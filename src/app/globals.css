@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
+@import "swiper/css";
+@import "swiper/css/thumbs";
+@import "swiper/css/navigation";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* --text-primary: purple; */
 }
 
 @theme inline {
@@ -20,7 +25,144 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* background: var(--background); */
+  /* color: var(--foreground); */
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-family: cursive !important; */
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+@layer {
+  :root {
+    /* Primary Color Palette */
+    --color-primary: 59 130 246; /* blue-500 */
+    --color-primary-dark: 29 78 216; /* blue-700 */
+
+    /* Text Colors */
+    --color-text-primary: var(--color-primary);
+    --color-text-secondary: 75 85 99; /* gray-600 */
+    --swiper-navigation-size: 16px !important;
+    --swiper-theme-color: black !important;
+  }
+
+  .dark {
+    /* Dark Mode Overrides */
+    --color-primary: 96 165 250; /* blue-400 */
+    --color-text-primary: var(--color-primary);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded;
+  }
+  .bg-primary {
+    background-color: #1d4ed8;
+  }
+  .text-primary {
+    color: #1d4ed8;
+  }
+}
+
+:root {
+  --color-primary: #4f46e5;
+  --color-base-dark: #1f2937;
+  --color-base-light: #f9fafb;
+  --color-muted: #6b7280;
+  --bg-light: #f9fafb;
+  --bg-dark: #1a202c;
+}
+
+.dark {
+  --color-base-dark: #f9fafb;
+  --color-base-light: #1f2937;
+  --bg-light: #1a202c;
+  --bg-dark: #f9fafb;
+}
+
+/* Utility classes */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-base-dark {
+  color: var(--color-base-dark);
+}
+
+.text-base-light {
+  color: var(--color-base-light);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.bg-light {
+  background-color: var(--bg-light);
+}
+
+.bg-dark {
+  background-color: var(--bg-dark);
+}
+
+.text-price {
+  color: #e95144;
+}
+
+.swiper-button-next {
+  background: white;
+  /* padding: 6px !important; */
+  border-radius: 50%;
+  top: var(--swiper-navigation-top-offset, 36%) !important;
+}
+.swiper-button-next:after {
+  background: white;
+  padding: 6px 10px !important;
+  border-radius: 50%;
+}
+.swiper-button-prev {
+  top: var(--swiper-navigation-top-offset, 36%) !important;
+  background: white;
+  padding: 6px 10px !important;
+  border-radius: 50%;
+}
+.swiper-button-prev:after {
+  background: white;
+  padding: 6px 10px !important;
+  border-radius: 50%;
+}
+
+.swiper-pagination {
+  /* display: none; */
+  position: absolute !important;
+  bottom: 30px !important;
+}
+
+.related .swiper {
+  padding-bottom: 90px !important;
+}
+
+.swiper-pagination-bullet {
+  border: 2px solid black;
+  background: white !important;
+  padding: 5px;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: black !important;
+}
+
+/* @media (min-width: 1024px) { */
+/* .swiper-pagination {
+    /* display: none; */
+/* }  */
+/* } */
+@media (max-width: 1023px) {
+  .swiper-button-next {
+    display: none !important;
+  }
+
+  .swiper-button-prev {
+    display: none !important;
+  }
 }

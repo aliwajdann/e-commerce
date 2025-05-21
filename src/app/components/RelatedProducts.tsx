@@ -1,0 +1,93 @@
+'use client';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import ProductCard from './ProductCard';
+import useProducts from '@/hooks/useProducts';
+
+export default function ProductsSection() {
+  const { products, loading } = useProducts();
+
+  if (loading) return <div className="text-center py-10">Loading...</div>;
+
+  // Calculate discount percentage
+  const getDiscount = (price: number, originalPrice?: number) => {
+    if (!originalPrice || originalPrice <= price) return null;
+    return Math.round(((originalPrice - price) / originalPrice) * 100);
+  };
+
+  return (
+    <section id="productpage-related-products-section" className="px-2 md:px-4 py-10 min-h-screen bg-light dark:bg-dark transition-colors duration-500">
+
+      {/* Swiper for both mobile and desktop */}
+      <div className="related  relative md:w-4/5 my-0 mx-auto">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-primary dark:text-primary-dark">
+        Related Products
+      </h2>
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={20}
+          slidesPerView={1.5}
+          navigation
+          loop
+          pagination={{ clickable: true }}
+          breakpoints={{
+            // Mobile breakpoints
+            480: {
+              slidesPerView: 2,
+            },
+            // Tablet breakpoint
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            // Desktop breakpoints
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 25,
+            },
+            1280: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            }
+          }}
+        >
+          {products.map((product) => (
+            <SwiperSlide key={product.id}>
+              <div className="relative h-full">
+                {product.originalPrice && (
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded z-10">
+                    -{getDiscount(product.price, product.originalPrice)}%
+                  </div>
+                )}
+                <ProductCard
+                  product={{
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                    images: product.media,
+                    originalprice: product.originalPrice,
+                    rating: 4.5,
+                    colors: ['#000000', '#e53e3e', '#4299e1'],
+                    isNew: true,
+                    isBestSeller: true,
+                    href: `/products/${product.id}`,
+                  }}
+                />
+                {/* Show ADD TO CART only on mobile */}
+                {/* <div className="md:hidden mt-2">
+                  <button className="w-full bg-black text-white py-2 px-4 text-sm font-medium hover:bg-gray-800 transition-colors">
+                    ADD TO CART
+                  </button>
+                </div> */}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </section>
+  );
+}
