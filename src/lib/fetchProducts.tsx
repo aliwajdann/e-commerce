@@ -7,8 +7,10 @@ export async function fetchProducts() {
   const products: any[] = [];
 
   querySnapshot.forEach((doc) => {
-    products.push({ id: doc.id, ...doc.data() });
+    products.push({ id: doc.id, ...doc.data() 
+      
+    });
   });
 
-  return products;
+  return products; 
 }
