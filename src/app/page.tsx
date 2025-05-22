@@ -26,6 +26,7 @@ export default function Home() {
             </Link>
 
             <button className="border border-fuchsia-500 text-fuchsia-500 px-6 py-3 rounded-xl hover:bg-primary hover:text-white transition">
+              
               Learn More
             </button>
           </div>
