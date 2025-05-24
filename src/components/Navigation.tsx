@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { selectCartCount } from "@/redux/cartSelectors"; // update path
 import { useSelector, useDispatch } from "react-redux";
 import { toggle } from "@/redux/drawerSlice";
+import AnimatedLink from "./AnimatedLink"; // adjust path
+
 
 import Link from 'next/link';
 import CartDrawer from "./CartDrawer";
@@ -37,24 +39,28 @@ useEffect(() => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
-        <Link prefetch href="/" className="text-2xl font-bold text-fuchsia-500">
+        <Link prefetch href="/" className="after text-2xl font-bold text-fuchsia-500">
           WardrobeX
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8 text-sm font-medium relative">
-          <Link prefetch href="/" className="hover:text-primary transition">Home</Link>
-          <Link prefetch href="/products" className="hover:text-primary transition">Shop</Link>
-          <Link prefetch href="/about" className="hover:text-primary transition">About</Link>
-          {/* <Link href="/category/tshirt" className="hover:text-primary transition">T-Shirts</Link> */}
-           <ShoppingCart onClick={()=> dispatch(toggle())} className="relative hover:cursor-pointer hover:text-primary transition" />
-      {hasMounted && cartCount > 0 && (
-  <span className="absolute -top-3 -right-3 bg-dark text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-    {cartCount}
-  </span>
-)}
+  <Link href="/">Home</Link>
+  <Link href="/products">Shop</Link>
+  <Link href="/about">About</Link>
 
-        </nav>
+  <div className="relative">
+    <ShoppingCart
+      onClick={() => dispatch(toggle())}
+      className="hover:cursor-pointer hover:text-primary transition"
+    />
+    {hasMounted && cartCount > 0 && (
+      <span className="absolute -top-3 -right-3 bg-dark text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+        {cartCount}
+      </span>
+    )}
+  </div>
+</nav>
 
  {/* <button
       onClick={() => setIsDark(!isDark)}

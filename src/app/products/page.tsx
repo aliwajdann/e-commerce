@@ -1,4 +1,4 @@
-import Products from "@/app/components/products"
+import Products from "@/components/products"
 
 
 export default function ProductsSection() {

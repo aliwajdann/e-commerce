@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchProducts } from "@/lib/fetchProducts";
-import CreateProductForm from "@/app/components/CreateProductForm";
+import CreateProductForm from "@/components/CreateProductForm";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState<any[]>([]);

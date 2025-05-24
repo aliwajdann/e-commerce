@@ -5,11 +5,11 @@ import { useParams } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { db } from '@/lib/firebase';
-import RelatedProducts from '@/app/components/RelatedProducts'
+import RelatedProducts from '@/components/RelatedProducts'
 
 
-import ProductMedia from '@/app/components/productPage/ProductMedia';
-import ProductInfo from '@/app/components/productPage/ProductInfo';
+import ProductMedia from '@/components/productPage/ProductMedia';
+import ProductInfo from '@/components/productPage/ProductInfo';
 
 interface MediaType {
   type: 'image' | 'video';
