@@ -19,6 +19,10 @@ export default function Home() {
   // };
 // Please install OpenAI SDK first: `npm install openai`
 
+    
+
+
+
 
 
 
@@ -26,7 +30,7 @@ export default function Home() {
     <>
       {/* {isPending && <Loader />} */}
       <main className="min-h-screen bg-light dark:bg-dark transition-colors duration-500">
-        <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 items-center gap-16 h-full">
+        <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 items-center h-full gap-16">
           {/* Left Side */}
           <div>
             <h1 className="text-4xl md:text-6xl font-bold text-base-dark dark:text-base-light leading-tight mb-6">
