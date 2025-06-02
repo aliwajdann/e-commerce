@@ -1,10 +1,12 @@
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import ProductCard from "@/components/ProductCard";
+import { useParams } from "next/navigation";
 
 
-export default async function CategoryPage({ params }: { params: { id: string } }) {
-  const category = params.id;
+export default async function CategoryPage() {
+  const params = useParams();
+    const category = params?.id as string;
 
   if (!category) {
     throw new Error("Category slug is missing!");
