@@ -1,3 +1,4 @@
+"use client";
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import ProductCard from "@/components/ProductCard";
