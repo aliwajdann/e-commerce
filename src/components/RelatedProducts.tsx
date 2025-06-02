@@ -63,6 +63,7 @@ export default function ProductsSection() {
                     -{getDiscount(product.price, product.originalPrice)}%
                   </div>
                 )}
+                
                 <ProductCard
                   product={{
                     id: product.id,
