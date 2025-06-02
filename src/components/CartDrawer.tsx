@@ -166,7 +166,7 @@ export default function CartDrawer( ) {
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-black text-white py-3 rounded-lg font-semibold"
                 > */}
-                  <Link href="/checkout">
+                  <Link prefetch href="/checkout">
   <button onClick={()=> dispatch(toggle())} className="w-full bg-black text-white p-3 rounded mt-4">
     Proceed to Checkout
   </button>

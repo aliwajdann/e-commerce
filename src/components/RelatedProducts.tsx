@@ -59,7 +59,7 @@ export default function ProductsSection() {
             <SwiperSlide key={product.id}>
               <div className="relative h-full">
                 {product.originalPrice && (
-                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded z-10">
+                  <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 z-10">
                     -{getDiscount(product.price, product.originalPrice)}%
                   </div>
                 )}

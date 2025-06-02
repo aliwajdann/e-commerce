@@ -18,7 +18,10 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
   if (!media?.length) return null;
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded z-10">
+                    -%
+                  </div>
       {/* Main Media */}
       <Swiper
         spaceBetween={10}
@@ -36,6 +39,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
               <img src={item.url} alt={`Media ${index}`} className="w-full h-auto object-cover" />
             )}
           </SwiperSlide>
+          
         ))}
       </Swiper>
 
@@ -61,6 +65,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
           ))}
         </Swiper>
       )}
+      
     </div>
   );
 }

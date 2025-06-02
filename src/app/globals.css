@@ -29,7 +29,7 @@ body {
   /* color: var(--foreground); */
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-family: cursive !important; */
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: inter, sans-serif !important;
 }
 
 @layer {
@@ -82,7 +82,16 @@ body {
 
 /* Utility classes */
 .text-primary {
-  color: var(--color-primary);
+  color: #af601a;
+  /* color: #10b981; */
+}
+.border-primary {
+  border: 1px solid #af601a;
+  /* color: #10b981; */
+}
+.bg-primary {
+  background-color: #af601a;
+  /* color: #10b981; */
 }
 
 .text-base-dark {

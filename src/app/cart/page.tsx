@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/lib/store";
 import { removeFromCart, updateQuantity } from "@/redux/cartSlice";
+import Link from "next/link";
 
 export default function CartPage() {
   const [isClient, setIsClient] = useState(false);
@@ -141,9 +142,11 @@ export default function CartPage() {
                 </div>
               </div>
               
-              <button className="w-full bg-black text-white py-3 text-sm rounded-lg font-bold hover:bg-gray-800 transition mt-6">
-                PROCEED TO CHECKOUT
-              </button>
+              <Link prefetch href="/checkout">
+                <button className="w-full bg-black text-white py-3 text-sm rounded-lg font-bold hover:bg-gray-800 transition mt-6">
+                  Proceed to Checkout
+                </button>
+              </Link>
             </div>
           </div>
         </div>

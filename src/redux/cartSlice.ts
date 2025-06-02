@@ -35,14 +35,15 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      const existing = state.items.find(item => item.id === action.payload.id);
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        state.items.push(action.payload);
-      }
-      localStorage.setItem("cart", JSON.stringify(state.items));
-    },
+  const existing = state.items.find(item => item.id === action.payload.id);
+  if (existing) {
+    existing.quantity += action.payload.quantity; // ✅ Use the actual quantity from payload
+  } else {
+    state.items.push(action.payload);
+  }
+  localStorage.setItem("cart", JSON.stringify(state.items));
+},
+
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(item => item.id !== action.payload);
       localStorage.setItem("cart", JSON.stringify(state.items));

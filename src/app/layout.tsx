@@ -3,8 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import { Providers } from "@/app/providers";
-import { Montserrat } from "next/font/google";
+import {Inter} from "next/font/google";
 
+import { ClerkProvider } from '@clerk/nextjs'
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -16,7 +17,7 @@ import { Montserrat } from "next/font/google";
 //   subsets: ["latin"],
 // });
 
-const montserrat = Montserrat({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-montserrat",
 });
@@ -34,9 +35,10 @@ export default function RootLayout({
 }>) {
       // className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-light dark:bg-dark transition-colors duration-500` 
   return (
+      <ClerkProvider>
     <html lang="en">
       <body
-        className={`${montserrat.variable} antialiased min-h-screen transition-colors duration-500` 
+        className={`${inter.variable} antialiased min-h-screen transition-colors duration-500` 
       }
       >
         <Providers>
@@ -45,5 +47,6 @@ export default function RootLayout({
           </Providers>
       </body>
     </html>
+          </ClerkProvider>
   );
 }

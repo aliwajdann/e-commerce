@@ -4,6 +4,10 @@ import { selectCartCount } from "@/redux/cartSelectors"; // update path
 import { useSelector, useDispatch } from "react-redux";
 import { toggle } from "@/redux/drawerSlice";
 import AnimatedLink from "./AnimatedLink"; // adjust path
+import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import logo from "@/logo.png"
+import Image from 'next/image';
+
 
 
 import Link from 'next/link';
@@ -39,8 +43,8 @@ useEffect(() => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
-        <Link prefetch href="/" className="after text-2xl font-bold text-fuchsia-500">
-          WardrobeX
+        <Link style={{fontFamily: "cursive"}} prefetch href="/" className="after text-2xl font-bold text-primary">
+          <Image src={logo} alt="" />
         </Link>
 
         {/* Desktop Nav */}
@@ -48,6 +52,12 @@ useEffect(() => {
   <Link href="/">Home</Link>
   <Link href="/products">Shop</Link>
   <Link href="/about">About</Link>
+  <SignedIn>
+  <UserButton />
+</SignedIn>
+<SignedOut>
+  <a href="/sign-in">Sign In</a>
+</SignedOut>
 
   <div className="relative">
     <ShoppingCart

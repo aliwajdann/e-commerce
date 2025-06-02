@@ -192,7 +192,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="p-4 flex items-center">
         <div className=" justify-between items-start w-full">
           <div className='text-center'>
-            <h3 className="font-medium text-gray-900">{product.name}</h3>
+            <p className="text-gray-900">{product.name}</p>
             {/* <div className="flex items-center mt-1">
               {renderRating()}
               <span className="text-xs text-gray-500 ml-1">
@@ -201,13 +201,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div> */}
           </div>
 
-          <div className="text-center flex items-center md:gap-5  gap-4 justify-center">
-            <span className="font-bold text-gray-900 text-price">${product.price.toFixed(2)}</span>
+          <div className="text-center flex items-center md:gap-3  gap-4 justify-center">
             {product.originalprice && (
-              <span className="block font-semibold  text-gray-400 line-through">
+              <span className="block font-semibold text-sm text-gray-00 line-through">
                 ${product.originalprice.toFixed(2)}
               </span>
             )}
+            <span className="font-semibold text-gray-900 text-sm text-price">${product.price.toFixed(2)}</span>
           </div>
         </div>
 
