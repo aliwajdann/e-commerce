@@ -3,12 +3,12 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import ProductCard from "@/components/ProductCard";
 
 
-interface PageProps {
-  params: { id: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
+interface CategoryPageProps {
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function CategoryPage({ params }: PageProps) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const category = params.id;
 
   if (!category) {
@@ -49,5 +49,3 @@ export default async function CategoryPage({ params }: PageProps) {
     </div>
   );
 }
-
-
