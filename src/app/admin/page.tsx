@@ -20,3 +20,14 @@
 //     </div>
 //   );
 // }
+import React from 'react'
+
+function page() {
+  return (
+    <div>
+      im admin AdminPage
+    </div>
+  )
+}
+
+export default page
