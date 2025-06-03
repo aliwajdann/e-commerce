@@ -1,6 +1,8 @@
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import CategoryPageClient from "@/components/CategoryPageClient";
+import { type Metadata } from "next";
+
 
 interface Product {
   id: string;
@@ -10,7 +12,15 @@ interface Product {
   media: string[];
 }
 
-export default async function CategoryPage({ params }: { params: { id: string } }) {
+
+interface CategoryPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
+
   const category = params?.id;
 
   if (!category) {
