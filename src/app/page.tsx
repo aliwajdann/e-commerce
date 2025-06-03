@@ -1,21 +1,42 @@
 import Image from "next/image";
 import Products from "@/components/products"
-import ChatInterface from "@/components/ChatInterface";
-// import { Image } from "lucide-react";
+// import ChatInterface from "@/components/ChatInterface";
 import CategorySection from "@/components/CategorySection";
-import img from '@/hero-bg-img.jpg'
+import img from '@/hero-image.webp'
 
 export default function Home() {
 
   return (
     <>
-      <main className="h-lvh w-full relative">
-         <Image  className={"absolute h-full w-full"} src={img} alt="" />
-      </main>
+     <main className="h-screen w-full relative overflow-hidden">
+  <Image 
+    className="absolute inset-0 w-full h-full object-cover object-center md:object-cover sm:object-contain" 
+    src={img} 
+    alt="Hero Image"
+    fill
+    priority
+    sizes="100vw"
+  />
+  {/* Optional overlay for better text readability */}
+  <div className="absolute inset-0 bg-black/20"></div>
+  
+  {/* Optional content overlay */}
+  <div className="relative z-10 flex items-center justify-center h-full">
+    {/* Add your hero content here if needed */}
+    {/* 
+    <div className="text-center text-white">
+      <h1 className="text-4xl md:text-6xl font-bold mb-4">Your Hero Title</h1>
+      <p className="text-lg md:text-xl mb-8">Your hero description</p>
+      <button className="px-8 py-3 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors">
+        Call to Action
+      </button>
+    </div>
+    */}
+  </div>
+</main>
       <CategorySection />
       <Products />
-      <ChatInterface/>
-
+      {/* <ChatInterface/> */}
     </>
   );
 }

@@ -4,7 +4,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import { Providers } from "@/app/providers";
 import {Inter} from "next/font/google";
-
+import Footer from "@/components/Foorer";
 import { ClerkProvider } from '@clerk/nextjs'
 
 // const geistSans = Geist({
@@ -17,7 +17,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 //   subsets: ["latin"],
 // });
 
-const inter = Inter({
+const montserrat = Inter({
   subsets: ["latin"],
   variable: "--font-montserrat",
 });
@@ -38,12 +38,13 @@ export default function RootLayout({
       <ClerkProvider>
     <html lang="en">
       <body
-        className={`${inter.variable} antialiased min-h-screen transition-colors duration-500` 
+        className={`${montserrat.variable} antialiased min-h-screen transition-colors duration-500` 
       }
       >
         <Providers>
         <Navigation />
           {children}
+        <Footer />
           </Providers>
       </body>
     </html>

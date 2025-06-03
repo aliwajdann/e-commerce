@@ -51,7 +51,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       .map((_, i) => (
         <svg
           key={i}
-          className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+          className={`w-3 h-3 sm:w-4 sm:h-4 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -66,30 +66,30 @@ const ProductCard = ({ product }: ProductCardProps) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
-      className="relative overflow-hidden group"
+      className="relative overflow-hidden group "
       onClick={(()=>{
          router.push(product.href)
       })}
     >
       {/* Badges */}
-      {/* <div className="absolute top-3 left-3 z-10 flex gap-2">
+      {/* <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 flex gap-1 sm:gap-2">
         {product.isNew && (
-          <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+          <span className="bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">
             New
           </span>
         )}
         {product.isBestSeller && (
-          <span className="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+          <span className="bg-blue-500 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">
             Bestseller
           </span>
         )}
       </div> */}
 
       {/* Wishlist button */}
-      {/* <button className="absolute top-3 right-3 z-10 p-2 bg-white/80 rounded-full backdrop-blur-sm hover:bg-white transition-all">
+      {/* <button className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 p-1.5 sm:p-2 bg-white/80 rounded-full backdrop-blur-sm hover:bg-white transition-all">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-gray-600 hover:text-red-500 transition-colors"
+          className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 hover:text-red-500 transition-colors"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -105,9 +105,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
       {/* Product Image */}
       <div
-        className="relative overflow-hidden"
-        style={{aspectRatio: 4/6}}
-        // aspect-square
+        className="relative overflow-hidden aspect-[4/7] md:aspect-[4/6]"
+        // style={{aspectRatio: 4/6}}
         onMouseEnter={handleImageHover}
         onMouseLeave={handleImageLeave}
       >
@@ -120,10 +119,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
           className="absolute inset-0"
         >
           <img
-            // src={product.images[0]}
-             src={product.images?.find(media => media.type === "image")?.url || "/placeholder.png"}
+            src={product.images?.find(media => media.type === "image")?.url || "/placeholder.png"}
             alt={product.name}
-            className="object-cover"
+            className="w-full h-full object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
@@ -141,13 +139,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <img
               src={product.images.filter(media => media.type === "image")[1]?.url || "/placeholder.png"}
               alt={product.name}
-              className="object-cover"
+              className="w-full h-full object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </motion.div>
         )}
 
-        {/* Quick add to cart (appears on hover) */}
+        {/* Quick add to cart (appears on hover) - Desktop only */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{
@@ -155,45 +153,47 @@ const ProductCard = ({ product }: ProductCardProps) => {
             opacity: isHovered ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
-          className="hidden md:block absolute bottom-4 left-0 right-0 px-4"
+          className="hidden md:block absolute bottom-3 left-0 right-0 px-3"
         >
-        <div
-        >
-             
           <AtcBtn product={{
-        id: product.id,
-        title: product.name,
-        price: product.price,
-        media: product.images.map((m) => ({
-        url: m.url,
-        type: m.type || "image" 
-        })),
-        quantity: 1,
-        description: "hey"
-        }}/>
-        </div>
+            id: product.id,
+            title: product.name,
+            price: product.price,
+            media: product.images.map((m) => ({
+              url: m.url,
+              type: m.type || "image" 
+            })),
+            quantity: 1,
+            description: "hey"
+          }}/>
         </motion.div>
       </div>
-      <div className='mt-3 md:hidden'>
-                <AtcBtn product={{
-        id: product.id,
-        title: product.name,
-        price: product.price,
-        media: product.images.map((m) => ({
-        url: m.url,
-        type: m.type || "image" 
-        })),
-        quantity: 1,
-        description: "hey"
+
+      {/* Mobile Add to Cart Button */}
+      <div className='mt-2 px-3 md:hidden'>
+        <AtcBtn product={{
+          id: product.id,
+          title: product.name,
+          price: product.price,
+          media: product.images.map((m) => ({
+            url: m.url,
+            type: m.type || "image" 
+          })),
+          quantity: 1,
+          description: "hey"
         }}/>
-        </div>
+      </div>
 
       {/* Product Info */}
-      <div className="p-4 flex items-center">
-        <div className=" justify-between items-start w-full">
+      <div className="p-3 sm:p-4 flex items-center">
+        <div className="justify-between items-start w-full space-y-2">
+          {/* Product Name */}
           <div className='text-center'>
-            <p className="text-gray-900">{product.name}</p>
-            {/* <div className="flex items-center mt-1">
+            <h3 className="text-gray-900 font-medium text-sm sm:text-base leading-tight line-clamp-2">
+              {product.name}
+            </h3>
+            {/* Rating - uncomment if needed */}
+            {/* <div className="flex items-center justify-center mt-1">
               {renderRating()}
               <span className="text-xs text-gray-500 ml-1">
                 ({product.rating.toFixed(1)})
@@ -201,28 +201,36 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div> */}
           </div>
 
-          <div className="text-center flex items-center md:gap-3  gap-4 justify-center">
+          {/* Price Section */}
+          <div className="text-center flex items-center gap-2 sm:gap-3 justify-center">
             {product.originalprice && (
-              <span className="block font-semibold text-sm text-gray-00 line-through">
+              <span className="font-medium text-xs sm:text-sm text-gray-500 line-through">
                 ${product.originalprice.toFixed(2)}
               </span>
             )}
-            <span className="font-semibold text-gray-900 text-sm text-price">${product.price.toFixed(2)}</span>
+            <span className="font-bold text-price text-sm sm:text-base">
+              ${product.price.toFixed(2)}
+            </span>
           </div>
         </div>
 
         {/* Color options */}
         {/* {product.colors && product.colors.length > 0 && (
-          <div className="mt-3">
-            <div className="flex space-x-2">
-              {product.colors.map((color) => (
+          <div className="mt-2 sm:mt-3">
+            <div className="flex justify-center space-x-1 sm:space-x-2">
+              {product.colors.slice(0, 4).map((color) => (
                 <button
                   key={color}
-                  className="w-5 h-5 rounded-full border border-gray-200"
+                  className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-gray-200 hover:scale-110 transition-transform"
                   style={{ backgroundColor: color }}
                   aria-label={`Color ${color}`}
                 />
               ))}
+              {product.colors.length > 4 && (
+                <span className="text-xs text-gray-500 self-center">
+                  +{product.colors.length - 4}
+                </span>
+              )}
             </div>
           </div>
         )} */}
