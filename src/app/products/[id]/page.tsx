@@ -1,9 +1,10 @@
-// app/category/[id]/page.tsx
-export const dynamic = "force-dynamic";
+'use client';
 
-import { db } from "@/lib/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import CategoryPageClient from "@/components/CategoryPageClient";
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import CategoryPageClient from '@/components/CategoryPageClient';
 
 interface Product {
   id: string;
@@ -13,25 +14,31 @@ interface Product {
   media: string[];
 }
 
-interface CategoryPageProps {
-  params: {
-    id: string;
-  };
-}
+export default function CategoryPage() {
+  const { id } = useParams();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
-  const category = params.id;
+  useEffect(() => {
+    if (!id) return;
 
-  if (!category) {
-    throw new Error("Category slug is missing!");
-  }
+    const fetchProducts = async () => {
+      const q = query(collection(db, 'products'), where('category', '==', id));
+      const snapshot = await getDocs(q);
 
-  const q = query(collection(db, "products"), where("category", "==", category));
-  const snapshot = await getDocs(q);
-  const products: Product[] = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...(doc.data() as any),
-  }));
+      const productsData: Product[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as any),
+      }));
 
-  return <CategoryPageClient category={category} products={products} />;
+      setProducts(productsData);
+      setLoading(false);
+    };
+
+    fetchProducts();
+  }, [id]);
+
+  if (loading) return <p className="p-6">Loading products...</p>;
+
+  return <CategoryPageClient category={id as string} products={products} />;
 }
