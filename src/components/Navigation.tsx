@@ -18,7 +18,7 @@ const desktopNavItems = [
   { name: "READY TO WEAR", href: "/ready-to-wear" },
   { name: "LUXURY EMBROIDERIES", href: "/luxury-embroideries" },
   { name: "MASTER'S COLLECTION", href: "/masters-collection" },
-  { name: "WINTER SALE", href: "/winter-sale" }
+  // { name: "WINTER SALE", href: "/winter-sale" }
 ];
 
 const mobileNavItems = [
@@ -97,7 +97,7 @@ export default function Header() {
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="hidden md:block fixed w-full z-50 bg-white shadow-sm"
+        className="hidden md:block fixed w-full z-50 bg-white"
       >
         <div className="container mx-auto px-4">
           {/* Top Bar */}
@@ -213,7 +213,7 @@ export default function Header() {
                 >
                   <Link 
                     href={item.href} 
-                    className="text-sm font-medium uppercase tracking-wider text-gray-900 transition-colors hover:text-red-500"
+                    className="text-sm font-medium uppercase tracking-wider text-gray-900 transition-colors hover:text-teal-600"
                   >
                     {item.name}
                   </Link>
@@ -229,7 +229,7 @@ export default function Header() {
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="md:hidden fixed w-full z-50 bg-white shadow-sm"
+        className="md:hidden fixed w-full z-50 bg-white"
       >
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <button 
@@ -255,10 +255,10 @@ export default function Header() {
             <div className="relative">
               <ShoppingCart
                 onClick={() => dispatch(toggle())}
-                className="h-5 w-5 text-gray-700 hover:cursor-pointer hover:text-red-500 transition"
+                className="h-5 w-5 text-gray-700 hover:cursor-pointer hover:text-teal-600 transition"
               />
               {hasMounted && cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-gray-800 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -357,7 +357,7 @@ export default function Header() {
                     >
                       <Link
                         href={item.href}
-                        className="block py-2 text-gray-900 font-medium uppercase hover:text-red-500 transition-colors"
+                        className="block py-2 text-gray-900 font-medium uppercase hover:text-teal-600 transition-colors"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {item.name}

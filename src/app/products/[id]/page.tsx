@@ -53,7 +53,7 @@ export default function ProductPage() {
 
   return (
     <>
-    <div className="p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto mt-12">
+    <div className="p-3.5 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto mt-1.5 md:mt-6">
       <ProductMedia media={product.media} />
       <ProductInfo
         id={product.id}

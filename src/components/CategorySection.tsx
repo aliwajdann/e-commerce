@@ -21,7 +21,7 @@ const categories = [
 
 export default function CategorySection() {
   // Show only first two categories for mobile/tablet
-  const mobileCategories = categories.slice(0, 2);
+  const mobileCategories = categories.slice(0, 1);
   
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
@@ -52,7 +52,8 @@ export default function CategorySection() {
       </div>
 
       {/* Mobile and Tablet view - only 2 categories, face to face */}
-      <div className="lg:hidden grid grid-cols-2 gap-4 mt-6">
+      {/* <div className="lg:hidden grid grid-cols-2 gap-4 mt-6"> */}
+      <div className="lg:hidden mt-6">
         {mobileCategories.map((category) => (
           <Link
             key={category.name}

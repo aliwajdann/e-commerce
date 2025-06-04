@@ -29,7 +29,7 @@ export default function ProductsSection() {
       </h2>
         <Swiper
           modules={[Navigation, Pagination]}
-          spaceBetween={20}
+          spaceBetween={15}
           slidesPerView={1.5}
           navigation
           loop
@@ -63,7 +63,7 @@ export default function ProductsSection() {
                     -{getDiscount(product.price, product.originalPrice)}%
                   </div>
                 )}
-                
+
                 <ProductCard
                   product={{
                     id: product.id,
