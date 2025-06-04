@@ -24,13 +24,13 @@ export default function ProductsSection() {
 
       {/* Swiper for both mobile and desktop */}
       <div className="related  relative md:w-4/5 my-0 mx-auto">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-primary dark:text-primary-dark">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6  text-gray-800 dark:text-primary-dark">
         Related Products
       </h2>
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={15}
-          slidesPerView={1.5}
+          slidesPerView={1.3}
           navigation
           loop
           pagination={{ clickable: true }}
@@ -38,6 +38,7 @@ export default function ProductsSection() {
             // Mobile breakpoints
             480: {
               slidesPerView: 2,
+              spaceBetween: 15,
             },
             // Tablet breakpoint
             768: {

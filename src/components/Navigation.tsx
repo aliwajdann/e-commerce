@@ -304,7 +304,7 @@ export default function Header() {
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="fixed top-0 left-0 h-full w-4/5 max-w-sm bg-white z-50 shadow-xl"
             >
-              <div className="flex justify-between items-center p-4 border-b border-gray-200">
+              <div className="flex justify-between items-center p-4  border-gray-200">
                 <Link 
                   href="/" 
                   className="text-xl font-bold text-gray-900"
@@ -338,7 +338,7 @@ export default function Header() {
                   <SignedOut>
                     <Link
                       href="/sign-in"
-                      className="block py-2 text-blue-600 font-medium"
+                      className="block py-2 text-teal-600 font-medium"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Sign In
@@ -367,13 +367,13 @@ export default function Header() {
                 </ul>
 
                 {/* WhatsApp Button */}
-                <div className="mt-6 pt-4 border-t border-gray-200">
+                <div className="mt-6 pt-4 border-gray-200">
                   <button
                     onClick={() => {
                       handleWhatsAppClick();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors flex items-center justify-center space-x-2"
+                    className="w-full bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-800 transition-colors flex items-center justify-center space-x-2"
                   >
                     <ShoppingBag className="h-4 w-4" />
                     <span>WhatsApp Order</span>

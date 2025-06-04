@@ -145,7 +145,7 @@ body {
 .swiper-pagination {
   /* display: none; */
   position: absolute !important;
-  bottom: 30px !important;
+  bottom: 50px !important;
 }
 
 .related .swiper {

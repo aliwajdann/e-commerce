@@ -66,7 +66,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
-      className="relative overflow-hidden group "
+      className="relative overflow-hidden group"
       onClick={(()=>{
          router.push(product.href)
       })}
@@ -170,7 +170,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Mobile Add to Cart Button */}
-      <div className='mt-2 px-3 md:hidden'>
+      <div className='mt-1.5 px-3 md:hidden'>
         <AtcBtn product={{
           id: product.id,
           title: product.name,
@@ -180,13 +180,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
             type: m.type || "image" 
           })),
           quantity: 1,
-          description: "hey"
+          description: ""
         }}/>
       </div>
 
       {/* Product Info */}
       <div className="p-3 sm:p-4 flex items-center">
-        <div className="justify-between items-start w-full space-y-2">
+        <div className="justify-between items-start w-full space-y-1">
           {/* Product Name */}
           <div className='text-center'>
             <h3 className="text-gray-900 font-medium text-sm sm:text-base leading-tight line-clamp-2">

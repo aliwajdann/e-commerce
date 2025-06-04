@@ -59,7 +59,7 @@ export default function CheckoutPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-2 sm:px-4 lg:px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -100,8 +100,8 @@ export default function CheckoutPage() {
                     type="text"
                     value={form.name}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                    placeholder="John Doe"
+                    className="outline-none w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-teal-600 transition"
+                    placeholder=" ali wajdan"
                   />
                   <FiUser className="absolute left-3 top-3.5 text-gray-400" />
                 </div>
@@ -118,8 +118,8 @@ export default function CheckoutPage() {
                     type="tel"
                     value={form.phone}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                    placeholder="+92 300 1234567"
+                    className="outline-none w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-teal-600 transition"
+                    placeholder="+92 3240059011"
                   />
                   <FiPhone className="absolute left-3 top-3.5 text-gray-400" />
                 </div>
@@ -136,8 +136,8 @@ export default function CheckoutPage() {
                     type="text"
                     value={form.address}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                    placeholder="123 Main St, City"
+                    className="outline-none w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-teal-600 transition"
+                    placeholder="enter you address"
                   />
                   <FiMapPin className="absolute left-3 top-3.5 text-gray-400" />
                 </div>
@@ -165,13 +165,15 @@ export default function CheckoutPage() {
                 >
                   <div className="flex items-center">
                     <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden mr-4">
-                      {/* {item.image && (
-                        <img
-                          src={item.image}
-                          alt={item.name}
+                      {item.media.map( (it, index)=>{
+                      return  <img
+                          src={it.url}
+                          alt={it.type}
+                          key={index}
                           className="w-full h-full object-cover"
-                        /> */}
-                      {/* )} */}
+                        />
+                        }  )}
+                      
                     </div>
                     <div>
                       <h3 className="font-medium text-gray-800">{item.title}</h3>
@@ -211,7 +213,7 @@ export default function CheckoutPage() {
               whileHover={{ scale: 1.01 }}
               onClick={handlePlaceOrder}
               disabled={isSubmitting}
-              className={`w-full mt-8 py-3.5 rounded-lg font-medium text-white transition ${isSubmitting ? 'bg-indigo-400' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+              className={`w-full mt-8 py-3.5 rounded-lg font-medium text-white transition ${isSubmitting ? 'bg-teal-400' : 'bg-teal-600 hover:bg-teal-800'}`}
             >
               <AnimatePresence mode="wait">
                 {isSubmitting ? (

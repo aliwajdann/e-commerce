@@ -18,12 +18,12 @@ const Footer = () => {
               className="md:hidden flex justify-between items-center w-full text-left"
               onClick={() => toggleSection('talk')}
             >
-              <h3 className="text-lg font-semibold md:pb-0 pb-1.5">TALK TO US</h3>
+              <h3 className=" font-semibold md:pb-0 pb-1.5">TALK TO US</h3>
               {/* <span className="text-xl">
                 {openSection === 'talk' ? '−' : '+'}
               </span> */}
             </button>
-            <h3 className="text-lg font-semibold mb-4 hidden md:block">TALK TO US</h3>
+            <h3 className="font-semibold mb-4 hidden md:block">TALK TO US</h3>
             {/* <ul className={`space-y-2 ${openSection === 'talk' ? 'block' : 'hidden'} md:block`}> */}
             <ul className={`space-y-2 block`}>
               <li>Whatsapp: +92 3240059011</li>
@@ -38,12 +38,12 @@ const Footer = () => {
               className="md:hidden flex justify-between items-center w-full text-left"
               onClick={() => toggleSection('account')}
             >
-              <h3 className="text-lg font-semibold">ACCOUNT</h3>
-              <span className="text-xl">
+              <h3 className="font-semibold">ACCOUNT</h3>
+              <span className="">
                 {openSection === 'account' ? '−' : '+'}
               </span>
             </button>
-            <h3 className="text-lg font-semibold mb-4 hidden md:block">ACCOUNT</h3>
+            <h3 className="font-semibold mb-4 hidden md:block">ACCOUNT</h3>
             <ul className={`space-y-2 ${openSection === 'account' ? 'block' : 'hidden'} md:block`}>
               <li><a href="#" className="hover:text-white transition-colors">Account Login</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Track Your Order</a></li>
@@ -56,12 +56,12 @@ const Footer = () => {
               className="md:hidden flex justify-between items-center w-full text-left"
               onClick={() => toggleSection('shopping')}
             >
-              <h3 className="text-lg font-semibold">SHOPPING GUIDE</h3>
+              <h3 className="font-semibold">SHOPPING GUIDE</h3>
               <span className="text-xl">
                 {openSection === 'shopping' ? '−' : '+'}
               </span>
             </button>
-            <h3 className="text-lg font-semibold mb-4 hidden md:block">SHOPPING GUIDE</h3>
+            <h3 className=" font-semibold mb-4 hidden md:block">SHOPPING GUIDE</h3>
             <ul className={`space-y-2 ${openSection === 'shopping' ? 'block' : 'hidden'} md:block`}>
               <li><a href="#" className="hover:text-white transition-colors">FAQ's</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Boadmay Payment Gateway</a></li>
@@ -78,12 +78,12 @@ const Footer = () => {
               className="md:hidden flex justify-between items-center w-full text-left"
               onClick={() => toggleSection('about')}
             >
-              <h3 className="text-lg font-semibold">ABOUT THE BRAND</h3>
+              <h3 className=" font-semibold">ABOUT THE BRAND</h3>
               <span className="text-xl">
                 {openSection === 'about' ? '−' : '+'}
               </span>
             </button>
-            <h3 className="text-lg font-semibold mb-4 hidden md:block">ABOUT THE BRAND</h3>
+            <h3 className=" font-semibold mb-4 hidden md:block">ABOUT THE BRAND</h3>
             <ul className={`space-y-2 ${openSection === 'about' ? 'block' : 'hidden'} md:block`}>
               <li><a href="#" className="hover:text-white transition-colors">Store Locator</a></li>
               <li><a href="#" className="hover:text-white transition-colors">History</a></li>
@@ -99,7 +99,7 @@ const Footer = () => {
               className="md:hidden flex justify-between items-center w-full text-left"
               onClick={() => toggleSection('newsletter')}
             > */}
-              <h3 className="text-lg font-semibold md:pb-0 pb-1.5">NEWSLETTER SIGN UP</h3>
+              <h3 className=" font-semibold md:pb-0 pb-1.5">NEWSLETTER SIGN UP</h3>
               {/* <span className="text-xl">
                 {openSection === 'newsletter' ? '−' : '+'}
               </span> */}
