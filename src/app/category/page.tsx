@@ -1,10 +1,9 @@
 import React from 'react'
+import CategorySection from '@/components/CategorySection'
 
 function page() {
   return (
-    <div>
-      I'm collection page
-    </div>
+   <CategorySection />
   )
 }
 

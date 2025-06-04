@@ -12,19 +12,18 @@ import logo from "@/logo.png";
 import CartDrawer from "./CartDrawer";
 
 const desktopNavItems = [
-  { name: "Home", href: "/" },
-  { name: "Shop", href: "/products" },
-  { name: "About", href: "/about" },
-  { name: "READY TO WEAR", href: "/ready-to-wear" },
-  { name: "LUXURY EMBROIDERIES", href: "/luxury-embroideries" },
-  { name: "MASTER'S COLLECTION", href: "/masters-collection" },
+  { name: "HOME", href: "/" },
+  { name: "SHOP", href: "/products" },
+  { name: "CONTACT", href: "/contact" },
+  { name: "CASUAL AND STYLISH", href: "/category/casual-stylish-tshirts" },
+  { name: "SUMMER READY SHORTS", href: "/category/summer-ready-looks-shorts" },
+  { name: "TRENDING AND MODERN", href: "/category/trending-modern" },
   // { name: "WINTER SALE", href: "/winter-sale" }
 ];
 
 const mobileNavItems = [
   { name: "Home", href: "/" },
   { name: "Shop", href: "/products" },
-  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
   ...desktopNavItems.slice(3) // Add the special collections
 ];

@@ -9,12 +9,16 @@ export default function Home() {
   return (
     <>
      <main className="h-screen w-full relative overflow-hidden">
-  <Image 
-    className="absolute inset-0 w-full h-full object-cover object-center md:object-cover sm:object-contain" 
-    src={img} 
+  <img
+    className="hidden md:block absolute inset-0 w-full h-full object-cover object-center md:object-cover sm:object-contain" 
+    src="https://thecambridgeshop.com/cdn/shop/files/Webbanners_summer_copy-Eid_4120924f-1eb2-4a3e-98cb-ccc39ce25502.webp?v=1748342432750" 
     alt="Hero Image"
-    fill
-    priority
+    sizes="100vw"
+  />
+  <img
+    className="md:hidden block absolute inset-0 w-full h-full object-cover object-center md:object-cover sm:object-contain" 
+    src="https://thecambridgeshop.com/cdn/shop/files/Mobile_Webbanners_summer_copy-Eid.webp?v=17483420681100" 
+    alt="Hero Image"
     sizes="100vw"
   />
   {/* Optional overlay for better text readability */}

@@ -170,7 +170,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Mobile Add to Cart Button */}
-      <div className='mt-1.5 px-3 md:hidden'>
+      <div className='mt-1.5 md:hidden w-full'>
         <AtcBtn product={{
           id: product.id,
           title: product.name,
@@ -189,7 +189,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <div className="justify-between items-start w-full space-y-1">
           {/* Product Name */}
           <div className='text-center'>
-            <h3 className="text-gray-900 font-medium text-sm sm:text-base leading-tight line-clamp-2">
+            <h3 className="text-gray-900 text-sm font-medium sm:text-base leading-tight line-clamp-2">
               {product.name}
             </h3>
             {/* Rating - uncomment if needed */}
