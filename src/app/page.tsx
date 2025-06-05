@@ -17,7 +17,7 @@ export default function Home() {
   />
   {/* mobile image */}
   <img
-    className="md:hidden h-[86vh] block  inset-0 w-full object-cover object-center md:object-cover sm:object-contain" 
+    className="md:hidden h-[78vh] block  inset-0 w-full object-cover object-center md:object-cover sm:object-contain" 
     src="https://thecambridgeshop.com/cdn/shop/files/Mobile_Webbanners_summer_copy-Eid.webp?v=17483420681100" 
     alt="Hero Image"
     sizes="100vw"
