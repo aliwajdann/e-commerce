@@ -119,15 +119,15 @@ export default function CartPage() {
                 <p className="text-sm">Pay in 3 installments of <span className="font-bold">Rs. {(subtotal / 3).toLocaleString()}</span></p>
               </div>
               
-              <div>
+              {/* <div>
                 <h3 className="font-bold mb-2">Additions/Comments</h3>
                 <textarea 
                   placeholder="Special instruction for seller..."
                   className="w-full border p-2 rounded text-sm h-20"
                 />
-              </div>
+              </div> */}
               
-              <div className="pt-4">
+              {/* <div className="pt-4">
                 <h3 className="font-bold mb-2">Calculate Shipping</h3>
                 <div className="space-y-3">
                   <div>
@@ -140,10 +140,10 @@ export default function CartPage() {
                     <p className="text-xs text-base-dark mt-1">Coupon code will be applied on the checkout page</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
               
               <Link prefetch href="/checkout">
-                <button className="w-full bg-black text-white py-3 text-sm rounded-lg font-bold hover:bg-gray-800 transition mt-6">
+                <button className="hover:cursor-pointer w-full bg-black text-white py-3 text-sm rounded-lg font-bold hover:bg-gray-800 transition mt-6">
                   Proceed to Checkout
                 </button>
               </Link>

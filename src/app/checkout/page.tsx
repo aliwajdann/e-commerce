@@ -252,7 +252,7 @@ export default function CheckoutPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex items-center justify-center"
+                    className="flex items-center justify-center hover:cursor-pointer"
                   >
                     <FiCheckCircle className="mr-2" />
                     Place Order (COD)

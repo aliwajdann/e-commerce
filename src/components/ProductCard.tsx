@@ -66,7 +66,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
-      className="relative overflow-hidden group"
+      className="relative overflow-hidden group hover:cursor-pointer"
       onClick={(()=>{
          router.push(product.href)
       })}
@@ -205,11 +205,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <div className="text-center flex items-center gap-2 sm:gap-3 justify-center">
             {product.originalprice && (
               <span className="font-medium text-xs sm:text-sm text-gray-500 line-through">
-                ${product.originalprice.toFixed(2)}
+                Rs.{product.originalprice.toFixed(2)}
               </span>
             )}
             <span className="font-bold text-price text-sm sm:text-base">
-              ${product.price.toFixed(2)}
+              Rs.{product.price.toFixed(2)}
             </span>
           </div>
         </div>

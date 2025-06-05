@@ -17,7 +17,7 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    
+
 
     const form = new FormData();
     form.append('access_key', process.env.NEXT_PUBLIC_WEB3FORM_ACCESS_KEY || '');
@@ -76,7 +76,7 @@ const ContactForm = () => {
                 <p className="text-gray-600">{responseMessage}</p>
                 <button
                   onClick={() => setStatus('idle')}
-                  className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                  className="mt-4 px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition"
                 >
                   Send Another
                 </button>
@@ -97,7 +97,7 @@ const ContactForm = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
                       placeholder="ali wajdan"
                     />
                   </div>
@@ -117,7 +117,7 @@ const ContactForm = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
                       placeholder="name@example.com"
                     />
                   </div>
@@ -137,7 +137,7 @@ const ContactForm = () => {
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
                       placeholder="Write your message..."
                     />
                   </div>

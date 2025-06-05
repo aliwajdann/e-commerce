@@ -257,7 +257,7 @@ export default function Header() {
                 className="h-5 w-5 text-gray-700 hover:cursor-pointer hover:text-teal-600 transition"
               />
               {hasMounted && cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gray-800 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-2.5 -right-3 bg-gray-800 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
