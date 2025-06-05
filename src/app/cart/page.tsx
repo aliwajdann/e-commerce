@@ -53,7 +53,7 @@ export default function CartPage() {
                 </div>
                 <div className="col-span-3">
                   <h2 className="font-bold text-lg text-base-dark">{item.title}</h2>
-                  <p className="text-base-dark text-sm mt-1">Kayseria-Kayseria Classic- Unstitched +: fid1-25</p>
+                  {/* <p className="text-base-dark text-sm mt-1">Kayseria-Kayseria Classic- Unstitched +: fid1-25</p> */}
                   
                   <div className="mt-4 grid grid-cols-3 gap-4">
                     {/* Price Column */}
