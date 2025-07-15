@@ -30,9 +30,12 @@ body {
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-family: cursive !important; */
   /* font-family: inter, sans-serif !important; */
-  font-family: montserrat, sans-serif !important;
+  /* font-family: montserrat, sans-serif !important; */
+  font-family: "Lexend Deca" !important;
 }
-
+.product-page-pagination .swiper-slide {
+  width: auto !important;
+}
 @layer {
   :root {
     /* Primary Color Palette */
@@ -169,10 +172,36 @@ body {
 /* } */
 @media (max-width: 1023px) {
   .swiper-button-next {
-    display: none !important;
+    /* display: none !important; */
   }
 
   .swiper-button-prev {
-    display: none !important;
+    /* display: none !important; */
   }
+}
+/* .cart-page, */
+body {
+  /* background: #d9d9d9 !important; */
+}
+
+/* .swiper-wrapper .swiper-slide.swiper-slide-active { */
+/* display: contents !important; */
+/* width: 500px !important; */
+/* justify-content: center; */
+/* flex-direction: column; */
+/* } */
+/* .swiper-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  /* justify-content: center; */
+/* flex-direction: column; */
+/* } */
+.swiper-pagination-bullet {
+  @apply w-2 h-2 bg-gray-300 rounded-full opacity-100;
+}
+.swiper-pagination-bullet-active {
+  @apply bg-pink-400;
+}
+#mobile-thumbnails .swiper-slide {
+  /* width: auto !important; */
 }

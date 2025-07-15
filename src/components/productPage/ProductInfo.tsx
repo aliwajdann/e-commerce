@@ -1,11 +1,12 @@
 'use client';
-import ReactMarkdown from 'react-markdown'
+// import ReactMarkdown from 'react-markdown'
+import WatchingIndicator from './WatchingIndicator';
 import Ppatc from './Ppatc';
 
 import { useState } from "react";
 
 interface MediaType {
-  type: 'image' | 'video';
+  type: 'image' | 'video' | 'string';
   url: string;
 }
 
@@ -27,29 +28,39 @@ export default function ProductInfo({
   originalprice,
 }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
+   const featureList = description.split('\n')
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 p-4">
       <div className="space-y-1">
-        <h1 style={{ textTransform: 'uppercase' }} className="text-xl font-bold text-base-dark">
+      <div className="space-y-2 mb-6">
+        <h1 style={{ textTransform: 'capitalize' }} className="md:text-[28px] text-[24px] font-semibold text-gray-800">
           {title}
         </h1>
-
+ <div className="leading-relaxed text-muted">
+        {/* <ReactMarkdown>{description}</ReactMarkdown> */}
+        <ul className="list-disc pl-5 space-y-1 text-[#737373] md:text-[15px] text-[14px] font-normal">
+      {featureList.map((feature, index) => (
+        <li key={index}>{feature}</li>
+      ))}
+    </ul>
+      </div>
+      </div>
         <div className="flex items-center gap-2">
           {originalprice && (
-            <span className="block text-lg font-semibold text-base-dark line-through">
+            <span className="block   text-gray-400 md:text-[34px] text-[30px] line-through">
               Rs.{originalprice.toFixed(2)}
             </span>
           )}
-          <span className="font-semibold text-lg text-price">Rs.{price.toFixed(2)}</span>
+          <span className=" md:text-[34px] text-[30px] text-blue-600">Rs.{price.toFixed(2)}</span>
         </div>
       </div>
 
       <div className="flex gap-2 items-center">
-        <button className="bg-purple-800 text-sm px-2 py-0.5 hover:cursor-pointer   text-white border-none outline-none rounded-sm">
+        <button className="bg-purple-800 text-[10px] px-1 py-0.5 hover:cursor-pointer   text-white border-none outline-none rounded-sm">
           baadmay
         </button>
-        <p className="font-medium text-sm ">Pay in Three Installments of</p>
+        <p className="font-medium text-[12px] ">Pay in Three Installments of</p>
         <p className="text-purple-800 font-bold text-sm ">Rs.{(price / 3).toFixed(2)}</p>
       </div>
 
@@ -87,10 +98,8 @@ export default function ProductInfo({
   })),
 }} />
 
-
-      <div className="leading-relaxed text-muted">
-        <ReactMarkdown>{description}</ReactMarkdown>
-      </div>
+<WatchingIndicator />
+     
     </div>
   );
 }

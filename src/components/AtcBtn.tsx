@@ -44,10 +44,10 @@ quantity: product.quantity
 
   return (
       <>
-    <div className='bg-white w-full'>
+    <div className='bg-white w-full hover:cursor-pointer'>
        <button
         onClick={(e)=>{handleAddToCart(e)}}
-        className="w-full border-1 border-black font-bold inline-block text-black px-6 py-2 hover:bg-primary/90 hover:text-white hover:bg-black transition-all w-full text-center"
+        className="hover:cursor-pointer border-1 border-black font-bold inline-block text-black px-6 py-2 hover:bg-primary/90 hover:text-white hover:bg-black transition-all w-full text-center"
       >
           Add to Cart
       </button>

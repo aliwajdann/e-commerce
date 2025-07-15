@@ -8,7 +8,7 @@ import { selectCartCount } from "@/redux/cartSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle } from "@/redux/drawerSlice";
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
-import logo from "@/logo.png";
+import logo from "@/Velano.png";
 import CartDrawer from "./CartDrawer";
 
 const desktopNavItems = [
@@ -96,7 +96,7 @@ export default function Header() {
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="hidden md:block fixed w-full z-50 bg-white"
+        className="hidden md:block fixed w-full z-50 bg-white" style={{background: "#737373"}}
       >
         <div className="container mx-auto px-4">
           {/* Top Bar */}
@@ -114,7 +114,7 @@ export default function Header() {
               <div className="relative search-container">
                 <button 
                   onClick={toggleSearch}
-                  className="flex items-center text-gray-700 hover:text-gray-900 group"
+                  className="hover:cursor-pointer flex items-center text-gray-700 hover:text-gray-900 group"
                 >
                   <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
                   <span className="ml-1">Search</span>
@@ -127,7 +127,7 @@ export default function Header() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg p-3 border border-gray-200"
+                      className=" absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg p-3 border border-gray-200"
                     >
                       <input
                         type="text"
@@ -143,9 +143,9 @@ export default function Header() {
               {/* WhatsApp */}
               <button 
                 onClick={handleWhatsAppClick}
-                className="flex items-center text-gray-700 hover:text-gray-900 group"
+                className="hover:cursor-pointer flex items-center text-gray-700 hover:text-gray-900 group"
               >
-                <ShoppingBag className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                <ShoppingBag className="hover:cursor-pointer h-5 w-5 group-hover:scale-110 transition-transform" />
                 <span className="ml-1">WhatsApp</span>
               </button>
               
@@ -173,11 +173,11 @@ export default function Header() {
                   onClick={() => dispatch(toggle())}
                   className="flex items-center text-gray-700 hover:text-gray-900 group"
                 >
-                  <ShoppingCart className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <ShoppingCart className="hover:cursor-pointer h-5 w-5 group-hover:scale-110 transition-transform" />
                   <span className="ml-1"></span>
                 </button>
                 {hasMounted && cartCount > 0 && (
-                  <span className="absolute -top-3.5 -right-2 bg-gray-800 text-white text-xs font-bold rounded-full w-4.5 h-4.5 flex items-center justify-center">
+                  <span className="hover:cursor-pointer absolute -top-3.5 -right-2 bg-gray-800 text-white text-xs font-bold rounded-full w-4.5 h-4.5 flex items-center justify-center">
                     {cartCount}
                   </span>
                 )}

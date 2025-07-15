@@ -153,7 +153,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             opacity: isHovered ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
-          className="hidden md:block absolute bottom-3 left-0 right-0 px-3"
+          className="hover:cursor-pointer hidden md:block absolute bottom-3 left-0 right-0 px-3"
         >
           <AtcBtn product={{
             id: product.id,
@@ -170,7 +170,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Mobile Add to Cart Button */}
-      <div className='mt-1.5 md:hidden w-full'>
+      <div className='mt-1.5 md:hidden w-full hover:cursor-pointer'>
         <AtcBtn product={{
           id: product.id,
           title: product.name,

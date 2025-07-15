@@ -95,7 +95,7 @@ export default function CartDrawer( ) {
                           className="w-20 h-20 rounded-lg object-cover border"
                         />
                         <div className="flex-1">
-                          <h3 className="text-lg font-medium text-base-dark">{item.title}</h3>
+                          <h3 className="font-medium text-base-dark">{item.title}</h3>
                           <div className="flex gap-2 mt-1">
                             <span className="font-semibold text-price">Rs.{item.price.toFixed(2)}</span>
                             {item.price && (
@@ -111,7 +111,7 @@ export default function CartDrawer( ) {
                                   id: item.id,
                                   quantity: Math.max(1, item.quantity - 1)
                                 }))}
-                                className="scale-80 px-3 py-1 bg-dark text-white hover:bg-gray-200 transition rounded-full"
+                                className="hover:cursor-pointer scale-80 px-3 py-1 bg-dark text-white hover:bg-gray-200 transition rounded-full"
                               >
                                 -
                               </button>
@@ -123,7 +123,7 @@ export default function CartDrawer( ) {
                                   id: item.id,
                                   quantity: item.quantity + 1
                                 }))}
-                                className="scale-80 px-3 py-1 bg-dark hover:bg-gray-200 transition text-white rounded-full"
+                                className="hover:cursor-pointer scale-80 px-3 py-1 bg-dark hover:bg-gray-200 transition text-white rounded-full"
                               >
                                 +
                               </button>
@@ -132,7 +132,7 @@ export default function CartDrawer( ) {
                               onClick={() => dispatch(removeFromCart(item.id))}
                               className="text-red-500 text-sm hover:text-red-700 transition"
                             >
-                              <X className="w-5 h-5 text-base-dark" />
+                              <X className="w-5 h-5 text-base-dark hover:cursor-pointer" />
                             </button>
                           </div>
                         </div>
@@ -167,7 +167,7 @@ export default function CartDrawer( ) {
                   className="w-full bg-black text-white py-3 rounded-lg font-semibold"
                 > */}
                   <Link prefetch href="/checkout">
-  <button onClick={()=> dispatch(toggle())} className="w-full bg-black text-white p-3 rounded mt-4">
+  <button onClick={()=> dispatch(toggle())} className="hover:cursor-pointer w-full bg-black text-white p-3 rounded mt-4">
     Proceed to Checkout
   </button>
 </Link>

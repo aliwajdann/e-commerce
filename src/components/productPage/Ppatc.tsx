@@ -1,6 +1,9 @@
+'use client'
 import { addToCart } from '@/redux/cartSlice';
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggle } from "@/redux/drawerSlice";
+import { useRouter } from 'next/navigation';
+
 interface MediaType {
   type: string;
   url: string;
@@ -11,54 +14,83 @@ interface ProductInfoProps {
   title: string;
   price: number;
   description: string;
-  media: MediaType[],
-  quantity: number
+  media: MediaType[];
+  quantity: number;
 }
+
 interface Product {
-    product: ProductInfoProps
+  product: ProductInfoProps;
 }
 
-function Ppatc({product}:Product) {
-const dispatch = useDispatch();
+function Ppatc({ product }: Product) {
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  // const [open, setOpen] = useState(false);
+  const handleAddToCart = (e: any) => {
+    e.stopPropagation();
+    dispatch(toggle());
+    dispatch(
+      addToCart({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        media: product.media.map((m: any) => ({
+          url: m.url,
+          type: m.type || "image",
+        })),
+        quantity: product.quantity,
+      })
+    );
+  };
 
-  const handleAddToCart = (e:any) => {
-    dispatch(toggle())
-    // setOpen(true)
-     e.stopPropagation()
-      dispatch(
-          addToCart({
-              id: product.id,
-  title: product.title,
-  price:product.price,
-  media:product.media.map((m:any) => ({
-      url: m.url,
-    type: m.type || "image" 
-})),
-quantity: product.quantity
-})
-);
-// router.push('/cart')
+  const handleBuyNow = (e: any) => {
+    e.stopPropagation();
+    // dispatch(toggle());
+    dispatch(
+      addToCart({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        media: product.media.map((m: any) => ({
+          url: m.url,
+          type: m.type || "image",
+        })),
+        quantity: product.quantity,
+      })
+    );
+    router.push('/checkout');
+  };
+
+  const handleOrderOnWhatsApp = () => {
+    const phone = "+923240059011"; // Change this to your WhatsApp number
+    const message = `Hi, I'm interested in "${product.title}". Here’s the link: ${window.location.href}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
-      <>
-    <div className=''>
-       <button
-        onClick={(e)=>{handleAddToCart(e)}}
-        className="hover:cursor-pointer border-2 border-black font-bold inline-block px-6 py-2 text-white bg-black transition-all text-center rounded-md"
+    <div className='flex gap-2 flex-wrap'>
+      <button
+        onClick={handleAddToCart}
+        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-white bg-[rgb(16,71,164)] transition-all text-center rounded-md"
       >
-          Add to Cart
+        Add to Cart
       </button>
-      </div>
-</>
-
-  )
+      <button
+        onClick={handleBuyNow}
+        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-white bg-emerald-600 transition-all text-center rounded-md"
+      >
+        Buy Now
+      </button>
+      <button
+        onClick={handleOrderOnWhatsApp}
+        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-white bg-emerald-400 transition-all text-center rounded-md"
+      >
+        Order On WhatsApp
+      </button>
+    </div>
+  );
 }
 
-export default Ppatc
-
-
-
-
+export default Ppatc;

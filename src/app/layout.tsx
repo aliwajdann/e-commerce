@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
+// import Navigation from "@/components/Navigation";
+import VelanoHeader from "./VelanoHeader";
 import { Providers } from "@/app/providers";
-import {Inter} from "next/font/google";
-import Footer from "@/components/Foorer";
+// import {Inter} from "next/font/google";
+// import Footer from "@/components/Footer";
 import { ClerkProvider } from '@clerk/nextjs'
+// import Head from 'next/head';
+import { Lexend_Deca } from 'next/font/google'
+import LevanoFooter from "./LevanoFooter";
+
+
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -15,16 +21,21 @@ import { ClerkProvider } from '@clerk/nextjs'
 //   variable: "--font-geist-mono",
 //   subsets: ["latin"],
 // });
+   
+// const montserrat = Inter({
+//   subsets: ["latin"],
+//   variable: "--font-montserrat",
+// });
 
-const montserrat = Inter({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-});
-
+const lexendDeca = Lexend_Deca({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'], // you can choose the weights you want
+  variable: '--font-lexend-deca',
+})
 
 export const metadata: Metadata = {
-  title: "Nexwear",
-  description: "A clothing brand!",
+  title: "Velano",
+  description: "Minimal, everyday essentials with a clean aesthetic.",
 };
 
 export default function RootLayout({
@@ -37,13 +48,15 @@ export default function RootLayout({
       <ClerkProvider>
     <html lang="en">
       <body
-        className={`${montserrat.variable} antialiased min-h-screen transition-colors duration-500` 
+        className={` ${lexendDeca.variable} antialiased min-h-screen transition-colors duration-500 className='bg-[#d9d9d9]'` 
       }
       >
         <Providers>
-        <Navigation />
+        {/* <Navigation /> */}
+        <VelanoHeader />
           {children}
-        <Footer />
+        {/* <Footer /> */}
+        <LevanoFooter />
           </Providers>
       </body>
     </html>
