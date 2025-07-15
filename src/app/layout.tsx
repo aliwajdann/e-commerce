@@ -9,6 +9,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 // import Head from 'next/head';
 import { Lexend_Deca } from 'next/font/google'
 import LevanoFooter from "./LevanoFooter";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 
@@ -45,7 +46,7 @@ export default function RootLayout({
 }>) {
       // className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-light dark:bg-dark transition-colors duration-500` 
   return (
-      <ClerkProvider>
+    <ClerkProvider>
     <html lang="en">
       <body
         className={` ${lexendDeca.variable} antialiased min-h-screen transition-colors duration-500 className='bg-[#d9d9d9]'` 
@@ -55,6 +56,7 @@ export default function RootLayout({
         {/* <Navigation /> */}
         <VelanoHeader />
           {children}
+          <SpeedInsights />
         {/* <Footer /> */}
         <LevanoFooter />
           </Providers>

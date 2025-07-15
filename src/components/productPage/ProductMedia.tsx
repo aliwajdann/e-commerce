@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
+import type { Swiper as SwiperType } from 'swiper/types';
 import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
 
 import 'swiper/css';
@@ -119,7 +120,13 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
             pagination={{ clickable: true, dynamicBullets: true }}
             modules={[Navigation, Pagination, Thumbs]}
             className="w-full h-full"
-            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        onSlideChange={(swiper: SwiperType) => {
+  if (typeof swiper?.activeIndex === 'number') {
+    setActiveIndex(swiper.activeIndex);
+  }
+}}
+
+
             loop={false}
           >
             {media.map((item, index) => (
