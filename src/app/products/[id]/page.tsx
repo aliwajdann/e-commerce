@@ -127,7 +127,7 @@ export default function ProductPage() {
     fetchProduct();
   }, [id]);
 
-  if (loading || !product) return <p className="p-8">Loading...</p>;
+  if (loading || !product) return <p className="p-8 h-lvh">Loading...</p>;
 
   return (
     <>
