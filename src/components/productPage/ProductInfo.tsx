@@ -33,27 +33,20 @@ export default function ProductInfo({
   return (
     <div className="space-y-3 p-4">
       <div className="space-y-1">
-      <div className="space-y-2 mb-6">
+      <div className="">
         <h1 style={{ textTransform: 'capitalize' }} className="md:text-[28px] text-[24px] font-semibold text-gray-800">
           {title}
         </h1>
- <div className="leading-relaxed text-muted">
-        {/* <ReactMarkdown>{description}</ReactMarkdown> */}
-        <ul className="list-disc pl-5 space-y-1 text-[#737373] md:text-[15px] text-[14px] font-normal">
-      {featureList.map((feature, index) => (
-        <li key={index}>{feature}</li>
-      ))}
-    </ul>
-      </div>
-      </div>
-        <div className="flex items-center gap-2">
+   </div>
+ <div className="flex items-center gap-2">
           {originalprice && (
             <span className="block   text-gray-400 md:text-[34px] text-[30px] line-through">
               Rs.{originalprice.toFixed(2)}
             </span>
           )}
           <span className=" md:text-[34px] text-[30px] text-blue-600">Rs.{price.toFixed(2)}</span>
-        </div>
+      </div>
+        
       </div>
 
       <div className="flex gap-2 items-center">
@@ -99,7 +92,14 @@ export default function ProductInfo({
 }} />
 
 <WatchingIndicator />
-     
+     <div className="leading-relaxed text-muted">
+        {/* <ReactMarkdown>{description}</ReactMarkdown> */}
+        <ul className="list-disc pl-5 space-y-1 text-[#737373] md:text-[15px] text-[14px] font-normal">
+      {featureList.map((feature, index) => (
+        <li key={index}>{feature}</li>
+      ))}
+    </ul>
+      </div>
     </div>
   );
 }

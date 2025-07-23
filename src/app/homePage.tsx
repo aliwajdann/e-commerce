@@ -1,9 +1,9 @@
-import Image from "next/image";
+// import Image from "next/image";
 import Products from "@/components/products"
 // import ChatInterface from "@/components/ChatInterface";
 import CategorySection from "@/components/CategorySection";
 
-export default function Home() {
+export default function HomePage() {
 
   return (
     <>

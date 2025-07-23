@@ -45,7 +45,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
 
   if (!media?.length || isLoading || !swiperModules) {
     return (
-      <div className="flex flex-col lg:flex-row gap-4 max-w-6xl mx-auto p-4">
+      <div className="flex flex-col lg:flex-row gap-4 max-w-6xl mx-auto p-4 w-full">
         <div className="hidden lg:flex flex-col items-center space-y-2">
           <div className="w-16 h-64 bg-gray-200 rounded-lg animate-pulse" />
         </div>
@@ -106,7 +106,9 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
       </div>
 
       {/* Main Media */}
-     <div className="flex-1 w-full max-w-md lg:max-w-lg mx-auto">
+     <div className="flex-1 w-full max-w-md  mx-auto">
+     {/* <div className="w-full lg:w-auto flex-1"> */}
+
 
        <div className="relative w-full aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden">
 
