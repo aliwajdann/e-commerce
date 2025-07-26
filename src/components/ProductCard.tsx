@@ -9,6 +9,7 @@ type MediaItem = {
   url: string;
 };
 
+
 interface Product {
   id: string;
   name: string;
@@ -16,13 +17,13 @@ interface Product {
   originalprice?: number;
   images: MediaItem[];
   rating: number;
-  colors?: string[];
-  sizes?: string[];
+  sizes: string[];
+  colors: string[];
   isNew?: boolean;
   isBestSeller?: boolean;
   href: string;
-  
 }
+
 
 interface ProductCardProps {
   product: Product;
@@ -188,60 +189,65 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-3 sm:p-4 flex items-center">
-        <div className="justify-between items-start w-full space-y-1">
-          {/* Product Name */}
-          <div className='text-center'>
-            <h3 className="text-gray-900 text-sm font-medium sm:text-base leading-tight line-clamp-2">
-              {product.name}
-            </h3>
-            {/* Rating - uncomment if needed */}
-            {/* <div className="flex items-center justify-center mt-1">
-              {renderRating()}
-              <span className="text-xs text-gray-500 ml-1">
-                ({product.rating.toFixed(1)})
-              </span>
-            </div> */}
-          </div>
+<div className="p-3 sm:p-4 flex flex-col items-center gap-2">
+  <div className="text-center w-full">
+    <h3 className="text-gray-900 text-sm font-medium sm:text-base leading-tight line-clamp-2">
+      {product.name}
+    </h3>
+  </div>
 
-          {/* Price Section */}
-          <div className="text-center flex items-center gap-2 sm:gap-3 justify-center">
-            {product.originalprice && (
-              <span className="font-medium text-xs sm:text-sm text-gray-500 line-through">
-                Rs.{product.originalprice.toFixed(2)}
-              </span>
-            )}
-            <span className="font-bold text-price text-sm sm:text-base">
-              Rs.{product.price.toFixed(2)}
-            </span>
-          </div>
-           <motion.div>
-          <p>{product.colors}</p>
-          <p>{product.sizes}</p>
-        </motion.div>
-        </div>
+  {/* Price */}
+  <div className="flex items-center gap-2 justify-center">
+    {product.originalprice && (
+      <span className="text-xs sm:text-sm text-gray-500 line-through">
+        Rs.{product.originalprice.toFixed(2)}
+      </span>
+    )}
+    <span className="font-bold text-price text-sm sm:text-base">
+      Rs.{product.price.toFixed(2)}
+    </span>
+  </div>
 
-        {/* Color options */}
-        {/* {product.colors && product.colors.length > 0 && (
-          <div className="mt-2 sm:mt-3">
-            <div className="flex justify-center space-x-1 sm:space-x-2">
-              {product.colors.slice(0, 4).map((color) => (
-                <button
-                  key={color}
-                  className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-gray-200 hover:scale-110 transition-transform"
-                  style={{ backgroundColor: color }}
-                  aria-label={`Color ${color}`}
-                />
-              ))}
-              {product.colors.length > 4 && (
-                <span className="text-xs text-gray-500 self-center">
-                  +{product.colors.length - 4}
-                </span>
-              )}
-            </div>
-          </div>
-        )} */}
+  {/* Variants */}
+{(product.colors?.length > 0 || product.sizes?.length > 0) && (
+  <div className="flex flex-col items-center gap-1">
+     {/* Colors */}
+    {product.colors?.length > 0 && (
+      <div className="flex items-center justify-center gap-1">
+        {product.colors.slice(0, 4).map((color, idx) => (
+          <div
+            key={idx}
+            className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-gray-300"
+            style={{ backgroundColor: color }}
+            title={color}
+          />
+        ))}
+        {product.colors.length > 4 && (
+          <span className="text-xs text-gray-500 ml-1">
+            +{product.colors.length - 4}
+          </span>
+        )}
       </div>
+    )}
+
+    {/* Sizes */}
+    {product.sizes?.length > 0 && (
+      <div className="text-xs text-gray-500 flex flex-wrap justify-center gap-1">
+        {product.sizes.map((size, i) => (
+          <span
+            key={i}
+            className="px-1.5 py-0.5 border border-gray-300 rounded text-xs"
+          >
+            {size}
+          </span>
+        ))}
+      </div>
+    )}
+  
+   </div>
+)}
+
+</div>
     </motion.div>
   );
 };

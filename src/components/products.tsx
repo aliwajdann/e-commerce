@@ -35,6 +35,7 @@ console.log(products)
   }}
 />
 
+
       ))}
     </div>
   </section>
