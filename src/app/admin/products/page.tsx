@@ -69,7 +69,7 @@ export default  function  AdminProducts() {
             <h2 className="text-xl font-semibold">{product.title}</h2>
             <p className="text-sm text-gray-600">{product.description}</p>
             <p className="font-bold">Rs {product.price}</p>
-            <div className="flex gap-2 mt-2">
+            <div className="flex gap-2 mt-2 overflow-scroll no-scrollbar">
               {product.media?.map((item: any, i: number) =>
                 item.type === "image" ? (
                   <img
@@ -98,8 +98,8 @@ export default  function  AdminProducts() {
       </div>
 
       {/* Edit Dialog */}
-      <Dialog open={!!editingProduct} onOpenChange={() => setEditingProduct(null)}>
-        <DialogContent className="max-w-2xl">
+      <Dialog open={!!editingProduct} onOpenChange={() => setEditingProduct(null)} >
+        <DialogContent className="w-[90%]">
           <DialogHeader>
             <DialogTitle>Edit Product</DialogTitle>
           </DialogHeader>
