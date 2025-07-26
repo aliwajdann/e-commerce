@@ -11,7 +11,7 @@ export default function ProductsSection() {
   
 console.log(products)
   return (
-  <section className="px-3   md:px-4 py-6 min-h-screen bg-light dark:bg-dark transition-colors duration-500">
+  <section className="px-3   md:px-4 py-6 min-h-screen bg-white dark:bg-dark transition-colors duration-500">
     <h2 className=" text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-primary-dark">
        Women Section
     </h2>
