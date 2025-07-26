@@ -1,8 +1,17 @@
 // app/admin/orders/page.tsx
+"use client";
+
+// import { currentUser } from "@clerk/nextjs/server";
 import { getOrders } from "@/lib/getOrders";
 
 export default async function AdminOrdersPage() {
   const orders: any[] = await getOrders();
+  
+// const user = await currentUser();
+
+// if (!user || user.emailAddresses[0].emailAddress !== "aliwajdan.it@gmail.com" || "mominabbasminhas5@gmail.com") {
+//   return <div>🚫 Access Denied</div>;
+// }
 
   return (
     <div className="p-6">

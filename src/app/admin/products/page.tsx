@@ -1,4 +1,5 @@
-"use client";
+'use client'
+// import { currentUser } from "@clerk/nextjs/server";
 import { fetchProducts } from "@/lib/fetchProducts";
 import CreateProductForm from "@/components/CreateProductForm";
 
@@ -15,12 +16,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function AdminProducts() {
+export default  function  AdminProducts() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingProduct, setEditingProduct] = useState<any | null>(null);
   const [form, setForm] = useState<any>({});
   const [isSaving, setIsSaving] = useState(false);
+  // const user = await currentUser();
+
 
   useEffect(() => {
     fetchProducts().then((data) => {
@@ -49,6 +52,10 @@ export default function AdminProducts() {
   };
 
   if (loading) return <div className="p-4">Loading products...</div>;
+  //  if (!user || user.emailAddresses[0].emailAddress !== "aliwajdan.it@gmail.com" || "mominabbasminhas5@gmail.com") {
+  //   return <div>🚫 Access Denied</div>;
+  // }
+
 
   return (
     <div className="p-6">

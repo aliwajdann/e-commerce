@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  
 };
+
+export const config = {
+  matcher: ['/admin/:path*'], // 👈 Middleware runs ONLY on /admin routes
+};
+
 
 export default nextConfig;

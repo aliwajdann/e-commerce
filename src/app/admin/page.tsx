@@ -1,33 +1,19 @@
-// // app/admin/page.tsx
+import { currentUser } from "@clerk/nextjs/server";
 
-// import { auth } from "@clerk/nextjs/server";
-// import { useUser } from '@clerk/nextjs'
+const adminEmails = [
+  "aliwajdan.it@gmail.com",
+  "yourcousin@example.com",
+  "someoneelse@trusted.com",
+];
 
-// const { user, isSignedIn } = useUser()
+export default async function Page() {
+  const user = await currentUser();
 
+  const userEmail = user?.emailAddresses[0]?.emailAddress;
 
-// export default async function AdminPage() {
-//   const { userId } = auth();
+  if (!user || !userEmail || !adminEmails.includes(userEmail)) {
+    return <div>🚫 Access Denied</div>;
+  }
 
-//   if (!userId) {
-//     return <div className="p-6 text-center text-red-500">Please sign in to access admin dashboard</div>;
-//   }
-
-//   return (
-//     <div className="p-8">
-//       <h1 className="text-2xl font-bold">Welcome to Admin Panel</h1>
-//       {/* Add more here */}
-//     </div>
-//   );
-// }
-import React from 'react'
-
-function page() {
-  return (
-    <div>
-      im admin AdminPage
-    </div>
-  )
+  return <div>Welcome to the Admin Dashboard 🛡️</div>;
 }
-
-export default page

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import Navigation from "@/components/Navigation";
-import VelanoHeader from "./VelanoHeader";
+import Navigation from "@/components/Navigation";
+// import VelanoHeader from "./VelanoHeader";
 import { Providers } from "@/app/providers";
 // import {Inter} from "next/font/google";
 // import Footer from "@/components/Footer";
@@ -53,8 +53,8 @@ export default function RootLayout({
       }
       >
         <Providers>
-        {/* <Navigation /> */}
-        <VelanoHeader />
+        <Navigation />
+        {/* <VelanoHeader /> */}
           {children}
           <SpeedInsights />
         {/* <Footer /> */}

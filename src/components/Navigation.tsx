@@ -96,12 +96,12 @@ export default function Header() {
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="hidden md:block fixed w-full z-50 bg-white" style={{background: "#737373"}}
+        className="hidden md:block fixed w-full z-50 bg-white"
       >
         <div className="container mx-auto px-4">
           {/* Top Bar */}
           <div className="flex justify-end items-center py-4">
-            <Link href="/" className="hover:scale-105 transition-transform w-1/4">
+            <Link href="/" className="hover:scale-105 transition-transform w-1/4"> 
               {logo ? (
                 <Image src={logo} alt="Logo" width={120} height={40} />
               ) : (
@@ -167,6 +167,7 @@ export default function Header() {
                 </Link>
               </SignedOut>
               
+        
               {/* Cart */}
               <div className="relative">
                 <button 
