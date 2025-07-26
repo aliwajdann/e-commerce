@@ -1,5 +1,3 @@
-// components/CreateProductForm.tsx
-
 'use client';
 
 import { useState } from 'react';
@@ -14,24 +12,43 @@ export default function CreateProductForm() {
     price: '',
     originalPrice: '',
     media: [''],
+    variants: {
+      sizes: [''],
+      colors: [''],
+    },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index?: number) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index?: number, variantType?: 'sizes' | 'colors') => {
     const { name, value } = e.target;
+
     if (name === 'media' && typeof index === 'number') {
       const updatedMedia = [...formData.media];
       updatedMedia[index] = value;
       setFormData({ ...formData, media: updatedMedia });
+    } else if (variantType && typeof index === 'number') {
+      const updatedVariants = { ...formData.variants };
+      updatedVariants[variantType][index] = value;
+      setFormData({ ...formData, variants: updatedVariants });
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  const handleAddMedia = () => {
-    setFormData((prev) => ({
-      ...prev,
-      media: [...prev.media, ''],
-    }));
+  const handleAddField = (field: 'media' | 'sizes' | 'colors') => {
+    if (field === 'media') {
+      setFormData((prev) => ({
+        ...prev,
+        media: [...prev.media, ''],
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        variants: {
+          ...prev.variants,
+          [field]: [...prev.variants[field], ''],
+        },
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,6 +61,10 @@ export default function CreateProductForm() {
       price: parseFloat(formData.price),
       originalPrice: parseFloat(formData.originalPrice),
       media: formData.media.map((url) => ({ type: 'image', url })),
+      variants: {
+        sizes: formData.variants.sizes.filter((s) => s.trim() !== ''),
+        colors: formData.variants.colors.filter((c) => c.trim() !== ''),
+      },
     };
 
     try {
@@ -56,6 +77,10 @@ export default function CreateProductForm() {
         price: '',
         originalPrice: '',
         media: [''],
+        variants: {
+          sizes: [''],
+          colors: [''],
+        },
       });
     } catch (err) {
       console.error(err);
@@ -71,6 +96,7 @@ export default function CreateProductForm() {
       <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleChange} className="border p-2 w-full" required />
       <input name="originalPrice" type="number" placeholder="Original Price" value={formData.originalPrice} onChange={handleChange} className="border p-2 w-full" required />
 
+      {/* Media */}
       <div>
         {formData.media.map((url, i) => (
           <input
@@ -83,8 +109,40 @@ export default function CreateProductForm() {
             required
           />
         ))}
-        <button type="button" onClick={handleAddMedia} className="text-blue-500 text-sm mt-1">
+        <button type="button" onClick={() => handleAddField('media')} className="text-blue-500 text-sm mt-1">
           + Add more images
+        </button>
+      </div>
+
+      {/* Sizes */}
+      <div>
+        {formData.variants.sizes.map((size, i) => (
+          <input
+            key={i}
+            placeholder={`Size ${i + 1}`}
+            value={size}
+            onChange={(e) => handleChange(e, i, 'sizes')}
+            className="border p-2 w-full mt-1"
+          />
+        ))}
+        <button type="button" onClick={() => handleAddField('sizes')} className="text-blue-500 text-sm mt-1">
+          + Add Size
+        </button>
+      </div>
+
+      {/* Colors */}
+      <div>
+        {formData.variants.colors.map((color, i) => (
+          <input
+            key={i}
+            placeholder={`Color ${i + 1}`}
+            value={color}
+            onChange={(e) => handleChange(e, i, 'colors')}
+            className="border p-2 w-full mt-1"
+          />
+        ))}
+        <button type="button" onClick={() => handleAddField('colors')} className="text-blue-500 text-sm mt-1">
+          + Add Color
         </button>
       </div>
 

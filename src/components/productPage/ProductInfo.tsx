@@ -9,6 +9,10 @@ interface MediaType {
   type: 'image' | 'video' | 'string';
   url: string;
 }
+interface VariantsType {
+  colors: string[];
+  sizes: string[];
+}
 
 interface ProductInfoProps {
   id: string;
@@ -17,6 +21,7 @@ interface ProductInfoProps {
   originalprice: number;
   description: string;
   media: MediaType[];
+  variants: VariantsType,
 }
 
 export default function ProductInfo({
@@ -26,9 +31,14 @@ export default function ProductInfo({
   description,
   media,
   originalprice,
+  variants,
 }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
    const featureList = description.split('\n')
+   const [selectedColor, setSelectedColor] = useState('');
+const [selectedSize, setSelectedSize] = useState('');
+console.log("Variants:", variants);
+
 
   return (
     <div className="space-y-3 p-4">
@@ -38,6 +48,8 @@ export default function ProductInfo({
           {title}
         </h1>
    </div>
+
+
  <div className="flex items-center gap-2">
           {originalprice && (
             <span className="block   text-gray-400 md:text-[34px] text-[30px] line-through">
@@ -59,6 +71,46 @@ export default function ProductInfo({
 
       <p className="text-base-dark text-sm">SKU: E1680-A-GRADE</p>
 
+{variants?.colors?.length > 0 && (
+  <div className="mt-3">
+    <p className="text-sm font-medium mb-1">Color:</p>
+    <div className="flex gap-2">
+      {variants.colors.map((color) => (
+        <div
+          key={color}
+          onClick={() => setSelectedColor(color)}
+          className={`w-6 h-6 rounded-full border-2 cursor-pointer ${
+            selectedColor === color ? 'border-black' : 'border-gray-300'
+          }`}
+          style={{ backgroundColor: color }}
+          title={color}
+        />
+      ))}
+    </div>
+  </div>
+)}
+
+{variants?.sizes?.length > 0 && (
+  <div className="mt-3">
+    <p className="text-sm font-medium mb-1">Size:</p>
+    <div className="flex gap-2 flex-wrap">
+      {variants.sizes.map((size) => (
+        <button
+          key={size}
+          onClick={() => setSelectedSize(size)}
+          className={`px-3 py-1 border rounded-md text-sm font-medium ${
+            selectedSize === size ? 'bg-gray-800 text-white' : 'hover:bg-gray-100'
+          }`}
+        >
+          {size}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+
+
+
       <div className="mt-4 flex items-center gap-4">
         <div className="p-1 flex items-center justify-between gap-4  overflow-hidden text-base-dark">
           <button
@@ -79,12 +131,14 @@ export default function ProductInfo({
         </div>
       </div>
 
-     <Ppatc product={{
+    <Ppatc product={{
   id,
   title,
   price,
   description,
   quantity,
+  selectedColor,
+  selectedSize,
   media: media.map((m) => ({
     url: m.url,
     type: m.type || "image",

@@ -16,6 +16,8 @@ interface ProductInfoProps {
   description: string;
   media: MediaType[];
   quantity: number;
+  selectedColor?: string;  // <-- add this
+  selectedSize?: string;   // <-- and this
 }
 
 interface Product {
@@ -39,6 +41,9 @@ function Ppatc({ product }: Product) {
           type: m.type || "image",
         })),
         quantity: product.quantity,
+         selectedColor: product.selectedColor ?? undefined,
+selectedSize: product.selectedSize ?? undefined,
+
       })
     );
   };

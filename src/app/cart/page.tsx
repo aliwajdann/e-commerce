@@ -65,6 +65,16 @@ export default function CartPage() {
                       </div>
                     </div>
                     
+                  {/* Variants Column  */}
+                  {item.selectedColor && (
+  <p className="text-sm text-base-dark">Color: <span className="font-semibold">{item.selectedColor}</span></p>
+)}
+{item.selectedSize && (
+  <p className="text-sm text-base-dark">Size: <span className="font-semibold">{item.selectedSize}</span></p>
+)}
+
+
+
                     {/* Quantity Column */}
                     <div>
                       <p className="text-base-dark font-medium text-base-dark">Quantity</p>

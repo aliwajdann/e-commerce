@@ -35,12 +35,24 @@ export default function CheckoutPage() {
     );
 
     const orderData = {
-      customer: form,
-      items: cartItems,
-      total,
-      status: "pending",
-      createdAt: new Date().toISOString(),
-    };
+  customer: form,
+  items: cartItems.map((item) => ({
+    id: item.id,
+    title: item.title,
+    price: item.price,
+    quantity: item.quantity,
+    selectedColor: item.selectedColor || null,
+    selectedSize: item.selectedSize || null,
+    media: item.media.map((m) => ({
+      url: m.url,
+      type: m.type,
+    })),
+  })),
+  total,
+  status: "pending",
+  createdAt: new Date().toISOString(),
+};
+
 
     try {
       const orderId = await createOrder(orderData);
@@ -178,6 +190,9 @@ export default function CheckoutPage() {
                     <div>
                       <h3 className="font-medium text-gray-800">{item.title}</h3>
                       <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                      {item.selectedColor && <p>Color: {item.selectedColor}</p>}
+{item.selectedSize && <p>Size: {item.selectedSize}</p>}
+
                     </div>
                   </div>
                   <div className="text-right">

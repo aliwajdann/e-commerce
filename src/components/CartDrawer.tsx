@@ -104,6 +104,11 @@ export default function CartDrawer( ) {
                               </span>
                             )}
                           </div>
+
+{item.selectedColor && <p>Color: {item.selectedColor}</p>}
+{item.selectedSize && <p>Size: {item.selectedSize}</p>}
+
+
                           <div className="flex items-center justify-between mt-3">
                             <div className="p-1 flex items-center justify-around border border-gray-300 overflow-hidden text-base-dark">
                               <button

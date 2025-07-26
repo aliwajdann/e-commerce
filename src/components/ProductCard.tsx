@@ -17,9 +17,11 @@ interface Product {
   images: MediaItem[];
   rating: number;
   colors?: string[];
+  sizes?: string[];
   isNew?: boolean;
   isBestSeller?: boolean;
   href: string;
+  
 }
 
 interface ProductCardProps {
@@ -126,6 +128,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
         </motion.div>
 
+       
         {product.images.length > 1 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -212,6 +215,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
               Rs.{product.price.toFixed(2)}
             </span>
           </div>
+           <motion.div>
+          <p>{product.colors}</p>
+          <p>{product.sizes}</p>
+        </motion.div>
         </div>
 
         {/* Color options */}

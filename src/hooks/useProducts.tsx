@@ -16,6 +16,10 @@ type Product = {
   originalPrice?: number;
   description: string;
   media: MediaItem[];
+  variants?: {
+    colors: string[];
+    sizes: string[];
+  };
 };
 
 export default function useProducts() {
@@ -35,6 +39,7 @@ export default function useProducts() {
             description: productData.description,
             media: productData.media || [],
             originalPrice: productData.originalPrice,
+             variants: productData.variants,
           } as Product;
         });
 

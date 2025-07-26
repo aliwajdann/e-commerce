@@ -86,6 +86,10 @@ interface MediaType {
   type: 'image' | 'video';
   url: string;
 }
+interface VariantsType {
+  colors: string[];
+  sizes: string[];
+}
 
 interface Product {
   id: string;
@@ -94,6 +98,7 @@ interface Product {
   originalPrice: number;
   description: string;
   media: MediaType[];
+  variants: VariantsType,
 }
 
 export default function ProductPage() {
@@ -142,6 +147,7 @@ export default function ProductPage() {
           originalprice={product.originalPrice}   
           description={product.description}
           media={product.media}
+          variants={product.variants}
         />
       </div>
 
