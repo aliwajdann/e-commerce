@@ -45,7 +45,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
 
   if (!media?.length || isLoading || !swiperModules) {
     return (
-      <div className="flex flex-col lg:flex-row gap-4 max-w-6xl mx-auto p-4 w-full">
+      <div className="flex flex-col lg:flex-row  max-w-6xl mx-auto p-4 w-full">
         <div className="hidden lg:flex flex-col items-center space-y-2">
           <div className="w-16 h-64 bg-gray-200 rounded-lg animate-pulse" />
         </div>
@@ -64,9 +64,9 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
   const { Swiper, SwiperSlide, Navigation, Pagination, Thumbs, FreeMode } = swiperModules;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-4 max-w-6xl mx-auto p-4">
+    <div className="min-w-full flex flex-col  gap-4 max-w-6xl mx-auto p-4">
       {/* Desktop Thumbnails - Vertical */}
-      <div className="hidden lg:flex flex-col items-center w-20 space-y-2">
+      <div className="hidden  flex-col items-center w-20 space-y-2">
         <button
           onClick={() => thumbsSwiperRef.current?.swiper.slidePrev()}
           className="p-2 rounded-full border hover:bg-gray-100 transition-colors"
@@ -106,11 +106,11 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
       </div>
 
       {/* Main Media */}
-     <div className="flex-1 w-full max-w-md  mx-auto">
+     <div className="flex-1 w-full max-w-md  mx-auto min-w-full">
      {/* <div className="w-full lg:w-auto flex-1"> */}
 
 
-       <div className="relative w-full aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden">
+       <div className="relative w-full  bg-gray-100 rounded-lg overflow-hidden">
 
           <Swiper
             ref={mainSwiperRef}
@@ -132,7 +132,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
             loop={false}
           >
             {media.map((item, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide  key={index}>
                 {item.type === 'video' ? (
                   <video
                     src={item.url}
@@ -142,7 +142,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
                     muted
                   />
                 ) : (
-                  <img src={item.url} alt={`Product image ${index + 1}`} className="w-full h-full object-cover" />
+                  <img src={item.url} alt={`Product image ${index + 1}`} className="w-full h-full object-contain" />
                 )}
               </SwiperSlide>
             ))}
@@ -165,17 +165,17 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
 
       {/* Mobile Thumbnails - Horizontal */}
      {/* Mobile Thumbnails - Horizontal */}
-<div className="lg:hidden mt-4 w-full px-4">
-  <div className="flex items-center space-x-2 overflow-hidden">
+<div className=" mt-4 w-full px-4">
+  <div className="flex items-center space-x-4 overflow-hidden">
     {/* Left Arrow */}
-    <button
+    {/* <button
       onClick={() => mobileThumbsSwiperRef.current?.swiper.slidePrev()}
       className="p-2 rounded-full border hover:bg-gray-100 transition-colors flex-shrink-0"
     >
       <ChevronLeft size={16} />
-    </button>
+    </button> */}
 
-    <div className="flex-1 overflow-hidden">
+    <div className="overflow-hidden">
       <Swiper
         ref={mobileThumbsSwiperRef}
         slidesPerView={'auto'}
@@ -207,12 +207,12 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
     </div>
 
     {/* Right Arrow */}
-    <button
+    {/* <button
       onClick={() => mobileThumbsSwiperRef.current?.swiper.slideNext()}
       className="p-2 rounded-full border hover:bg-gray-100 transition-colors flex-shrink-0"
     >
       <ChevronRight size={16} />
-    </button>
+    </button> */}
   </div>
 </div>
 

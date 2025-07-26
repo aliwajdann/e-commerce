@@ -132,14 +132,14 @@ export default function ProductPage() {
   return (
     <>
       {/* <div className="p-3.5 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 max-w-6xl mx-auto mt-1.5 md:mt-6"> */}
-       <div className='md:grid md:grid-cols-2 md:my-5 mb-5 md:w-[90%] mx-auto'>
+       <div className='md:grid md:grid-cols-2 md:my-5 mb-5 md:w-[95%] mx-auto'>
 
         <ProductMedia media={product.media} />
         <ProductInfo
           id={product.id}
-          title={product.title}
+          title={product.title}   
           price={product.price}
-          originalprice={product.originalPrice}
+          originalprice={product.originalPrice}   
           description={product.description}
           media={product.media}
         />

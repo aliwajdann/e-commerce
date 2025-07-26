@@ -121,7 +121,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <img
             src={product.images?.find(media => media.type === "image")?.url || "/placeholder.png"}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
@@ -139,7 +139,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <img
               src={product.images.filter(media => media.type === "image")[1]?.url || "/placeholder.png"}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </motion.div>
