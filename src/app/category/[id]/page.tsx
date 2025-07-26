@@ -5,6 +5,10 @@ import { useParams } from 'next/navigation';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import ProductCard from '@/components/ProductCard';
+interface VariantsType {
+  colors: string[],
+  sizes: string[]
+}
 
 interface Product {
   id: string;
@@ -12,6 +16,7 @@ interface Product {
   price: number;
   originalPrice: number;
   media: [];
+  variants: VariantsType;
 }
 
 export default function CategoryPage() {
@@ -63,10 +68,11 @@ export default function CategoryPage() {
                 originalprice: product.originalPrice,
                 images: product.media,
                 rating: 4.5,
-                colors: ['#000000', '#e53e3e', '#4299e1'],
                 isNew: true,
                 isBestSeller: true,
                 href: `/products/${product.id}`,
+                colors: product.variants?.colors || [],
+                sizes: product.variants?.sizes || [],
               }}
             />
           ))}
