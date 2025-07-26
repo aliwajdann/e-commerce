@@ -23,7 +23,7 @@ function LandingPage() {
   return (
     <>
 
-    <div className='md:grid md:grid-cols-2 md:my-5 mb-5'>
+    {/* <div className='md:grid md:grid-cols-2 md:my-5 mb-5'>
       <ProductMedia media={mediaArray} />
       <ProductInfo
               id={'1122'}
@@ -52,7 +52,7 @@ RECHARGEABLE ELECTRIC JUICER`}
             </ul>
             </div>
 <FaqSection />
-            <ReviewsSection />
+            <ReviewsSection /> */}
     </>
   )
 }
