@@ -27,10 +27,11 @@ export default function CategoryPageClient({
                 originalprice: product.originalPrice,
                 images: product.media,
                 rating: 4.5,
-                colors: ["#000000", "#e53e3e", "#4299e1"],
                 isNew: true,
                 isBestSeller: true,
                 href: `/products/${product.id}`,
+                 colors: product.variants?.colors || [],
+                 sizes: product.variants?.sizes || [],
               }}
             />
           ))}
