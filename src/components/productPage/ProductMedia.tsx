@@ -47,14 +47,14 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
     return (
       <div className="flex flex-col lg:flex-row  max-w-6xl mx-auto p-4 w-full">
         <div className="hidden lg:flex flex-col items-center space-y-2">
-          <div className="w-16 h-64 bg-gray-200 rounded-lg animate-pulse" />
+          <div className="w-16 h-64 rounded-lg animate-pulse" />
         </div>
         <div className="flex-1 relative">
-          <div className="aspect-[3/4] lg:aspect-[4/5] bg-gray-200 rounded-lg animate-pulse" />
+          <div className="aspect-[3/4] lg:aspect-[4/5]  rounded-lg animate-pulse" />
         </div>
         <div className="lg:hidden flex space-x-2">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="w-16 h-20 bg-gray-200 rounded-lg animate-pulse" />
+            <div key={i} className="w-16 h-20 rounded-lg animate-pulse" />
           ))}
         </div>
       </div>
@@ -110,7 +110,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
      {/* <div className="w-full lg:w-auto flex-1"> */}
 
 
-       <div className="relative w-full  bg-gray-100 rounded-lg overflow-hidden">
+       <div className="relative w-full rounded-lg overflow-hidden">
 
           <Swiper
             ref={mainSwiperRef}
@@ -157,7 +157,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
           </button>
 
           {/* Counter */}
-          <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm z-10">
+          <div className="absolute bottom-4 right-4  bg-gradient  bg-opacity-50 text-white px-3 py-1 rounded-full text-sm z-10">
             {activeIndex + 1} / {media.length}
           </div>
         </div>

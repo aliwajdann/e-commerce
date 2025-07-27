@@ -8,7 +8,7 @@ type Subcategory = {
   slug: string;
 };
 
-type CategorySlug = 'clothing' | 'accessories' | 'jewellery';
+type CategorySlug = 'clothing' | 'accessories' | 'jewellery' ;
 
 const subcategories: Record<CategorySlug, Subcategory[]> = {
   clothing: [
@@ -25,7 +25,9 @@ const subcategories: Record<CategorySlug, Subcategory[]> = {
     { name: "Necklaces", slug: "necklaces" },
     { name: "Earrings", slug: "earrings" },
     { name: "Bracelets", slug: "bracelets" },
+    { name: "Key Chains", slug: "key-chains" },
   ],
+  
 };
 
 export default function SubCategoryPage() {

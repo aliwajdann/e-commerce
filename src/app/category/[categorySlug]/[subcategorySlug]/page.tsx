@@ -77,7 +77,7 @@ export default function SubCategoryProductsPage() {
   if (loading) return <p className="p-6">Loading products...</p>;
 
   return (
-    <div className="p-6 mt-5">
+    <div className="w-[90%] mt-2 mx-auto">
       <h1 className="text-3xl font-bold capitalize mb-6">
         {subcategory.replace('-', ' ')}
       </h1>

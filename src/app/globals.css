@@ -312,3 +312,11 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.bg-gradient {
+  background: linear-gradient(
+    to right,
+    rgb(23, 255, 209) 0%,
+    rgb(248, 45, 255) 100%
+  );
+}
