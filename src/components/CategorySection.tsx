@@ -1,46 +1,47 @@
 // components/CategorySection.tsx
+'use client';
+
 import Link from 'next/link';
 
 const categories = [
   {
-    name: "Casual & Stylish",
-    image: "https://images.pexels.com/photos/9775539/pexels-photo-9775539.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/category/casual-stylish-tshirts",
+    name: "Jewellery",
+    slug: "jewellery",
+    image: "https://media.istockphoto.com/id/1299139185/photo/female-hands-with-trendy-dark-nail-design-with-gold-bracelets-on-aqua-background-luxury.webp?a=1&b=1&s=612x612&w=0&k=20&c=PBXjSOfNKK7MICs6YVNbgEt-3wOTPSzGpe6Jotybk-c=",
   },
   {
-    name: "Summer Ready Shorts",
-    image: "https://images.pexels.com/photos/29205209/pexels-photo-29205209/free-photo-of-athletic-male-on-urban-rooftop-in-austin.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/category/summer-ready-looks-shorts",
+    name: "Skin Care",
+    slug: "skin-care",
+    image: "https://images.unsplash.com/photo-1620755901999-166c6c151efe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2tpbiUyMGNhcmUlMjB0aHVtYm5haWx8ZW58MHx8MHx8fDA%3D",
   },
   {
-    name: "Trending & Modern",
-    image: "https://images.pexels.com/photos/8346053/pexels-photo-8346053.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/category/trending-modern",
+    name: "Under Garments",
+    slug: "under-garments",
+    image: "https://images.unsplash.com/photo-1568441556126-f36ae0900180?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dW5kZXJnYXJtZW50c3xlbnwwfHwwfHx8MA%3D%3D",
   },
 ];
 
 export default function CategorySection() {
-  // Show only first two categories for mobile/tablet
+  // Show only the first category for mobile (optional tweak)
   const mobileCategories = categories.slice(0, 1);
-  
-  return (
-    <section className="max-w-7xl mx-auto py-10">
-<div className="flex items-center gap-4 my-10">
-  <div className="flex-grow border-t border-2 border-black" />
-  <h2 className="text-center text-xl font-semibold text-black whitespace-nowrap">
-    SHOP BY CATEGORY
-  </h2>
-  <div className="flex-grow  border-t border-2 border-black" />
-</div>
 
-      
-      {/* Desktop view - all 3 categories */}
-      <div className="hidden lg:grid grid-cols-3 gap-6 mt-6">
+  return (
+    <section className=" w-[90%] md:w-[80%] mx-auto py-10">
+      <div className="flex items-center gap-4 my-10">
+        <div className="flex-grow border-t border-2 border-black" />
+        <h2 className="text-center text-xl font-semibold text-black whitespace-nowrap">
+          SHOP BY CATEGORY
+        </h2>
+        <div className="flex-grow border-t border-2 border-black" />
+      </div>
+
+      {/* Desktop view */}
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-6 mt-6">
         {categories.map((category) => (
           <Link
-          prefetch
-            key={category.name}
-            href={category.link}
+            prefetch
+            key={category.slug}
+            href={`/category/${category.slug}`}
             className="relative group overflow-hidden shadow-lg"
           >
             <img
@@ -57,13 +58,12 @@ export default function CategorySection() {
         ))}
       </div>
 
-      {/* Mobile and Tablet view - only 2 categories, face to face */}
-      {/* <div className="lg:hidden grid grid-cols-2 gap-4 mt-6"> */}
-      <div className="lg:hidden mt-6">
+      {/* Mobile and Tablet view */}
+      <div className="hidden mt-6">
         {mobileCategories.map((category) => (
           <Link
-            key={category.name}
-            href={category.link}
+            key={category.slug}
+            href={`/category/${category.slug}`}
             className="relative group overflow-hidden shadow-lg"
           >
             <img

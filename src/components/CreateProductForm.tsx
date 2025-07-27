@@ -7,11 +7,12 @@ import { db } from '@/lib/firebase';
 export default function CreateProductForm() {
   const [formData, setFormData] = useState({
     title: '',
-    category: '',
     description: '',
     price: '',
     originalPrice: '',
     media: [''],
+    category: { name: '', slug: '' },
+    subcategory: { name: '', slug: '' },
     variants: {
       sizes: [''],
       colors: [''],
@@ -29,6 +30,15 @@ export default function CreateProductForm() {
       const updatedVariants = { ...formData.variants };
       updatedVariants[variantType][index] = value;
       setFormData({ ...formData, variants: updatedVariants });
+    } else if (name.startsWith('category.') || name.startsWith('subcategory.')) {
+      const [parent, key] = name.split('.');
+      setFormData({
+        ...formData,
+        [parent]: {
+          ...formData[parent as 'category' | 'subcategory'],
+          [key]: value,
+        },
+      });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -56,11 +66,18 @@ export default function CreateProductForm() {
 
     const productData = {
       title: formData.title,
-      category: formData.category,
       description: formData.description,
       price: parseFloat(formData.price),
       originalPrice: parseFloat(formData.originalPrice),
       media: formData.media.map((url) => ({ type: 'image', url })),
+      category: {
+        name: formData.category.name.trim(),
+        slug: formData.category.slug.trim(),
+      },
+      subcategory: {
+        name: formData.subcategory.name.trim(),
+        slug: formData.subcategory.slug.trim(),
+      },
       variants: {
         sizes: formData.variants.sizes.filter((s) => s.trim() !== ''),
         colors: formData.variants.colors.filter((c) => c.trim() !== ''),
@@ -72,11 +89,12 @@ export default function CreateProductForm() {
       alert('Product added!');
       setFormData({
         title: '',
-        category: '',
         description: '',
         price: '',
         originalPrice: '',
         media: [''],
+        category: { name: '', slug: '' },
+        subcategory: { name: '', slug: '' },
         variants: {
           sizes: [''],
           colors: [''],
@@ -91,10 +109,21 @@ export default function CreateProductForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto p-4">
       <input name="title" placeholder="Title" value={formData.title} onChange={handleChange} className="border p-2 w-full" required />
-      <input name="category" placeholder="Category" value={formData.category} onChange={handleChange} className="border p-2 w-full" required />
       <input name="description" placeholder="Description" value={formData.description} onChange={handleChange} className="border p-2 w-full" required />
       <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleChange} className="border p-2 w-full" required />
       <input name="originalPrice" type="number" placeholder="Original Price" value={formData.originalPrice} onChange={handleChange} className="border p-2 w-full" required />
+
+      {/* Category */}
+      <div className="space-y-1">
+        <input name="category.name" placeholder="Category Name" value={formData.category.name} onChange={handleChange} className="border p-2 w-full" />
+        <input name="category.slug" placeholder="Category Slug" value={formData.category.slug} onChange={handleChange} className="border p-2 w-full" />
+      </div>
+
+      {/* Subcategory */}
+      <div className="space-y-1">
+        <input name="subcategory.name" placeholder="Subcategory Name" value={formData.subcategory.name} onChange={handleChange} className="border p-2 w-full" />
+        <input name="subcategory.slug" placeholder="Subcategory Slug" value={formData.subcategory.slug} onChange={handleChange} className="border p-2 w-full" />
+      </div>
 
       {/* Media */}
       <div>

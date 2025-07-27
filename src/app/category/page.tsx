@@ -1,10 +1,8 @@
-import React from 'react'
-import CategorySection from '@/components/CategorySection'
-
-function page() {
+import CategorySection from "@/components/CategorySection";
+export default function Page() {
   return (
-   <CategorySection />
-  )
+  <>
+  <CategorySection />
+  </>
+  );
 }
-
-export default page

@@ -107,47 +107,49 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </button> */}
 
       {/* Product Image */}
-      <div
-        className="relative overflow-hidden aspect-[4/7] md:aspect-[4/6]"
-        // style={{aspectRatio: 4/6}}
-        onMouseEnter={handleImageHover}
-        onMouseLeave={handleImageLeave}
-      >
-        <motion.div
-          animate={{
-            opacity: isHovered ? 0 : 1,
-            scale: isHovered ? 0.95 : 1,
-          }}
-          transition={{ duration: 0.3 }}
-          className="absolute inset-0"
-        >
-          <img
-            src={product.images?.find(media => media.type === "image")?.url || "/placeholder.png"}
-            alt={product.name}
-            className="w-full h-full object-contain"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </motion.div>
+     <div
+  className="relative overflow-hidden aspect-[4/7] md:aspect-[4/6]"
+  onMouseEnter={handleImageHover}
+  onMouseLeave={handleImageLeave}
+>
+  {/* First (default) image */}
+  <motion.div
+    animate={{
+      opacity: isHovered ? 0 : 1,
+      scale: isHovered ? 0.95 : 1,
+    }}
+    transition={{ duration: 0.5 }}
+    className="absolute inset-0"
+  >
+    <img
+      src={product.images?.[0]?.url || "/placeholder.png"}
+      alt={product.name}
+      className="w-full h-full object-contain"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    />
+  </motion.div>
 
-       
-        {product.images.length > 1 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: isHovered ? 1 : 0,
-              scale: isHovered ? 1 : 1.05,
-            }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0"
-          >
-            <img
-              src={product.images.filter(media => media.type === "image")[1]?.url || "/placeholder.png"}
-              alt={product.name}
-              className="w-full h-full object-contain"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </motion.div>
-        )}
+  {/* Hover image (use second if available, else fallback to first) */}
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{
+      opacity: isHovered ? 1 : 0,
+      scale: isHovered ? 1 : 1.05,
+    }}
+    transition={{ duration: 0.5 }}
+    className="absolute inset-0"
+  >
+    <img
+      src={
+        product.images.length > 1
+          ? product.images[1]?.url
+          : product.images[0]?.url || "/placeholder.png"
+      }
+      alt={product.name}
+      className="w-full h-full object-contain"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    />
+  </motion.div>
 
         {/* Quick add to cart (appears on hover) - Desktop only */}
         <motion.div

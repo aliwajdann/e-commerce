@@ -101,13 +101,20 @@ export default function Header() {
         <div className="container mx-auto px-4">
           {/* Top Bar */}
           <div className="flex justify-end items-center py-4">
-            <Link href="/" className="hover:scale-105 transition-transform w-1/4"> 
-              {logo ? (
-                <Image src={logo} alt="Logo" width={120} height={40} />
-              ) : (
-                <span className="text-2xl font-bold text-gray-900 dark:text-white">Kayseria</span>
-              )}
-            </Link>
+           
+            {/* Logo */}
+        <Link href="/" className="flex gap-3 hover:scale-105 transition-transform w-1/4">
+          <Image
+            src={logo} // Make sure this exists in public folder
+            alt="Velano"
+            width={48}
+            height={36}
+            className="rounded"
+          />
+          <span className="text-[#737373] font-semibold text-lg tracking-wide">
+            VELANO
+          </span>
+        </Link>
             
             <div className="flex items-center space-x-6">
               {/* Search */}
@@ -239,13 +246,18 @@ export default function Header() {
             <Menu className="h-6 w-6" />
           </button>
           
-          <Link href="/" className="hover:scale-105 transition-transform">
-            {logo ? (
-              <Image src={logo} alt="Logo" width={100} height={32} />
-            ) : (
-              <span className="text-xl font-bold text-gray-900">Kayseria</span>
-            )}
-          </Link>
+         <Link href="/" className="flex  hover:scale-105 transition-transform w-1/4">
+          {/* <Image
+            src={logo} // Make sure this exists in public folder
+            alt="Velano"
+            width={45}
+            height={20}
+            className="rounded"
+          /> */}
+          <span className="text-[#737373] font-semibold text-lg tracking-wide">
+            VELANO
+          </span>
+        </Link>
           
           <div className="flex items-center space-x-4">
             <Search 
