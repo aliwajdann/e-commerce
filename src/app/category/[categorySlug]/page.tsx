@@ -38,11 +38,11 @@ export default function SubCategoryPage() {
     <section className="max-w-7xl mx-auto px-4 py-10">
       {/* Heading */}
       <div className="flex items-center gap-4 mb-10">
-        <div className="flex-grow border-t border-2 border-black" />
+        {/* <div className="flex-grow border-t border-2 border-black" /> */}
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-black whitespace-nowrap uppercase">
-          {category} Subcategories
+          {category} 
         </h1>
-        <div className="flex-grow border-t border-2 border-black" />
+        {/* <div className="flex-grow border-t border-2 border-black" /> */}
       </div>
 
       {/* Subcategory Grid */}
