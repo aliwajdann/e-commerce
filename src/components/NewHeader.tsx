@@ -9,8 +9,9 @@ import { toggle } from "@/redux/drawerSlice"
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs"
 import CartDrawer from "./CartDrawer"
 // import logoDesign from "@/logo-design.png"
-// import Image from 'next/image'
+import Image from 'next/image'
 
+import logo from '@/logo-v.png'
 const NewHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -93,18 +94,18 @@ const NewHeader = () => {
         {/* Centered Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link href="/" className="block">
-            <div className="bg-white w-15 h-10 sm:w-12 sm:h-9 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
-              <div className="relative w-6 h-6 sm:w-5 sm:h-5">
+            <div className="bg-transparent w-15 h-10 sm:w-12 sm:h-9 rounded-2xl flex items-center justify-center  transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+              {/* <div className="relative w-6 h-6 sm:w-5 sm:h-5"> */}
               {/* <div className="relative w-full  rounded-2xl"> */}
                 {/* Custom geometric logo */}
-                 <div className="absolute top-0 left-0 w-3 h-3 bg-gray-800 transform rotate-45" /> 
-                <div className="absolute bottom-0 right-0 w-3 h-3 bg-gray-800 transform rotate-45" /> 
-               {/* <Image
-            src={logoDesign} 
+                 {/* <div className="absolute top-0 left-0 w-3 h-3 bg-gray-800 transform rotate-45" /> 
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-gray-800 transform rotate-45" />  */}
+               <Image
+            src={logo} 
             alt='logo'
             className='rounded-2xl'
-          />  */}
-              </div>
+          /> 
+              {/* </div> */}
             </div>
           </Link>
         </div>
