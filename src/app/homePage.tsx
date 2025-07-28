@@ -1,17 +1,29 @@
+'use client';
 // import Image from "next/image";
 import Products from "@/components/products"
 // import ChatInterface from "@/components/ChatInterface";
 import CategorySection from "@/components/CategorySection";
-import Image from "next/image";
-import heroImage from '@/hero-image.png'
+
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
 
 export default function HomePage() {
 
+ const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [inView, controls]);
+
   return (
     <>
-     <main className="w-full relative overflow-hidden"> 
+     <main className="h-lvh w-full relative overflow-hidden flex justify-center items-center"> 
 
-      <div className="hero-background h-[100vh]  inset-0 w-full"></div>
+      <div className="hero-background h-[full]  inset-0 w-full absolute top-0 left-0"></div>
       {/* dekstop image  */}
   {/* <Image
     className="hidden h-[92vh] md:block  inset-0 w-full object-contain object-center md:object-contain sm:object-contain" 
@@ -33,17 +45,24 @@ export default function HomePage() {
   
   {/* Optional content overlay */}
   <div className="relative z-10 flex items-center justify-center h-full">
-    {/* Add your hero content here if needed */}
-    
-    {/* <div className="text-center text-white">
-      <h1 className="text-4xl md:text-6xl font-bold mb-4">Your Hero Title</h1>
-      <p className="text-lg md:text-xl mb-8">Your hero description</p>
-      <button className="px-8 py-3 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors">
-        Call to Action
-      </button>
-    </div> */}
-   
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={controls}
+        variants={{
+          hidden: { opacity: 0, y: 50 },
+          visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+        }}
+        className="text-center text-white"
+      >
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">Velano</h1>
+        <p className="text-lg md:text-xl mb-8">The Only Place You Wanna Be</p>
+        <button className="px-8 py-3 bg-[#681C1C] text-white rounded-lg hover:cursor-pointer hover:bg-gray-100 hover:text-[#681C1C] transition-colors">
+          Shop Now
+        </button>
+      </motion.div>
   </div>
+
 </main>
       <CategorySection />
       <Products />

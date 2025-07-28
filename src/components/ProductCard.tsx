@@ -193,7 +193,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       {/* Product Info */}
 <div className="p-3 sm:p-4 flex flex-col items-center gap-2">
   <div className="text-center w-full">
-    <h3 className="text-gray-900 text-sm font-medium sm:text-base leading-tight line-clamp-2">
+    <h3 className="text-[#F5D5D6] text-sm font-medium sm:text-base leading-tight line-clamp-2">
       {product.name}
     </h3>
   </div>
@@ -201,11 +201,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
   {/* Price */}
   <div className="flex items-center gap-2 justify-center">
     {product.originalprice && (
-      <span className="text-xs sm:text-sm text-gray-500 line-through">
+      <span className="text-xs sm:text-sm text-[#F5D5D6] line-through">
         Rs.{product.originalprice.toFixed(2)}
       </span>
     )}
-    <span className="font-bold text-price text-sm sm:text-base">
+    <span className="font-bold text-[#681C1C] text-sm sm:text-base">
       Rs.{product.price.toFixed(2)}
     </span>
   </div>

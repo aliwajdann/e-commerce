@@ -26,7 +26,8 @@ export default function CategorySection() {
   const mobileCategories = categories.slice(0, 1);
 
   return (
-    <section className=" w-[90%] md:w-[80%] mx-auto py-10">
+    <section className=" w-[100%] md:w-[100%] mx-auto py-10 custom-background">
+      <div className=" w-[90%] md:w-[85%] mx-auto">
       <div className="flex items-center gap-4 my-10">
         <div className="flex-grow border-t border-2 border-black" />
         <h2 className="text-center text-xl font-semibold text-black whitespace-nowrap">
@@ -78,6 +79,7 @@ export default function CategorySection() {
             </div>
           </Link>
         ))}
+      </div>
       </div>
     </section>
   );
