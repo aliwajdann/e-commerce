@@ -40,10 +40,10 @@ export default function ProductInfo({
 
   // Auto-select first color and size
   useEffect(() => {
-    if (variants.colors?.length > 0) {
+    if (variants?.colors?.length > 0) {
       setSelectedColor(variants.colors[0]);
     }
-    if (variants.sizes?.length > 0) {
+    if (variants?.sizes?.length > 0) {
       setSelectedSize(variants.sizes[0]);
     }
   }, [variants]);
@@ -79,7 +79,7 @@ export default function ProductInfo({
       <p className="text-base-dark text-sm">SKU: E1680-A-GRADE</p>
 
       {/* Color */}
-      {variants.colors && variants.colors.length > 0 && (
+      {variants?.colors && variants?.colors?.length > 0 && (
         <div className="mt-3">
           <p className="text-sm font-medium mb-1">Color:</p>
           <div className="flex gap-2">
@@ -99,7 +99,7 @@ export default function ProductInfo({
       )}
 
       {/* Size */}
-      {variants.sizes && variants.sizes.length > 0 && (
+      {variants?.sizes && variants?.sizes?.length > 0 && (
         <div className="mt-3">
           <p className="text-sm font-medium mb-1">Size:</p>
           <div className="flex gap-2 flex-wrap">

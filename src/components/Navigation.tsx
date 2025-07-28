@@ -10,6 +10,9 @@ import { toggle } from "@/redux/drawerSlice";
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import logo from "@/Velano.png";
 import CartDrawer from "./CartDrawer";
+import { useLoadingOverlay } from '@/components/LoadingOverlay';
+
+
 
 const desktopNavItems = [
   { name: "HOME", href: "/" },
@@ -89,6 +92,14 @@ export default function Header() {
     setShowSearch(!showSearch);
   };
 
+const { show, hide } = useLoadingOverlay();
+
+  const handleClick = () => {
+    show(); // Show spinner
+    // Optionally hide manually after navigation
+  };
+
+
   return (
     <>
       {/* Desktop Header */}
@@ -96,7 +107,7 @@ export default function Header() {
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="hidden md:block fixed w-full z-50 bg-white"
+        className="hidden md:block fixed w-full z-50 bg-transparent backdrop-brightness-75"
       >
         <div className="container mx-auto px-4">
           {/* Top Bar */}
@@ -104,14 +115,14 @@ export default function Header() {
            
             {/* Logo */}
         <Link href="/" className="flex gap-3 hover:scale-105 transition-transform w-1/4">
-          <Image
+          {/* <Image
             src={logo} // Make sure this exists in public folder
             alt="Velano"
             width={48}
             height={36}
             className="rounded"
-          />
-          <span className="text-[#737373] font-semibold text-lg tracking-wide">
+          /> */}
+          <span className="text-white font-semibold text-lg tracking-wide">
             VELANO
           </span>
         </Link>
@@ -121,7 +132,7 @@ export default function Header() {
               <div className="relative search-container">
                 <button 
                   onClick={toggleSearch}
-                  className="hover:cursor-pointer flex items-center text-gray-700 hover:text-gray-900 group"
+                  className="hover:cursor-pointer flex items-center text-white hover:text-gray-300 group"
                 >
                   <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
                   <span className="ml-1">Search</span>
@@ -150,7 +161,7 @@ export default function Header() {
               {/* WhatsApp */}
               <button 
                 onClick={handleWhatsAppClick}
-                className="hover:cursor-pointer flex items-center text-gray-700 hover:text-gray-900 group"
+                className="hover:cursor-pointer flex items-center text-white hover:text-gray-300 group"
               >
                 <ShoppingBag className="hover:cursor-pointer h-5 w-5 group-hover:scale-110 transition-transform" />
                 <span className="ml-1">WhatsApp</span>
@@ -159,7 +170,7 @@ export default function Header() {
               {/* User Authentication */}
               <SignedIn>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-700">
+                  <span className="text-sm text-white">
                     Welcome, {user?.firstName || "User"}!
                   </span>
                   <UserButton />
@@ -168,9 +179,9 @@ export default function Header() {
               <SignedOut>
                 <Link 
                   href="/sign-in" 
-                  className="text-gray-700 hover:text-gray-900"
+                  className="text-white hover:text-gray-300"
                 >
-                  Sign In
+                  Account
                 </Link>
               </SignedOut>
               
@@ -179,7 +190,7 @@ export default function Header() {
               <div className="relative">
                 <button 
                   onClick={() => dispatch(toggle())}
-                  className="flex items-center text-gray-700 hover:text-gray-900 group"
+                  className="flex items-center text-white hover:text-gray-300 group"
                 >
                   <ShoppingCart className="hover:cursor-pointer h-5 w-5 group-hover:scale-110 transition-transform" />
                   <span className="ml-1"></span>
@@ -209,7 +220,7 @@ export default function Header() {
           >
             <ul className="flex space-x-8">
               {desktopNavItems.map((item, index) => (
-                <motion.li 
+                <motion.li   onClick={handleClick}
                   key={index}
                   whileHover={{ 
                     y: -3,
@@ -220,7 +231,7 @@ export default function Header() {
                 >
                   <Link 
                     href={item.href} 
-                    className="text-sm font-medium uppercase tracking-wider text-gray-900 transition-colors hover:text-teal-600"
+                    className="text-sm font-medium uppercase tracking-wider text-white transition-colors hover:text-teal-600"
                   >
                     {item.name}
                   </Link>
@@ -236,12 +247,12 @@ export default function Header() {
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="md:hidden fixed w-full z-50 bg-white"
+        className="md:hidden fixed w-full z-50 bg-transparent"
       >
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <button 
             onClick={() => setIsMobileMenuOpen(true)}
-            className="text-gray-900 hover:scale-110 transition-transform"
+            className="text-white hover:scale-110 transition-transform"
           >
             <Menu className="h-6 w-6" />
           </button>
@@ -254,20 +265,20 @@ export default function Header() {
             height={20}
             className="rounded"
           /> */}
-          <span className="text-[#737373] font-semibold text-lg tracking-wide">
+          <span className="text-white font-semibold text-lg tracking-wide">
             VELANO
           </span>
         </Link>
           
           <div className="flex items-center space-x-4">
             <Search 
-              className="h-5 w-5 text-gray-700 hover:scale-110 transition-transform cursor-pointer" 
+              className="h-5 w-5 text-white hover:scale-110 transition-transform cursor-pointer" 
               onClick={toggleSearch}
             />
             <div className="relative">
               <ShoppingCart
                 onClick={() => dispatch(toggle())}
-                className="h-5 w-5 text-gray-700 hover:cursor-pointer hover:text-teal-600 transition"
+                className="h-5 w-5 text-white hover:cursor-pointer hover:text-teal-600 transition"
               />
               {hasMounted && cartCount > 0 && (
                 <span className="absolute -top-2.5 -right-3 bg-gray-800 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
@@ -325,7 +336,7 @@ export default function Header() {
                   {logo ? (
                     <Image src={logo} alt="Logo" width={80} height={28} />
                   ) : (
-                    "Kayseria"
+                    "Velano"
                   )}
                 </Link>
                 <button 
@@ -398,7 +409,7 @@ export default function Header() {
       </AnimatePresence>
 
       {/* Spacer for fixed header */}
-      <div className="h-16 md:h-28"></div>
+      {/* <div className="h-16 md:h-28"></div> */}
       
       {/* Cart Drawer */}
       {typeof window !== "undefined" && <CartDrawer />}

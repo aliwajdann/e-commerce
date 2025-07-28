@@ -2,6 +2,8 @@
 import Products from "@/components/products"
 // import ChatInterface from "@/components/ChatInterface";
 import CategorySection from "@/components/CategorySection";
+import Image from "next/image";
+import heroImage from '@/hero-image.png'
 
 export default function HomePage() {
 
@@ -9,16 +11,18 @@ export default function HomePage() {
     <>
      <main className="w-full relative overflow-hidden bg-white"> 
       {/* dekstop image  */}
-  <img
-    className="hidden h-[92vh] md:block  inset-0 w-full object-cover object-center md:object-cover sm:object-contain" 
-    src="https://res.cloudinary.com/dzzjh7n6q/image/upload/v1753600045/cld-sample-5.jpg" 
+  <Image
+    className="hidden h-[92vh] md:block  inset-0 w-full object-contain object-center md:object-contain sm:object-contain" 
+    // src="https://res.cloudinary.com/dzzjh7n6q/image/upload/v1753600045/cld-sample-5.jpg" 
+    src={heroImage}
     alt="Hero Image"
     sizes="100vw"
   />
   {/* mobile image */}
-  <img
+   <Image
     className="md:hidden h-[80vh] block  inset-0 w-full object-cover object-center md:object-cover sm:object-contain" 
-    src="https://res.cloudinary.com/dzzjh7n6q/image/upload/v1753600045/cld-sample-5.jpg" 
+    // src="https://res.cloudinary.com/dzzjh7n6q/image/upload/v1753600045/cld-sample-5.jpg" 
+     src={heroImage}
     alt="Hero Image"
     sizes="100vw"
   />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
+// import Navigation from "@/components/Navigation";
+import NewHeader from "@/components/NewHeader";
 // import VelanoHeader from "./VelanoHeader";
 import { Providers } from "@/app/providers";
 // import {Inter} from "next/font/google";
@@ -10,6 +11,8 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { Lexend_Deca } from 'next/font/google'
 import LevanoFooter from "./LevanoFooter";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { LoadingOverlayProvider } from '@/components/LoadingOverlay';
+
 
 
 
@@ -49,13 +52,15 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body
-        className={` ${lexendDeca.variable} antialiased min-h-screen transition-colors duration-500 className='bg-[#d9d9d9]'` 
-      }
+        className={` ${lexendDeca.variable} antialiased min-h-screen transition-colors duration-500 className='bg-[#d9d9d9]'` }
       >
         <Providers>
-        <Navigation />
+        {/* <Navigation /> */}
+        <NewHeader />
         {/* <VelanoHeader /> */}
+        <LoadingOverlayProvider>
           {children}
+          </LoadingOverlayProvider>
           <SpeedInsights />
         {/* <Footer /> */}
         <LevanoFooter />
