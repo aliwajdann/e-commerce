@@ -9,25 +9,27 @@ export default function HomePage() {
 
   return (
     <>
-     <main className="w-full relative overflow-hidden bg-white"> 
+     <main className="w-full relative overflow-hidden"> 
+
+      <div className="hero-background h-[100vh]  inset-0 w-full"></div>
       {/* dekstop image  */}
-  <Image
+  {/* <Image
     className="hidden h-[92vh] md:block  inset-0 w-full object-contain object-center md:object-contain sm:object-contain" 
     // src="https://res.cloudinary.com/dzzjh7n6q/image/upload/v1753600045/cld-sample-5.jpg" 
     src={heroImage}
     alt="Hero Image"
     sizes="100vw"
-  />
+  /> */}
   {/* mobile image */}
-   <Image
+   {/* <Image
     className="md:hidden h-[80vh] block  inset-0 w-full object-cover object-center md:object-cover sm:object-contain" 
     // src="https://res.cloudinary.com/dzzjh7n6q/image/upload/v1753600045/cld-sample-5.jpg" 
      src={heroImage}
     alt="Hero Image"
     sizes="100vw"
-  />
+  /> */}
   {/* Optional overlay for better text readability */}
-  <div className="absolute inset-0 bg-black/20"></div>
+  {/* <div className="absolute inset-0 bg-black/20"></div> */}
   
   {/* Optional content overlay */}
   <div className="relative z-10 flex items-center justify-center h-full">

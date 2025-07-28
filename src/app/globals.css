@@ -320,3 +320,7 @@ body {
     rgb(248, 45, 255) 100%
   );
 }
+
+.hero-background {
+  background: linear-gradient(to bottom, #b077a1 0%, #d19195 50%, #f5d5d6 100%);
+}
