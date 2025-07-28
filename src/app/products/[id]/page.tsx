@@ -132,12 +132,13 @@ export default function ProductPage() {
     fetchProduct();
   }, [id]);
 
-  if (loading || !product) return <p className="p-8 h-lvh">Loading...</p>;
+  if (loading || !product) return <p className="p-8 h-lvh custom-background">Loading...</p>;
 
   return (
     <>
       {/* <div className="p-3.5 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 max-w-6xl mx-auto mt-1.5 md:mt-6"> */}
-       <div className='md:grid md:grid-cols-2 md:my-5 mb-5 md:w-[95%] mx-auto'>
+       <div className='w-full  custom-background'>
+       <div className='md:grid md:grid-cols-2   md:w-[95%] mx-auto pt-20 '>
 
         <ProductMedia media={product.media} />
         <ProductInfo
@@ -151,15 +152,16 @@ export default function ProductPage() {
         />
       </div>
 
-      <div className="description mb-10 md:w-[95%] md:p-[2%] w-[90%] mx-auto p-[3] grid gap-4">
+      {/* <div className="description mb-10 md:w-[95%] md:p-[2%] w-[90%] mx-auto p-[3] grid gap-4">
         <h4 className="md:text-[22px] text-[20px] font-bold">Description</h4>
         <p className="md:text-[15px] text-[14px] text-gray-500 whitespace-pre-line">
           {product.description}
         </p>
+      </div> */}
       </div>
 
-      <FaqSection />
-      <ReviewsSection />
+      {/* <FaqSection /> */}
+      {/* <ReviewsSection /> */}
     </>
   );
 }

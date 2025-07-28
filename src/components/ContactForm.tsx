@@ -47,7 +47,8 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white px-4 py-16 sm:px-6 lg:px-8">
+    <div className="min-h-screen  px-4 py-16 sm:px-6 lg:px-8 custom-background">
+    <div className="w-[90%] mx-auto mt-20">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -55,7 +56,7 @@ const ContactForm = () => {
         className="max-w-2xl mx-auto"
       >
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-6">Contact Us</h1>
-        <p className="text-center text-gray-500 mb-10">
+        <p className="text-center text-[#681C1C] mb-10">
           We'd love to hear from you! Fill out the form below and we'll get back to you soon.
         </p>
 
@@ -189,6 +190,7 @@ const ContactForm = () => {
           </AnimatePresence>
         </div>
       </motion.div>
+    </div>
     </div>
   );
 };

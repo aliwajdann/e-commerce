@@ -67,17 +67,24 @@ const NewHeader = () => {
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex gap-8 lg:gap-8 md:gap-5">
             <Link 
-              href="/men" 
+              href="/category/jewellery" 
               className="text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
             >
-              For Men
+              Jewellery
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link 
-              href="/women" 
+              href="/category/skin-care" 
               className="text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
             >
-              For Women
+              Skin Care
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
+            </Link>
+            <Link 
+              href="/category/under-garments" 
+              className="text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
+            >
+              Under Garments
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
             </Link>
           </nav>
@@ -159,7 +166,7 @@ const NewHeader = () => {
               <ShoppingCart className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-white" />
             </button>
             {hasMounted && cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+              <span className="absolute -top-2 -right-2 bg-[#681C1C] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
                 {cartCount}
               </span>
             )}
@@ -210,18 +217,25 @@ const NewHeader = () => {
         {/* Mobile Navigation Links */}
         <nav className="flex flex-col items-center gap-8">
           <Link 
-            href="/men" 
+            href="/category/jewellery" 
             onClick={closeMobileMenu}
             className="text-white text-2xl font-medium uppercase tracking-wide transition-all duration-300 hover:text-pink-400 hover:scale-110"
           >
-            For Men
+            Jewellery
           </Link>
           <Link 
-            href="/women" 
+            href="/category/skin-care" 
             onClick={closeMobileMenu}
             className="text-white text-2xl font-medium uppercase tracking-wide transition-all duration-300 hover:text-pink-400 hover:scale-110"
           >
-            For Women
+            Skin Care
+          </Link>
+          <Link 
+            href="/category/under-garments" 
+            onClick={closeMobileMenu}
+            className="text-white text-2xl font-medium uppercase tracking-wide transition-all duration-300 hover:text-pink-400 hover:scale-110"
+          >
+            Under Garments
           </Link>
           <Link 
             href="/about" 

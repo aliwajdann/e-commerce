@@ -108,7 +108,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
       {/* Product Image */}
      <div
-  className="relative overflow-hidden aspect-[4/7] md:aspect-[4/6]"
+  className="relative overflow-hidden aspect-[4/5] md:aspect-[4/6]"
   onMouseEnter={handleImageHover}
   onMouseLeave={handleImageLeave}
 >
@@ -152,14 +152,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
   </motion.div>
 
         {/* Quick add to cart (appears on hover) - Desktop only */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{
-            y: isHovered ? 0 : 20,
-            opacity: isHovered ? 1 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="hover:cursor-pointer hidden md:block absolute bottom-3 left-0 right-0 px-3"
+        <div
+          // initial={{ y: 20, opacity: 0 }}
+          // animate={{
+          //   y: isHovered ? 0 : 20,
+          //   opacity: isHovered ? 1 : 0,
+          // }}
+          // transition={{ duration: 0.3 }}
+          className="hover:cursor-pointer hidden md:block absolute bottom-3 left-0 right-0 px-3 "
+          // style={{opacity: 1, transform:}}
         >
           <AtcBtn product={{
             id: product.id,
@@ -172,7 +173,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             quantity: 1,
             description: "hey"
           }}/>
-        </motion.div>
+        </div>
       </div>
 
       {/* Mobile Add to Cart Button */}

@@ -24,7 +24,8 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4 md:p-6 className='bg-[#d9d9d9]' cart-page">
+    <div className="w-full p-4 md:p-6 'bg-[#d9d9d9]' cart-page custom-background">
+    <div className="max-w-4xl mx-auto pt-20">
       <div className="mb-6">
         <h1 className="text-3xl font-bold uppercase text-base-dark">Your Cart</h1>
         <div className="bg-yellow-100 border-l-4 border-yellow-500 p-3 mt-4">
@@ -61,7 +62,7 @@ export default function CartPage() {
                       <p className="text-base-dark font-medium">Price</p>
                       <div className="mt-2">
                         <p className="text-base-dark line-through">Rs. {item.price.toLocaleString()}</p>
-                        <p className="text-red-600 font-bold">Rs. {discountedPrice.toLocaleString()}</p>
+                        <p className="text-[#681C1C] font-bold">Rs. {discountedPrice.toLocaleString()}</p>
                       </div>
                     </div>
                     
@@ -103,7 +104,7 @@ export default function CartPage() {
                   
                   <button
                     onClick={() => dispatch(removeFromCart(item.id))}
-                    className="mt-4 text-red-500 hover:text-red-700 text-sm font-medium hover:cursor-pointer"
+                    className="mt-4 text-[#681C1C]  text-sm font-medium hover:cursor-pointer"
                   >
                     Remove
                   </button>
@@ -161,6 +162,7 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

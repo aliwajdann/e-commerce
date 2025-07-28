@@ -3,6 +3,7 @@
 import Products from "@/components/products"
 // import ChatInterface from "@/components/ChatInterface";
 import CategorySection from "@/components/CategorySection";
+import Link from "next/link";
 
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -44,24 +45,35 @@ export default function HomePage() {
   {/* <div className="absolute inset-0 bg-black/20"></div> */}
   
   {/* Optional content overlay */}
-  <div className="relative z-10 flex items-center justify-center h-full">
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={controls}
-        variants={{
-          hidden: { opacity: 0, y: 50 },
-          visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-        }}
-        className="text-center text-white"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">Velano</h1>
-        <p className="text-lg md:text-xl mb-8">The Only Place You Wanna Be</p>
-        <button className="px-8 py-3 bg-[#681C1C] text-white rounded-lg hover:cursor-pointer hover:bg-gray-100 hover:text-[#681C1C] transition-colors">
-          Shop Now
-        </button>
-      </motion.div>
-  </div>
+ <div className="relative z-10 flex items-center justify-center h-screen">
+  <motion.div
+    ref={ref}
+    initial="hidden"
+    animate={controls}
+    variants={{
+      hidden: { opacity: 0, y: 50 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+    }}
+    className="text-center text-white max-w-2xl px-4"
+  >
+    <p className="text-2xl font-semibold tracking-widest mb-4 uppercase text-[#F5D5D6]">
+      Velano
+    </p>
+
+    <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+      Where Style Meets Soul
+    </h1>
+
+    <p className="text-lg md:text-xl mb-10 text-white/90">
+      Discover curated pieces made to elevate your everyday look bold, effortless, and unapologetically you.
+    </p>
+
+    <Link href="/products" className="cursor-pointer px-8 py-3 bg-[#681C1C] text-white rounded-lg hover:bg-white hover:text-[#681C1C] transition-colors duration-300">
+      Step Into Your Era
+    </Link>
+  </motion.div>
+</div>
+
 
 </main>
       <CategorySection />

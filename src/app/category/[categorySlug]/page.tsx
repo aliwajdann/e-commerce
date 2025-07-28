@@ -37,7 +37,8 @@ export default function SubCategoryPage() {
   const subs = subcategories[category] || [];
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-10">
+    <section className="w-full px-4 py-10 custom-background pt-20">
+    <div className="max-w-7xl pt-20 mx-auto">
       {/* Heading */}
       <div className="flex items-center gap-4 mb-10">
         {/* <div className="flex-grow border-t border-2 border-black" /> */}
@@ -69,6 +70,7 @@ export default function SubCategoryPage() {
             </div>
           </Link>
         ))}
+      </div>
       </div>
     </section>
   );

@@ -77,8 +77,9 @@ export default function SubCategoryProductsPage() {
   if (loading) return <p className="p-6">Loading products...</p>;
 
   return (
-    <div className="w-[90%] mt-2 mx-auto">
-      <h1 className="text-3xl font-bold capitalize mb-6">
+     <section className="w-full px-4 py-10 custom-background pt-24">
+    <div className="w-[90%]  mx-auto">
+      <h1 className="text-3xl font-bold capitalize mb-1">
         {subcategory.replace('-', ' ')}
       </h1>
 
@@ -107,5 +108,6 @@ export default function SubCategoryProductsPage() {
         </div>
       )}
     </div>
+    </section>
   );
 }
