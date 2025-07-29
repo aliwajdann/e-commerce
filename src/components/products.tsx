@@ -8,7 +8,7 @@ import useProducts from '@/hooks/useProducts';
 
 export default function ProductsSection() {
   const { products, loading } = useProducts();
-  const [isVisible, setIsVisible] = useState(true);
+  // const [isVisible, setIsVisible] = useState(true);
   const [activeFilter, setActiveFilter] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
   const sectionRef = useRef<HTMLElement>(null);
@@ -67,17 +67,17 @@ export default function ProductsSection() {
       className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-[#F5D5D6]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-[#681C1C]/5 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#D4A5A6]/5 rounded-full blur-3xl"></div>
-      </div>
+      </div> */}
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
+      <div className="relative z-10 w-[100%] mx-auto px-4 py-12 flex flex-col items-center">
         {/* Header Section */}
-        <div className={`text-center mb-16 transform transition-all duration-1000 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
+        <div className={`text-center mb-16 transform transition-all duration-1000  w-[90%]`}>
+{/* isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0' */}
+
           <div className="inline-flex items-center justify-center mb-6">
             <div className="h-px bg-gradient-to-r from-transparent via-[#681C1C]/30 to-transparent w-20"></div>
             <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-[#F5D5D6]/30">
@@ -95,9 +95,8 @@ export default function ProductsSection() {
         </div>
 
         {/* Filter and Sort Bar */}
-        <div className={`mb-12 transform transition-all duration-1000 delay-300 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
+        <div className={`mb-12 transform transition-all duration-1000 delay-300 w-[90%]`}>
+          {/* isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0' */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
             <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
               {/* Filter Tabs */}
@@ -138,18 +137,18 @@ export default function ProductsSection() {
         </div>
 
         {/* Products Grid */}
-        <div className={`transform transition-all duration-1000 delay-500 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+        <div className={`transform transition-all duration-1000 delay-500`}>
+          {/* isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0' */}
+        
+          <div className="grid grid-cols-2  md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6  mb-12 w-full">
             {products.map((product, index) => (
               <div
                 key={product.id}
                 className="transform transition-all duration-500"
                 style={{ 
                   animationDelay: `${index * 100}ms`,
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
+                  // opacity: isVisible ? 1 : 0,
+                  // transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
                 }}
               >
                 <ProductCard
@@ -173,9 +172,9 @@ export default function ProductsSection() {
         </div>
 
         {/* Load More Section */}
-        <div className={`text-center transform transition-all duration-1000 delay-700 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
+        <div className={`text-center transform transition-all duration-1000 delay-700`}>
+          {/*  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0' */}
+        
           <div className="inline-flex flex-col items-center gap-6">
             <button className="group relative px-12 py-4 bg-gradient-to-r from-[#681C1C] to-[#8B2635] text-white rounded-full font-bold text-lg overflow-hidden transition-all duration-500 hover:scale-110 hover:shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -197,9 +196,8 @@ export default function ProductsSection() {
         </div>
 
         {/* Stats Section */}
-        <div className={`mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 transform transition-all duration-1000 delay-900 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
+        <div className={`mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 transform transition-all duration-1000 delay-900`}>
+           {/* isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0' */}
           {[
             { number: '500+', label: 'Products', icon: '🛍️' },
             { number: '15K+', label: 'Happy Customers', icon: '💝' },

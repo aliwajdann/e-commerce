@@ -114,7 +114,7 @@ export default function CategorySection() {
       className="relative min-h-screen hero-background overflow-hidden"
     >
       {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
         {Array.from({ length: 20 }).map((_, i) => (
           <div
@@ -130,7 +130,7 @@ export default function CategorySection() {
             }}
           />
         ))}
-      </div>
+      </div> */}
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16 md:py-20">
         {/* Header */}
