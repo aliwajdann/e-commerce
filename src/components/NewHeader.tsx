@@ -253,7 +253,35 @@ const NewHeader = () => {
           >
             Contact
           </Link>
+          
         </nav>
+        <div className="hidden md:flex items-center">
+            <SignedIn>
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-white/90">
+                  Hi, {user?.firstName || "User"}!
+                </span>
+                <UserButton 
+                  appearance={{
+                    elements: {
+                      avatarBox: "w-8 h-8 hover:scale-105 transition-transform"
+                    }
+                  }}
+                />
+              </div>
+            </SignedIn>
+            <SignedOut>
+              <Link 
+                href="/sign-in" 
+                className="flex items-center gap-2 text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
+              >
+                <User className="w-4 h-4" />
+                Account
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
+              </Link>
+            </SignedOut>
+          </div>
+
 
         {/* Mobile Cart Info */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">

@@ -44,14 +44,11 @@ quantity: product.quantity
 
   return (
       <>
-    <div className='w-full hover:cursor-pointer bg-white/15 backdrop-blur-[25px]'>
-       <button
+      <button className='w-full bg-gradient-to-r from-[#681C1C] to-[#8B2635] text-white py-2.5 px-4 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]'
         onClick={(e)=>{handleAddToCart(e)}}
-        className=" md:text-md text-[15px] hover:cursor-pointer border-1  font-bold inline-block text-[#681C1C] px-6 py-2   transition-all w-full text-center "
       >
           Add to Cart
       </button>
-      </div>
 </>
 
   )

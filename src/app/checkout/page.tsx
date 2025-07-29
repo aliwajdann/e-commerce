@@ -229,7 +229,7 @@ export default function CheckoutPage() {
               whileHover={{ scale: 1.01 }}
               onClick={handlePlaceOrder}
               disabled={isSubmitting}
-              className={`w-full mt-8 py-3.5 hover:cursor-pointer rounded-lg font-medium text-white transition ${isSubmitting ? 'bg-teal-400' : 'bg-teal-600 hover:bg-teal-800'}`}
+              className={`w-full mt-8 py-3.5 hover:cursor-pointer bg-[#681C1C] rounded-lg font-medium text-white transition ${isSubmitting ? 'bg-teal-400' : 'bg-[#681C1C] hover:bg-teal-800'}`}
             >
               <AnimatePresence mode="wait">
                 {isSubmitting ? (
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="hover:cursor-pointer flex items-center justify-center"
+                    className="hover:cursor-pointer flex items-center justify-center "
                   >
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"

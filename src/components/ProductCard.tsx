@@ -1,7 +1,7 @@
 'use client'; 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-// import AtcBtn from './AtcBtn';
+import AtcBtn from './AtcBtn';
 
 type MediaItem = {
   type: string;
@@ -26,12 +26,6 @@ interface ProductCardProps {
   product: Product;
 }
 
-// Mock AtcBtn component for demo
-const AtcBtn = ({ product }: { product: any }) => (
-  <button className="w-full bg-gradient-to-r from-[#681C1C] to-[#8B2635] text-white py-2.5 px-4 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]">
-    Add to Cart
-  </button>
-);
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
@@ -147,7 +141,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               }`}
             >
               <img
-                src={product.images[1]?.url || "/api/placeholder/400/500"}
+                src={product.images[1]?.url || product.images?.[0].url }
                 alt={product.name}
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -156,14 +150,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
 
           {/* Hover Overlay */}
-          <div
+          {/* <div
             className={`absolute inset-0 bg-black/20 transition-opacity duration-300 ${
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}
-          />
+          /> */}
 
           {/* Desktop Quick Actions */}
-          <div
+          {/* <div
             className={`hidden md:flex absolute bottom-4 left-4 right-4 gap-2 transition-all duration-500 ${
               isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
@@ -171,11 +165,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <button className="flex-1 bg-white/95 backdrop-blur-sm text-gray-800 py-2.5 px-4 rounded-full font-semibold text-sm transition-all duration-300 hover:bg-white hover:shadow-lg">
               Quick View
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Product Information */}
-        <div className="p-4 space-y-3">
+        <div className="p-2 space-y-1">
           {/* Product Name */}
           <h3 className="text-gray-800 font-semibold text-base leading-tight line-clamp-2 group-hover:text-[#681C1C] transition-colors duration-300">
             {product.name}
@@ -204,8 +198,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div> */}
 
           {/* Price */}
-          <div className="flex items-center  justify-between">
-            <div className="flex md:items-center items-start  flex-col md:flex-row gap-2">
+          <div className="flex items-center  justify-start">
+            <div className="flex md:items-center items-start  flex-col md:flex-row md:gap-2 gap-0">
               <span className="font-bold text-[#681C1C] text-lg">
                 Rs.{product.price.toFixed(2)}
               </span>

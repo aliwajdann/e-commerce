@@ -140,7 +140,7 @@ export default function ProductsSection() {
         <div className={`transform transition-all duration-1000 delay-500`}>
           {/* isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0' */}
         
-          <div className="grid grid-cols-2  md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6  mb-12 w-full">
+          <div className="grid grid-cols-2  md:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 md:gap-x-4 md:gap-y-8 lg:gap-x-6  mb-12 w-full">
             {products.map((product, index) => (
               <div
                 key={product.id}
