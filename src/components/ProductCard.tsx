@@ -1,24 +1,15 @@
 'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import AtcBtn from './AtcBtn';
-
-type MediaItem = {
-  type: string;
-  url: string;
-};
 
 interface Product {
   id: string;
   name: string;
   price: number;
   originalprice?: number;
-  images: MediaItem[];
-  rating: number;
-  sizes: string[];
-  colors: string[];
-  isNew?: boolean;
-  isBestSeller?: boolean;
+  images: { url: string }[];
+  colors?: string[];
   href: string;
 }
 
@@ -28,23 +19,9 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  const handleImageHover = () => {
-    setIsHovered(true);
-    if (product.images.length > 1) {
-      setCurrentImageIndex(1);
-    }
-  };
-
-  const handleImageLeave = () => {
-    setIsHovered(false);
-    setCurrentImageIndex(0);
-  };
-
-  const handleWishlistToggle = (e: React.MouseEvent) => {
+  const handleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsWishlisted(!isWishlisted);
   };
@@ -53,45 +30,28 @@ const ProductCard = ({ product }: ProductCardProps) => {
     router.push(product.href);
   };
 
-  const calculateDiscount = () => {
-    if (!product.originalprice) return 0;
-    return Math.round(((product.originalprice - product.price) / product.originalprice) * 100);
-  };
+  const discount =
+    product.originalprice && product.originalprice > product.price
+      ? Math.round(((product.originalprice - product.price) / product.originalprice) * 100)
+      : 0;
 
   return (
-    <div className="group relative px-1 sm:px-2">
-      <div
-        className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
-        onClick={handleCardClick}
-      >
-        <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
-          {product.isNew && (
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm">
-              NEW
-            </span>
-          )}
-          {product.isBestSeller && (
-            <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm">
-              BESTSELLER
-            </span>
-          )}
-          {product.originalprice && calculateDiscount() > 0 && (
-            <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm">
-              -{calculateDiscount()}%
-            </span>
-          )}
-        </div>
-
+    <div
+      onClick={handleCardClick}
+      className="cursor-pointer border p-2 rounded-md shadow-sm hover:shadow-md transition"
+    >
+      <div className="relative">
+        <img
+          src={product.images?.[0]?.url || '/placeholder.png'}
+          alt={product.name}
+          className="w-full h-60 object-cover rounded"
+        />
         <button
-          onClick={handleWishlistToggle}
-          className="absolute top-3 right-3 z-20 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 group/wishlist"
+          onClick={handleWishlist}
+          className="absolute top-2 right-2 p-1 bg-white rounded-full border"
         >
           <svg
-            className={`w-5 h-5 transition-all duration-300 ${
-              isWishlisted
-                ? 'text-red-500 fill-current'
-                : 'text-gray-400 hover:text-red-500 group-hover/wishlist:scale-110'
-            }`}
+            className="w-5 h-5 text-red-500"
             fill={isWishlisted ? 'currentColor' : 'none'}
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -104,98 +64,41 @@ const ProductCard = ({ product }: ProductCardProps) => {
             />
           </svg>
         </button>
+      </div>
 
-        <div
-          className="relative overflow-hidden aspect-[4/5] bg-gray-50"
-          onMouseEnter={handleImageHover}
-          onMouseLeave={handleImageLeave}
-        >
-          <div
-            className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-              isHovered ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
-            }`}
-          >
-            <img
-              src={product.images?.[0]?.url || '/api/placeholder/400/500'}
-              alt={product.name}
-              className="w-full h-full object-cover rounded-md sm:rounded-lg"
-              loading="lazy"
-            />
-          </div>
+      <div className="mt-2 space-y-1">
+        <h3 className="text-sm font-medium text-gray-800 line-clamp-2">{product.name}</h3>
 
-          {product.images.length > 1 && (
-            <div
-              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-              }`}
-            >
-              <img
-                src={product.images[1]?.url || product.images?.[0].url}
-                alt={product.name}
-                className="w-full h-full object-cover rounded-md sm:rounded-lg"
-                loading="lazy"
-              />
-            </div>
+        <div className="flex items-center gap-2">
+          <span className="font-semibold text-[#681C1C] text-sm">
+            Rs.{product.price.toFixed(0)}
+          </span>
+          {product.originalprice && (
+            <span className="text-sm text-gray-500 line-through">
+              Rs.{product.originalprice.toFixed(0)}
+            </span>
+          )}
+          {discount > 0 && (
+            <span className="text-xs bg-red-100 text-red-600 px-1 py-0.5 rounded">
+              -{discount}%
+            </span>
           )}
         </div>
 
-        <div className="p-3 space-y-1 sm:space-y-2">
-          <h3 className="text-gray-800 font-semibold text-sm sm:text-base leading-snug line-clamp-2 group-hover:text-[#681C1C] transition-colors duration-300">
-            {product.name}
-          </h3>
-
-          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 gap-0">
-            <span className="font-bold text-[#681C1C] text-base sm:text-lg">
-              Rs.{product.price.toFixed(2)}
-            </span>
-            {product.originalprice && (
-              <span className="text-sm text-gray-500 line-through">
-                Rs.{product.originalprice.toFixed(2)}
-              </span>
+        {product.colors && product.colors.length > 0 && (
+          <div className="flex items-center gap-1 mt-1">
+            {product.colors.slice(0, 4).map((color, i) => (
+              <div
+                key={i}
+                className="w-4 h-4 rounded-full border"
+                style={{ backgroundColor: color }}
+              />
+            ))}
+            {product.colors.length > 4 && (
+              <span className="text-xs text-gray-500">+{product.colors.length - 4}</span>
             )}
           </div>
-
-          {product.colors?.length > 0 && (
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs sm:text-sm text-gray-600 font-medium">Colors:</span>
-              <div className="flex gap-1">
-                {product.colors.slice(0, 4).map((color, idx) => (
-                  <div
-                    key={idx}
-                    className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-gray-300 shadow-sm"
-                    style={{ backgroundColor: color }}
-                    title={color}
-                  />
-                ))}
-                {product.colors.length > 4 && (
-                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gray-100 border border-gray-300 flex items-center justify-center">
-                    <span className="text-[10px] text-gray-600 font-medium">
-                      +{product.colors.length - 4}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          <div className="pt-2">
-            <AtcBtn
-              product={{
-                id: product.id,
-                title: product.name,
-                price: product.price,
-                media: product.images.map((m) => ({
-                  url: m.url,
-                  type: m.type || 'image',
-                })),
-                quantity: 1,
-                description: 'Product description',
-              }}
-            />
-          </div>
-        </div>
-
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#681C1C]/5 to-[#F5D5D6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        )}
       </div>
     </div>
   );
