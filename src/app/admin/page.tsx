@@ -2,8 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 const adminEmails = [
   "aliwajdan.it@gmail.com",
-  "yourcousin@example.com",
-  "someoneelse@trusted.com",
+  "mominabbasminhas5@gmail.com",
 ];
 
 export default async function Page() {

@@ -9,7 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const email = user?.emailAddresses[0]?.emailAddress;
 
   if (!user || !email || !adminEmails.includes(email)) {
-    return redirect("/"); // or show custom Access Denied UI
+    return redirect("/"); 
   }
 
   return <>{children}</>;

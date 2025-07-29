@@ -1,5 +1,4 @@
 // app/admin/orders/page.tsx
-"use client";
 
 // import { currentUser } from "@clerk/nextjs/server";
 import { getOrders } from "@/lib/getOrders";

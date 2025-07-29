@@ -281,7 +281,7 @@ export default function CategorySection() {
         </div>
 
         {/* Category Preview Grid */}
-        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transform transition-all duration-1000 delay-500 md:px-0 px-3 ${
+        {/* <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transform transition-all duration-1000 delay-500 md:px-0 px-3 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
           {categories.map((category, index) => (
@@ -312,7 +312,7 @@ export default function CategorySection() {
               </div>
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* Stats Section */}
         <div className={`grid grid-cols-3 gap-8 mt-16 transform transition-all duration-1000 delay-700 ${

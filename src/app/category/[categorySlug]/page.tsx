@@ -2,75 +2,129 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useState, useRef, useEffect } from 'react';
 
 type Subcategory = {
   name: string;
   slug: string;
+  image?: string; // Add image field optionally
 };
 
-type CategorySlug = 'clothing' | 'accessories' | 'jewellery' ;
+type CategorySlug = 'skinCare' | 'underGarments' | 'jewellery';
 
 const subcategories: Record<CategorySlug, Subcategory[]> = {
-  clothing: [
-    { name: "T-Shirts", slug: "t-shirts" },
-    { name: "Hoodies", slug: "hoodies" },
-    { name: "Jeans", slug: "jeans" },
+  underGarments: [
+    { name: "T-Shirts", slug: "t-shirts", image: "/images/tshirts.jpg" },
+    { name: "Hoodies", slug: "hoodies", image: "/images/hoodies.jpg" },
+    { name: "Jeans", slug: "jeans", image: "/images/jeans.jpg" },
+    { name: "Jeans", slug: "jeans", image: "/images/jeans.jpg" },
   ],
-  accessories: [
-    { name: "Watches", slug: "watches" },
-    { name: "Sunglasses", slug: "sunglasses" },
-    { name: "Wallets", slug: "wallets" },
+  skinCare: [
+    { name: "Watches", slug: "watches", image: "/images/watches.jpg" },
+    { name: "Sunglasses", slug: "sunglasses", image: "/images/sunglasses.jpg" },
+    { name: "Wallets", slug: "wallets", image: "/images/wallets.jpg" },
+    { name: "anything", slug: "wallets", image: "/images/anything.jpg" },
   ],
   jewellery: [
-    { name: "Necklaces", slug: "necklaces" },
-    { name: "Earrings", slug: "earrings" },
-    { name: "Bracelets", slug: "bracelets" },
-    { name: "Key Chains", slug: "key-chains" },
+    { name: "Necklaces", slug: "necklaces", image: "/images/necklaces.jpg" },
+    { name: "Earrings", slug: "earrings", image: "/images/earrings.jpg" },
+    { name: "Bracelets", slug: "bracelets", image: "/images/bracelets.jpg" },
+    { name: "Key Chains", slug: "key-chains", image: "/images/keychains.jpg" },
   ],
-  
 };
 
 export default function SubCategoryPage() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const sectionRef = useRef<HTMLElement>(null);
+
   const params = useParams();
   const category = params.categorySlug as CategorySlug;
-
   const subs = subcategories[category] || [];
 
-  return (
-    <section className="w-full px-4 py-10 custom-background pt-20">
-    <div className="max-w-7xl pt-20 mx-auto">
-      {/* Heading */}
-      <div className="flex items-center gap-4 mb-10">
-        {/* <div className="flex-grow border-t border-2 border-black" /> */}
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-black whitespace-nowrap uppercase">
-          {category} 
-        </h1>
-        {/* <div className="flex-grow border-t border-2 border-black" /> */}
-      </div>
+  // Auto-play slider
+  useEffect(() => {
+    if (!isAutoPlaying || subs.length <= 1) return;
 
-      {/* Subcategory Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-        {subs.map((sub) => (
-          <Link
-            key={sub.slug}
-            href={`/category/${category}/${sub.slug}`}
-            className="group block bg-white border border-gray-200 shadow hover:shadow-md transition-all rounded-lg overflow-hidden"
-          >
-            <div className="h-48 bg-gray-100 flex items-center justify-center text-gray-500 text-xl group-hover:bg-gray-200 transition">
-              {/* Placeholder text/image */}
-              {sub.name}
-            </div>
-            <div className="p-4 text-center">
-              <h2 className="text-lg font-semibold text-gray-800 group-hover:text-black transition">
-                {sub.name}
-              </h2>
-              <p className="text-sm text-gray-500 capitalize mt-1">
-                Explore {sub.name}
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % subs.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, subs.length]);
+
+  // Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const goToSlide = (index: number) => {
+    setActiveSlide(index);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  return (
+    <section ref={sectionRef} className="w-full px-4 py-10 pt-20 custom-background">
+      <div className="max-w-7xl pt-20 mx-auto">
+        {/* Heading */}
+        <div className="flex items-center gap-4 mb-10">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-black uppercase whitespace-nowrap">
+            {category}
+          </h1>
+        </div>
+
+        {/* Subcategory Grid */}
+        <div
+          className={`grid grid-cols-2 md:grid-cols-4 gap-4 transform transition-all duration-1000 delay-500 md:px-0 px-3 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          {subs.map((sub, index) => (
+            <Link
+              key={sub.slug}
+              href={`/products/${sub.slug}`}
+              onClick={() => goToSlide(index)}
+              className={`group relative overflow-hidden rounded-2xl transition-all duration-500 ${
+                index === activeSlide
+                  ? 'scale-105 ring-2 ring-white/50'
+                  : 'hover:scale-105 opacity-70 hover:opacity-100'
+              }`}
+            >
+              <div className="aspect-square relative">
+                <img
+                  src={sub.image || '/placeholder.jpg'}
+                  alt={sub.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-2 left-2 right-2">
+                  <div className="text-white text-sm font-semibold truncate">
+                    {sub.name}
+                  </div>
+                </div>
+                {index === activeSlide && (
+                  <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );
