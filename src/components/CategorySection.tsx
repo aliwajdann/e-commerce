@@ -193,7 +193,7 @@ export default function CategorySection() {
                       </div>
 
                       {/* Content Side */}
-                      <div className="relative flex flex-col justify-center p-12 md:order-2 order-1">
+                      <div className="relative flex flex-col justify-center md:p-12 p-6 md:order-2 order-1">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-sm"></div>
                         
                         <div className="relative z-10">
@@ -281,7 +281,7 @@ export default function CategorySection() {
         </div>
 
         {/* Category Preview Grid */}
-        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transform transition-all duration-1000 delay-500 ${
+        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transform transition-all duration-1000 delay-500 md:px-0 px-3 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
           {categories.map((category, index) => (
