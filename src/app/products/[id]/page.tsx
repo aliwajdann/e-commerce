@@ -79,7 +79,7 @@ import { db } from '@/lib/firebase';
 
 import ProductMedia from '@/components/productPage/ProductMedia';
 import ProductInfo from '@/components/productPage/ProductInfo';
-import ReviewsSection from '@/components/productPage/ReviewsSection';
+// import ReviewsSection from '@/components/productPage/ReviewsSection';
 import FaqSection from '@/components/productPage/FaqSection';
 
 interface MediaType {
@@ -160,7 +160,7 @@ export default function ProductPage() {
       </div> */}
       </div>
 
-      {/* <FaqSection /> */}
+      <FaqSection />
       {/* <ReviewsSection /> */}
     </>
   );

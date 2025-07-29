@@ -97,12 +97,12 @@ export default function SubCategoryProductsPage() {
                 price: product.price,
                 originalprice: product.originalPrice,
                 images: product.media,
-                rating: 4.5,
-                isNew: true,
-                isBestSeller: true,
+                // rating: 4.5,
+                // isNew: true,
+                // isBestSeller: true,
                 href: `/products/${product.id}`,
                 colors: product.variants?.colors || [],
-                sizes: product.variants?.sizes || [],
+                // sizes: product.variants?.sizes || [],
               }}
             />
           ))}

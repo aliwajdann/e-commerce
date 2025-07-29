@@ -72,12 +72,12 @@ export default function ProductsSection() {
                     price: product.price,
                     images: product.media,
                     originalprice: product.originalPrice,
-                    rating: 4.5,
-                    isNew: true,
-                    isBestSeller: true,
+                    // rating: 4.5,
+                    // isNew: true,
+                    // isBestSeller: true,
                     href: `/products/${product.id}`,
                     colors: product.variants?.colors || [],
-                 sizes: product.variants?.sizes || [],
+                //  sizes: product.variants?.sizes || [],
                   }}
                 />
                 {/* Show ADD TO CART only on mobile */}
