@@ -14,5 +14,5 @@ export default async function Page() {
     return <div>🚫 Access Denied</div>;
   }
 
-  return <div>Welcome to the Admin Dashboard 🛡️</div>;
+  return <div className="mt-20">Welcome to the Admin Dashboard 🛡️</div>;
 }
