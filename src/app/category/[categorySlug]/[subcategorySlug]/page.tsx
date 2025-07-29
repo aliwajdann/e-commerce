@@ -64,6 +64,7 @@ export default function SubCategoryProductsPage() {
 });
 
         setProducts(productsData);
+        console.log(productsData);
       } catch (err) {
         console.error('❌ Error fetching products:', err);
       } finally {
@@ -80,7 +81,7 @@ export default function SubCategoryProductsPage() {
      <section className="w-full px-4 py-10 custom-background pt-24">
     <div className="w-[90%]  mx-auto">
       <h1 className="text-3xl font-bold capitalize mb-1">
-        {subcategory.replace('-', ' ')}
+        {/* {subcategory.replace('-', 'het') + "lo"} */}
       </h1>
 
       {products.length === 0 ? (

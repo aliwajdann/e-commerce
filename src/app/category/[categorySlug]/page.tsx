@@ -10,20 +10,20 @@ type Subcategory = {
   image?: string; // Add image field optionally
 };
 
-type CategorySlug = 'skinCare' | 'underGarments' | 'jewellery';
+type CategorySlug = 'skincare' | 'undergarments' | 'jewellery';
 
 const subcategories: Record<CategorySlug, Subcategory[]> = {
-  underGarments: [
+  undergarments: [
     { name: "T-Shirts", slug: "t-shirts", image: "/images/tshirts.jpg" },
     { name: "Hoodies", slug: "hoodies", image: "/images/hoodies.jpg" },
     { name: "Jeans", slug: "jeans", image: "/images/jeans.jpg" },
-    { name: "Jeans", slug: "jeans", image: "/images/jeans.jpg" },
+    // { name: "Jeans", slug: "jeans", image: "/images/jeans.jpg" },
   ],
-  skinCare: [
+  skincare: [
     { name: "Watches", slug: "watches", image: "/images/watches.jpg" },
     { name: "Sunglasses", slug: "sunglasses", image: "/images/sunglasses.jpg" },
     { name: "Wallets", slug: "wallets", image: "/images/wallets.jpg" },
-    { name: "anything", slug: "wallets", image: "/images/anything.jpg" },
+    { name: "anything", slug: "anything", image: "/images/anything.jpg" },
   ],
   jewellery: [
     { name: "Necklaces", slug: "necklaces", image: "/images/necklaces.jpg" },
@@ -98,7 +98,7 @@ export default function SubCategoryPage() {
           {subs.map((sub, index) => (
             <Link
               key={sub.slug}
-              href={`/products/${sub.slug}`}
+              href={`/category/${category}/${sub.slug}`}
               onClick={() => goToSlide(index)}
               className={`group relative overflow-hidden rounded-2xl transition-all duration-500 ${
                 index === activeSlide

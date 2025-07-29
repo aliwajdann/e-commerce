@@ -253,10 +253,14 @@ const NewHeader = () => {
           >
             Contact
           </Link>
+           <SignedIn>
+                <Link href="/admin">Admin</Link>
+            </SignedIn>
           
         </nav>
         <div className="hidden md:flex items-center">
             <SignedIn>
+                <Link href="/admin">Admin</Link>
               <div className="flex items-center space-x-3">
                 <span className="text-sm text-white/90">
                   Hi, {user?.firstName || "User"}!

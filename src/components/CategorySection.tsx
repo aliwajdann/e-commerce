@@ -45,14 +45,7 @@ const categories: Category[] = [
     gradient: "from-emerald-400 via-teal-500 to-cyan-600",
     icon: "👜"
   },
-  // {
-  //   name: "Fragrances",
-  //   slug: "fragrances",
-  //   image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59d32?w=600&auto=format&fit=crop&q=60",
-  //   description: "Captivate with signature scents",
-  //   gradient: "from-violet-400 via-purple-500 to-fuchsia-600",
-  //   icon: "🌺"
-  // }
+
 ];
 
 export default function CategorySection() {
@@ -110,27 +103,9 @@ export default function CategorySection() {
   return (
     <section 
       ref={sectionRef}
-      // className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden"
       className="relative min-h-screen hero-background overflow-hidden"
     >
-      {/* Animated Background */}
-      {/* <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-white/10 animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 4 + 1}px`,
-              height: `${Math.random() * 4 + 1}px`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${Math.random() * 3 + 2}s`
-            }}
-          />
-        ))}
-      </div> */}
+    
 
       <div className="relative z-10 w-full max-w-7xl mx-auto md:px-4 px-0 py-16 md:py-20">
         {/* Header */}
@@ -223,9 +198,7 @@ export default function CategorySection() {
                               <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500"></div>
                             </button>
                             
-                            {/* <div className="text-gray-400 text-sm">
-                              {Math.floor(Math.random() * 500) + 100}+ items
-                            </div> */}
+                           
                           </div>
                         </div>
                       </div>
@@ -281,7 +254,7 @@ export default function CategorySection() {
         </div>
 
         {/* Category Preview Grid */}
-        {/* <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transform transition-all duration-1000 delay-500 md:px-0 px-3 ${
+        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transform transition-all duration-1000 delay-500 md:px-0 px-3 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
           {categories.map((category, index) => (
@@ -312,7 +285,7 @@ export default function CategorySection() {
               </div>
             </button>
           ))}
-        </div> */}
+        </div>
 
         {/* Stats Section */}
         <div className={`grid grid-cols-3 gap-8 mt-16 transform transition-all duration-1000 delay-700 ${
