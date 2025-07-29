@@ -32,7 +32,7 @@ export default function ProductsSection() {
   }
 
   return (
-    <section className="min-h-screen px-4 py-12">
+    <section className="min-h-screen px-1 py-12">
       <div className="max-w-6xl mx-auto">
 
         <div className="mb-8 text-center">
@@ -82,12 +82,9 @@ export default function ProductsSection() {
                 price: product.price,
                 images: product.media || [],
                 originalprice: product.originalPrice,
-                rating: 4.5,
-                isNew: false,
-                isBestSeller: false,
                 href: `/products/${product.id}`,
                 colors: [],
-                sizes: [],
+                // sizes: [],
               }}
             />
           ))}
