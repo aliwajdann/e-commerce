@@ -47,7 +47,8 @@ const NewHeader = () => {
       {/* Main Header */}
       <header className={`fixed top-5 left-1/2 transform -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-6xl z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/15 backdrop-blur-[25px]' 
+          // ? 'bg-white/15 backdrop-blur-[25px]' 
+          ? 'bg-[#681C1C] backdrop-blur-[200px]' 
           : 'bg-white/10 backdrop-blur-[20px]'
       } border border-white/20 rounded-full px-8 py-4 flex items-center justify-between hover:bg-white/15 hover:shadow-lg hover:shadow-black/10 md:top-5 md:w-[calc(100%-2.5rem)] sm:top-4 sm:w-[calc(100%-1.875rem)] sm:px-5 sm:py-3`}>
         

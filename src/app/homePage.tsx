@@ -89,7 +89,7 @@ export default function HomePage() {
             {/* Description */}
             <div className={`transform transition-all duration-1000 delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               <p className="text-xl md:text-2xl mb-16 text-[#F5D5D6]/90 leading-relaxed max-w-3xl mx-auto font-light">
-                Discover curated pieces made to elevate your everyday look —
+                Discover curated pieces made to elevate your everyday look 
                 <span className="text-[#D4A5A6] font-medium"> bold, effortless, and unapologetically you.</span>
               </p>
             </div>
@@ -107,9 +107,9 @@ export default function HomePage() {
                   {/* Button Text */}
                   <span className="relative z-10 transition-colors duration-300 group-hover:text-[#681C1C] flex items-center">
                     Step Into Your Era
-                    <svg className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {/* <svg className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    </svg> */}
                   </span>
                 </button>
               </Link>

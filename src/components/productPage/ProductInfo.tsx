@@ -76,7 +76,7 @@ export default function ProductInfo({
         <p className="text-purple-800 font-bold text-sm">Rs.{(price / 3).toFixed(2)}</p>
       </div>
 
-      <p className="text-base-dark text-sm text-[#F5D5D6]">SKU: E1680-A-GRADE</p>
+      <p className="text-sm text-[#F5D5D6]">SKU: E1680-A-GRADE</p>
 
       {/* Color */}
       {variants?.colors && variants?.colors?.length > 0 && (
@@ -125,14 +125,14 @@ export default function ProductInfo({
         <div className="p-1 flex items-center gap-4">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="font-bold bg-dark px-2 text-white hover:bg-gray-200 transition rounded-full"
+            className="font-bold bg-[#681C1C] px-2 text-white hover:bg-gray-200 transition rounded-full"
           >
             -
           </button>
           <span className="px-3 py-1 w-8 text-center">{quantity}</span>
           <button
             onClick={() => setQuantity(quantity + 1)}
-            className="font-bold px-2 bg-dark text-white hover:bg-gray-200 transition rounded-full"
+            className="font-bold px-2 bg-[#681C1C] text-white hover:bg-gray-200 transition rounded-full"
           >
             +
           </button>

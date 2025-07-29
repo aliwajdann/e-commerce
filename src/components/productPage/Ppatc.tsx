@@ -78,7 +78,7 @@ selectedSize: product.selectedSize ?? undefined,
     <div className='flex gap-2 flex-wrap'>
       <button
         onClick={handleAddToCart}
-        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#F5D5D6] bg-[#681C1C] transition-all text-center border-[#F5D5D6]  rounded-md"
+        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#F5D5D6] bg-[#681C1C] transition-all text-center border-[#681C1C]  rounded-md"
       >
         Add to Cart
       </button>
@@ -90,7 +90,7 @@ selectedSize: product.selectedSize ?? undefined,
       </button>
       <button
         onClick={handleOrderOnWhatsApp}
-        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#F5D5D6] bg-transparent transition-all text-center rounded-md border-[#F5D5D6]"
+        className="hover:cursor-pointer inline-block bg-teal-600 px-6 py-2 text-white  transition-all text-center rounded-md "
       >
         Order On WhatsApp
       </button>

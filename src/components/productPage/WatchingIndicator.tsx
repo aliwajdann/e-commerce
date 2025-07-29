@@ -26,9 +26,9 @@ export default function WatchingIndicator() {
       <div className={`transition-all duration-300 ${
         isVisible ? 'opacity-100 scale-100' : 'opacity-70 scale-95'
       }`}>
-        <div className="bg-blue-50 border border-blue-200 md:rounded-full rounded-md px-4 py-2 flex items-center space-x-2 shadow-sm">
-          <Eye size={16} className="text-blue-600" />
-          <span className="text-blue-800 font-medium text-sm">
+        <div className="bg-[#681C1C] md:rounded-full rounded-md px-4 py-2 flex items-center space-x-2 shadow-sm">
+          <Eye size={16} className="text-white" />
+          <span className="text-white font-medium text-sm">
             {watchingCount} People watching this product now!
           </span>
         </div>

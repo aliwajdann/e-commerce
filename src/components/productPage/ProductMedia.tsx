@@ -157,7 +157,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
           </button>
 
           {/* Counter */}
-          <div className="absolute bottom-4 right-4  bg-gradient  bg-opacity-50 text-white px-3 py-1 rounded-full text-sm z-10">
+          <div className="absolute bottom-4 right-4 bg-[#681C1C]  bg-opacity-50 text-white px-3 py-1 rounded-full text-sm z-10">
             {activeIndex + 1} / {media.length}
           </div>
         </div>
@@ -191,8 +191,8 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
               onClick={() => mainSwiperRef.current?.swiper.slideTo(index)}
               className={`w-16 h-20 rounded-lg overflow-hidden border-2 ${
                 activeIndex === index
-                  ? 'border-pink-400 ring-2 ring-pink-200'
-                  : 'border-gray-200'
+                  // ? 'border-pink-400 ring-2 ring-pink-200'
+                  // : 'border-gray-200'
               } transition-all duration-200`}
             >
               {item.type === 'video' ? (
