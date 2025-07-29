@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import ProductCard from './ProductCard';
 import useProducts from '@/hooks/useProducts';
 
@@ -8,144 +8,95 @@ export default function ProductsSection() {
   const { products, loading } = useProducts();
   const [activeFilter, setActiveFilter] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
-  const sectionRef = useRef<HTMLElement>(null);
 
   const filters = [
-    { id: 'all', label: 'All Products', count: products.length },
-    { id: 'new', label: 'New Arrivals', count: 15 },
-    { id: 'bestseller', label: 'Best Sellers', count: 8 },
-    { id: 'sale', label: 'On Sale', count: 12 }
+    { id: 'all', label: 'All' },
+    { id: 'new', label: 'New' },
+    { id: 'bestseller', label: 'Best Sellers' },
+    { id: 'sale', label: 'Sale' }
   ];
 
   const sortOptions = [
     { value: 'featured', label: 'Featured' },
     { value: 'price-low', label: 'Price: Low to High' },
     { value: 'price-high', label: 'Price: High to Low' },
-    { value: 'newest', label: 'Newest First' },
-    { value: 'rating', label: 'Highest Rated' }
+    { value: 'newest', label: 'Newest' },
   ];
 
   if (loading) {
     return (
-      <section className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="relative">
-            <div className="w-20 h-20 border-4 border-[#FAD1D5] rounded-full animate-spin border-t-[#BD5B74] mb-6"></div>
-            <div className="absolute inset-0 w-20 h-20 border-4 border-transparent rounded-full animate-ping border-t-[#BD5B74]/20"></div>
-          </div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">Loading Products</h3>
-          <p className="text-gray-600">Discovering amazing pieces for you...</p>
-        </div>
+      <section className="min-h-screen flex items-center justify-center">
+        <p className="text-lg font-medium text-gray-600">Loading products...</p>
       </section>
     );
   }
 
   return (
-    <section ref={sectionRef} className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 relative overflow-hidden">
-      <div className="relative z-10 w-full mx-auto px-4 py-12 flex flex-col items-center">
-        <div className="text-center mb-16 w-[90%]">
-          <div className="inline-flex items-center justify-center mb-6">
-            <div className="h-px bg-gradient-to-r from-transparent via-[#BD5B74]/30 to-transparent w-20"></div>
-            <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-[#FAD1D5]/30">
-              <div className="w-3 h-3 bg-gradient-to-r from-[#BD5B74] to-[#F8A5B4] rounded-full animate-pulse"></div>
-            </div>
-            <div className="h-px bg-gradient-to-r from-transparent via-[#BD5B74]/30 to-transparent w-20"></div>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-4 tracking-tight">Women's Collection</h2>
-          <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            Discover curated pieces that celebrate your unique style and confidence
-          </p>
+    <section className="min-h-screen px-4 py-12">
+      <div className="max-w-6xl mx-auto">
+
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-800">Women's Collection</h2>
+          <p className="text-gray-600 mt-2 text-base">Stylish & comfortable picks for every mood.</p>
         </div>
 
-        <div className="mb-12 w-[90%]">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
-            <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                {filters.map((filter) => (
-                  <button
-                    key={filter.id}
-                    onClick={() => setActiveFilter(filter.id)}
-                    className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 ${
-                      activeFilter === filter.id
-                        ? 'bg-gradient-to-r from-[#BD5B74] to-[#F8A5B4] text-white shadow-lg transform scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
-                    }`}
-                  >
-                    {filter.label}
-                    <span className="ml-2 text-xs opacity-75">({filter.count})</span>
-                  </button>
-                ))}
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-gray-600 font-medium text-sm">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#BD5B74]/20 focus:border-[#BD5B74] transition-all duration-300"
-                >
-                  {sortOptions.map((option) => (
-                    <option key={option.value} value={option.value}>{option.label}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+          <div className="flex flex-wrap gap-2">
+            {filters.map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`px-4 py-2 rounded-full text-sm ${
+                  activeFilter === filter.id
+                    ? 'bg-black text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 md:gap-x-4 md:gap-y-8 lg:gap-x-6 mb-12 w-full">
-          {products.map((product, index) => (
-            <div
-              key={product.id}
-              className="transform transition-all duration-500"
-              style={{ animationDelay: `${index * 100}ms` }}
+          <div className="flex items-center gap-2">
+            <label className="text-sm text-gray-600">Sort by:</label>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-3 py-2 border rounded-md text-sm text-gray-700"
             >
-              <ProductCard
-                product={{
-                  id: product.id,
-                  name: product.title,
-                  price: product.price,
-                  images: product.media || [],
-                  originalprice: product.originalPrice,
-                  rating: 4.5,
-                  isNew: index % 3 === 0,
-                  isBestSeller: index % 4 === 0,
-                  href: `/products/${product.id}`,
-                  colors: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'],
-                  sizes: ['XS', 'S', 'M', 'L', 'XL']
-                }}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center">
-          <div className="inline-flex flex-col items-center gap-6">
-            <button className="group relative px-12 py-4 bg-gradient-to-r from-[#BD5B74] to-[#F8A5B4] text-white rounded-full font-bold text-lg overflow-hidden transition-all duration-500 hover:scale-110 hover:shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-              <span className="relative z-10 flex items-center">
-                Load More Products
-                <svg className="w-6 h-6 ml-3 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m0 0l7-7m7 7H3" />
-                </svg>
-              </span>
-            </button>
-            <div className="flex items-center gap-4 text-gray-600">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-[#BD5B74] rounded-full animate-pulse"></div>
-                <span className="text-sm">Showing {products.length} of 156 products</span>
-              </div>
-            </div>
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[{ number: '500+', label: 'Products', icon: '🛍️' }, { number: '15K+', label: 'Happy Customers', icon: '💝' }, { number: '98%', label: 'Satisfaction', icon: '⭐' }, { number: '24/7', label: 'Support', icon: '💬' }].map((stat, index) => (
-            <div key={index} className="text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/50 hover:bg-white/80 transition-all duration-300">
-              <div className="text-3xl mb-3">{stat.icon}</div>
-              <div className="text-2xl md:text-3xl font-bold text-[#BD5B74] mb-2">{stat.number}</div>
-              <div className="text-gray-600 font-medium">{stat.label}</div>
-            </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={{
+                id: product.id,
+                name: product.title,
+                price: product.price,
+                images: product.media || [],
+                originalprice: product.originalPrice,
+                rating: 4.5,
+                isNew: false,
+                isBestSeller: false,
+                href: `/products/${product.id}`,
+                colors: [],
+                sizes: [],
+              }}
+            />
           ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <button className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition">
+            Load More Products
+          </button>
         </div>
       </div>
     </section>
