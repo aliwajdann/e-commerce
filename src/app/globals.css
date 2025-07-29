@@ -328,3 +328,10 @@ body {
   /* background: linear-gradient(95deg, #681c1c 0%, #d19195 50%, #f5d5d6 100%); */
   background: linear-gradient(135deg, #d19195, #a34b96);
 }
+
+Link {
+  cursor: pointer;
+}
+Button {
+  cursor: pointer;
+}

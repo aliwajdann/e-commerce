@@ -12,6 +12,7 @@ import { Lexend_Deca } from 'next/font/google'
 import LevanoFooter from "./LevanoFooter";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LoadingOverlayProvider } from '@/components/LoadingOverlay';
+import velano from "./favicon.ico"
 
 
 
@@ -40,6 +41,9 @@ const lexendDeca = Lexend_Deca({
 export const metadata: Metadata = {
   title: "Velano",
   description: "Minimal, everyday essentials with a clean aesthetic.",
+   icons: {
+    icon: "./favicon.ico", 
+  },
 };
 
 export default function RootLayout({
