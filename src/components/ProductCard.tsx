@@ -204,8 +204,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div> */}
 
           {/* Price */}
-          <div className="flex items-center flex-col md:flex-row justify-between">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center  justify-between">
+            <div className="flex md:items-center items-start  flex-col md:flex-row gap-2">
               <span className="font-bold text-[#681C1C] text-lg">
                 Rs.{product.price.toFixed(2)}
               </span>
