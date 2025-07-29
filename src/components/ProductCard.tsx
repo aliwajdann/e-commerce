@@ -204,7 +204,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div> */}
 
           {/* Price */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center flex-col md:flex-row justify-between">
             <div className="flex items-center gap-2">
               <span className="font-bold text-[#681C1C] text-lg">
                 Rs.{product.price.toFixed(2)}
@@ -242,7 +242,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
 
           {/* Sizes */}
-          {product.sizes?.length > 0 && (
+          {/* {product.sizes?.length > 0 && (
             <div className="flex items-center gap-2">
               <span className="text-xs text-gray-600 font-medium">Sizes:</span>
               <div className="flex gap-1 flex-wrap">
@@ -261,7 +261,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 )}
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Add to Cart Button */}
           <div className="pt-2">

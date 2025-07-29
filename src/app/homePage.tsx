@@ -128,7 +128,7 @@ export default function HomePage() {
         </div>
 
         {/* Simple Decorative Elements - Static positions */}
-        <div className="absolute top-10 left-10 w-16 h-16 border border-[#F5D5D6]/20 rounded-full opacity-40"></div>
+        <div className="absolute top-12 left-10 w-16 h-16 border border-[#F5D5D6]/20 rounded-full opacity-40"></div>
         <div className="absolute top-20 right-20 w-12 h-12 border border-[#681C1C]/20 rounded-full opacity-30"></div>
         <div className="absolute bottom-20 left-20 w-8 h-8 bg-[#F5D5D6]/15 rounded-full"></div>
         <div className="absolute bottom-32 right-32 w-6 h-6 bg-[#681C1C]/15 rounded-full"></div>

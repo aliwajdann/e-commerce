@@ -132,7 +132,7 @@ export default function CategorySection() {
         ))}
       </div> */}
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16 md:py-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto md:px-4 px-0 py-16 md:py-20">
         {/* Header */}
         <div className={`text-center mb-16 transform transition-all duration-1000 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -148,7 +148,7 @@ export default function CategorySection() {
             <div className="h-px bg-gradient-to-r from-transparent via-white/50 to-transparent w-24"></div>
           </div>
           
-          <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-6 tracking-tight">
+          <h2 style={{lineHeight: 1.2}} className="text-5xl md:text-7xl font-black bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-6 tracking-tight">
             Shop by Category
           </h2>
           <p className="text-gray-300 text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed font-light">
@@ -180,11 +180,11 @@ export default function CategorySection() {
                     {/* Main Content */}
                     <div className="grid md:grid-cols-2 gap-0 min-h-[500px]">
                       {/* Image Side */}
-                      <div className="relative overflow-hidden md:order-1 order-2">
+                      <div className="hidden md:block relative overflow-hidden md:order-1 order-2">
                         <img
                           src={category.image}
                           alt={category.name}
-                          className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                          className="hidden md:block w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent md:hidden"></div>
                         
@@ -211,7 +211,10 @@ export default function CategorySection() {
                           
                           <div className="flex items-center space-x-4">
                             <button className={`group/btn relative px-8 py-4 bg-gradient-to-r ${category.gradient} text-white font-semibold rounded-full shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 overflow-hidden`}>
-                              <span className="relative z-10 flex items-center">
+                              <span className="md:hidden  relative z-10 flex items-center">
+                                Explore 
+                              </span>
+                              <span className="hidden relative z-10 md:flex items-center">
                                 Explore Collection
                                 <svg className="w-5 h-5 ml-2 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -220,9 +223,9 @@ export default function CategorySection() {
                               <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500"></div>
                             </button>
                             
-                            <div className="text-gray-400 text-sm">
+                            {/* <div className="text-gray-400 text-sm">
                               {Math.floor(Math.random() * 500) + 100}+ items
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
