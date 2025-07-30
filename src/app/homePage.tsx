@@ -1,13 +1,15 @@
 'use client';
 import ProductsSection from "@/components/products";
 // import CategorySection from "@/components/CategorySection";
+import SubcategorySlider from "@/components/SubcategoryProducts";
+import CategoryRoundSlider from "@/components/CategorySlider";
 
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { ClassNames } from "@emotion/react";
+// import { ClassNames } from "@emotion/react";
 
 const categories = [
   {
@@ -112,6 +114,13 @@ export default function HeroCategorySwiper() {
         ))}
       </Swiper>
     </section>
+    <SubcategorySlider
+  category="jewellery"
+  subcategory="necklaces"
+  title="Necklaces Collection"
+/>
+<CategoryRoundSlider category="jewellery" title="Shop by Type" />
+
 <ProductsSection></ProductsSection>
 {/* <CategorySection></CategorySection> */}
 </>

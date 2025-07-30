@@ -2,7 +2,7 @@ import React from 'react'
 
 function FaqSection() {
   return (
-    <div className="my-12 md:w-[90%] w-[95%]  mx-auto">
+    <div className="my-12 md:w-[90%] w-[90%]  mx-auto">
   <h2 className="text-2xl font-bold mb-4">FAQs</h2>
   <div className="space-y-4">
     <div>

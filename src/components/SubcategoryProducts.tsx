@@ -1,0 +1,116 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import ProductCard from './ProductCard';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import { Autoplay } from 'swiper/modules';
+
+interface Product {
+  id: string;
+  title: string;
+  price: number;
+  originalPrice: number;
+  media: { url: string; type: string }[];
+  variants: {
+    colors: string[];
+    sizes: string[];
+  };
+  category: { name: string; slug: string };
+  subcategory: { name: string; slug: string };
+}
+
+interface SubcategorySliderProps {
+  category: string;
+  subcategory: string;
+  title?: string;
+}
+
+export default function SubcategorySlider({
+  category,
+  subcategory,
+  title,
+}: SubcategorySliderProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const q = query(
+          collection(db, 'products'),
+          where('category.slug', '==', category),
+          where('subcategory.slug', '==', subcategory)
+        );
+        const snapshot = await getDocs(q);
+        const productsData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Product[];
+        setProducts(productsData);
+      } catch (error) {
+        console.error('❌ Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [category, subcategory]);
+
+  if (loading || products.length === 0) return null;
+
+  return (
+    <section className="w-full px-4 pt-6 pb-10">
+      <div className="w-[90%] mx-auto">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-lg font-semibold capitalize text-gray-800">
+            {title || subcategory.replace('-', ' ')}
+          </h2>
+          <button className="text-sm text-[#681C1C] hover:underline font-medium">
+            View All
+          </button>
+        </div>
+
+    <Swiper
+  spaceBetween={12}
+  loop={true}
+  autoplay={{ delay: 3500 }}
+  modules={[Autoplay]}
+  breakpoints={{
+    320: { slidesPerView: 1 },
+    480: { slidesPerView: 1 },
+    768: { slidesPerView: 1 },
+    1024: { slidesPerView: 4 },
+  }}
+  className="pt-2"
+>
+
+
+  {products.map((product) => (
+    <SwiperSlide
+      key={product.id}
+    >
+      <ProductCard
+        product={{
+          id: product.id,
+          name: product.title,
+          price: product.price,
+          originalprice: product.originalPrice,
+          images: product.media,
+          colors: product.variants?.colors || [],
+          href: `/products/${product.id}`,
+        }}
+      />
+    </SwiperSlide>
+  ))}
+</Swiper>
+
+      </div>
+    </section>
+  );
+}
