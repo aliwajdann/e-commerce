@@ -122,7 +122,7 @@ export default function HeroCategorySwiper() {
                 <div key={i} className={`w-8 h-8 bg-gradient-to-r ${categories[i-1]?.gradient} rounded-full border-2 border-white animate-pulse`} style={{animationDelay: `${i * 200}ms`}}></div>
               ))}
             </div>
-            <span className="text-gray-700 font-medium">Join thousands of happy customers</span>
+            <span className="text-gray-700 md:text-[16px] text-[12px]">Join thousands of happy customers</span>
           </div>
           </div>
     </section>
