@@ -40,7 +40,7 @@ export default function ProductsSection() {
           <p className="text-gray-600 mt-2 text-base">Stylish & comfortable picks for every mood.</p>
         </div>
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
           <div className="flex flex-wrap gap-2">
             {filters.map((filter) => (
               <button
@@ -72,7 +72,7 @@ export default function ProductsSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 gap-x-2 md:gap-x-4 md:gap-y-4">
           {products.map((product) => (
             <ProductCard
               key={product.id}

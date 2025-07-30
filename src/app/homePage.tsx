@@ -7,13 +7,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { ClassNames } from "@emotion/react";
 
 const categories = [
   {
     name: 'Jewellery',
     slug: 'jewellery',
     image:
-      'https://media.istockphoto.com/id/1299139185/photo/female-hands-with-trendy-dark-nail-design-with-gold-bracelets-on-aqua-background-luxury.webp',
+      'https://img.freepik.com/premium-photo/best-amazing-wonderful-this-photo-take-this-picture-your-work-ai-generated-top-lovely-photo_1078211-47480.jpg?ga=GA1.1.462192201.1753866574&semt=ais_hybrid&w=740&q=80',
     description: 'Elegant pieces for every occasion',
     gradient: 'from-yellow-400 via-amber-500 to-orange-600',
     icon: '💎',
@@ -22,7 +23,7 @@ const categories = [
     name: 'Skin Care',
     slug: 'skin-care',
     image:
-      'https://media.istockphoto.com/id/2171944978/photo/facial-serum-skin-care-essence-liquid-texture-of-cosmetic-product-on-beige-background-3d.webp',
+      'https://img.freepik.com/premium-photo/beauty-woman-face-portrait-beautiful-female-model-with-perfect-clean-skin-isolated_489646-298.jpg?semt=ais_hybrid&w=740&q=80',
     description: 'Nourish your natural beauty',
     gradient: 'from-pink-400 via-rose-500 to-red-500',
     icon: '✨',
@@ -52,7 +53,8 @@ export default function HeroCategorySwiper() {
     <>
     <section className="hero-background relative py-20 px-4 md:px-8 pt-30">
       <div className="max-w-6xl mx-auto text-center mb-10">
-        <div style={{lineHeight: 1.2}} className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-400 to-purple-500">
+        <div style={{lineHeight: 1.2}} className="text-5xl md:text-6xl font-extrabold text-white">
+          {/* bg-clip-text   text-transparent*/}
           Shop by Category
         </div>
         <p className="text-gray-600 text-lg mt-4 max-w-xl mx-auto">
@@ -70,14 +72,14 @@ export default function HeroCategorySwiper() {
         breakpoints={{
           640: { slidesPerView: 1.2 },
           768: { slidesPerView: 2 },
-          1024: { slidesPerView: 2 },
+          1024: { slidesPerView: 2 , loop: true },
         }}
         className="pb-12"
       >
         {categories.map((cat) => (
-          <SwiperSlide key={cat.slug}>
+          <SwiperSlide key={cat.slug} className="">
             <Link href={`/category/${cat.slug}`} className="block group">
-              <div className="rounded-2xl overflow-hidden shadow-xl bg-white transition-transform transform group-hover:scale-105">
+              <div className="rounded-2xl overflow-hidden shadow-xl bg-white">
                 <div className="h-56 md:h-64 w-full relative">
                   <img
                     src={cat.image}
@@ -88,7 +90,7 @@ export default function HeroCategorySwiper() {
                 </div>
                 <div className="p-5">
                   <div
-                    className={`text-4xl mb-2 transition-transform group-hover:scale-110`}
+                    className={`text-4xl mb-2 transition-transform`}
                   >
                     {cat.icon}
                   </div>
