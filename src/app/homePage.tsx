@@ -74,12 +74,12 @@ export default function HeroCategorySwiper() {
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 2 , loop: true },
         }}
-        className="pb-12"
+        className=""
       >
         {categories.map((cat) => (
           <SwiperSlide key={cat.slug} className="">
-            <Link href={`/category/${cat.slug}`} className="block group">
-              <div className="rounded-2xl overflow-hidden shadow-xl bg-white">
+            <Link href={`/category/${cat.slug}`} className="block group mb-12">
+              <div className="rounded-2xl overflow-hidden shadow-xl bg-transparent backdrop-blur-3xl">
                 <div className="h-56 md:h-64 w-full relative">
                   <img
                     src={cat.image}

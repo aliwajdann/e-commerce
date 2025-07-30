@@ -33,7 +33,7 @@ export default function ProductsSection() {
 
   return (
     <section className="min-h-screen px-1 py-12">
-      <div className="max-w-6xl mx-auto">
+      <div className="md:max-w-[90%] mx-auto">
 
         <div className="mb-8 text-center">
           <h2 className="text-3xl font-bold text-gray-800">Women's Collection</h2>
@@ -90,11 +90,6 @@ export default function ProductsSection() {
           ))}
         </div>
 
-        <div className="text-center mt-10">
-          <button className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition">
-            Load More Products
-          </button>
-        </div>
       </div>
     </section>
   );

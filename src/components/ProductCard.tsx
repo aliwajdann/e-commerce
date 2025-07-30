@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+
 interface Product {
   id: string;
   name: string;
@@ -40,11 +41,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
       onClick={handleCardClick}
       className="cursor-pointer border p-2 rounded-md shadow-sm hover:shadow-md transition"
     >
-      <div className="relative">
+      <div className="relative p-0">
         <img
           src={product.images?.[0]?.url || '/placeholder.png'}
           alt={product.name}
-          className="w-full h-60 object-cover rounded"
+          className="w-full h-full object-fill rounded"
         />
         <button
           onClick={handleWishlist}
@@ -99,6 +100,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             )}
           </div>
         )}
+       
       </div>
     </div>
   );
