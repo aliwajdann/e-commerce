@@ -18,6 +18,9 @@ export default function CartPage() {
   if (!isClient) return null; // 🔐 Prevent hydration mismatch
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const deliveryFee = subtotal < 3000 && subtotal > 0 ? 200 : 0;
+const total = subtotal + deliveryFee;
+
 
   if (items.length === 0) {
     return <div className="p-8 text-center text-base-dark">🛒 Your cart is empty</div>;
@@ -120,45 +123,32 @@ export default function CartPage() {
             <h2 className="text-xl font-bold uppercase mb-4">Order Summary</h2>
             
             <div className="space-y-4">
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Subtotal</span>
-                <span className="font-bold">Rs. {subtotal.toLocaleString()}</span>
-              </div>
-              
-              <div className="border-b pb-4">
-                <h3 className="font-bold mb-2">Goodmold</h3>
-                <p className="text-sm">Pay in 3 installments of <span className="font-bold">Rs. {(subtotal / 3).toLocaleString()}</span></p>
-              </div>
-              
-              {/* <div>
-                <h3 className="font-bold mb-2">Additions/Comments</h3>
-                <textarea 
-                  placeholder="Special instruction for seller..."
-                  className="w-full border p-2 rounded text-sm h-20"
-                />
-              </div> */}
-              
-              {/* <div className="pt-4">
-                <h3 className="font-bold mb-2">Calculate Shipping</h3>
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm font-medium mb-1">Coupon Code</label>
-                    <input 
-                      type="text" 
-                      placeholder="Enter Coupon Code"
-                      className="w-full border p-2 rounded text-sm"
-                    />
-                    <p className="text-xs text-base-dark mt-1">Coupon code will be applied on the checkout page</p>
-                  </div>
-                </div>
-              </div> */}
-              
-              <Link prefetch href="/checkout">
-                <button className="hover:cursor-pointer w-full bg-black text-white py-3 text-sm rounded-lg font-bold hover:bg-gray-800 transition mt-6">
-                  Proceed to Checkout
-                </button>
-              </Link>
-            </div>
+  <div className="flex justify-between border-b pb-2">
+    <span className="font-medium">Subtotal</span>
+    <span className="font-bold">Rs. {subtotal.toLocaleString()}</span>
+  </div>
+
+  <div className="flex justify-between border-b pb-2">
+    <span className="font-medium">Delivery Fee</span>
+    <span className="font-bold">{deliveryFee === 0 ? "Free" : `Rs. ${deliveryFee}`}</span>
+  </div>
+
+  <div className="flex justify-between text-lg font-bold pt-2 border-t">
+    <span>Total</span>
+    <span>Rs. {total.toLocaleString()}</span>
+  </div>
+
+  <p className="text-xs text-gray-500 pt-1">
+    🚚 Free delivery on orders above Rs. 3000
+  </p>
+
+  <Link prefetch href="/checkout">
+    <button className="hover:cursor-pointer w-full bg-black text-white py-3 text-sm rounded-lg font-bold hover:bg-gray-800 transition mt-6">
+      Proceed to Checkout
+    </button>
+  </Link>
+</div>
+
           </div>
         </div>
       </div>

@@ -34,8 +34,13 @@ export default function CheckoutPage() {
       0
     );
 
-    const orderData = {
+   const orderData = {
   customer: form,
+  subtotal: total,
+  deliveryFee,
+  total: finalTotal,
+  status: "pending",
+  createdAt: new Date().toISOString(),
   items: cartItems.map((item) => ({
     id: item.id,
     title: item.title,
@@ -48,9 +53,6 @@ export default function CheckoutPage() {
       type: m.type,
     })),
   })),
-  total,
-  status: "pending",
-  createdAt: new Date().toISOString(),
 };
 
 
@@ -69,6 +71,9 @@ export default function CheckoutPage() {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+  const deliveryFee = totalPrice < 3000 ? 200 : 0;
+const finalTotal = totalPrice + deliveryFee;
+
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-2 sm:px-4 lg:px-6 ">
@@ -208,19 +213,27 @@ export default function CheckoutPage() {
             <div className="space-y-3 border-t border-gray-200 pt-4">
               <div className="flex justify-between text-gray-600">
                 <span>Subtotal</span>
-                <span>PKR {totalPrice.toLocaleString()}</span>
+<span>PKR {finalTotal.toLocaleString()}</span>
+
               </div>
               <div className="flex justify-between text-gray-600">
-                <span>Shipping</span>
-                <span className="text-green-600">Free</span>
-              </div>
+  <span>Delivery Fee</span>
+  <span className={deliveryFee === 0 ? "text-green-600" : "text-gray-800"}>
+    {deliveryFee === 0 ? "Free" : `PKR ${deliveryFee}`}
+  </span>
+</div>
+
               <div className="flex justify-between text-gray-600">
                 <span>Tax</span>
                 <span>PKR 0</span>
               </div>
-              <div className="flex justify-between text-lg font-semibold text-gray-900 pt-2">
-                <span>Total</span>
-                <span>PKR {totalPrice.toLocaleString()}</span>
+              <div className="flex justify-between flex-col text-xl font-semibold text-gray-900 pt-2">
+                <span>Total PKR {finalTotal.toLocaleString()}</span>
+                
+<p className="text-sm text-gray-500 mt-2">
+  * Orders above PKR 3,000 qualify for free delivery
+</p>
+
               </div>
             </div>
 

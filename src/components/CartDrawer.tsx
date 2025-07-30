@@ -15,6 +15,9 @@ export default function CartDrawer( ) {
   const dispatch = useDispatch();
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+const deliveryFee = subtotal < 3000 && subtotal > 0 ? 200 : 0;
+const total = subtotal + deliveryFee;
+
   
   useEffect(() => {
      isOn ? "hidden" : "auto";
@@ -149,42 +152,44 @@ export default function CartDrawer( ) {
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 border-t">
-              <div className="space-y-4 flex flex-col">
-                <div className="border-b pb-4">
-                  <h3 className="font-semibold text-lg mb-2 text-base-dark">Subtotal</h3>
-                  <div className="flex justify-between">
-                    <span className="text-base-dark">Total:</span>
-                    <span className="font-semibold text-base-dark">Rs.{subtotal.toFixed(2)}</span>
-                  </div>
-                </div>
-                {/* <div className="border-b pb-4">
-                  <h3 className="font-semibold text-lg mb-2">Diagrams</h3>
-                  <div className="text-sm">
-                    <span className="font-medium">baschnay</span>
-                    <p>Pay in 3 Installments of <span className="font-semibold">Rs.{(subtotal / 3).toFixed(2)}</span></p>
-                  </div>
-                </div> */}
+           <div className="px-6 py-4 border-t">
+  <div className="space-y-4 flex flex-col">
 
-                {/* <motion.button
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-black text-white py-3 rounded-lg font-semibold"
-                > */}
-                  <Link prefetch href="/checkout">
-  <button onClick={()=> dispatch(toggle())} className="hover:cursor-pointer w-full bg-black text-white p-3 rounded mt-4">
-    Proceed to Checkout
-  </button>
-</Link>
+    <div className="border-b pb-4 space-y-2">
+      <h3 className="font-semibold text-lg text-base-dark">Summary</h3>
 
-                {/* </motion.button> */}
-                
-                <Link  onClick={()=> dispatch(toggle())} href={"/cart"} className="text-base-dark py-3 text-center text-sm underline hover:text-gray-600 transition">
-                  VIEW CART
-                </Link>
-              </div>
-            </div>
-          </motion.aside>
+      <div className="flex justify-between text-sm text-base-dark">
+        <span>Subtotal</span>
+        <span>Rs.{subtotal.toFixed(2)}</span>
+      </div>
+
+      <div className="flex justify-between text-sm text-base-dark">
+        <span>Delivery Fee</span>
+        <span>{deliveryFee === 0 ? "Free" : `Rs.${deliveryFee}`}</span>
+      </div>
+
+      <div className="flex justify-between text-base font-semibold text-base-dark border-t pt-2">
+        <span>Total</span>
+        <span>Rs.{total.toFixed(2)}</span>
+      </div>
+
+      <p className="text-xs text-gray-500 pt-1">
+        🚚 Delivery is free on orders above Rs. 3000
+      </p>
+    </div>
+
+    <Link prefetch href="/checkout">
+      <button onClick={() => dispatch(toggle())} className="hover:cursor-pointer w-full bg-black text-white p-3 rounded mt-4">
+        Proceed to Checkout
+      </button>
+    </Link>
+
+    <Link onClick={() => dispatch(toggle())} href="/cart" className="text-base-dark py-3 text-center text-sm underline hover:text-gray-600 transition">
+      VIEW CART
+    </Link>
+  </div>
+</div>
+</motion.aside>
         )}
       </AnimatePresence>
     </>

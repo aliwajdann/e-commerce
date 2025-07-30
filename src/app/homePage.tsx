@@ -116,8 +116,8 @@ export default function HeroCategorySwiper() {
       </Swiper>
       <div className={`text-center mt-8`}>
        
-         <div className="inline-flex items-center justify-center space-x-4 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-8 py-4 shadow-lg">
-           <div className="flex md:-space-x-2 -space-x-1 ">
+         <div className="inline-flex items-center justify-center md:space-x-2 space-x-1 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-8 py-4 shadow-lg">
+           <div className="flex -space-x-2  ">
              {[1,2,3].map((i) => (
                 <div key={i} className={`w-8 h-8 bg-gradient-to-r ${categories[i-1]?.gradient} rounded-full border-2 border-white animate-pulse`} style={{animationDelay: `${i * 200}ms`}}></div>
               ))}

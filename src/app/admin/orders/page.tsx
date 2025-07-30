@@ -27,7 +27,10 @@ export default async function AdminOrdersPage() {
                 <th className="p-3">Customer</th>
                 <th className="p-3">Phone</th>
                 <th className="p-3">Address</th>
-                <th className="p-3">Total</th>
+               <th className="p-3">Subtotal</th>
+<th className="p-3">Delivery</th>
+<th className="p-3">Total</th>
+
                 <th className="p-3">Status</th>
                 <th className="p-3">Created At</th>
               </tr>
@@ -39,7 +42,14 @@ export default async function AdminOrdersPage() {
                   <td className="p-3">{order.customer?.name}</td>
                   <td className="p-3">{order.customer?.phone}</td>
                   <td className="p-3">{order.customer?.address}</td>
-                  <td className="p-3">Rs {order.total}</td>
+                 <td className="p-3">Rs {order.subtotal ?? "N/A"}</td>
+<td className="p-3">
+  {order.deliveryFee === 0
+    ? "Free"
+    : `Rs ${order.deliveryFee}`}
+</td>
+<td className="p-3 font-semibold">Rs {order.total}</td>
+
                   <td className="p-3 capitalize text-yellow-600">{order.status}</td>
                   <td className="p-3">
                     {order.createdAt?.toDate?.().toLocaleString()}
