@@ -51,7 +51,7 @@ const categories = [
 export default function HeroCategorySwiper() {
   return (
     <>
-    <section className="bg-white relative pt-24 md:pt-30 px-4 md:px-8 ">
+    <section className="bg-white relative pt-24 mdpt-30 px-4 md:px-8 ">
       {/* <div className="max-w-6xl mx-auto text-center mb-10">
         <div style={{lineHeight: 1.2}} className="text-5xl md:text-6xl font-extrabold text-white">
           {/* bg-clip-text   text-transparent*/}
@@ -64,14 +64,15 @@ export default function HeroCategorySwiper() {
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 3500 }}
-        spaceBetween={20}
-        slidesPerView={1}
+        loop= {true}
+        spaceBetween={10}
+        slidesPerView={1.2}
         centeredSlides= {true}
         pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1.2 },
           768: { slidesPerView: 2 },
-          1024: { slidesPerView: 2 , loop: true },
+          1024: { slidesPerView: 2 ,  },
         }}
         className=""
       >
@@ -88,11 +89,11 @@ export default function HeroCategorySwiper() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
                 </div>
                 <div className="p-5">
-                  <div
+                  {/* <div
                     className={`text-4xl mb-2 transition-transform`}
                   >
                     {cat.icon}
-                  </div>
+                  </div> */}
                   <h3 className="text-2xl font-bold text-black mb-2">
                     {cat.name}
                   </h3>
