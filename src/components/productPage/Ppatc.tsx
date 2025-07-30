@@ -1,8 +1,10 @@
-'use client'
+'use client';
+
 import { addToCart } from '@/redux/cartSlice';
 import { useDispatch } from "react-redux";
 import { toggle } from "@/redux/drawerSlice";
 import { useRouter } from 'next/navigation';
+import { logCartActivity } from "@/lib/cartActivity";
 
 interface MediaType {
   type: string;
@@ -16,8 +18,8 @@ interface ProductInfoProps {
   description: string;
   media: MediaType[];
   quantity: number;
-  selectedColor?: string;  // <-- add this
-  selectedSize?: string;   // <-- and this
+  selectedColor?: string;
+  selectedSize?: string;
 }
 
 interface Product {
@@ -28,46 +30,52 @@ function Ppatc({ product }: Product) {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const logActivity = () => {
+    logCartActivity(product.title);
+  };
+
   const handleAddToCart = (e: any) => {
     e.stopPropagation();
     dispatch(toggle());
-    dispatch(
-      addToCart({
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        media: product.media.map((m: any) => ({
-          url: m.url,
-          type: m.type || "image",
-        })),
-        quantity: product.quantity,
-         selectedColor: product.selectedColor ?? undefined,
-selectedSize: product.selectedSize ?? undefined,
 
-      })
-    );
+    dispatch(addToCart({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      media: product.media.map((m: any) => ({
+        url: m.url,
+        type: m.type || "image",
+      })),
+      quantity: product.quantity,
+      selectedColor: product.selectedColor ?? undefined,
+      selectedSize: product.selectedSize ?? undefined,
+    }));
+
+    logActivity(); // ✅ Track add to cart
   };
 
   const handleBuyNow = (e: any) => {
     e.stopPropagation();
-    // dispatch(toggle());
-    dispatch(
-      addToCart({
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        media: product.media.map((m: any) => ({
-          url: m.url,
-          type: m.type || "image",
-        })),
-        quantity: product.quantity,
-      })
-    );
+
+    dispatch(addToCart({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      media: product.media.map((m: any) => ({
+        url: m.url,
+        type: m.type || "image",
+      })),
+      quantity: product.quantity,
+      selectedColor: product.selectedColor ?? undefined,
+      selectedSize: product.selectedSize ?? undefined,
+    }));
+
+    logActivity(); // ✅ Track buy now
     router.push('/checkout');
   };
 
   const handleOrderOnWhatsApp = () => {
-    const phone = "+923240059011"; // Change this to your WhatsApp number
+    const phone = "+923240059011";
     const message = `Hi, I'm interested in "${product.title}". Here’s the link: ${window.location.href}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
@@ -78,7 +86,7 @@ selectedSize: product.selectedSize ?? undefined,
     <div className='flex gap-2 flex-wrap'>
       <button
         onClick={handleAddToCart}
-        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#F5D5D6] bg-[#681C1C] transition-all text-center border-[#681C1C]  rounded-md"
+        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#F5D5D6] bg-[#681C1C] transition-all text-center border-[#681C1C] rounded-md"
       >
         Add to Cart
       </button>
@@ -90,7 +98,7 @@ selectedSize: product.selectedSize ?? undefined,
       </button>
       <button
         onClick={handleOrderOnWhatsApp}
-        className="hover:cursor-pointer inline-block bg-teal-600 px-6 py-2 text-white  transition-all text-center rounded-md "
+        className="hover:cursor-pointer inline-block bg-teal-600 px-6 py-2 text-white transition-all text-center rounded-md"
       >
         Order On WhatsApp
       </button>

@@ -71,7 +71,7 @@ export default function CheckoutPage() {
   );
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-2 sm:px-4 lg:px-6 custom-background">
+    <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-2 sm:px-4 lg:px-6 ">
     <div className="w-[90%] mx-auto mt-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export default function CheckoutPage() {
                     value={form.name}
                     onChange={handleChange}
                     className="outline-none w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-teal-600 transition"
-                    placeholder=" ali wajdan"
+                    placeholder="your name"
                   />
                   <FiUser className="absolute left-3 top-3.5 text-gray-400" />
                 </div>
@@ -132,7 +132,7 @@ export default function CheckoutPage() {
                     value={form.phone}
                     onChange={handleChange}
                     className="outline-none w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-teal-600 transition"
-                    placeholder="+92 3240059011"
+                    placeholder="your contact number"
                   />
                   <FiPhone className="absolute left-3 top-3.5 text-gray-400" />
                 </div>

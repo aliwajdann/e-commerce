@@ -63,34 +63,36 @@ export default function CategoryRoundSlider({ category, title }: CategoryRoundSl
   const subs = subcategories[category] || [];
 
   return (
-    <section className="w-full px-4 pb-10 pt-6">
-      <div className="w-full max-w-7xl mx-auto">
-        {/* Heading */}
-        <div className="inline-flex items-center justify-center mb-6">
+    <section className="w-full  pb-10 pt-6 flex flex-col items-center">
+         <div className="inline-flex items-center justify-center mb-4">
             <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
             <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-gray-200">
               <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse"></div>
             </div>
             <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
           </div>
-          
-        <div className="flex items-center justify-between mb-4 px-2">
+            <div className="flex items-center justify-between mb-8 px-2">
           <h2 className="text-xl font-semibold capitalize text-gray-800">
             {title || category}
           </h2>
         </div>
+      <div className="w-full max-w-[90%] mx-auto ">
+       
+          
+        {/* Heading */}
+      
 
         {/* Swiper */}
         <Swiper
           spaceBetween={16}
-          slidesPerView={2}
+          slidesPerView={3}
           loop={true}
           autoplay={{ delay: 3500, disableOnInteraction: false }}
           modules={[Autoplay]} // ✅ STEP 2: Enable Autoplay module
           breakpoints={{
-            320: { slidesPerView: 2.2 },
-            480: { slidesPerView: 2.5 },
-            768: { slidesPerView: 3.2 },
+            320: { slidesPerView: 3 },
+            480: { slidesPerView: 3 },
+            768: { slidesPerView: 4 },
             1024: { slidesPerView: 4 },
           }}
           className="pl-1"

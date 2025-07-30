@@ -76,14 +76,14 @@ const NewHeader = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link 
-              href="/category/skin-care" 
+              href="/category/skincare" 
               className="text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
             >
               Skin Care
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link 
-              href="/category/under-garments" 
+              href="/category/undergarments" 
               className="text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
             >
               Under Garments

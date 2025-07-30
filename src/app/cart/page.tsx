@@ -24,7 +24,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="w-full p-4 md:p-6 'bg-[#d9d9d9]' cart-page custom-background">
+    <div className="w-full p-4 md:p-6 'bg-[#d9d9d9]' cart-page bg-white">
     <div className="max-w-4xl mx-auto pt-20">
       <div className="mb-6">
         <h1 className="text-3xl font-bold uppercase text-base-dark">Your Cart</h1>

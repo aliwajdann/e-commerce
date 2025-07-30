@@ -53,7 +53,7 @@ const categories = [
 export default function HeroCategorySwiper() {
   return (
     <>
-    <section className="bg-white relative pt-24 mdpt-30 px-4 md:px-8 ">
+    <section className="bg-white relative pt-24 md:pt-28">
       {/* <div className="max-w-6xl mx-auto text-center mb-10">
         <div style={{lineHeight: 1.2}} className="text-5xl md:text-6xl font-extrabold text-white">
           {/* bg-clip-text   text-transparent*/}
@@ -113,9 +113,32 @@ export default function HeroCategorySwiper() {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className={`text-center mt-10`}>
+       
+         <div className="inline-flex items-center justify-center space-x-4 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-8 py-4 shadow-lg">
+           <div className="flex -space-x-2">
+             {[1,2,3].map((i) => (
+                <div key={i} className={`w-8 h-8 bg-gradient-to-r ${categories[i-1]?.gradient} rounded-full border-2 border-white animate-pulse`} style={{animationDelay: `${i * 200}ms`}}></div>
+              ))}
+            </div>
+            <span className="text-gray-700 font-medium">Join thousands of happy customers</span>
+          </div>
+          </div>
     </section>
+
     <SubcategorySlider
   category="jewellery"
+  subcategory="necklaces"
+  title="Necklaces Collection"
+/>
+ 
+    <SubcategorySlider
+  category="undergarments"
+  subcategory="necklaces"
+  title="Necklaces Collection"
+/>
+    <SubcategorySlider
+  category="skincare"
   subcategory="necklaces"
   title="Necklaces Collection"
 />

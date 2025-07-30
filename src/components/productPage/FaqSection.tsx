@@ -17,6 +17,7 @@ function FaqSection() {
       <h3 className="font-semibold">Q: Is there any return or exchange?</h3>
       <p className="text-gray-600">Yes! Check our return policy below for full details.</p>
     </div>
+     <p>Note: Actual product color may vary slightly from the image</p>
   </div>
 </div>
 
