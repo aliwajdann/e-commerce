@@ -65,7 +65,7 @@ export default function SubcategorySlider({
   if (loading || products.length === 0) return null;
 
   return (
-    <section className="w-full px-4 pt-6 pb-10 flex flex-col items-center">
+    <section className="w-full  pt-6 pb-10 flex flex-col items-center">
         <div className="inline-flex items-center justify-center mb-6">
             <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
             <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-gray-200">
@@ -88,15 +88,15 @@ export default function SubcategorySlider({
        
 
     <Swiper
-  spaceBetween={12}
   loop={true}
   autoplay={{ delay: 2000 }}
   modules={[Autoplay]}
+  spaceBetween={12}
   breakpoints={{
-    320: { slidesPerView: 2 },
-    480: { slidesPerView: 2 },
-    768: { slidesPerView: 3 },
-    1024: { slidesPerView: 4 },
+    320: { slidesPerView: 2 , spaceBetween: 6},
+    480: { slidesPerView: 2, spaceBetween:6 },
+    768: { slidesPerView: 3 , spaceBetween: 10},
+    1024: { slidesPerView: 4 , spaceBetween: 12},
   }}
   className="pt-2"
 >
