@@ -94,10 +94,10 @@ export default function HeroCategorySwiper() {
                   >
                     {cat.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-2xl font-bold text-white mb-2">
                     {cat.name}
                   </h3>
-                  <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                  <p className="text-sm text-white mb-4 line-clamp-2">
                     {cat.description}
                   </p>
                   <button
