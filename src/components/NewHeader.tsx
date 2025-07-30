@@ -50,7 +50,7 @@ const NewHeader = () => {
           // ? 'bg-white/15 backdrop-blur-[25px]' 
           // ? 'bg-[#681C1C] backdrop-blur-[200px]' 
           // : 'bg-white/10 backdrop-blur-[20px]'
-      } border border-white/20 rounded-full px-4 py-2 flex items-center justify-between hover:bg-white/15 hover:shadow-lg hover:shadow-black/10 md:top-5 md:w-[calc(100%-2.5rem)] sm:top-4 sm:w-[calc(100%-1.875rem)] sm:px-5 sm:py-3`}>
+      } border border-white/20 rounded-full px-4 py-2 flex items-center justify-between  hover:shadow-lg hover:shadow-black/10 md:top-5 md:w-[calc(100%-2.5rem)] sm:top-4 sm:w-[calc(100%-1.875rem)] sm:px-5 sm:py-3`}>
         
         {/* Left Navigation */}
         <div className="flex items-center gap-8 md:gap-5">
