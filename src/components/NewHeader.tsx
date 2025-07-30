@@ -45,12 +45,12 @@ const NewHeader = () => {
   return (
     <>
       {/* Main Header */}
-      <header className={`fixed top-5 left-1/2 transform -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-6xl z-50 transition-all duration-300 ${
+      <header className={`fixed top-3 left-1/2 transform -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-6xl z-50 transition-all duration-300 bg-black/60 ${
         isScrolled 
           // ? 'bg-white/15 backdrop-blur-[25px]' 
-          ? 'bg-[#681C1C] backdrop-blur-[200px]' 
-          : 'bg-white/10 backdrop-blur-[20px]'
-      } border border-white/20 rounded-full px-8 py-4 flex items-center justify-between hover:bg-white/15 hover:shadow-lg hover:shadow-black/10 md:top-5 md:w-[calc(100%-2.5rem)] sm:top-4 sm:w-[calc(100%-1.875rem)] sm:px-5 sm:py-3`}>
+          // ? 'bg-[#681C1C] backdrop-blur-[200px]' 
+          // : 'bg-white/10 backdrop-blur-[20px]'
+      } border border-white/20 rounded-full px-4 py-2 flex items-center justify-between hover:bg-white/15 hover:shadow-lg hover:shadow-black/10 md:top-5 md:w-[calc(100%-2.5rem)] sm:top-4 sm:w-[calc(100%-1.875rem)] sm:px-5 sm:py-3`}>
         
         {/* Left Navigation */}
         <div className="flex items-center gap-8 md:gap-5">
@@ -95,7 +95,7 @@ const NewHeader = () => {
         {/* Centered Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link href="/" className="block">
-            <div className="bg-transparent w-15 h-10 sm:w-12 sm:h-9 rounded-2xl flex items-center justify-center  transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+            <div className="bg-transparent w-12 h-10 md:w-15 md:h-10 rounded-2xl flex items-center justify-center  transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
               {/* <div className="relative w-6 h-6 sm:w-5 sm:h-5"> */}
               {/* <div className="relative w-full  rounded-2xl"> */}
                 {/* Custom geometric logo */}
@@ -177,19 +177,19 @@ const NewHeader = () => {
       </header>
 
       {/* Mobile Navigation Overlay */}
-      <div className={`fixed inset-0 z-40 bg-black/90 backdrop-blur-[20px] flex flex-col items-center justify-center transition-all duration-300 md:hidden ${
+      <div className={`pt-10 fixed inset-0 z-40 bg-black/90 backdrop-blur-[20px] flex flex-col items-center justify-center transition-all duration-300 md:hidden ${
         isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
       }`}>
         {/* Close Button */}
         <button
           onClick={closeMobileMenu}
-          className="absolute top-8 right-8 text-white text-3xl transition-all duration-300 hover:text-pink-400 hover:rotate-90"
+          className="absolute top-20 right-8 text-white text-3xl transition-all duration-300 hover:text-pink-400 hover:rotate-90"
         >
           ×
         </button>
 
         {/* Mobile Authentication Section */}
-        <div className="absolute top-8 left-8">
+        <div className="absolute top-20 left-8">
           <SignedIn>
             <div className="flex items-center space-x-3">
               <UserButton 

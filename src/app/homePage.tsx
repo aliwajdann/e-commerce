@@ -51,17 +51,16 @@ const categories = [
 export default function HeroCategorySwiper() {
   return (
     <>
-    <section className="hero-background relative py-20 px-4 md:px-8 pt-30">
-      <div className="max-w-6xl mx-auto text-center mb-10">
+    <section className="bg-white relative pt-24 md:pt-30 px-4 md:px-8 ">
+      {/* <div className="max-w-6xl mx-auto text-center mb-10">
         <div style={{lineHeight: 1.2}} className="text-5xl md:text-6xl font-extrabold text-white">
           {/* bg-clip-text   text-transparent*/}
-          Shop by Category
-        </div>
-        <p className="text-gray-600 text-lg mt-4 max-w-xl mx-auto">
-          Discover premium collections crafted for the modern woman ✨
-        </p>
-      </div>
-
+          {/* Shop by Category */}
+        {/* </div> */}
+        {/* <p className="text-gray-600 text-lg mt-4 max-w-xl mx-auto"> */}
+          {/* Discover premium collections crafted for the modern woman ✨ */}
+        {/* </p> */}
+      {/* </div> */}
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 3500 }}
@@ -94,10 +93,10 @@ export default function HeroCategorySwiper() {
                   >
                     {cat.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-2xl font-bold text-black mb-2">
                     {cat.name}
                   </h3>
-                  <p className="text-sm text-white mb-4 line-clamp-2">
+                  <p className="text-sm text-black mb-4 line-clamp-2">
                     {cat.description}
                   </p>
                   <button
