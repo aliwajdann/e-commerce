@@ -64,13 +64,14 @@ export default function HeroCategorySwiper() {
         {/* </p> */}
       {/* </div> */}
       <Swiper
-        modules={[Autoplay, Pagination]}
+        // modules={[Autoplay, Pagination]}
+        modules={[Autoplay]}
         autoplay={{ delay: 3500 }}
         loop= {true}
         spaceBetween={10}
         slidesPerView={1.2}
         centeredSlides= {true}
-        pagination={{ clickable: true }}
+        // pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1.2 },
           768: { slidesPerView: 2 },
