@@ -36,9 +36,20 @@ export default function ProductsSection() {
       <div className="md:max-w-[90%] mx-auto">
 
         <div className="mb-8 text-center">
+          <div className="inline-flex items-center justify-center mb-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
+            <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-gray-200">
+              <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse"></div>
+            </div>
+            <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
+          </div>
+          
           <h2 className="text-3xl font-bold text-gray-800">Women's Collection</h2>
           <p className="text-gray-600 mt-2 text-base">Stylish & comfortable picks for every mood.</p>
         </div>
+        
+     
+
 
         <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
           <div className="flex flex-wrap gap-2">

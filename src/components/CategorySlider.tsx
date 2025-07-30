@@ -66,6 +66,14 @@ export default function CategoryRoundSlider({ category, title }: CategoryRoundSl
     <section className="w-full px-4 pb-10 pt-6">
       <div className="w-full max-w-7xl mx-auto">
         {/* Heading */}
+        <div className="inline-flex items-center justify-center mb-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
+            <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-gray-200">
+              <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse"></div>
+            </div>
+            <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
+          </div>
+          
         <div className="flex items-center justify-between mb-4 px-2">
           <h2 className="text-xl font-semibold capitalize text-gray-800">
             {title || category}
