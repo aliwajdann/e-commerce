@@ -137,8 +137,8 @@ export default function ProductPage() {
   return (
     <>
       {/* <div className="p-3.5 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 max-w-6xl mx-auto mt-1.5 md:mt-6"> */}
-       <div className='w-full  custom-background'>
-       <div className='md:grid md:grid-cols-2   md:w-[95%] mx-auto pt-20 '>
+       <div className='w-full  bg-white'>
+       <div className='md:grid md:grid-cols-2   md:w-[95%] mx-auto md:pt-30 pt-24'>
 
         <ProductMedia media={product.media} />
         <ProductInfo

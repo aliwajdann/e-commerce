@@ -33,12 +33,11 @@ export default function ProductInfo({
   variants,
 }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
-  const featureList = description.split('\n');
-
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
 
-  // Auto-select first color and size
+  const featureList = description.split('\n');
+
   useEffect(() => {
     if (variants?.colors?.length > 0) {
       setSelectedColor(variants.colors[0]);
@@ -49,45 +48,45 @@ export default function ProductInfo({
   }, [variants]);
 
   return (
-    <div className="space-y-3 p-4">
+    <div className="space-y-4 p-4 sm:p-6">
       {/* Title & Price */}
-      <div className="space-y-1">
-        <h1 style={{ textTransform: 'capitalize' }} className="md:text-[28px] text-[24px] font-semibold text-[#F5D5D6]">
-          {title}
-        </h1>
-        <div className="flex items-center gap-2">
-          {originalprice && (
-            <span className="block text-[#F5D5D6] text-[24px] line-through">
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-semibold capitalize text-black">{title}</h1>
+        <div className="flex items-center gap-2 mt-1">
+          {originalprice > price && (
+            <span className="text-lg sm:text-xl text-black line-through">
               Rs.{originalprice.toFixed(2)}
             </span>
           )}
-          <span className="md:text-[34px] text-[30px] text-[#681C1C]">
+          <span className="text-2xl sm:text-3xl font-bold text-[#681C1C]">
             Rs.{price.toFixed(2)}
           </span>
         </div>
       </div>
 
-      {/* Installment */}
-      <div className="flex gap-2 items-center">
-        <button className="bg-purple-800 text-[10px] px-1 py-0.5 text-white border-none rounded-sm">
+      {/* Installment Info */}
+      <div className="flex flex-wrap items-center gap-2 text-sm">
+        <button className="bg-purple-700 text-white px-2 py-1 text-xs rounded">
           baadmay
         </button>
-        <p className="font-medium text-[12px] text-[#F5D5D6]">Pay in Three Installments of</p>
-        <p className="text-purple-800 font-bold text-sm">Rs.{(price / 3).toFixed(2)}</p>
+        <span className="text-black">Pay in three installments of</span>
+        <span className="text-purple-700 font-semibold">
+          Rs.{(price / 3).toFixed(2)}
+        </span>
       </div>
 
-      <p className="text-sm text-[#F5D5D6]">SKU: E1680-A-GRADE</p>
+      <p className="text-sm text-gray-600">SKU: E1680-A-GRADE</p>
 
-      {/* Color */}
-      {variants?.colors && variants?.colors?.length > 0 && (
-        <div className="mt-3">
-          <p className="text-sm font-medium mb-1">Color:</p>
+      {/* Color Selection */}
+      {variants?.colors?.length > 0 && (
+        <div>
+          <p className="text-sm font-medium mb-1 text-gray-600">Color:</p>
           <div className="flex gap-2">
-            {variants.colors.map((color) => (
+            {variants?.colors.map((color) => (
               <div
                 key={color}
                 onClick={() => setSelectedColor(color)}
-                className={`w-6 h-6 rounded-full border-2 cursor-pointer ${
+                className={`w-7 h-7 rounded-full border-2 cursor-pointer ${
                   selectedColor === color ? 'border-black' : 'border-gray-300'
                 }`}
                 style={{ backgroundColor: color }}
@@ -98,19 +97,19 @@ export default function ProductInfo({
         </div>
       )}
 
-      {/* Size */}
-      {variants?.sizes && variants?.sizes?.length > 0 && (
-        <div className="mt-3">
-          <p className="text-sm font-medium mb-1">Size:</p>
-          <div className="flex gap-2 flex-wrap">
-            {variants.sizes.map((size) => (
+      {/* Size Selection */}
+      {variants?.sizes?.length > 0 && (
+        <div>
+          <p className="text-sm font-medium mb-1 text-gray-200">Size:</p>
+          <div className="flex flex-wrap gap-2">
+            {variants?.sizes?.map((size) => (
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`px-3 py-1 border rounded-md text-sm font-medium ${
+                className={`px-3 py-1 rounded-md border text-sm font-medium transition ${
                   selectedSize === size
-                    ? 'bg-gray-800 text-white'
-                    : 'hover:bg-gray-100'
+                    ? 'bg-gray-800 text-white border-gray-700'
+                    : 'bg-white text-black hover:bg-gray-100 border-gray-300'
                 }`}
               >
                 {size}
@@ -120,19 +119,20 @@ export default function ProductInfo({
         </div>
       )}
 
-      {/* Quantity Selector */}
-      <div className="mt-4 flex items-center gap-4">
-        <div className="p-1 flex items-center gap-4">
+      {/* Quantity */}
+      <div className="flex items-center gap-4 mt-4">
+        <p className="text-sm text-gray-600">Quantity:</p>
+        <div className="flex items-center border border-gray-600 rounded-full px-2">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="font-bold bg-[#681C1C] px-2 text-white hover:bg-gray-200 transition rounded-full"
+            className="text-xl px-2 font-bold text-[#681C1C]"
           >
             -
           </button>
-          <span className="px-3 py-1 w-8 text-center">{quantity}</span>
+          <span className="px-3 text-gray-600">{quantity}</span>
           <button
             onClick={() => setQuantity(quantity + 1)}
-            className="font-bold px-2 bg-[#681C1C] text-white hover:bg-gray-200 transition rounded-full"
+            className="text-xl px-2 font-bold text-[#681C1C]"
           >
             +
           </button>
@@ -159,13 +159,13 @@ export default function ProductInfo({
       <WatchingIndicator />
 
       {/* Features */}
-      <div className="leading-relaxed text-muted">
-        <ul className="list-disc pl-5 space-y-1 text-[#F5D5D6] md:text-[15px] text-[14px] font-normal">
-          {featureList.map((feature, index) => (
-            <li key={index}>{feature}</li>
+      {featureList.length > 0 && (
+        <ul className="list-disc pl-5 space-y-1 text-sm text-gray-600">
+          {featureList.map((feature, i) => (
+            <li key={i}>{feature}</li>
           ))}
         </ul>
-      </div>
+      )}
     </div>
   );
 }

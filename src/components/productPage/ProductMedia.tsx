@@ -64,7 +64,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
   const { Swiper, SwiperSlide, Navigation, Pagination, Thumbs, FreeMode } = swiperModules;
 
   return (
-    <div className="min-w-full flex flex-col  gap-4 max-w-6xl mx-auto p-4">
+    <div className="min-w-full flex flex-col  gap-0 max-w-6xl mx-auto p-4">
       {/* Desktop Thumbnails - Vertical */}
       <div className="hidden  flex-col items-center w-20 space-y-2">
         <button
