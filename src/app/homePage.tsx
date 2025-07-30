@@ -3,6 +3,8 @@ import ProductsSection from "@/components/products";
 // import CategorySection from "@/components/CategorySection";
 import SubcategorySlider from "@/components/SubcategoryProducts";
 import CategoryRoundSlider from "@/components/CategorySlider";
+// import Sectionn from "@/components/sectionn";
+// import Sectionnn from "@/components/sectionn";
 
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -54,6 +56,23 @@ export default function HeroCategorySwiper() {
   return (
     <>
     <section className="bg-white relative pt-24 md:pt-28">
+      <div className={`w-full flex justify-center`}>
+              <div className="relative inline-block mb-8">
+                <h2 className="text-4xl md:text-8xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#F5D5D6] via-[#D4A5A6] to-[#F5D5D6] relative">
+                  VELANO
+                </h2>
+                
+                {/* Animated Underline */}
+                {/* <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-[#681C1C] to-transparent">
+                  <div className="h-full bg-gradient-to-r from-[#F5D5D6] to-[#681C1C] animate-pulse"></div>
+                </div> */}
+
+                {/* Floating Letters Effect */}
+                <div className="absolute inset-0 text-4xl md:text-8xl font-black tracking-wider text-[#681C1C]/10 animate-bounce" style={{ animationDelay: '1s' }}>
+                  VELANO
+                </div>
+              </div>
+            </div>
       {/* <div className="max-w-6xl mx-auto text-center mb-10">
         <div style={{lineHeight: 1.2}} className="text-5xl md:text-6xl font-extrabold text-white">
           {/* bg-clip-text   text-transparent*/}
@@ -116,7 +135,7 @@ export default function HeroCategorySwiper() {
       </Swiper>
       <div className={`text-center mt-8`}>
        
-         <div className="inline-flex items-center justify-center md:space-x-2 space-x-1 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-8 py-4 shadow-lg">
+         <div className="inline-flex items-center justify-center md:space-x-2 space-x-1 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full md:px-8 px-6 py-4 shadow-lg">
            <div className="flex -space-x-2  ">
              {[1,2,3].map((i) => (
                 <div key={i} className={`w-8 h-8 bg-gradient-to-r ${categories[i-1]?.gradient} rounded-full border-2 border-white animate-pulse`} style={{animationDelay: `${i * 200}ms`}}></div>
@@ -126,7 +145,8 @@ export default function HeroCategorySwiper() {
           </div>
           </div>
     </section>
-
+{/* <Sectionn /> */}
+{/* <Sectionnn /> */}
     <SubcategorySlider
   category="jewellery"
   subcategory="necklaces"
