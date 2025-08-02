@@ -39,9 +39,9 @@ export default function CartActivityPage() {
               <div>
                 <p className="font-medium">🧾 Product ID: <Link href={`/products/${log.productId}`} className="underline">{log.productId}</Link></p>
                 <p className="text-sm text-gray-500">User: {log.userId || "Guest"}</p>
-              </div>
+              </div> 
               <p className="text-sm text-gray-500">
-                {log.timestamp?.toDate().toLocaleString()}
+                {log.timestamp?.toDate().toLocaleString()} 
               </p>
             </div>
           </li>

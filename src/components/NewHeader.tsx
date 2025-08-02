@@ -20,6 +20,12 @@ const NewHeader = () => {
   const dispatch = useDispatch()
   const cartCount = useSelector(selectCartCount)
   const { user } = useUser()
+const allowedAdminEmails = [
+  "aliwajdan.it@gmail.com", 
+  "yourcousin@email.com"
+];
+
+const isAdmin = user && allowedAdminEmails.includes(user?.primaryEmailAddress?.emailAddress || "");
 
   useEffect(() => {
     setHasMounted(true)
@@ -132,32 +138,32 @@ const NewHeader = () => {
           </nav>
 
           {/* Authentication - Desktop */}
-          <div className="hidden md:flex items-center">
-            <SignedIn>
-              <div className="flex items-center space-x-3">
-                <span className="text-sm text-white/90">
-                  Hi, {user?.firstName || "User"}!
-                </span>
-                <UserButton 
-                  appearance={{
-                    elements: {
-                      avatarBox: "w-8 h-8 hover:scale-105 transition-transform"
-                    }
-                  }}
-                />
-              </div>
-            </SignedIn>
-            <SignedOut>
-              <Link 
-                href="/sign-in" 
-                className="flex items-center gap-2 text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
-              >
-                <User className="w-4 h-4" />
-                Account
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
-              </Link>
-            </SignedOut>
-          </div>
+          <div className="hidden md:flex items-center space-x-4">
+  <SignedIn>
+    {isAdmin && (
+      <Link
+        href="/admin"
+        className="text-white/90 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:text-white hover:-translate-y-0.5 relative group"
+      >
+        Admin
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
+      </Link>
+    )}
+    <div className="flex items-center space-x-3">
+      <span className="text-sm text-white/90">
+        Hi, {user?.firstName || "User"}!
+      </span>
+      <UserButton
+        appearance={{
+          elements: {
+            avatarBox: "w-8 h-8 hover:scale-105 transition-transform",
+          },
+        }}
+      />
+    </div>
+  </SignedIn>
+    </div>
+
 
           {/* Cart */}
           <div className="relative">
@@ -177,9 +183,11 @@ const NewHeader = () => {
       </header>
 
       {/* Mobile Navigation Overlay */}
-      <div className={`pt-10 fixed inset-0 z-40 bg-black/90 backdrop-blur-[20px] flex flex-col items-center justify-center transition-all duration-300 md:hidden ${
-        isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-      }`}>
+     <div className={`fixed inset-0 z-40 bg-black/90 backdrop-blur-[20px] transition-all duration-300 md:hidden ${
+  isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+}`}>
+  <div className="flex flex-col h-full overflow-y-auto pt-24 pb-20 px-6 gap-10 items-center">
+
         {/* Close Button */}
         <button
           onClick={closeMobileMenu}
@@ -189,32 +197,21 @@ const NewHeader = () => {
         </button>
 
         {/* Mobile Authentication Section */}
-        <div className="absolute top-20 left-8">
-          <SignedIn>
-            <div className="flex items-center space-x-3">
-              <UserButton 
-                appearance={{
-                  elements: {
-                    avatarBox: "w-8 h-8"
-                  }
-                }}
-              />
-              <span className="text-white text-sm">
-                {user?.firstName || "User"}
-              </span>
-            </div>
-          </SignedIn>
-          <SignedOut>
-            <Link 
-              href="/sign-in" 
-              onClick={closeMobileMenu}
-              className="flex items-center gap-2 text-white hover:text-pink-400 transition-colors"
-            >
-              <User className="w-4 h-4" />
-              <span>Sign In</span>
-            </Link>
-          </SignedOut>
-        </div>
+        <nav className="flex flex-col items-center gap-8">
+  ...
+  <SignedIn>
+    {isAdmin && (
+      <Link 
+        href="/admin" 
+        onClick={closeMobileMenu}
+        className="text-white text-2xl font-medium uppercase tracking-wide transition-all duration-300 hover:text-pink-400 hover:scale-110"
+      >
+        Admin
+      </Link>
+    )}
+  </SignedIn>
+</nav>
+
 
         {/* Mobile Navigation Links */}
         <nav className="flex flex-col items-center gap-8">
@@ -305,6 +302,7 @@ const NewHeader = () => {
             )}
           </button>
         </div>
+      </div>
       </div>
 
       {/* Click Outside to Close Mobile Menu */}

@@ -25,7 +25,7 @@ const categories = [
   },
   {
     name: 'Skin Care',
-    slug: 'skin-care',
+    slug: 'skincare',
     image:
       'https://img.freepik.com/premium-photo/beauty-woman-face-portrait-beautiful-female-model-with-perfect-clean-skin-isolated_489646-298.jpg?semt=ais_hybrid&w=740&q=80',
     description: 'Nourish your natural beauty',
@@ -34,7 +34,7 @@ const categories = [
   },
   {
     name: 'Under Garments',
-    slug: 'under-garments',
+    slug: 'undergarments',
     image:
       'https://images.unsplash.com/photo-1679826010913-09dab83d852c?w=600&auto=format&fit=crop&q=60',
     description: 'Comfort meets confidence',
@@ -144,7 +144,7 @@ export default function HeroCategorySwiper() {
             <span className="text-gray-700 font-medium md:text-[16px] text-[12px]">Join thousands of happy customers</span>
           </div>
           </div>
-    </section>
+    </section> 
 {/* <Sectionn /> */}
 {/* <Sectionnn /> */}
     <SubcategorySlider
