@@ -22,7 +22,7 @@ const NewHeader = () => {
 
   const allowedAdminEmails = [
     "aliwajdan.it@gmail.com",
-    "yourcousin@email.com"
+    "mominabbbasminhas5@email.com"
   ]
 
   const isAdmin = user && allowedAdminEmails.includes(user?.primaryEmailAddress?.emailAddress || "")

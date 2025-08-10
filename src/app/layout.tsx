@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // import Navigation from "@/components/Navigation";
-import NewHeader from "@/components/NewHeader";
+// import NewHeader from "@/components/NewHeader";
+import Header from "@/components/Header";
 // import VelanoHeader from "./VelanoHeader";
 import { Providers } from "@/app/providers";
 // import {Inter} from "next/font/google";
 // import Footer from "@/components/Footer";
 import { ClerkProvider } from '@clerk/nextjs'
 // import Head from 'next/head';
-import { Lexend_Deca } from 'next/font/google'
+// import { Lexend_Deca } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import LevanoFooter from "./LevanoFooter";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LoadingOverlayProvider } from '@/components/LoadingOverlay';
-import velano from "./favicon.ico"
+// import velano from "./favicon.ico"
 
 
 
@@ -27,16 +29,16 @@ import velano from "./favicon.ico"
 //   subsets: ["latin"],
 // });
    
-// const montserrat = Inter({
-//   subsets: ["latin"],
-//   variable: "--font-montserrat",
-// });
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+});
 
-const lexendDeca = Lexend_Deca({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'], // you can choose the weights you want
-  variable: '--font-lexend-deca',
-})
+// const lexendDeca = Lexend_Deca({
+//   subsets: ['latin'],
+//   weight: ['400', '500', '600', '700'], // you can choose the weights you want
+//   variable: '--font-lexend-deca',
+// })
 
 export const metadata: Metadata = {
   title: "Velano",
@@ -55,12 +57,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body
-        className={` ${lexendDeca.variable} antialiased min-h-screen transition-colors duration-500 className='bg-[#d9d9d9]'` }
+      <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white` }
       >
         <Providers>
         {/* <Navigation /> */}
-        <NewHeader />
+        <Header />
         {/* <VelanoHeader /> */}
         <LoadingOverlayProvider>
           {children}

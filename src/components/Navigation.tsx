@@ -107,7 +107,7 @@ const { show, hide } = useLoadingOverlay();
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
-        className="hidden md:block fixed w-full z-50 bg-transparent backdrop-brightness-75"
+        className="hidden md:block  w-full z-50 bg-white backdrop-brightness-75"
       >
         <div className="container mx-auto px-4">
           {/* Top Bar */}
@@ -122,7 +122,7 @@ const { show, hide } = useLoadingOverlay();
             height={36}
             className="rounded"
           /> */}
-          <span className="text-white font-semibold text-lg tracking-wide">
+          <span className="text-black font-semibold text-lg tracking-wide">
             VELANO
           </span>
         </Link>
@@ -132,7 +132,7 @@ const { show, hide } = useLoadingOverlay();
               <div className="relative search-container">
                 <button 
                   onClick={toggleSearch}
-                  className="hover:cursor-pointer flex items-center text-white hover:text-gray-300 group"
+                  className="hover:cursor-pointer flex items-center text-black hover:text-gray-800 group"
                 >
                   <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
                   <span className="ml-1">Search</span>
@@ -145,12 +145,12 @@ const { show, hide } = useLoadingOverlay();
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className=" absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg p-3 border border-gray-200"
+                      className=" absolute top-full right-0 mt-2 w-80 bg-black rounded-lg shadow-lg p-3 border border-gray-800"
                     >
                       <input
                         type="text"
                         placeholder="Search products..."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         autoFocus
                       />
                     </motion.div>
@@ -161,7 +161,7 @@ const { show, hide } = useLoadingOverlay();
               {/* WhatsApp */}
               <button 
                 onClick={handleWhatsAppClick}
-                className="hover:cursor-pointer flex items-center text-white hover:text-gray-300 group"
+                className="hover:cursor-pointer flex items-center text-black hover:text-gray-800 group"
               >
                 <ShoppingBag className="hover:cursor-pointer h-5 w-5 group-hover:scale-110 transition-transform" />
                 <span className="ml-1">WhatsApp</span>
@@ -170,7 +170,7 @@ const { show, hide } = useLoadingOverlay();
               {/* User Authentication */}
               <SignedIn>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-white">
+                  <span className="text-sm text-black">
                     Welcome, {user?.firstName || "User"}!
                   </span>
                   <UserButton />
@@ -179,7 +179,7 @@ const { show, hide } = useLoadingOverlay();
               <SignedOut>
                 <Link 
                   href="/sign-in" 
-                  className="text-white hover:text-gray-300"
+                  className="text-black hover:text-gray-800"
                 >
                   Account
                 </Link>
@@ -190,7 +190,7 @@ const { show, hide } = useLoadingOverlay();
               <div className="relative">
                 <button 
                   onClick={() => dispatch(toggle())}
-                  className="flex items-center text-white hover:text-gray-300 group"
+                  className="flex items-center text-black hover:text-gray-800 group"
                 >
                   <ShoppingCart className="hover:cursor-pointer h-5 w-5 group-hover:scale-110 transition-transform" />
                   <span className="ml-1"></span>
@@ -231,7 +231,7 @@ const { show, hide } = useLoadingOverlay();
                 >
                   <Link 
                     href={item.href} 
-                    className="text-sm font-medium uppercase tracking-wider text-white transition-colors hover:text-teal-600"
+                    className="text-sm font-medium uppercase tracking-wider text-black transition-colors hover:text-teal-600"
                   >
                     {item.name}
                   </Link>
@@ -252,7 +252,7 @@ const { show, hide } = useLoadingOverlay();
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <button 
             onClick={() => setIsMobileMenuOpen(true)}
-            className="text-white hover:scale-110 transition-transform"
+            className="text-black hover:scale-110 transition-transform"
           >
             <Menu className="h-6 w-6" />
           </button>
@@ -265,23 +265,23 @@ const { show, hide } = useLoadingOverlay();
             height={20}
             className="rounded"
           /> */}
-          <span className="text-white font-semibold text-lg tracking-wide">
+          <span className="text-black font-semibold text-lg tracking-wide">
             VELANO
           </span>
         </Link>
           
           <div className="flex items-center space-x-4">
             <Search 
-              className="h-5 w-5 text-white hover:scale-110 transition-transform cursor-pointer" 
+              className="h-5 w-5 text-black hover:scale-110 transition-transform cursor-pointer" 
               onClick={toggleSearch}
             />
             <div className="relative">
               <ShoppingCart
                 onClick={() => dispatch(toggle())}
-                className="h-5 w-5 text-white hover:cursor-pointer hover:text-teal-600 transition"
+                className="h-5 w-5 text-black hover:cursor-pointer hover:text-teal-600 transition"
               />
               {hasMounted && cartCount > 0 && (
-                <span className="absolute -top-2.5 -right-3 bg-gray-800 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-2.5 -right-3 bg-gray-800 text-black text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -301,7 +301,7 @@ const { show, hide } = useLoadingOverlay();
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </motion.div>
           )}
@@ -327,7 +327,7 @@ const { show, hide } = useLoadingOverlay();
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="fixed top-0 left-0 h-full w-4/5 max-w-sm bg-white z-50 shadow-xl"
             >
-              <div className="flex justify-between items-center p-4  border-gray-200">
+              <div className="flex justify-between items-center p-4  border-gray-800">
                 <Link 
                   href="/" 
                   className="text-xl font-bold text-gray-900"
@@ -349,11 +349,11 @@ const { show, hide } = useLoadingOverlay();
               
               <nav className="p-4">
                 {/* User Section */}
-                <div className="mb-6 pb-4 border-b border-gray-200">
+                <div className="mb-6 pb-4 border-b border-gray-800">
                   <SignedIn>
                     <div className="flex items-center space-x-3 mb-3">
                       <UserButton />
-                      <span className="text-gray-700">
+                      <span className="text-gray-800">
                         {user?.firstName || "User"}
                       </span>
                     </div>
@@ -390,13 +390,13 @@ const { show, hide } = useLoadingOverlay();
                 </ul>
 
                 {/* WhatsApp Button */}
-                <div className="mt-6 pt-4 border-gray-200">
+                <div className="mt-6 pt-4 border-gray-800">
                   <button
                     onClick={() => {
                       handleWhatsAppClick();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="w-full bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-800 transition-colors flex items-center justify-center space-x-2"
+                    className="w-full bg-teal-600 text-black py-2 px-4 rounded-md hover:bg-teal-800 transition-colors flex items-center justify-center space-x-2"
                   >
                     <ShoppingBag className="h-4 w-4" />
                     <span>WhatsApp Order</span>
