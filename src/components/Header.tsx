@@ -6,14 +6,16 @@ import { useSelector, useDispatch } from "react-redux"
 import { toggle } from "@/redux/drawerSlice"
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs"
 import CartDrawer from "./CartDrawer"
-import Image from 'next/image'
-import logo from '@/logo-v.png'
+import HeaderBar from './HeaderBar';
+// import Image from 'next/image'
+// import logo from '@/logo-v.png'
 
 export default function Header() {
   const [isTopBarVisible, setIsTopBarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+  
 
   // Redux and Auth integration
   const dispatch = useDispatch(); // Add this import: import { useDispatch } from "react-redux"
@@ -63,9 +65,11 @@ export default function Header() {
   ];
 
   return (
+    <>
     <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+    <HeaderBar />
       {/* Top Section - Desktop Only */}
-      <div className='h-8 bg-black text-white text-center flex items-center justify-center'>hey</div>
+      {/* <div className='h-8 bg-black text-white text-center flex items-center justify-center'>hey</div> */}
       <div 
         className={`hidden lg:block transition-all duration-500 ease-out overflow-hidden ${
           isTopBarVisible ? 'max-h-20 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-4'
@@ -76,17 +80,17 @@ export default function Header() {
             <div className="flex items-center justify-between h-12">
               {/* Left Links */}
               <div className="flex space-x-6">
-                <a href="#" className="text-xs text-gray-600 hover:text-black transition-colors">
+                <a href="#" className="text-[13px] text-gray-600 hover:text-black transition-colors">
                   About Us
                 </a>
-                <a href="#" className="text-xs text-gray-600 hover:text-black transition-colors">
+                <a href="#" className="text-[13px] text-gray-600 hover:text-black transition-colors">
                   Help
                 </a>
               </div>
 
               {/* Logo */}
               <div className="flex-1 flex justify-center">
-                <div className="text-xl font-light tracking-[0.2em] text-black">
+                <div className="text-2xl  tracking-[0.2em] text-black">
                   VELANO<sup className="text-xs">®</sup>
                 </div>
               </div>
@@ -320,5 +324,6 @@ export default function Header() {
 <CartDrawer />
 
     </header>
+    </>
   );
 }

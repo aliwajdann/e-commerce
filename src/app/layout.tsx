@@ -11,9 +11,9 @@ import { ClerkProvider } from '@clerk/nextjs'
 // import Head from 'next/head';
 // import { Lexend_Deca } from 'next/font/google'
 import { Montserrat } from 'next/font/google'
-import LevanoFooter from "./LevanoFooter";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LoadingOverlayProvider } from '@/components/LoadingOverlay';
+import Footer from "./LevanoFooter";
 // import velano from "./favicon.ico"
 
 
@@ -57,7 +57,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white` }
+      <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white pt-2 md:pt-16` }
       >
         <Providers>
         {/* <Navigation /> */}
@@ -67,8 +67,7 @@ export default function RootLayout({
           {children}
           </LoadingOverlayProvider>
           <SpeedInsights />
-        {/* <Footer /> */}
-        <LevanoFooter />
+          <Footer />
           </Providers>
       </body>
     </html>

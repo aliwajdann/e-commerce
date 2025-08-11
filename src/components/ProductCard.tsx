@@ -40,9 +40,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div
       onClick={handleCardClick}
-      className={`cursor-pointer p-2 transition group ${hasSecondImage ? 'hover:shadow-md' : ''}`}
+      className={`cursor-pointer p-2 transition group ${hasSecondImage ? '' : ''}`}
     >
-      <div className="relative p-0 overflow-hidden rounded">
+      <div className="relative p-0 overflow-hidden ">
         {/* Main Image */}
         <img
           src={product.images?.[0]?.url || '/placeholder.png'}

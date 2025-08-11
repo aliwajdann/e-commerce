@@ -59,6 +59,10 @@ const HeroSection = () => {
 
   return (
     <section  className="relative h-screen w-full overflow-hidden">
+        <div className='absolute botom-[10%] left-[10%] bg-amber-700'>
+            <h2>NEW COLLECTION</h2>
+            <button>EXPLORE</button>
+        </div>
       <Swiper
         ref={swiperRef}
         loop = { true }
@@ -107,9 +111,9 @@ const HeroSection = () => {
                   {/* <source src={item.src} type="video/mp4"/> */}
                 </video>
               )}
-              <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+              {/* <div className="absolute inset-0 bg-black/20 flex items-center justify-center"> */}
                 {/* <h2 className="text-white text-5xl font-bold">Nike Campaign {index + 1}</h2> */}
-              </div>
+              {/* </div> */}
             </div>
           </SwiperSlide>
         ))}
@@ -119,6 +123,10 @@ const HeroSection = () => {
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
         <div className="custom-pagination flex justify-center"></div>
       </div>
+       <div className='absolute botom-[10%] left-[10%] bg-amber-700 h-20 w-12'>
+            <h2>NEW COLLECTION</h2>
+            <button>EXPLORE</button>
+        </div>
 
       <div className="absolute bottom-7 right-10 z-10 flex items-center space-x-4">
         {/* Previous Arrow (New) */}

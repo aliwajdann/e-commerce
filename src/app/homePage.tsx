@@ -2,7 +2,13 @@
 import ProductsSection from "@/components/products";
 import SubcategorySlider from "@/components/SubcategoryProducts";
 import CategoryRoundSlider from "@/components/CategorySlider";
+import CategoryGrid from "@/components/CategoryGrid";
 import HeroSection from "@/components/HeroSection";
+import InspirationSection from "@/components/InspirationSection";
+import TrendingSection from "@/components/TrendingSection";
+import AsSeenInSection from "@/components/AsSeenIn";
+import TestimonialSection from "@/components/Testimonials";
+import TextWithImage from "@/components/TextWithImage";
 
 
 import 'swiper/css';
@@ -19,8 +25,13 @@ export default function HeroCategorySwiper() {
   subcategory="necklaces"
   title="Necklaces Collection"
 />
- 
-    <SubcategorySlider
+ <CategoryGrid />
+ <InspirationSection />
+ <TrendingSection />
+ <TextWithImage />
+ <AsSeenInSection />
+ <TestimonialSection />
+    {/* <SubcategorySlider
   category="undergarments"
   subcategory="necklaces"
   title="Necklaces Collection"
@@ -29,10 +40,10 @@ export default function HeroCategorySwiper() {
   category="skincare"
   subcategory="necklaces"
   title="Necklaces Collection"
-/>
+/> */}
 <CategoryRoundSlider category="jewellery" title="Shop by Type" />
 
-<ProductsSection></ProductsSection>
+{/* <ProductsSection></ProductsSection> */}
 {/* <CategorySection></CategorySection> */}
 </>
   );
