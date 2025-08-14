@@ -57,7 +57,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white pt-2 md:pt-16` }
+      <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white` }
       >
         <Providers>
         {/* <Navigation /> */}

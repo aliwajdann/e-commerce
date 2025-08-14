@@ -34,7 +34,7 @@ const CategoryGrid = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 h-screen max-h-[600px] lg:max-h-[500px]">
+    <div className="grid grid-cols-2 lg:grid-cols-4 h-screen max-h-[500px] lg:max-h-[450px]">
       {categories.map((category) => (
         <Link
           key={category.id}
@@ -43,7 +43,8 @@ const CategoryGrid = () => {
         >
           {/* Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            // className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${category.image})`,
             }}
@@ -56,7 +57,7 @@ const CategoryGrid = () => {
           <div className="relative h-full flex flex-col justify-end p-4 sm:p-6 lg:p-8">
             <div className="text-white">
               {/* Category Title */}
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-2 sm:mb-3 tracking-wide">
+              <h2 className="text-2xl font-bold sm:text-3xl lg:text-4xl  mb-2 sm:mb-3 tracking-wide">
                 {category.title}
               </h2>
               

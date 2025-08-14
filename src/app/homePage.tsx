@@ -9,6 +9,7 @@ import TrendingSection from "@/components/TrendingSection";
 import AsSeenInSection from "@/components/AsSeenIn";
 import TestimonialSection from "@/components/Testimonials";
 import TextWithImage from "@/components/TextWithImage";
+import OnSaleSection from "@/components/OnSaleSection";
 
 
 import 'swiper/css';
@@ -20,11 +21,16 @@ export default function HeroCategorySwiper() {
   return (
     <>
   <HeroSection />
-    <SubcategorySlider
+    <OnSaleSection
+  category="jewellery"
+  subcategory="necklaces"
+  title="BestSellers on sale"
+/>
+    {/* <SubcategorySlider
   category="jewellery"
   subcategory="necklaces"
   title="Necklaces Collection"
-/>
+/> */}
  <CategoryGrid />
  <InspirationSection />
  <TrendingSection />

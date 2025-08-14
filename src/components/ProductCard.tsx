@@ -40,7 +40,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div
       onClick={handleCardClick}
-      className={`cursor-pointer p-2 transition group ${hasSecondImage ? '' : ''}`}
+      className={`cursor-pointer  transition group ${hasSecondImage ? '' : ''}`}
     >
       <div className="relative p-0 overflow-hidden ">
         {/* Main Image */}
@@ -64,10 +64,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       <div className="mt-2 space-y-1">
-        <h3 className="text-sm text-black line-clamp-2">{product.name}</h3>
+        <h3 className="text-[13px] text-black line-clamp-2">{product.name}</h3>
 
         <div className="flex items-center justify-between">
-          <span className="custom-gray text-sm">
+          <span className="custom-gray text-xs">
             Rs.{product.price.toFixed(0)}
           </span>
 

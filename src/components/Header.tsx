@@ -7,6 +7,7 @@ import { toggle } from "@/redux/drawerSlice"
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs"
 import CartDrawer from "./CartDrawer"
 import HeaderBar from './HeaderBar';
+import { useRef } from 'react';
 // import Image from 'next/image'
 // import logo from '@/logo-v.png'
 
@@ -26,7 +27,7 @@ export default function Header() {
     "aliwajdan.it@gmail.com", 
     "mominabbbasminhas5@email.com"
   ];
-
+ useRef(Header)
   const isAdmin = user && allowedAdminEmails.includes(user?.primaryEmailAddress?.emailAddress || "");
 
   useEffect(() => {
@@ -41,39 +42,59 @@ export default function Header() {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY < lastScrollY || currentScrollY <= 50) {
-        // Scrolling up or near top - show top bar
-        setIsTopBarVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past threshold - hide top bar
-        setIsTopBarVisible(false);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
+    // Run scroll hide/show only on desktop
+  if (window.innerWidth < 1024) return; // lg breakpoint in Tailwind is 1024px
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  let ticking = false;
+
+  const handleScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        // Show top bar when near top or scrolling up
+        if (currentScrollY < lastScrollY - 20 || currentScrollY <= 200) {
+          setIsTopBarVisible(true);
+        }
+        // Hide when scrolling down past threshold
+        else if (currentScrollY > lastScrollY + 40 && currentScrollY > 400) {
+          setIsTopBarVisible(false);
+        }
+
+        setLastScrollY(currentScrollY);
+        ticking = false;
+      });
+
+      ticking = true;
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [lastScrollY]);
+
 
   const menuItems = [
     'New In', 'Lingerie', 'Sets', 'Bestsellers', 'Provocative', 
     'Bras', 'Swim', 'Nightwear', 'Hosiery', 'Gifts', 'Clothing', 'Archive'
   ];
 
+
   return (
     <>
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
     <HeaderBar />
+    {/* <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm"> */}
+    <header
+  className={`sticky top-0 z-50 bg-white shadow-sm transition-transform duration-200 linear`}
+  style={{
+    transform: isTopBarVisible ? 'translateY(0)' : 'translateY(-66px)' // your top bar height
+  }}
+>
       {/* Top Section - Desktop Only */}
       {/* <div className='h-8 bg-black text-white text-center flex items-center justify-center'>hey</div> */}
       <div 
-        className={`hidden lg:block transition-all duration-500 ease-out overflow-hidden ${
-          isTopBarVisible ? 'max-h-20 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-4'
-        }`}
+        className={`hidden lg:block transition-all duration-500 ease-out overflow-hidden 
+        `}
       >
         <div className="border-gray-100 md:pt-3 md:pb-2">
           <div className="max-w-[90%] mx-auto  px-6 md:px-0">

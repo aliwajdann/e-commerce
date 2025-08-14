@@ -58,11 +58,11 @@ const HeroSection = () => {
   };
 
   return (
-    <section  className="relative h-screen w-full overflow-hidden">
-        <div className='absolute botom-[10%] left-[10%] bg-amber-700'>
+    <section  className="relative h-[85vh] md:h-[80vh] w-full overflow-hidden flex justify-center items-center">
+        {/* <div className='absolute botom-[10%] left-[10%] bg-amber-700'>
             <h2>NEW COLLECTION</h2>
             <button>EXPLORE</button>
-        </div>
+        </div> */}
       <Swiper
         ref={swiperRef}
         loop = { true }
@@ -87,7 +87,8 @@ const HeroSection = () => {
         onAutoplayTimeLeft={(_blank, _, percentage) => {
           setProgress(1 - percentage);
         }}
-        className="h-full w-full"
+        // className="md:h-[98%] md:w-[98%] h-full w-full"
+        className=" h-full w-full"
       >
         {mediaItems.map((item, index) => (
           <SwiperSlide key={index}>
@@ -123,10 +124,10 @@ const HeroSection = () => {
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
         <div className="custom-pagination flex justify-center"></div>
       </div>
-       <div className='absolute botom-[10%] left-[10%] bg-amber-700 h-20 w-12'>
+       {/* <div className='absolute botom-[10%] left-[10%] bg-amber-700 h-20 w-12'>
             <h2>NEW COLLECTION</h2>
             <button>EXPLORE</button>
-        </div>
+        </div> */}
 
       <div className="absolute bottom-7 right-10 z-10 flex items-center space-x-4">
         {/* Previous Arrow (New) */}
