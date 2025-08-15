@@ -10,6 +10,7 @@ import AsSeenInSection from "@/components/AsSeenIn";
 import TestimonialSection from "@/components/Testimonials";
 import TextWithImage from "@/components/TextWithImage";
 import OnSaleSection from "@/components/OnSaleSection";
+import ImageAndProducts from "@/components/ImageAndProducts";
 
 
 import 'swiper/css';
@@ -26,6 +27,7 @@ export default function HeroCategorySwiper() {
   subcategory="necklaces"
   title="BestSellers on sale"
 />
+<ImageAndProducts />
     {/* <SubcategorySlider
   category="jewellery"
   subcategory="necklaces"

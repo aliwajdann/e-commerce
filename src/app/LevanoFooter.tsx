@@ -84,7 +84,7 @@ const Footer = () => {
           <div className="mb-8 pb-8 border-b border-gray-200">
             <div className="max-w-md mx-auto text-center space-y-6">
               <p className="text-sm text-gray-700 leading-relaxed px-4">
-                With its beautiful details, soft fabrics and unique styles, the Bluebella lingerie is perfect for 
+                With its beautiful details, soft fabrics and unique styles, the Velano lingerie is perfect for 
                 embracing the underwear-as-outerwear trend...
               </p>
               
@@ -93,7 +93,7 @@ const Footer = () => {
                   CONNECT WITH US
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  And receive an exclusive 10% off your order, exclusively on www.bluebella.eu
+                  And receive an exclusive 10% off your order, exclusively on www.velanoshop.store
                 </p>
                 
                 <form onSubmit={handleEmailSubmit} className="space-y-3">
@@ -197,13 +197,13 @@ const Footer = () => {
             {/* Copyright */}
             <div className="space-y-2 text-xs text-gray-500">
               <p>
-                © 2025 Bluebella. E-commerce by{' '}
+                © 2025 Velano. E-commerce by{' '}
                 <Link href="#" className="hover:text-gray-700">
-                  WeMakeWebsites
+                  Me
                 </Link>
               </p>
               <p>
-                Bluebella® is a registered trademark of Bluebella Ltd. Registered company 05566892.
+                {/* Velano® is a registered trademark of Velano Ltd. Registered company 05566892. */}
               </p>
             </div>
           </div>
@@ -238,7 +238,7 @@ const Footer = () => {
                 CONNECT WITH US
               </h3>
               <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                And receive an exclusive 10% off your order, exclusively on www.bluebella.eu
+                And receive an exclusive 10% off your order, exclusively on www.velanoshop.store
               </p>
               
               <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-2">
@@ -307,13 +307,13 @@ const Footer = () => {
             {/* Copyright */}
             <div className="space-y-2 text-xs md:text-sm text-gray-500">
               <p>
-                © 2025 Bluebella. E-commerce by{' '}
+                © 2025 Velano. E-commerce by{' '}
                 <Link href="#" className="hover:text-gray-700">
-                  WeMakeWebsites
+                  Me
                 </Link>
               </p>
               <p>
-                Bluebella® is a registered trademark of Bluebella Ltd. Registered company 05566892.
+                {/* Velano® is a registered trademark of  Ltd. Registered company 05566892. */}
               </p>
             </div>
           </div>
