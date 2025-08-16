@@ -64,7 +64,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       <div className="mt-2 space-y-1">
-        <h3 className="text-[13px] text-black line-clamp-2">{product.name}</h3>
+        <p className="text-[13px] text-black line-clamp-2">{product.name}</p>
 
         <div className="flex items-center justify-between">
           <span className="custom-gray text-xs">

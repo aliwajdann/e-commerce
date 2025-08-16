@@ -10,7 +10,7 @@ interface PromoCardProps {
 
 const PromoCard = ({ image, title, description, link }: PromoCardProps) => {
   return (
-    <div className="flex flex-col md:flex-row bg-amber-50/20 rounded-sm overflow-hidden shadow-sm">
+    <div className="pt-[32px] md:pt-[40px] flex flex-col md:flex-row bg-amber-50/20 rounded-sm overflow-hidden shadow-sm">
       {/* Image */}
       <div className="md:w-1/2 ">
         <img
@@ -23,7 +23,7 @@ const PromoCard = ({ image, title, description, link }: PromoCardProps) => {
       {/* Text Content */}
       <div className="flex flex-col justify-center gap-4 p-6 md:w-1/2">
         <span className="uppercase  text-xs text-gray-500 font-medium">Promo</span>
-        <h2 className="md:text-xl text-md font-semibold text-gray-900">{title}</h2>
+        <p className="md:text-xl text-md font-semibold text-gray-900">{title}</p>
         <p className="text-gray-600 text-xs">{description}</p>
         <Link
           href={link}

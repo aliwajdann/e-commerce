@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 function TextWithCategories () {
   return (
-  <div className="md:pl-[32px] pl-[0px] grid grid-cols-1 md:grid-cols-2 items-center overflow-hidden">
+  <div className="pt-[32px] md:pt-[40px] md:pl-[32px] pl-[0px] grid grid-cols-1 md:grid-cols-2 items-center overflow-hidden">
   
   {/* Mobile header section */}
   <div className="md:hidden flex flex-col items-center justify-center">
@@ -27,10 +27,10 @@ function TextWithCategories () {
   </div>
 
   {/* Image */}
-  <div>
-    <h4>T-Shirts</h4>
+  <div className='pl-[16px] md:pl-[32px]'>
+    <h4 className='text-[32px] md:text-[38px] font-normal capitalize text-[#3C3738]'>T-Shirts</h4>
     <p>So many fabrics, patterns and colours to collect</p>
-    <Link href="">Shop Now</Link>
+    <Link href="" className='text-sm custom-gray underline  text-[#3c3738]'>Shop Now</Link>
   </div>
 
   {/* Products List */}

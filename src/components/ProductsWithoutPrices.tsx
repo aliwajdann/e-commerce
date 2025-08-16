@@ -124,7 +124,7 @@ export default function ProductsWithoutPrices({
       </div> */}
       
       <div className="flex items-start flex-col gap-4 mb-4">
-        <h2 style={{lineHeight: "47.5px"}} className="text-[38px] font-semibold capitalize text-gray-800">
+        <h2  className="md:text-[38px] text-[32px]  capitalize text-gray-800">
           {title}
         </h2>
         <button className="text-sm text-[black] underline font-medium">

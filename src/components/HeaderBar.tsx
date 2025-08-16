@@ -25,7 +25,7 @@ const HeaderBar = () => {
   }, []);
 
   return (
-    <div className="bg-black text-white relative overflow-hidden">
+    <div className="bg-black text-white relative overflow-hidden  ">
       <div className="flex items-center h-8 px-2 sm:px-4 justify-center gap-4">
         
         {/* Left Arrow */}
@@ -46,7 +46,7 @@ const HeaderBar = () => {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-full flex items-center justify-center text-xs font-medium tracking-wide uppercase whitespace-nowrap"
+                className="flex-shrink-0 w-full flex items-center justify-center text-[10px] font-medium tracking-wide uppercase whitespace-nowrap"
               >
                 {message}
               </div>

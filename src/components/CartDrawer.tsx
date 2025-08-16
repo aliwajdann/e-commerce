@@ -33,7 +33,7 @@ const total = subtotal + deliveryFee;
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 h-screen"
             onClick={() => dispatch(toggle())}
           />
         )}
@@ -47,10 +47,10 @@ const total = subtotal + deliveryFee;
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-xl z-50 flex flex-col"
+            className="fixed top-0 right-0  w-full max-w-md h-screen bg-white shadow-xl z-50 flex flex-col"
           >
             {/* Header */}
-            <div className="px-6 py-4 border-b flex justify-between items-center">
+            <div className="px-6 py-4 border-b flex justify-between items-center bg-white">
               <h2 className="text-2xl font-semibold text-base-dark">Shopping Cart</h2>
               <button onClick={()=> dispatch(toggle())}>
                 <X className="w-6 h-6 text-base-dark" />
@@ -58,7 +58,7 @@ const total = subtotal + deliveryFee;
             </div>
 
             {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto px-6 py-4">
+            <div className="flex-1 overflow-y-auto px-6 py-4 bg-white">
               <div className="mb-4 text-sm text-gray-500">
                 {items.length} {items.length === 1 ? "item" : "items"}
               </div>
@@ -112,7 +112,7 @@ const total = subtotal + deliveryFee;
 {item.selectedSize && <p>Size: {item.selectedSize}</p>}
 
 
-                          <div className="flex items-center justify-between mt-3">
+                          <div className="flex items-center justify-between mt-3 bg-white">
                             <div className="p-1 flex items-center justify-around border border-gray-300 overflow-hidden text-base-dark">
                               <button
                                 onClick={() => dispatch(updateQuantity({
@@ -152,7 +152,7 @@ const total = subtotal + deliveryFee;
             </div>
 
             {/* Footer */}
-           <div className="px-6 py-4 border-t">
+           <div className="px-6 py-4 border-t bg-white">
   <div className="space-y-4 flex flex-col">
 
     <div className="border-b pb-4 space-y-2">

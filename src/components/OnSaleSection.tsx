@@ -111,20 +111,20 @@ export default function OnSaleSection({
   if (loading || products.length === 0) return null;
 
   return (
-    <section className="w-full pt-6 pb-10 flex flex-col items-center">
-      <div className="inline-flex items-center justify-center mb-6">
+    <section className="w-full flex flex-col items-center pt-[32px] md:pt-[40px]">
+      {/* <div className="inline-flex items-center justify-center mb-6">
         <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
         <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-gray-200">
           <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse"></div>
         </div>
         <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
-      </div>
+      </div> */}
       
       <div className="flex items-center flex-col gap-4 mb-4">
-        <h2 className="text-lg font-semibold capitalize text-gray-800">
+        <h2 style={{lineHeight: "48px"}} className="text-[32px] md:text-[38px] font-normal capitalize text-[#3C3738]">
           {title}
         </h2>
-        <button className="text-sm text-[#681C1C] hover:underline font-medium">
+        <button className="text-sm custom-gray underline  text-[#3c3738]">
           View All
         </button>
       </div>
