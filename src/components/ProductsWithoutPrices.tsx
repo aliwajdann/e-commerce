@@ -23,12 +23,14 @@ interface SubcategorySliderProps {
   category: string;
   subcategory: string;
   title?: string;
+  linktext? : string
 }
 
 export default function ProductsWithoutPrices({
   category,
   subcategory,
   title,
+  linktext
 }: SubcategorySliderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -126,7 +128,7 @@ export default function ProductsWithoutPrices({
           {title}
         </h2>
         <button className="text-sm text-[black] underline font-medium">
-          View All
+          {linktext}
         </button>
       </div>
       </div>

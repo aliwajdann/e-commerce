@@ -95,6 +95,14 @@ body {
 .product-page-pagination .swiper-slide {
   width: auto !important;
 }
+
+.custom-gradient {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.381) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
 @layer {
   :root {
     /* Primary Color Palette */
