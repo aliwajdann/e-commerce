@@ -90,7 +90,7 @@ body {
   /* font-family: cursive !important; */
   /* font-family: inter, sans-serif !important; */
   /* font-family: montserrat, sans-serif !important; */
-  font-family: "PPRadioGrotesk", Arial, sans-serif !important;
+  /* font-family: "PPRadioGrotesk", Arial, sans-serif !important; */
 
   /* font-family: "Lexend Deca" !important; */
 }
@@ -99,13 +99,21 @@ body {
   box-sizing: border-box !important;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Dancing+Script:wght@400..700&family=Dosis:wght@200..800&family=Metal+Mania&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ruda:wght@400..900&display=swap");
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: EditorialNew-Regular;
+  font-family: "Playfair Display", serif;
+}
+
+body,
+p,
+span {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
 }
 .product-page-pagination .swiper-slide {
   width: auto !important;

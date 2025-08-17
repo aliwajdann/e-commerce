@@ -1,14 +1,17 @@
 import React from 'react'
 import ProductsWithoutPrices from './ProductsWithoutPrices'
 
+
+
 function ImageAndProducts() {
   return (
-  <div className="pt-[32px] md:pt-[40px] w-full md:pl-[32px] pl-[0px] grid grid-cols-1 md:grid-cols-2 items-center justify-center overflow-hidden">
+    <>
+  <div  className="imageandproducts pt-[32px] md:pt-[40px] w-full md:pl-[32px] pl-[0px] grid  items-center justify-center overflow-hidden">
   
   {/* Mobile header section */}
   <div className="md:hidden flex flex-col items-center justify-center">
     <div className="flex items-center flex-col gap-4 mb-4">
-      <h2  className="text-[32px] capitalize text-gray-800">
+      <h2  className="md:text-[38px] text-[32px] font-medium capitalize text-gray-800">
         OnSale Section
       </h2>
       <button className="text-sm text-gray-800 underline font-medium">
@@ -38,6 +41,26 @@ function ImageAndProducts() {
     />
   </div>
 </div>
+ <style jsx>{`
+        .imageandproducts {
+          display: grid;
+        }
+
+        /* Desktop (>=768px) */
+        @media (min-width: 768px) {
+          .imageandproducts {
+            grid-template-columns: 40% auto;
+          }
+        }
+
+        /* Mobile (<768px) */
+        @media (max-width: 767px) {
+          .imageandproducts {
+            grid-template-rows: auto auto auto;
+          }
+        }
+      `}</style>
+</>
   )
 }
 

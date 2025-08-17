@@ -46,8 +46,8 @@ export default function ServicesSection() {
     <section className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 px-4 md:px-12 py-12">
       {/* Left side text */}
       <div className="md:w-1/3 w-full">
-        <h2 style={{lineHeight: "41px"}} className="md:text-[38px] text-[32px] text-center font-light text-gray-900">
-          Discover our <span className="text-brown-600 font-normal">services.</span>
+        <h2 style={{lineHeight: "41px"}} className="text-[24px]  md:text-[32px] font-medium text-center  text-gray-900">
+          Discover our <h2 className="text-emerald-800 inline text-[24px]  md:text-[32px] font-medium">services.</h2>
         </h2>
       </div>
 

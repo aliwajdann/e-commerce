@@ -120,12 +120,12 @@ export default function OnSaleSection({
         <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
       </div> */}
       
-      <div className="flex items-center flex-col gap-4 mb-4">
-        <h2 style={{lineHeight: "48px"}} className="text-[32px] md:text-[38px] font-normal capitalize text-[#3C3738]">
+      <div className="flex items-center flex-col gap-4 mb-6">
+        <h2 style={{lineHeight: "48px"}} className="text-[24px]  md:text-[32px] font-medium capitalize text-[#3C3738]">
           {title}
         </h2>
         <button className="text-sm custom-gray underline  text-[#3c3738]">
-          View All
+          Shop Now
         </button>
       </div>
 

@@ -2,93 +2,127 @@
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiPause, FiPlay, FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import Image from 'next/image';
-// import image1 from '../assets/image-1.jpg';
-// import image2 from '../assets/image-2.jpg';
-// import videooo from '../assets/Julia Sloane.mp4';
 import image1 from "@/Internet_20250730_210957_1.jpeg"
 import image2 from "@/Internet_20250730_210957_2.jpeg"
 import image3 from "@/Internet_20250730_210957_4.jpeg"
-// import image1 from "@/Velano.png"
 
 // Import styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-// import '../styles.css'; // New custom styles
 
 const HeroSection = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const swiperRef = useRef<any>(null);
 
   const mediaItems = [
     {
       type: 'image',
       src: image1,
-      alt: 'Nike Campaign'
+      alt: 'Nike Campaign',
+      title: 'NEW COLLECTION',
+      subtitle: 'Step into the future',
+      description: 'Discover the latest Nike innovations designed for peak performance',
+      buttonText: 'EXPLORE NOW'
     },
-    // {
-    //   type: 'video',
-    //   src: "",
-    //   alt: 'Nike Shoe Video'
-    // },
     {
       type: 'image',
       src: image2,
-      alt: 'Nike Air Max'
+      alt: 'Nike Air Max',
+      title: 'AIR MAX SERIES',
+      subtitle: 'Maximum comfort, maximum style',
+      description: 'Experience legendary Air Max cushioning in bold new colorways',
+      buttonText: 'SHOP AIR MAX'
     },
     {
       type: 'image',
       src: image3,
-      alt: 'Nike Air Max'
+      alt: 'Nike Performance',
+      title: 'PERFORMANCE GEAR',
+      subtitle: 'Unleash your potential',
+      description: 'Professional-grade athletic wear for champions and dreamers alike',
+      buttonText: 'GEAR UP'
     }
   ];
 
-  const togglePlayPause = () => {
-    if (swiperRef.current?.swiper.autoplay.running) {
-      swiperRef.current.swiper.autoplay.stop();
-      setIsPlaying(false);
-    } else {
-      swiperRef.current?.swiper.autoplay.start();
-      setIsPlaying(true);
+  // const togglePlayPause = () => {
+  //   if (swiperRef.current?.swiper.autoplay.running) {
+  //     swiperRef.current.swiper.autoplay.stop();
+  //     setIsPlaying(false);
+  //   } else {
+  //     swiperRef.current?.swiper.autoplay.start();
+  //     setIsPlaying(true);
+  //   }
+  // };
+
+  const handleSlideChange = (swiper:any) => {
+    setCurrentSlide(swiper.realIndex);
+  };
+
+  const contentVariants = {
+    hidden: {
+      y: 100,
+      opacity: 0
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: {
+      y: 50,
+      opacity: 0
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
     }
   };
 
   return (
-    <section  className="relative h-[85vh] md:h-[80vh] w-full overflow-hidden flex justify-center items-center">
-        {/* <div className='absolute botom-[10%] left-[10%] bg-amber-700'>
-            <h2>NEW COLLECTION</h2>
-            <button>EXPLORE</button>
-        </div> */}
+    <section className="mb-[32px] md:mb-[40px] relative h-[85vh] md:h-[80vh] w-full overflow-hidden flex justify-center items-center">
       <Swiper
         ref={swiperRef}
-        loop = { true }
+        loop={true}
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{ 
-          delay: 3000,
+          delay: 4000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
           waitForTransition: true
         }}
-        speed={800} // Smoother transition
+        speed={800}
         pagination={{ 
           clickable: true,
           el: '.custom-pagination',
           bulletClass: 'w-2 h-2 mx-1 rounded-full bg-white opacity-50 inline-block cursor-pointer transition-opacity',
-          bulletActiveClass: '!opacity-100' // Only changes opacity now
+          bulletActiveClass: '!opacity-100'
         }}
         navigation={{
           nextEl: '.custom-next',
           prevEl: '.custom-prev'
         }}
+        onSlideChange={handleSlideChange}
         onAutoplayTimeLeft={(_blank, _, percentage) => {
           setProgress(1 - percentage);
         }}
-        // className="md:h-[98%] md:w-[98%] h-full w-full"
-        className=" h-full w-full"
+        className="h-full w-full"
       >
         {mediaItems.map((item, index) => (
           <SwiperSlide key={index}>
@@ -102,36 +136,83 @@ const HeroSection = () => {
                 />
               ) : (
                 <video 
-                preload="auto"
+                  preload="auto"
                   autoPlay 
                   muted 
                   loop 
                   playsInline
-                  className="w-full h-full"
+                  className="w-full h-full object-cover"
                 >
-                  {/* <source src={item.src} type="video/mp4"/> */}
                 </video>
               )}
-              {/* <div className="absolute inset-0 bg-black/20 flex items-center justify-center"> */}
-                {/* <h2 className="text-white text-5xl font-bold">Nike Campaign {index + 1}</h2> */}
-              {/* </div> */}
+              
+              {/* Overlay */}
+              <div className="absolute w-full h-full inset-0 bg-black/20" />
+              
+              {/* Content */}
+              <div className="absolute bottom-1 left-1 inset-0 flex items-center">
+                <div className="container mx-auto px-4 absolute bottom-[12%] left-0.5 md:px-8 lg:px-12">
+                  <AnimatePresence mode="wait">
+                    {currentSlide === index && (
+                      <motion.div
+                        key={`content-${index}`}
+                        variants={contentVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        className="max-w-2xl text-white"
+                      >
+                        {/* <motion.h2 
+                          variants={itemVariants}
+                          className="text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4 text-orange-400"
+                        >
+                          {item.title}
+                        </motion.h2> */}
+                        
+                        <motion.h1 
+                          variants={itemVariants}
+                          className="text-[24px] md:text-[32px]  font-bold leading-tight mb-6"
+                        >
+                          {item.subtitle}
+                        </motion.h1>
+                        
+                        <motion.p 
+                          variants={itemVariants}
+                          className="text-sm md:text-lg text-gray-200 mb-8 max-w-lg leading-relaxed"
+                        >
+                          {item.description}
+                        </motion.p>
+                        
+                        <motion.button
+                          variants={itemVariants}
+                          whileHover={{ 
+                            scale: 1.05,
+                            backgroundColor: "rgba(255, 255, 255, 0.2)" 
+                          }}
+                          whileTap={{ scale: 0.95 }}
+                          className="bg-white  text-black px-5 py-2 font-semibold text-[12px] tracking-wide uppercase rounded-none border-2 border-white hover:bg-transparent hover:text-white transition-all duration-300 backdrop-blur-sm"
+                        >
+                          {item.buttonText}
+                        </motion.button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Custom Controls */}
+      {/* Custom Pagination */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
         <div className="custom-pagination flex justify-center"></div>
       </div>
-       {/* <div className='absolute botom-[10%] left-[10%] bg-amber-700 h-20 w-12'>
-            <h2>NEW COLLECTION</h2>
-            <button>EXPLORE</button>
-        </div> */}
 
+      {/* Controls */}
       <div className="absolute bottom-7 right-10 z-10 flex items-center space-x-4">
-        {/* Previous Arrow (New) */}
-        <button className="hidden md:block custom-prev text-white p-2 rounded-full hover:bg-white/10">
+        {/* Previous Arrow */}
+        <button className="hidden md:block custom-prev text-white p-2 rounded-full hover:bg-white/10 transition-colors">
           <FiChevronLeft size={24} />
         </button>
 
@@ -161,15 +242,15 @@ const HeroSection = () => {
             />
           </svg>
           <button 
-            onClick={togglePlayPause}
-            className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white"
+            // onClick={togglePlayPause}
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white hover:scale-110 transition-transform"
           >
             {isPlaying ? <FiPause size={16} /> : <FiPlay size={16} className="ml-0.5" />}
           </button>
         </div>
 
         {/* Next Arrow */}
-        <button className="custom-next text-white p-2 rounded-full hover:bg-white/10">
+        <button className="custom-next text-white p-2 rounded-full hover:bg-white/10 transition-colors">
           <FiChevronRight size={24} />
         </button>
       </div>
