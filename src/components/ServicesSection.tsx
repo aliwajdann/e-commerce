@@ -17,7 +17,7 @@ const ServiceCard = ({ image, title, link }: ServiceCardProps) => {
       <img
         src={image}
         alt={title}
-        className="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-500"
+        className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
       />
 
       {/* Overlay text */}
@@ -43,7 +43,7 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 px-4 md:px-12 py-12">
+    <section className=" flex flex-col md:flex-row items-start md:items-center justify-between gap-8 px-4 md:w-[85%] mx-auto md:pl-12 py-12">
       {/* Left side text */}
       <div className="md:w-1/3 w-full">
         <h2 style={{lineHeight: "41px"}} className="text-[24px]  md:text-[32px] font-medium text-center  text-gray-900">

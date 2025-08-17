@@ -56,7 +56,7 @@ export default function PromoGrid() {
 
   return (
     <section className="
-    flex gap-6 px-4 md:px-12 py-10 md:w-[70%]
+    flex gap-6 px-4 md:px-12 py-10 md:w-[78%]
     overflow-x-auto md:overflow-x-visible
     snap-x snap-mandatory md:snap-none
     ml-[16px]  md:mx-auto

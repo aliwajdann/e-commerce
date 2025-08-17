@@ -97,7 +97,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="mb-[32px] md:mb-[40px] relative h-[85vh] md:h-[80vh] w-full overflow-hidden flex justify-center items-center">
+    <section className="mb-[32px] md:mb-[40px] relative h-[82vh] md:h-[78vh] w-full overflow-hidden flex justify-center items-center">
       <Swiper
         ref={swiperRef}
         loop={true}
@@ -148,7 +148,7 @@ const HeroSection = () => {
               )}
               
               {/* Overlay */}
-              <div className="absolute w-full h-full inset-0 bg-black/20" />
+              <div className="absolute w-full h-full inset-0 bg-black/10" />
               
               {/* Content */}
               <div className="absolute bottom-1 left-1 inset-0 flex items-center">

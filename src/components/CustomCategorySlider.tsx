@@ -133,7 +133,7 @@ export default function CustomCategorySlider({ title, linktext }: CategorySlider
               <img
                 src={cat.image}
                 alt={cat.name}
-                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full  object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div  className="absolute  w-full h-full inset-0 custom-gradient ">
                 <span className="text-white text-xl font-semibold capitalize absolute bottom-2 left-2">
