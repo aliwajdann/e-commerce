@@ -58,10 +58,10 @@ export default function Header() {
         <HeaderBar />
         <header
           className={`bg-white shadow-sm transition-transform duration-200`}
-          style={{ transform: isTopBarVisible ? 'translateY(0)' : 'translateY(-66px)' }}
+          style={{ transform: isTopBarVisible ? 'translateY(0)' : 'translateY(-100px)' }}
         >
           {/* Desktop Top Section */}
-          <div className="hidden lg:block border-gray-100 md:pt-3 md:pb-2">
+          <div className="hidden lg:block  md:pt-3 md:pb-2">
             <div className="max-w-[90%] mx-auto px-6 md:px-0">
               <div className="flex items-center justify-between h-12">
                 <div className="flex space-x-6">
@@ -108,7 +108,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex justify-center border-t border-gray-100">
+          <div className="hidden md:flex justify-center bg-white">
             <nav className="flex space-x-8 xl:space-x-10 h-14 items-center">
               {menuItems.map((item, i) => (
                 <a key={i} href="#" className="text-[12px] font-[500] text-gray-900 hover:text-gray-600">{item}</a>

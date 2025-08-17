@@ -47,7 +47,7 @@ export default function ServicesSection() {
       {/* Left side text */}
       <div className="md:w-1/3 w-full">
         <h2 style={{lineHeight: "41px"}} className="text-[24px]  md:text-[32px] font-medium text-center  text-gray-900">
-          Discover our <h2 className="text-emerald-800 inline text-[24px]  md:text-[32px] font-medium">services.</h2>
+          Discover our <span className="text-emerald-800 inline text-[24px]  md:text-[32px] font-medium">services.</span>
         </h2>
       </div>
 

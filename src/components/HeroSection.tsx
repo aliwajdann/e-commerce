@@ -66,23 +66,7 @@ const HeroSection = () => {
 
   const contentVariants = {
     hidden: {
-      y: 100,
-      opacity: 0
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: {
-      y: 50,
+      y: 60,
       opacity: 0
     },
     visible: {
@@ -90,7 +74,24 @@ const HeroSection = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: [0.25, 0.1, 0.25, 1],
+        staggerChildren: 0.08,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: {
+      y: 25,
+      opacity: 0
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: [0.25, 0.1, 0.25, 1]
       }
     }
   };
@@ -151,7 +152,7 @@ const HeroSection = () => {
               
               {/* Content */}
               <div className="absolute bottom-1 left-1 inset-0 flex items-center">
-                <div className="container mx-auto px-4 absolute bottom-[12%] left-0.5 md:px-8 lg:px-12">
+                <div className="container mx-auto px-4 absolute bottom-[15%] left-0.5 md:px-8 lg:px-12">
                   <AnimatePresence mode="wait">
                     {currentSlide === index && (
                       <motion.div
@@ -162,38 +163,28 @@ const HeroSection = () => {
                         exit="hidden"
                         className="max-w-2xl text-white"
                       >
-                        {/* <motion.h2 
-                          variants={itemVariants}
-                          className="text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4 text-orange-400"
-                        >
-                          {item.title}
-                        </motion.h2> */}
-                        
                         <motion.h1 
                           variants={itemVariants}
-                          className="text-[24px] md:text-[32px]  font-bold leading-tight mb-6"
+                          className="text-[24px] md:text-[38px] font-bold leading-tight mb-5"
                         >
                           {item.subtitle}
                         </motion.h1>
                         
                         <motion.p 
                           variants={itemVariants}
-                          className="text-sm md:text-lg text-gray-200 mb-8 max-w-lg leading-relaxed"
+                          className="text-[14px] md:text-[16px] text-gray-200 mb-6 max-w-lg leading-relaxed"
                         >
                           {item.description}
                         </motion.p>
                         
-                        <motion.button
-                          variants={itemVariants}
-                          whileHover={{ 
-                            scale: 1.05,
-                            backgroundColor: "rgba(255, 255, 255, 0.2)" 
-                          }}
-                          whileTap={{ scale: 0.95 }}
-                          className="bg-white  text-black px-5 py-2 font-semibold text-[12px] tracking-wide uppercase rounded-none border-2 border-white hover:bg-transparent hover:text-white transition-all duration-300 backdrop-blur-sm"
+                        <button
+                          // variants={itemVariants}
+                          // whileHover={{ scale: 1.02 }}
+                          // whileTap={{ scale: 0.98 }}
+                          className="bg-white text-black px-5 py-2 font-semibold text-[12px] tracking-wide uppercase rounded-none border-2 border-white hover:bg-transparent hover:text-white transition-all duration-300 backdrop-blur-sm"
                         >
                           {item.buttonText}
-                        </motion.button>
+                        </button>
                       </motion.div>
                     )}
                   </AnimatePresence>

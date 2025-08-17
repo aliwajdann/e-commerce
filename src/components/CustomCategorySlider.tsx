@@ -69,7 +69,7 @@ export default function CustomCategorySlider({ title, linktext }: CategorySlider
   };
 
   return (
-    <section className="w-full pt-6 pb-10 flex flex-col items-start pl-[16px] md:pl-[32px]">
+    <section className="w-full pt-4 pb-10 flex flex-col items-start pl-[16px] md:pl-[32px]">
       {/* Heading */}
       <div className="md:block hidden">
         <div className="flex items-start flex-col gap-4 mb-4">

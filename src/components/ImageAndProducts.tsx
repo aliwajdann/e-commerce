@@ -10,8 +10,8 @@ function ImageAndProducts() {
   
   {/* Mobile header section */}
   <div className="md:hidden flex flex-col items-center justify-center">
-    <div className="flex items-center flex-col gap-4 mb-4">
-      <h2  className="md:text-[38px] text-[32px] font-medium capitalize text-gray-800">
+    <div className="flex items-center flex-col gap-4 mb-8">
+      <h2  className="md:text-[38px] text-[32px]  font-medium capitalize text-gray-800">
         OnSale Section
       </h2>
       <button className="text-sm text-gray-800 underline font-medium">
