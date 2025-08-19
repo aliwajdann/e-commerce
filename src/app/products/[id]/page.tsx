@@ -75,7 +75,7 @@ export default function ProductPage() {
       <div className="w-full bg-white">
         <CartActivityToast productTitle={product.title} />
 
-        <div className="product-container grid mt-4 md:w-[100%] mx-auto">
+        <div className="product-container grid md:mt-4 mt-1 md:w-[100%] mx-auto">
           <ProductMedia media={product.media} />
           <ProductInfo
             id={product.id}

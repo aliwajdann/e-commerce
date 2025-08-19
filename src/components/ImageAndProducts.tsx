@@ -19,12 +19,17 @@ function ImageAndProducts({title, tagline, linktext, image, buttonlink}:Props) {
   
   {/* Mobile header section */}
   <div className="md:hidden flex flex-col items-center justify-center">
-    <div className="flex items-center flex-col gap-4 mb-8">
-      <h2  className="md:text-[38px] text-[32px] text-center font-medium capitalize text-gray-800">
+    <div
+  className={`flex  items-center justify-center flex-col mb-6 ${
+    tagline ? "gap-0" : "gap-3"
+  }`}
+>
+
+      <h2  className="text-center md:text-[38px] text-[30px]  font-medium capitalize text-gray-800">
         {title}
       </h2>
-     {tagline &&  <p className='text-center text-[13px] md:text-[16px] mb-6'>{tagline}</p>}
-      <a href={buttonlink} className="text-sm text-gray-800 underline font-medium">
+     {tagline &&  <p className='text-center text-[13px] md:text-[16px] mb-4'>{tagline}</p>}
+      <a href={buttonlink} className="text-center text-sm text-gray-800 underline font-medium">
         {linktext}
       </a>
     </div>

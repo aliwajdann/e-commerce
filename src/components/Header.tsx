@@ -68,7 +68,7 @@ export default function Header() {
                   <a href="#" className="text-[13px] text-gray-600 hover:text-black">About Us</a>
                   <a href="#" className="text-[13px] text-gray-600 hover:text-black">Help</a>
                 </div>
-                <div className="flex-1 flex justify-center text-2xl tracking-[0.2em]">VELANO<sup className="text-xs">®</sup></div>
+                <a href='/' className="flex-1 flex justify-center text-2xl tracking-[0.2em]">VELANO<sup className="text-xs">®</sup></a>
                 <div className="flex items-center space-x-4">
                   <SignedIn>
                     <div className="flex items-center space-x-3">
@@ -91,10 +91,12 @@ export default function Header() {
             </div>
           </div>
 
+
+
           {/* Mobile Header */}
           <div className="lg:hidden flex items-center justify-between h-14 px-4">
             <button onClick={toggleMobileMenu} className="p-2 hover:bg-gray-100 rounded"><Menu className="w-5 h-5 text-gray-700" /></button>
-            <div className="absolute left-1/2 transform -translate-x-1/2 text-lg tracking-[0.15em]">VELANO<sup className="text-xs">®</sup></div>
+            <a href='/' className="absolute left-1/2 transform -translate-x-1/2 text-lg tracking-[0.15em]">VELANO<sup className="text-xs">®</sup></a>
             <div className="flex items-center space-x-3">
               <SignedIn><UserButton appearance={{ elements: { avatarBox: "w-6 h-6 hover:scale-105" } }} /></SignedIn>
               <SignedOut><a href="/sign-in" className="p-1 hover:bg-gray-100 rounded"><User className="w-4 h-4 text-gray-700" /></a></SignedOut>

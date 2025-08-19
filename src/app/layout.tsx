@@ -57,11 +57,8 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      
-<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Dancing+Script:wght@400..700&family=Dosis:wght@200..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Metal+Mania&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Ruda:wght@400..900&display=swap"     precedence="default"
- rel="stylesheet">
-</link>
-      <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white` }
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" precedence="default" rel="stylesheet" />    
+ <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white` }
       >
         <Providers>
         {/* <Navigation /> */}

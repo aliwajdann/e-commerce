@@ -105,16 +105,22 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: "Playfair Display", serif;
+h6,
+span {
+  font-family: "Exo 2", sans-serif;
 }
 
 body,
-p,
-span {
+p {
   font-family: "Lato", sans-serif;
   font-weight: 500;
 }
+
+/* body,
+p {
+  font-family: "Jost", sans-serif;
+} */
+
 .product-page-pagination .swiper-slide {
   width: auto !important;
 }
@@ -399,3 +405,22 @@ Button {
 /* .secondary-white{
   color: #55565b;
 } */
+
+.product-page-custom-pagination .swiper-pagination-bullet {
+  /* background: #000 !important; */
+  opacity: 0.4;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transition: 0.3s;
+  transform: scale(0.5);
+  margin: 0px !important;
+}
+
+.product-page-custom-pagination
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: white !important;
+  opacity: 1;
+  transform: scale(0.5);
+  margin: 0px !important;
+}

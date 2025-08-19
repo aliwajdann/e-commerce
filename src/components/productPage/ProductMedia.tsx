@@ -44,6 +44,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
   const { Swiper, SwiperSlide, Pagination } = swiperModules;
 
   return (
+    <>
     <div className="w-full max-w-6xl mx-auto pl-[16px] md:pl-[0px]">
       {/* Desktop Grid */}
       <div className="hidden md:grid grid-cols-2">
@@ -93,8 +94,9 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
         </Swiper>
 
         {/* Custom pagination at bottom-left */}
-        <div className="custom-pagination absolute bottom-2 left-2 !w-auto flex space-x-2 z-10"></div>
+        <div className="product-page-custom-pagination absolute bottom-2 left-2 !w-auto flex space-x-2 z-10"></div>
       </div>
     </div>
+    </>
   );
 }

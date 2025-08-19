@@ -128,8 +128,12 @@ export default function ProdsWithImg({
         <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
       </div> */}
       
-      <div className="flex items-start justify-center flex-col gap-4 mb-4">
-        <h2  className="md:text-[38px] text-[32px]  capitalize text-gray-800">
+<div
+  className={`flex items-start justify-center flex-col mb-6 ${
+    tagline ? "gap-0" : "gap-3"
+  }`}
+>
+        <h2  className="text-center text-[28px] md:text-[38px] capitalize text-gray-800">
           {title}
         </h2>
         {tagline &&  <p className='text-center text-[13px] md:text-[16px] mb-6'>{tagline}</p>}
@@ -137,6 +141,7 @@ export default function ProdsWithImg({
           {linktext}
         </a>
       </div>
+
       </div>
 
       <div 

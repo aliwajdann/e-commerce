@@ -169,10 +169,11 @@ export default function ProductsWithoutPrices({
         </div>
 
         {/* Products Container */}
-       <div
+<div
   ref={scrollContainerRef}
-  className="flex overflow-x-auto gap-2 md:gap-3 pt-2 pb-4 scroll-smooth custom-scrollbar"
+  className="flex overflow-x-auto gap-2 md:gap-3 pt-2 pb-4 scroll-smooth custom-scrollbar "
 >
+
   {products.map((product) => (
     <div
       key={product.id}
