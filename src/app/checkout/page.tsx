@@ -77,7 +77,7 @@ const finalTotal = totalPrice + deliveryFee;
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-2 sm:px-4 lg:px-6 ">
-    <div className="w-[90%] mx-auto mt-20">
+    <div className="w-[90%] mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

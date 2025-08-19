@@ -1,15 +1,23 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import WatchingIndicator from './WatchingIndicator';
+import { useState, useEffect } from 'react';
+import { Minus, Plus } from 'lucide-react';
 import Ppatc from './Ppatc';
 
 interface MediaType {
   type: 'image' | 'video' | 'string';
   url: string;
 }
+
+interface ColorVariant {
+  colorCode: string;
+  colorName: string;
+  image?: string;
+  images?: MediaType[];
+}
+
 interface VariantsType {
-  colors: string[];
+  colors: ColorVariant[];
   sizes: string[];
 }
 
@@ -27,17 +35,17 @@ export default function ProductInfo({
   id,
   title,
   price,
+  originalprice,
   description,
   media,
-  originalprice,
   variants,
 }: ProductInfoProps) {
-  const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState('');
-  const [selectedSize, setSelectedSize] = useState('');
+  const [qty, setQty] = useState(1);
+  const [selectedColor, setSelectedColor] = useState<ColorVariant | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
+  const [showSizeGrid, setShowSizeGrid] = useState(false);
 
-  const featureList = description.split('\n');
-
+  // default selections
   useEffect(() => {
     if (variants?.colors?.length > 0) {
       setSelectedColor(variants.colors[0]);
@@ -47,125 +55,150 @@ export default function ProductInfo({
     }
   }, [variants]);
 
+  const discount = originalprice
+    ? Math.round(((originalprice - price) / originalprice) * 100)
+    : null;
+
   return (
-    <div className="space-y-4 p-4 sm:p-6">
-      {/* Title & Price */}
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-semibold capitalize text-black">{title}</h1>
-        <div className="flex items-center gap-2 mt-1">
-          {originalprice > price && (
-            <span className="text-lg sm:text-xl text-black line-through">
-              Rs.{originalprice.toFixed(2)}
-            </span>
+    <div className="max-w-xl space-y-4 md:px-[36px] px-[16px] mt-5">
+      {/* Badge */}
+      <div className="inline-block bg-red-700 text-white text-xs font-medium px-3 py-1 rounded">
+        Buy 5 get 70% off
+      </div>
+
+      {/* Title and Prices */}
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl font-serif">{title}</h1>
+
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-semibold">£{price.toFixed(2)}</span>
+          {originalprice && (
+            <>
+              <span className="text-sm text-red-500">(-{discount}%)</span>
+              <span className="text-sm text-gray-500 line-through">
+                £{originalprice.toFixed(2)}
+              </span>
+            </>
           )}
-          <span className="text-2xl sm:text-3xl font-bold text-[#681C1C]">
-            Rs.{price.toFixed(2)}
-          </span>
         </div>
       </div>
 
-      {/* Installment Info */}
-      <div className="flex flex-wrap items-center gap-2 text-sm">
-        <button className="bg-purple-700 text-white px-2 py-1 text-xs rounded">
-          baadmay
-        </button>
-        <span className="text-black">Pay in three installments of</span>
-        <span className="text-purple-700 font-semibold">
-          Rs.{(price / 3).toFixed(2)}
-        </span>
-      </div>
-
-      <p className="text-sm text-gray-600">SKU: E1680-A-GRADE</p>
-
-      {/* Color Selection */}
+      {/* Colors */}
       {variants?.colors?.length > 0 && (
-        <div>
-          <p className="text-sm font-medium mb-1 text-gray-600">Color:</p>
-          <div className="flex gap-2">
-            {variants?.colors.map((color) => (
-              <div
-                key={color}
-                onClick={() => setSelectedColor(color)}
-                className={`w-7 h-7 rounded-full border-2 cursor-pointer ${
-                  selectedColor === color ? 'border-black' : 'border-gray-300'
-                }`}
-                style={{ backgroundColor: color }}
-                title={color}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Size Selection */}
-      {variants?.sizes?.length > 0 && (
-        <div>
-          <p className="text-sm font-medium mb-1 text-gray-200">Size:</p>
-          <div className="flex flex-wrap gap-2">
-            {variants?.sizes?.map((size) => (
+        <div className="space-y-2">
+          <p className="text-sm">
+            Colour:{' '}
+            <span className="font-medium">
+              {selectedColor ? selectedColor.colorName : ''}
+            </span>
+          </p>
+          <div className="flex space-x-2">
+            {variants.colors.map((c) => (
               <button
-                key={size}
-                onClick={() => setSelectedSize(size)}
-                className={`px-3 py-1 rounded-md border text-sm font-medium transition ${
-                  selectedSize === size
-                    ? 'bg-gray-800 text-white border-gray-700'
-                    : 'bg-white text-black hover:bg-gray-100 border-gray-300'
-                }`}
+                key={c.colorName}
+                onClick={() => setSelectedColor(c)}
+                className={`w-12 h-12 border-2 overflow-hidden transition 
+                  ${
+                    selectedColor?.colorName === c.colorName
+                      ? 'border-black'
+                      : 'border-gray-300 hover:border-black'
+                  }
+                  ${c.image ? 'rounded-md' : 'rounded-full'}
+                `}
+                title={c.colorName}
               >
-                {size}
+                {c.image ? (
+                  <img
+                    src={c.image}
+                    alt={c.colorName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : <p>p</p>
+
+                }
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* Quantity */}
-      <div className="flex items-center gap-4 mt-4">
-        <p className="text-sm text-gray-600">Quantity:</p>
-        <div className="flex items-center border border-gray-600 rounded-full px-2">
-          <button
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="text-xl px-2 font-bold text-[#681C1C]"
-          >
-            -
-          </button>
-          <span className="px-3 text-gray-600">{quantity}</span>
-          <button
-            onClick={() => setQuantity(quantity + 1)}
-            className="text-xl px-2 font-bold text-[#681C1C]"
-          >
-            +
-          </button>
-        </div>
+      {/* Links */}
+      <div className="flex space-x-4 text-sm underline text-gray-600">
+        <button>Find your size</button>
+        <button>Size chart</button>
       </div>
 
-      {/* Add to Cart */}
-      <Ppatc
-        product={{
-          id,
-          title,
-          price,
-          description,
-          quantity,
-          selectedColor,
-          selectedSize,
-          media: media.map((m) => ({
-            url: m.url,
-            type: m.type || 'image',
-          })),
-        }}
-      />
+      {/* Size Selector */}
+      {variants?.sizes?.length > 0 && (
+        <div className="relative">
+          <button
+            onClick={() => setShowSizeGrid(!showSizeGrid)}
+            className="w-full flex justify-between items-center border px-4 py-3 rounded text-sm"
+          >
+            {selectedSize ? 'Size: ' + selectedSize : 'Select size'}
+            <span className="ml-2">▾</span>
+          </button>
 
-      <WatchingIndicator />
-
-      {/* Features */}
-      {featureList.length > 0 && (
-        <ul className="list-disc pl-5 space-y-1 text-sm text-gray-600">
-          {featureList.map((feature, i) => (
-            <li key={i}>{feature}</li>
-          ))}
-        </ul>
+          {showSizeGrid && (
+            <div className="absolute left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg p-4 z-20">
+              <div className="grid grid-cols-4 gap-2">
+                {variants.sizes.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => {
+                      setSelectedSize(s);
+                      setShowSizeGrid(false);
+                    }}
+                    className={`py-2 text-sm rounded border transition 
+                      ${
+                        selectedSize === s
+                          ? 'border-black font-medium'
+                          : 'border-gray-300 hover:border-black'
+                      }`}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       )}
+
+      {/* Quantity + Add to Bag */}
+      <div className="flex items-center space-x-3">
+        <div className="flex items-center border rounded h-full px-3 py-2">
+          <button
+            className="px-0"
+            onClick={() => setQty((q) => Math.max(1, q - 1))}
+          >
+            <Minus size={16} />
+          </button>
+          <span className="px-4">{qty}</span>
+          <button className="px-0" onClick={() => setQty((q) => q + 1)}>
+            <Plus size={16} />
+          </button>
+        </div>
+
+        <Ppatc
+          product={{
+            id,
+            title,
+            price,
+            description,
+            quantity: qty,
+            selectedColor: selectedColor?.colorName,
+            selectedSize: selectedSize,
+            media: media.map((m) => ({ url: m.url, type: m.type })),
+          }}
+        />
+      </div>
+
+      {/* Tabs */}
+      <div className="border-t mt-4 pt-4 flex space-x-6 text-sm">
+        <button className="hover:underline">Product description</button>
+        <button className="hover:underline">Shipping and returns</button>
+      </div>
     </div>
   );
 }

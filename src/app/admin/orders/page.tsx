@@ -13,7 +13,7 @@ export default async function AdminOrdersPage() {
 // }
 
   return (
-    <div className="p-6 mt-20">
+    <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">📦 Orders Dashboard</h1>
 
       {orders.length === 0 ? (

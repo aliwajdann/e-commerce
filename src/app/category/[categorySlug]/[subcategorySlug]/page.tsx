@@ -78,7 +78,7 @@ export default function SubCategoryProductsPage() {
   if (loading) return <p className="p-6">Loading products...</p>;
 
   return (
-     <section className="w-full px-4 py-10 custom-background pt-24">
+     <section className="w-full px-4 py-10 custom-background ">
     <div className="w-[90%]  mx-auto">
       <h1 className="text-3xl font-bold capitalize mb-1">
         {/* {subcategory.replace('-', 'het') + "lo"} */}

@@ -39,7 +39,7 @@ export default function AdminProducts() {
       media: product.media?.map((m: any) => m.url).join(',') || '',
       variants: {
         sizes: product.variants?.sizes?.join(',') || '',
-        colors: product.variants?.colors?.join(',') || '',
+        colors: JSON.stringify(product.variants?.colors || []), // stringify objects for editing
       },
       category: product.category?.name || '',
       categorySlug: product.category?.slug || '',
@@ -56,6 +56,15 @@ export default function AdminProducts() {
     if (!editingProduct?.id) return;
     setIsSaving(true);
 
+    let parsedColors = [];
+    try {
+      parsedColors = JSON.parse(form.variants.colors);
+    } catch (err) {
+      alert('Colors must be valid JSON (array of {colorCode, colorName, image})');
+      setIsSaving(false);
+      return;
+    }
+
     const updatedProduct = {
       ...editingProduct,
       title: form.title,
@@ -65,7 +74,7 @@ export default function AdminProducts() {
       media: form.media.split(',').map((url: string) => ({ type: 'image', url })),
       variants: {
         sizes: form.variants.sizes.split(',').map((s: string) => s.trim()),
-        colors: form.variants.colors.split(',').map((c: string) => c.trim()),
+        colors: parsedColors,
       },
       category: {
         name: form.category,
@@ -94,7 +103,7 @@ export default function AdminProducts() {
   if (loading) return <div className="p-4">Loading products...</div>;
 
   return (
-    <div className="p-6 mt-20">
+    <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">All Products</h1>
       <div className="grid gap-4">
         {products.map((product) => (
@@ -104,7 +113,7 @@ export default function AdminProducts() {
           >
             <h2 className="text-xl font-semibold">{product.title}</h2>
             <p className="text-sm text-gray-600">{product.description}</p>
-            <p className="font-bold">Rs {product.price}</p>
+            <p className="font-bold">£{product.price}</p>
             <div className="flex gap-2 mt-2 overflow-scroll no-scrollbar">
               {product.media?.map((item: any, i: number) =>
                 item.type === 'image' ? (
@@ -150,7 +159,7 @@ export default function AdminProducts() {
             <Input name="subcategory" value={form.subcategory || ''} onChange={handleChange} placeholder="Subcategory Name" />
             <Input name="subcategorySlug" value={form.subcategorySlug || ''} onChange={handleChange} placeholder="Subcategory Slug" />
             <Input name="media" value={form.media || ''} onChange={handleChange} placeholder="Media URLs (comma separated)" />
-            <Input name="variants.colors" value={form.variants?.colors || ''} onChange={(e) => setForm({ ...form, variants: { ...form.variants, colors: e.target.value } })} placeholder="Colors (comma separated)" />
+            <Input name="variants.colors" value={form.variants?.colors || ''} onChange={(e) => setForm({ ...form, variants: { ...form.variants, colors: e.target.value } })} placeholder="Colors (JSON array)" />
             <Input name="variants.sizes" value={form.variants?.sizes || ''} onChange={(e) => setForm({ ...form, variants: { ...form.variants, sizes: e.target.value } })} placeholder="Sizes (comma separated)" />
           </div>
 

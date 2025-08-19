@@ -15,7 +15,7 @@ export default function CreateProductForm() {
     subcategory: { name: '', slug: '' },
     variants: {
       sizes: [''],
-      colors: [''],
+      colors: [{ colorCode: '', colorName: '', image: '' }],
     },
   });
 
@@ -26,10 +26,15 @@ export default function CreateProductForm() {
       const updatedMedia = [...formData.media];
       updatedMedia[index] = value;
       setFormData({ ...formData, media: updatedMedia });
-    } else if (variantType && typeof index === 'number') {
-      const updatedVariants = { ...formData.variants };
-      updatedVariants[variantType][index] = value;
-      setFormData({ ...formData, variants: updatedVariants });
+    } else if (variantType === 'sizes' && typeof index === 'number') {
+      const updatedSizes = [...formData.variants.sizes];
+      updatedSizes[index] = value;
+      setFormData({ ...formData, variants: { ...formData.variants, sizes: updatedSizes } });
+    } else if (variantType === 'colors' && typeof index === 'number') {
+      const { field } = e.target.dataset;
+      const updatedColors = [...formData.variants.colors];
+      updatedColors[index] = { ...updatedColors[index], [field!]: value };
+      setFormData({ ...formData, variants: { ...formData.variants, colors: updatedColors } });
     } else if (name.startsWith('category.') || name.startsWith('subcategory.')) {
       const [parent, key] = name.split('.');
       setFormData({
@@ -50,12 +55,17 @@ export default function CreateProductForm() {
         ...prev,
         media: [...prev.media, ''],
       }));
-    } else {
+    } else if (field === 'sizes') {
+      setFormData((prev) => ({
+        ...prev,
+        variants: { ...prev.variants, sizes: [...prev.variants.sizes, ''] },
+      }));
+    } else if (field === 'colors') {
       setFormData((prev) => ({
         ...prev,
         variants: {
           ...prev.variants,
-          [field]: [...prev.variants[field], ''],
+          colors: [...prev.variants.colors, { colorCode: '', colorName: '', image: '' }],
         },
       }));
     }
@@ -80,7 +90,7 @@ export default function CreateProductForm() {
       },
       variants: {
         sizes: formData.variants.sizes.filter((s) => s.trim() !== ''),
-        colors: formData.variants.colors.filter((c) => c.trim() !== ''),
+        colors: formData.variants.colors.filter((c) => c.colorCode && c.colorName),
       },
     };
 
@@ -97,7 +107,7 @@ export default function CreateProductForm() {
         subcategory: { name: '', slug: '' },
         variants: {
           sizes: [''],
-          colors: [''],
+          colors: [{ colorCode: '', colorName: '', image: '' }],
         },
       });
     } catch (err) {
@@ -162,13 +172,29 @@ export default function CreateProductForm() {
       {/* Colors */}
       <div>
         {formData.variants.colors.map((color, i) => (
-          <input
-            key={i}
-            placeholder={`Color ${i + 1}`}
-            value={color}
-            onChange={(e) => handleChange(e, i, 'colors')}
-            className="border p-2 w-full mt-1"
-          />
+          <div key={i} className="grid grid-cols-3 gap-2 mt-1">
+            <input
+              placeholder="Color Code (#000000)"
+              value={color.colorCode}
+              data-field="colorCode"
+              onChange={(e) => handleChange(e, i, 'colors')}
+              className="border p-2 w-full"
+            />
+            <input
+              placeholder="Color Name"
+              value={color.colorName}
+              data-field="colorName"
+              onChange={(e) => handleChange(e, i, 'colors')}
+              className="border p-2 w-full"
+            />
+            <input
+              placeholder="Swatch Image URL"
+              value={color.image}
+              data-field="image"
+              onChange={(e) => handleChange(e, i, 'colors')}
+              className="border p-2 w-full"
+            />
+          </div>
         ))}
         <button type="button" onClick={() => handleAddField('colors')} className="text-blue-500 text-sm mt-1">
           + Add Color

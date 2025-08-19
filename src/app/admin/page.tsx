@@ -16,7 +16,7 @@ export default async function Page() {
   }
 
   return(
-   <div className="mt-20 px-[2%] py-[5%]">
+   <div className="px-[2%] py-[5%]">
     <p>Welcome to the Admin Dashboard 🛡️</p>
     <p>Sunao Admin bhai</p>
     <div className="my-5 flex flex-col md:flex-row gap-2">

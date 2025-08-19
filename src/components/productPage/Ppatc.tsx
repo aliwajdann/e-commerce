@@ -83,27 +83,28 @@ function Ppatc({ product }: Product) {
   };
 
   return (
-    <div className='flex gap-2 flex-wrap'>
+    // <div className='flex gap-2 flex-wrap'>
       <button
         onClick={handleAddToCart}
-        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#F5D5D6] bg-[#681C1C] transition-all text-center border-[#681C1C] rounded-md"
+        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-white border-none bg-[#3C3738] transition-all text-center "
       >
-        Add to Cart
+        Add to shopping bag
       </button>
-      <button
-        onClick={handleBuyNow}
-        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#681C1C] bg-[#F5D5D6] transition-all text-center rounded-md border-[#F5D5D6]"
-      >
-        Buy Now
-      </button>
-      <button
-        onClick={handleOrderOnWhatsApp}
-        className="hover:cursor-pointer inline-block bg-teal-600 px-6 py-2 text-white transition-all text-center rounded-md"
-      >
-        Order On WhatsApp
-      </button>
-    </div>
+      
   );
 }
 
 export default Ppatc;
+/* <button
+        onClick={handleBuyNow}
+        className="hover:cursor-pointer border-2 inline-block px-6 py-2 text-[#681C1C] bg-[#F5D5D6] transition-all text-center rounded-md border-[#F5D5D6]"
+      >
+        Buy Now
+      </button> */
+      /* <button
+        onClick={handleOrderOnWhatsApp}
+        className="hover:cursor-pointer inline-block bg-teal-600 px-6 py-2 text-white transition-all text-center rounded-md"
+      >
+        Order On WhatsApp
+      </button> */
+    // </div>
