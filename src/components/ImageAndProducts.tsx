@@ -20,7 +20,7 @@ function ImageAndProducts({title, tagline, linktext, image, buttonlink}:Props) {
   {/* Mobile header section */}
   <div className="md:hidden flex flex-col items-center justify-center">
     <div className="flex items-center flex-col gap-4 mb-8">
-      <h2  className="md:text-[38px] text-[32px]  font-medium capitalize text-gray-800">
+      <h2  className="md:text-[38px] text-[32px] text-center font-medium capitalize text-gray-800">
         {title}
       </h2>
      {tagline &&  <p className='text-center text-[13px] md:text-[16px] mb-6'>{tagline}</p>}

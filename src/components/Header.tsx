@@ -54,7 +54,7 @@ export default function Header() {
   return (
     <>
       {/* Sticky wrapper for both HeaderBar + Header */}
-      <div className="sticky top-0 z-50">
+      <div className="sticky top-0 z-50 h-screen">
         <HeaderBar />
         <header
           className={`bg-white shadow-sm transition-transform duration-200`}

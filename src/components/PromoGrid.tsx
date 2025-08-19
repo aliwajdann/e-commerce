@@ -10,7 +10,7 @@ interface PromoCardProps {
 
 const PromoCard = ({ image, title, description, link }: PromoCardProps) => {
   return (
-    <div className="pt-[32px] md:pt-[40px] flex flex-col md:flex-row bg-gray-50/50 rounded-sm overflow-hidden shadow-sm">
+    <div className="flex flex-col md:flex-row bg-gray-50/50 rounded-sm overflow-hidden shadow-sm">
       {/* Image */}
       <div className="md:w-1/2 ">
         <img
@@ -49,14 +49,14 @@ export default function PromoGrid() {
       image: "https://images.unsplash.com/photo-1754901350480-c0fdd1a427b4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzOXx8fGVufDB8fHx8fA%3D%3D",
       title: "Mix & Match 4 for 3",
       description:
-        "Shop across to make the most of the 4 for 3 promotion.",
+        "Shop across to make the most of the 4 for 3 promotion.And here you go", 
       link: "/shop",
     },
   ];
 
   return (
     <section className="
-    flex gap-6 px-4 md:px-12 py-10 md:w-[78%]
+    flex md:gap-6 gap-2 px-4 md:px-12 py-10 md:w-[78%] pt-[32px] md:pt-[40px]
     overflow-x-auto md:overflow-x-visible
     snap-x snap-mandatory md:snap-none
     ml-[16px]  md:mx-auto
