@@ -54,7 +54,7 @@ export default function Header() {
   return (
     <>
       {/* Sticky wrapper for both HeaderBar + Header */}
-      <div className="sticky top-0 z-50 h-screen">
+      <div className="sticky top-0 z-50">
         <HeaderBar />
         <header
           className={`bg-white shadow-sm transition-transform duration-200`}
@@ -119,7 +119,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Slide Menu - fullscreen overlay */}
-      <div className={`fixed inset-0 z-[9999] w-full h-screen bg-white transform transition-transform duration-500 ease-out lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed inset-0 z-[9999] w-full pb-2 h-screen bg-white transform transition-transform duration-500 ease-out lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b bg-white">
