@@ -8,7 +8,8 @@ import { db } from '@/lib/firebase';
 import CartActivityToast from '@/components/CartActivityToast';
 import ProductMedia from '@/components/productPage/ProductMedia';
 import ProductInfo from '@/components/productPage/ProductInfo';
-import FaqSection from '@/components/productPage/FaqSection';
+// import FaqSection from '@/components/productPage/FaqSection';
+import ProductDetails from '@/components/productPage/ProductDetails';
 
 interface MediaType {
   type: 'image' | 'video';
@@ -68,7 +69,9 @@ export default function ProductPage() {
     fetchProduct();
   }, [id]);
 
-  if (loading || !product) return <p className="p-8 h-lvh">Loading...</p>;
+  if (loading || !product) return ( <div className="flex items-center justify-center h-screen">
+      <div className="w-10 h-10 border-4 border-[#681C1C]  border-t-transparent rounded-full animate-spin"></div>
+    </div>)
 
   return (
     <>
@@ -89,7 +92,7 @@ export default function ProductPage() {
         </div>
       </div>
 
-      {/* <FaqSection /> */}
+      <ProductDetails description={product.description} />
 
       <style jsx>{`
         /* Desktop (>=768px) */

@@ -196,8 +196,8 @@ export default function ProductInfo({
 
       {/* Tabs */}
       <div className="border-t mt-4 pt-4 flex space-x-6 text-sm">
-        <button className="hover:underline">Product description</button>
-        <button className="hover:underline">Shipping and returns</button>
+        <button className="underline">Product description</button>
+        <button className="underline">Shipping and returns</button>
       </div>
     </div>
   );
