@@ -10,6 +10,7 @@ import ProductMedia from '@/components/productPage/ProductMedia';
 import ProductInfo from '@/components/productPage/ProductInfo';
 // import FaqSection from '@/components/productPage/FaqSection';
 import ProductDetails from '@/components/productPage/ProductDetails';
+import RelatedProducts from '@/components/productPage/RelatedProducts';
 
 interface MediaType {
   type: 'image' | 'video';
@@ -28,10 +29,16 @@ interface VariantsType {
   colors: ColorVariant[];
 }
 
+interface categoryType  {
+  slug: string,
+  name: string,
+}
+
 interface Product {
   id: string;
   title: string;
   price: number;
+  category: categoryType;
   originalPrice: number;
   description: string;
   media: MediaType[];
@@ -69,6 +76,8 @@ export default function ProductPage() {
     fetchProduct();
   }, [id]);
 
+ 
+
   if (loading || !product) return ( <div className="flex items-center justify-center h-screen">
       <div className="w-10 h-10 border-4 border-[#681C1C]  border-t-transparent rounded-full animate-spin"></div>
     </div>)
@@ -92,7 +101,8 @@ export default function ProductPage() {
         </div>
       </div>
 
-      <ProductDetails description={product.description} />
+<ProductDetails description={product.description} />
+<RelatedProducts category={product.category.slug} currentProductId={product.id} />
 
       <style jsx>{`
         /* Desktop (>=768px) */
