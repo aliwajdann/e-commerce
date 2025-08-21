@@ -14,6 +14,7 @@ import { Montserrat } from 'next/font/google'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LoadingOverlayProvider } from '@/components/LoadingOverlay';
 import Footer from "./LevanoFooter";
+import ConditionalHeader from "./ConditionalHeader";
 // import velano from "./favicon.ico"
 
 
@@ -48,6 +49,8 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -62,7 +65,8 @@ export default function RootLayout({
       >
         <Providers>
         {/* <Navigation /> */}
-        <Header />
+        <ConditionalHeader />
+        {/* <Header /> */}
         {/* <VelanoHeader /> */}
         <LoadingOverlayProvider>
           {children}
