@@ -1,36 +1,72 @@
 "use client";
 
 import { useState } from "react";
+import { InfoSidebar } from "./InfoSidebar";
 
-interface ProductDescriptionProps {
-  description: string;
-//   itemCode: string;
-//   features: string[];
-}
 
-const infoButtons = [
-  "Composition & Care",
-  "Traceability",
-  "Returns",
-  "Product availability in store",
-];
+
 let itemCode = 987;
 
 let features = [
     "sdf", "sfa", "sfa", "sfa", "sfa"
 ]
-export default function ProductDetails({
-  description,
-//   itemCode,
-//   features,
-}: ProductDescriptionProps) {
+
+interface MediaType {
+  type: 'image' | 'video';
+  url: string;
+}
+
+interface ColorVariant {
+  colorCode: string;
+  colorName: string;
+  swatchImage?: string; // optional, if you add swatch images
+  images?: MediaType[]; // optional, so you can show color-specific media
+}
+
+interface VariantsType {
+  sizes: string[];
+  colors: ColorVariant[];
+}
+
+interface categoryType  {
+  slug: string,
+  name: string,
+}
+
+interface Product {
+  id: string;
+  title: string;
+  price: number;
+  category: categoryType;
+  originalPrice: number;
+  description: string;
+  media: MediaType[];
+  variants: VariantsType;
+}
+
+interface ProductDetailsProps {
+  productdetails: Product;
+}
+
+export default function ProductDetails({productdetails }: ProductDetailsProps) {
+
+const [isOpen, setIsOpen] = useState(false);
+  const [activeContent, setActiveContent] = useState<React.ReactNode>(null);
+  const infoButtons = [
+  { label: "Composition & Care", content: <p>Fabric details...</p> },
+  { label: "Traceability", content: <p>Made in Pakistan...</p> },
+  { label: "Returns", content:
+     <p>30-day return policy... {productdetails.title}</p>,
+     },
+  { label: "Product availability in store", content: <p>Available in XYZ stores...</p> },
+];
   return (
-    <div className="py-4 md:py-6 md:px-[36px] pl-[16px] grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-neutral-700 mt-8">
+    <div id="custom-product-details" className="py-4 md:py-6 md:px-[36px] pl-[16px] grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-neutral-700 mt-8">
       {/* Description */}
       <div>
         <h3 className="font-medium mb-4 border-b-1 md:pb-4 pb-3">Description</h3>
         <p className="text-xs text-neutral-500 mb-2">Item code: {itemCode}</p>
-        <p className="mb-4">{description}</p>
+        <p className="mb-4">{productdetails.description}</p>
         <ul className="space-y-1">
           {features.map((f, i) => (
             <li key={i} className="before:content-['·'] before:mr-1">
@@ -80,16 +116,27 @@ export default function ProductDetails({
 
       {/* Info Buttons */}
       <div className="space-y-2">
-        {infoButtons.map((btn, i) => (
-          <button
-            key={i}
-            className="w-full flex justify-between items-center text-left px-4 py-3 text-sm bg-neutral-50 hover:bg-neutral-100 rounded transition"
-          >
-            <span>{btn}</span>
-            <span>→</span>
-          </button>
-        ))}
-      </div>
+      {infoButtons.map((btn, i) => (
+        <button
+          key={i}
+          onClick={() => {
+            setActiveContent(btn.content);
+            setIsOpen(true);
+          }}
+          className="w-full flex justify-between items-center text-left px-4 py-3 text-sm bg-neutral-50 hover:bg-neutral-100 rounded transition"
+        >
+          <span>{btn.label}</span>
+          <span>→</span>
+        </button>
+      ))}
+
+      <InfoSidebar
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        content={activeContent}
+        product={productdetails}
+      />
+    </div>
     </div>
   );
 }

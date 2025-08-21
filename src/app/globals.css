@@ -423,3 +423,7 @@ Button {
   transform: scale(0.5);
   margin: 0px !important;
 }
+
+#custom-product-details {
+  scroll-margin-top: 160px;
+}

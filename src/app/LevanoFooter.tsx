@@ -83,7 +83,7 @@ const Footer = () => {
           {/* Mobile Newsletter Section */}
           <div className="mb-8 pb-8 border-b border-gray-200">
             <div className="max-w-md mx-auto text-center space-y-6">
-              <p className="text-sm text-gray-700 leading-relaxed px-4">
+              <p className="text-xs text-gray-700 leading-relaxed px-4">
                 With its beautiful details, soft fabrics and unique styles, the Velano lingerie is perfect for 
                 embracing the underwear-as-outerwear trend...
               </p>
@@ -92,7 +92,7 @@ const Footer = () => {
                 <h3 className="text-base font-semibold text-gray-900 tracking-wide">
                   CONNECT WITH US
                 </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs text-gray-600 leading-relaxed">
                   And receive an exclusive 10% off your order, exclusively on www.velanoshop.store
                 </p>
                 
@@ -102,12 +102,12 @@ const Footer = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email address"
-                    className="w-full px-4 py-3 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                    className="w-full px-4 py-3 text-xs border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-black text-white py-3 text-sm font-medium hover:bg-gray-800 transition-colors duration-200"
+                    className="w-full bg-black text-white py-3 text-xs font-medium hover:bg-gray-800 transition-colors duration-200"
                   >
                     JOIN
                   </button>
@@ -124,7 +124,7 @@ const Footer = () => {
                   onClick={() => toggleSection(index)}
                   className="w-full py-4 px-2 text-left flex items-center justify-between"
                 >
-                  <h3 className="text-sm font-semibold text-gray-900 tracking-wide">
+                  <h3 className="text-xs font-semibold text-gray-900 tracking-wide">
                     {section.title}
                   </h3>
                   <span className="text-gray-600 text-lg">
@@ -139,7 +139,7 @@ const Footer = () => {
                         <li key={linkIndex}>
                           <Link 
                             href={link.href}
-                            className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                            className="text-xs text-gray-600 hover:text-gray-900 transition-colors duration-200"
                           >
                             {link.name}
                           </Link>
@@ -159,8 +159,8 @@ const Footer = () => {
               <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
                 <span className="text-white text-xs">🇪🇺</span>
               </div>
-              <span className="text-sm text-gray-700">Europe (EUR)</span>
-              <button className="text-sm text-gray-600 hover:text-gray-900 underline">
+              <span className="text-xs text-gray-700">Europe (EUR)</span>
+              <button className="text-xs text-gray-600 hover:text-gray-900 underline">
                 Change
               </button>
             </div>
@@ -176,7 +176,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   aria-label={social.name}
                 >
-                  <span className="text-sm">{social.icon}</span>
+                  <span className="text-xs">{social.icon}</span>
                 </Link>
               ))}
             </div>
@@ -214,7 +214,7 @@ const Footer = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-8 lg:mb-12">
             {footerSections.map((section, index) => (
               <div key={index} className="space-y-3 md:space-y-4">
-                <h3 className="text-sm md:text-base font-semibold text-gray-900 tracking-wide">
+                <h3 className="text-xs md:text-base font-semibold text-gray-900 tracking-wide">
                   {section.title}
                 </h3>
                 <ul className="space-y-2 md:space-y-3">
@@ -222,7 +222,7 @@ const Footer = () => {
                     <li key={linkIndex}>
                       <Link 
                         href={link.href}
-                        className="text-xs md:text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                        className="text-xs md:text-xs text-gray-600 hover:text-gray-900 transition-colors duration-200"
                       >
                         {link.name}
                       </Link>
@@ -234,10 +234,10 @@ const Footer = () => {
 
             {/* Newsletter Signup */}
             <div className="space-y-4 md:space-y-6">
-              <h3 className="text-sm md:text-base font-semibold text-gray-900 tracking-wide">
+              <h3 className="text-xs md:text-base font-semibold text-gray-900 tracking-wide">
                 CONNECT WITH US
               </h3>
-              <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+              <p className="text-xs md:text-xs text-gray-600 leading-relaxed">
                 And receive an exclusive 10% off your order, exclusively on www.velanoshop.store
               </p>
               
@@ -247,12 +247,12 @@ const Footer = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
-                  className="flex-1 px-3 py-2 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                  className="flex-1 px-3 py-2 text-xs border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-800 transition-colors duration-200 min-w-[80px]"
+                  className="bg-black text-white px-4 py-2 text-xs font-medium hover:bg-gray-800 transition-colors duration-200 min-w-[80px]"
                 >
                   JOIN
                 </button>
@@ -269,7 +269,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     aria-label={social.name}
                   >
-                    <span className="text-sm">{social.icon}</span>
+                    <span className="text-xs">{social.icon}</span>
                   </Link>
                 ))}
               </div>
@@ -280,15 +280,15 @@ const Footer = () => {
           <div className="border-t border-gray-200 pt-6 md:pt-8">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 md:mb-6 gap-4">
               {/* Currency Selector */}
-              <div className="flex items-center space-x-2">
+              {/* <div className="flex items-center space-x-2">
                 <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
                   <span className="text-white text-xs">🇪🇺</span>
                 </div>
-                <span className="text-sm text-gray-700">Europe (EUR)</span>
-                <button className="text-sm text-gray-600 hover:text-gray-900 underline">
+                <span className="text-xs text-gray-700">Europe (EUR)</span>
+                <button className="text-xs text-gray-600 hover:text-gray-900 underline">
                   Change
                 </button>
-              </div>
+              </div> */}
 
               {/* Payment Methods */}
               <div className="flex items-center space-x-2 md:space-x-3">
@@ -305,7 +305,7 @@ const Footer = () => {
             </div>
 
             {/* Copyright */}
-            <div className="space-y-2 text-xs md:text-sm text-gray-500">
+            <div className="space-y-2 text-xs md:text-xs text-gray-500">
               <p>
                 © 2025 Velano. E-commerce by{' '}
                 <Link href="#" className="hover:text-gray-700">

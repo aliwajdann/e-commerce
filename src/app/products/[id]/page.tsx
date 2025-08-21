@@ -101,7 +101,7 @@ export default function ProductPage() {
         </div>
       </div>
 
-<ProductDetails description={product.description} />
+<ProductDetails  productdetails={product} />
 <RelatedProducts category={product.category.slug} currentProductId={product.id} />
 
       <style jsx>{`

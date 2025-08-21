@@ -45,6 +45,14 @@ export default function ProductInfo({
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const [showSizeGrid, setShowSizeGrid] = useState(false);
 
+const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+
   // default selections
   useEffect(() => {
     if (variants?.colors?.length > 0) {
@@ -93,9 +101,9 @@ export default function ProductInfo({
             </span>
           </p>
           <div className="flex space-x-2">
-            {variants.colors.map((c) => (
+            {variants.colors.map((c,v) => (
               <button
-                key={c.colorName}
+                key={v}
                 onClick={() => setSelectedColor(c)}
                 className={`w-12 h-12 border-2 overflow-hidden transition 
                   ${
@@ -196,9 +204,10 @@ export default function ProductInfo({
 
       {/* Tabs */}
       <div className="border-t mt-4 pt-4 flex space-x-6 text-sm">
-        <button className="underline">Product description</button>
-        <button className="underline">Shipping and returns</button>
+        <button  onClick={() => scrollToSection("custom-product-details")} className="underline">Product description</button>
+        <button  onClick={() => scrollToSection("custom-product-details")} className="underline">Shipping and returns</button>
       </div>
     </div>
   );
 }
+

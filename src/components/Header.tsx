@@ -113,7 +113,7 @@ export default function Header() {
           <div className="hidden md:flex justify-center bg-white">
             <nav className="flex space-x-8 xl:space-x-10 h-14 items-center">
               {menuItems.map((item, i) => (
-                <a key={i} href="#" className="text-[12px] font-[500] text-gray-900 hover:text-gray-600">{item}</a>
+                <a key={i} href="#" className="text-xs font-[500] text-gray-900 hover:text-gray-600">{item}</a>
               ))}
             </nav>
           </div>
@@ -121,23 +121,23 @@ export default function Header() {
       </div>
 
       {/* Mobile Slide Menu - fullscreen overlay */}
-      <div className={`fixed inset-0 z-[9999] w-full pb-4 h-lvh bg-white transform transition-transform duration-500 ease-out lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed inset-0 z-[9999] w-full  h-full bg-white transform transition-transform duration-500 ease-out lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b bg-white">
             <span className="text-xl tracking-[0.2em]">Menu</span>
-            <button onClick={closeMobileMenu} className="p-2 hover:bg-gray-100 rounded-full"><X className="w-6 h-6" /></button>
+            <button onClick={closeMobileMenu} className="p-2 hover:bg-gray-100 rounded-full"><X className="w-4 h-4" /></button>
           </div>
           {/* Menu Items */}
           <div className="flex-1 overflow-y-auto py-6 bg-white">
             <nav className="px-6">
               {menuItems.map((item, i) => (
-                <a key={i} href="#" onClick={closeMobileMenu} className="block px-4 py-4 border-b text-lg hover:bg-gray-50">{item}</a>
+                <a key={i} href="#" onClick={closeMobileMenu} className="text-xs block px-4 py-4 border-b  hover:bg-gray-50">{item}</a>
               ))}
             </nav>
             <div className="mt-8 px-6 pt-6 border-t space-y-2 bg-white">
-              <a href="#" className="block px-4 py-4 border-b text-gray-600 hover:bg-gray-50">About Us</a>
-              <a href="#" className="block px-4 py-4 border-b text-gray-600 hover:bg-gray-50">Help</a>
+              <a href="#" className="text-xs block px-4 py-4 border-b text-gray-600 hover:bg-gray-50">About Us</a>
+              <a href="#" className="text-xs block px-4 py-4 border-b text-gray-600 hover:bg-gray-50">Help</a>
             </div>
           </div>
           {/* Bottom */}
@@ -145,19 +145,19 @@ export default function Header() {
             <SignedIn>
               <div className="flex flex-col items-center space-y-2">
                 <UserButton appearance={{ elements: { avatarBox: "w-8 h-8" } }} />
-                <span className="text-sm">Hi, {user?.firstName || 'User'}!</span>
+                <span className="text-xs">Hi, {user?.firstName || 'User'}!</span>
                 {isAdmin && <a href="/admin" className="text-xs text-blue-600">Admin</a>}
               </div>
             </SignedIn>
             <SignedOut>
               <a href="/sign-in" onClick={closeMobileMenu} className="flex flex-col items-center space-y-2">
                 <User className="w-6 h-6 text-gray-600" />
-                <span className="text-sm">Account</span>
+                <span className="text-xs">Account</span>
               </a>
             </SignedOut>
             <button className="flex flex-col items-center space-y-2 relative ">
               <Heart className="w-6 h-6 text-gray-600" />
-              <span className="text-sm">Wishlist (0)</span>
+              <span className="text-xs">Wishlist (0)</span>
             </button>
             <button onClick={() => { handleCartClick(); closeMobileMenu(); }} className="flex flex-col items-center space-y-2 relative">
               <ShoppingCart className="w-6 h-6 text-gray-600" />

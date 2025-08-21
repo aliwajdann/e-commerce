@@ -29,7 +29,7 @@ function TextAndProducts() {
   {/* Image */}
   <div className='pl-[16px] md:pl-[32px] flex flex-col items-center justify-center'>
     <h4 className='text-[24px]  md:text-[32px] font-medium capitalize text-[#3C3738]'>T-Shirts</h4>
-    <p className='text-center text-[13px] md:text-[16px]  mb-4'>So many fabrics, patterns and colours to collect</p>
+    <p style={{fontWeight: 200}} className='text-center text-[13px] md:text-[16px]  mb-4'>So many fabrics, patterns and colours to collect</p>
     <Link href="" className='text-sm custom-gray underline  text-[#3c3738]'>Shop Now</Link>
   </div>
 
