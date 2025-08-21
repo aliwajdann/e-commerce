@@ -1,172 +1,256 @@
-'use client'
-import { Heart, ShoppingCart, User, Menu, X } from 'lucide-react';
-import { useState, useEffect } from 'react'
-import { selectCartCount } from "@/redux/cartSelectors"
-import { useSelector, useDispatch } from "react-redux"
-import { toggle } from "@/redux/drawerSlice"
-import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs"
-import CartDrawer from "./CartDrawer"
-import HeaderBar from './HeaderBar';
+"use client";
+
+import { ShoppingCart, User, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { selectCartCount } from "@/redux/cartSelectors";
+import { useSelector, useDispatch } from "react-redux";
+import { toggle } from "@/redux/drawerSlice";
+import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
+import CartDrawer from "./CartDrawer";
+import HeaderBar from "./HeaderBar";
+
+/**
+ * New header:
+ * - Sticky top, transparent initially (white text/icons).
+ * - Hamburger visible on all screens (left).
+ * - Center logo.
+ * - Right side: account + cart.
+ * - When scrolled > 20px: a white bg slides down from top and text/icons switch to dark.
+ * - Single slide-fullscreen menu (used on all breakpoints).
+ */
 
 export default function Header() {
-  const [isTopBarVisible, setIsTopBarVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
 
   const dispatch = useDispatch();
   const cartCount = useSelector(selectCartCount);
   const { user } = useUser();
 
-  const allowedAdminEmails = ["aliwajdan.it@gmail.com","mominabbbasminhas5@email.com"];
-  const isAdmin = user && allowedAdminEmails.includes(user?.primaryEmailAddress?.emailAddress || "");
+  useEffect(() => setHasMounted(true), []);
 
-  useEffect(() => { setHasMounted(true); }, []);
+  // admin check preserved
+  const allowedAdminEmails = [
+    "aliwajdan.it@gmail.com",
+    "mominabbbasminhas5@email.com",
+  ];
+  const isAdmin =
+    user && allowedAdminEmails.includes(user?.primaryEmailAddress?.emailAddress || "");
+
+  // scroll detection (simple: > 20px)
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY || 0;
+      setIsScrolled(y > 25);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleCartClick = () => dispatch(toggle());
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const toggleMenu = () => setIsMenuOpen((s) => !s);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  useEffect(() => {
-    if (window.innerWidth < 1024) return;
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          if (currentScrollY < lastScrollY - 20 || currentScrollY <= 200) {
-            setIsTopBarVisible(true);
-          } else if (currentScrollY > lastScrollY + 40 && currentScrollY > 400) {
-            setIsTopBarVisible(false);
-          }
-          setLastScrollY(currentScrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  const iconColor = isScrolled ? "text-gray-800" : "text-white";
 
-  const menuItems = ['New In','Lingerie','Sets','Bestsellers','Provocative','Bras','Swim','Nightwear','Hosiery','Gifts','Clothing','Archive'];
+  const menuItems = [
+    "New In",
+    "Lingerie",
+    "Sets",
+    "Bestsellers",
+    "Provocative",
+    "Bras",
+    "Swim",
+    "Nightwear",
+    "Hosiery",
+    "Gifts",
+    "Clothing",
+    "Archive",
+  ];
 
   return (
     <>
-      {/* Sticky wrapper for both HeaderBar + Header */}
-      <div className="sticky top-0 z-50">
-        <HeaderBar />
+      <div className="fixed top-0 left-0 w-full z-50">
+       <div className="relative z-50 bg-red-600">
+    <HeaderBar />
+  </div>
+        {/* Header container */}
         <header
-          className={`bg-white transition-transform duration-200`}
-          style={{ transform: isTopBarVisible ? 'translateY(0)' : 'translateY(-100px)' }}
-        >
-          {/* Desktop Top Section */}
-          <div className="hidden lg:block  md:pt-3 md:pb-2">
-            <div className="max-w-[90%] mx-auto px-6 md:px-0">
-              <div className="flex items-center justify-between h-12">
-                <div className="flex space-x-6">
-                  <a href="#" className="text-[13px] text-gray-600 hover:text-black">About Us</a>
-                  <a href="#" className="text-[13px] text-gray-600 hover:text-black">Help</a>
-                </div>
-                <a href='/' className="flex-1 flex justify-center text-2xl tracking-[0.2em]">VELANO<sup className="text-xs">®</sup></a>
-                <div className="flex items-center space-x-4">
-                  <SignedIn>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xs text-gray-600">Hi, {user?.firstName || 'User'}!</span>
-                      <UserButton appearance={{ elements: { avatarBox: "w-6 h-6 hover:scale-105" } }} />
-                    </div>
-                  </SignedIn>
-                  <SignedOut>
-                    <a href="/sign-in" className="p-1 hover:bg-gray-100 rounded"><User className="w-4 h-4 text-gray-700" /></a>
-                  </SignedOut>
-                  <button className="p-1 hover:bg-gray-100 rounded"><Heart className="w-4 h-4 text-gray-700" /></button>
-                  <button onClick={handleCartClick} className="p-1 hover:bg-gray-100 rounded relative">
-                    <ShoppingCart className="w-4 h-4 text-gray-700" />
-                    {hasMounted && cartCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-black text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">{cartCount}</span>
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
+  className={`relative md:px-3 py-1 transition-all duration-300 ${
+    isScrolled ? "md:mt-0" : "md:mt-[16px]"
+  }`}
+>
+          {/* Sliding white background (animated from top) */}
+          <div
+            aria-hidden
+            className={`absolute inset-x-0 top-0 h-full pointer-events-none transition-transform duration-350 ease-[cubic-bezier(.2,.9,.2,1)] ${
+              isScrolled ? "translate-y-0" : "-translate-y-full"
+            }`}
+            style={{ willChange: "transform" }}
+          >
+            <div className="w-full h-full bg-white opacity-100" />
           </div>
 
+          {/* Actual header content (transparent initially) */}
+          <div
+            className={`relative flex items-center justify-between h-14 px-4 md:px-6 transition-colors duration-300 ${
+              isScrolled ? "text-gray-900" : "text-white"
+            }`}
+            role="navigation"
+            aria-label="Main"
+          >
+            {/* Left: Hamburger (always visible) */}
+            <div className="flex items-center">
+              <button
+                onClick={toggleMenu}
+                aria-label="Open menu"
+                className={`p-2 flex gap-2 items-center justify-center rounded hover:opacity-90 transition ${isScrolled ? "bg-white/0" : "bg-white/0"}`}
+              >
+                <Menu className={`w-5 h-5 ${isScrolled ? "text-gray-900" : "text-white"}`} />
+                Menu
+              </button>
+            </div>
 
+            {/* Center: Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <a
+                href="/"
+                className={`inline-block text-sm tracking-[0.18em] font-medium ${
+                  isScrolled ? "text-gray-900" : "text-white"
+                }`}
+              >
+                VELANO<sup className={`${isScrolled ? "text-[10px] text-gray-700" : "text-[10px] text-white"}`}>®</sup>
+              </a>
+            </div>
 
-          {/* Mobile Header */}
-          <div className="lg:hidden flex items-center justify-between h-14 px-4">
-            <button onClick={toggleMobileMenu} className="p-2 hover:bg-gray-100 rounded"><Menu className="w-5 h-5 text-gray-700" /></button>
-            <a href='/' className="absolute left-1/2 transform -translate-x-1/2 text-lg tracking-[0.15em]">VELANO<sup className="text-xs">®</sup></a>
-            <div className="flex items-center space-x-3">
-              <SignedIn><UserButton appearance={{ elements: { avatarBox: "w-6 h-6 hover:scale-105" } }} /></SignedIn>
-              <SignedOut><a href="/sign-in" className="p-1 hover:bg-gray-100 rounded"><User className="w-4 h-4 text-gray-700" /></a></SignedOut>
-              <button onClick={handleCartClick} className="p-1 hover:bg-gray-100 rounded relative">
-                <ShoppingCart className="w-4 h-4 text-gray-700" />
+            {/* Right: Account + Cart */}
+            <div className="flex items-center gap-3">
+              <SignedIn>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs ${isScrolled ? "text-gray-700" : "text-white/90"}`}>
+                    Hi, {user?.firstName || "User"}!
+                  </span>
+                  <UserButton appearance={{ elements: { avatarBox: "w-7 h-7" } }} />
+                </div>
+              </SignedIn>
+
+              <SignedOut>
+                <a
+                  href="/sign-in"
+                  className={`p-1 rounded flex items-center ${isScrolled ? "bg-white/0" : "bg-white/0"}`}
+                >
+                  <User className={`w-5 h-5 ${isScrolled ? "text-gray-900" : "text-white"}`} />
+                </a>
+              </SignedOut>
+
+              {/* <button
+                title="Wishlist"
+                className="p-1 rounded"
+                aria-label="Wishlist"
+              >
+                <Heart className={`w-5 h-5 ${isScrolled ? "text-gray-900" : "text-white"}`} />
+              </button> */}
+
+              <button
+                onClick={handleCartClick}
+                className="relative p-1 rounded"
+                aria-label="Open cart"
+              >
+                <ShoppingCart className={`w-5 h-5 ${isScrolled ? "text-gray-900" : "text-white"}`} />
                 {hasMounted && cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">{cartCount}</span>
+                  <span
+                    className={`absolute -top-1 -right-2 bg-black text-white text-[10px] font-semibold rounded-full w-5 h-5 flex items-center justify-center`}
+                  >
+                    {cartCount}
+                  </span>
                 )}
               </button>
             </div>
           </div>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex justify-center bg-white">
-            <nav className="flex space-x-8 xl:space-x-10 h-14 items-center">
-              {menuItems.map((item, i) => (
-                <a key={i} href="#" className="text-xs font-[500] text-gray-900 hover:text-gray-600">{item}</a>
-              ))}
-            </nav>
-          </div>
         </header>
       </div>
 
-      {/* Mobile Slide Menu - fullscreen overlay */}
-      <div className={`fixed inset-0 z-[9999] w-full  h-full bg-white transform transition-transform duration-500 ease-out lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      {/* Fullscreen Slide Menu (used on all sizes when hamburger pressed) */}
+      <div
+  className={`
+    fixed top-0 left-0 h-full z-[9999] bg-white transform transition-transform duration-400
+    ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
+    w-full md:w-[30%]   // 👈 full on mobile, 30% on desktop
+    shadow-lg
+  `}
+>
         <div className="flex flex-col h-full">
-          {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b bg-white">
-            <span className="text-xl tracking-[0.2em]">Menu</span>
-            <button onClick={closeMobileMenu} className="p-2 hover:bg-gray-100 rounded-full"><X className="w-4 h-4" /></button>
+          {/* Menu Header */}
+          <div className="flex items-center justify-between px-6 py-4 border-b">
+            <span className="text-sm tracking-[0.18em]">Menu</span>
+            <button onClick={closeMenu} className="p-2 rounded-full">
+              <X className="w-4 h-4" />
+            </button>
           </div>
-          {/* Menu Items */}
-          <div className="flex-1 overflow-y-auto py-6 bg-white">
-            <nav className="px-6">
-              {menuItems.map((item, i) => (
-                <a key={i} href="#" onClick={closeMobileMenu} className="text-xs block px-4 py-4 border-b  hover:bg-gray-50">{item}</a>
+
+          {/* Menu items */}
+          <nav className="flex-1 overflow-y-auto py-6 text-sm">
+            <ul className="px-6 space-y-1">
+              {menuItems.map((m, i) => (
+                <li key={i}>
+                  <a
+                    onClick={closeMenu}
+                    href="#"
+                    className="block w-full text-xs py-3 border-b border-gray-100 hover:bg-gray-50"
+                  >
+                    {m}
+                  </a>
+                </li>
               ))}
-            </nav>
-            <div className="mt-8 px-6 pt-6 border-t space-y-2 bg-white">
-              <a href="#" className="text-xs block px-4 py-4 border-b text-gray-600 hover:bg-gray-50">About Us</a>
-              <a href="#" className="text-xs block px-4 py-4 border-b text-gray-600 hover:bg-gray-50">Help</a>
+            </ul>
+
+            <div className="mt-6 px-6 border-t pt-4 space-y-2">
+              <a onClick={closeMenu} href="#" className="block text-xs py-3 border-b">About Us</a>
+              <a onClick={closeMenu} href="#" className="block text-xs py-3 border-b">Help</a>
             </div>
-          </div>
-          {/* Bottom */}
-          <div className="border-t p-6 flex justify-around bg-white">
-            <SignedIn>
-              <div className="flex flex-col items-center space-y-2">
-                <UserButton appearance={{ elements: { avatarBox: "w-8 h-8" } }} />
-                <span className="text-xs">Hi, {user?.firstName || 'User'}!</span>
-                {isAdmin && <a href="/admin" className="text-xs text-blue-600">Admin</a>}
-              </div>
-            </SignedIn>
-            <SignedOut>
-              <a href="/sign-in" onClick={closeMobileMenu} className="flex flex-col items-center space-y-2">
-                <User className="w-6 h-6 text-gray-600" />
-                <span className="text-xs">Account</span>
-              </a>
-            </SignedOut>
-            <button className="flex flex-col items-center space-y-2 relative ">
-              <Heart className="w-6 h-6 text-gray-600" />
-              <span className="text-xs">Wishlist (0)</span>
-            </button>
-            <button onClick={() => { handleCartClick(); closeMobileMenu(); }} className="flex flex-col items-center space-y-2 relative">
-              <ShoppingCart className="w-6 h-6 text-gray-600" />
-              <span className="text-sm">Cart</span>
-              {hasMounted && cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
-              )}
-            </button>
-          </div>
+          </nav>
+
+          {/* Menu footer */}
+          {/* <div className="border-t p-5 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <SignedIn>
+                <div className="flex items-center gap-3">
+                  <UserButton appearance={{ elements: { avatarBox: "w-8 h-8" } }} />
+                  <div className="text-xs">
+                    <div>Hi, {user?.firstName || "User"}</div>
+                    {isAdmin && <a href="/admin" className="text-xs text-blue-600">Admin</a>}
+                  </div>
+                </div>
+              </SignedIn>
+
+              <SignedOut>
+                <a onClick={closeMenu} href="/sign-in" className="flex items-center gap-2 text-xs">
+                  <User className="w-5 h-5 text-gray-700" />
+                  <span>Sign in</span>
+                </a>
+              </SignedOut>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button className="text-xs">Wishlist</button>
+              <button
+                onClick={() => {
+                  handleCartClick();
+                  closeMenu();
+                }}
+                className="relative"
+              >
+                Cart
+                {hasMounted && cartCount > 0 && (
+                  <span className="absolute -top-2 -right-6 bg-black text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div> */}
         </div>
       </div>
 

@@ -49,8 +49,9 @@ export default function CartPage() {
           <div className="flex items-center gap-2 text-xs text-yellow-800 bg-yellow-50 border border-yellow-100 rounded px-3 py-2">
             <Clock className="w-3 h-3" />
             <span>
-              Someone placed an order on an item in your bag — reserved for{" "}
-              <span className="font-semibold">24 minutes</span>.
+              {/* Someone placed an order on an item in your bag reserved for{" "} */}
+              Someone placed an order on an item in your bag
+              {/* <span className="font-semibold">24 minutes</span>. */}
             </span>
           </div>
         </div>
@@ -185,10 +186,10 @@ export default function CartPage() {
                   <span className="font-medium">Rs. {subtotal.toLocaleString()}</span>
                 </div>
 
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <span className="text-gray-600">Discount</span>
                   <span className="font-medium text-[#681C1C]">- Rs. 0</span>
-                </div>
+                </div> */}
 
                 <div className="flex justify-between">
                   <span className="text-gray-600">Standard delivery total</span>
@@ -204,7 +205,7 @@ export default function CartPage() {
               </div>
 
               <p className="text-[11px] text-gray-500 mt-3">
-                Add Rs. 3000 to get Free Standard Shipping over Rs. 3000
+                Free Standard Shipping over Rs. 3000
               </p>
 
               <Link prefetch href="/checkout" className="block">
@@ -214,12 +215,12 @@ export default function CartPage() {
               </Link>
 
               <div className="mt-3 flex gap-2">
-                <button className="flex-1 py-2 text-xs border border-[#ebe7e4] rounded-sm">
+                {/* <button className="flex-1 py-2 text-xs border border-[#ebe7e4] rounded-sm">
                   PayPal
                 </button>
                 <button className="flex-1 py-2 text-xs border border-[#ebe7e4] rounded-sm">
                   Klarna
-                </button>
+                </button> */}
               </div>
             </div>
           </aside>

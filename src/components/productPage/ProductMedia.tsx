@@ -78,7 +78,7 @@ export default function ProductMedia({ media }: { media: MediaType[] }) {
         >
           {media.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="w-full aspect-[4/5] overflow-hidden rounded-sm">
+              <div className="w-full aspect-[4/5] overflow-hidden rounded-xs">
                 {item.type === 'video' ? (
                   <video src={item.url} controls muted className="w-full h-full object-cover" />
                 ) : (

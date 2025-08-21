@@ -40,7 +40,7 @@ export default function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40"
+            className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40 h-full"
             onClick={() => dispatch(toggle())}
           />
         )}
@@ -54,7 +54,7 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", ease: "easeInOut", duration: 0.28 }}
-            className="fixed top-0 right-0 w-full max-w-md h-screen bg-white shadow-xl z-50 flex flex-col"
+            className="fixed top-0 right-0 h-full w-full max-w-md  bg-white shadow-xl z-50 flex flex-col"
             role="dialog"
             aria-label="Cart drawer"
           >

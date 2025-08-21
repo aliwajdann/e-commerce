@@ -48,31 +48,7 @@ image="https://sfra.production.calzedonia.coremedia.cloud/resource/image/5934182
 <PromoGrid />
 <ServicesSection />
 <CollectionSectionTexts />
-    {/* <SubcategorySlider
-  category="jewellery"
-  subcategory="necklaces"
-  title="Necklaces Collection"
-/> */}
- {/* <CategoryGrid /> */}
- {/* <InspirationSection /> */}
- {/* <TrendingSection /> */}
- {/* <TextWithImage /> */}
- {/* <AsSeenInSection /> */}
- {/* <TestimonialSection /> */}
-    {/* <SubcategorySlider
-  category="undergarments"
-  subcategory="necklaces"
-  title="Necklaces Collection"
-/>
-    <SubcategorySlider
-  category="skincare"
-  subcategory="necklaces"
-  title="Necklaces Collection"
-/> */}
-{/* <CategoryRoundSlider category="jewellery" title="Shop by Type" /> */}
 
-{/* <ProductsSection></ProductsSection> */}
-{/* <CategorySection></CategorySection> */}
-</>
+  </>
   );
 }

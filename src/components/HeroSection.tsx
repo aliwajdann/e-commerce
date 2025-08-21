@@ -97,7 +97,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="mb-[32px] md:mb-[40px] relative h-[82vh] md:h-[78vh] w-full overflow-hidden flex justify-center items-center">
+    <section className="md:pb-[16px] md:px-[16px]  mb-[32px] md:mb-[40px] h-lvh relative  w-full overflow-hidden flex justify-center items-center">
       <Swiper
         ref={swiperRef}
         loop={true}
@@ -181,7 +181,7 @@ const HeroSection = () => {
                           // variants={itemVariants}
                           // whileHover={{ scale: 1.02 }}
                           // whileTap={{ scale: 0.98 }}
-                          className="bg-white text-black px-5 py-2 font-semibold text-[12px] tracking-wide uppercase rounded-none border-2 border-white hover:bg-transparent hover:text-white transition-all duration-300 backdrop-blur-sm"
+                          className="bg-white text-black px-5 py-2 font-medium text-[12px] tracking-wide  rounded-none border-2 border-white hover:bg-transparent hover:text-white transition-all duration-300 backdrop-blur-sm"
                         >
                           {item.buttonText}
                         </button>

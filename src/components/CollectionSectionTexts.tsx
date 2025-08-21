@@ -5,10 +5,10 @@ function CollectionSectionTexts() {
    <section className="px-4 md:px-12 py-10">
   {/* Title + Intro */}
   <div className="mb-8 max-w-3xl">
-    <p  className="text-lg  font-[500] mb-2">
+    <p  className="text-md  font-[500] mb-2">
       WOMEN'S COLLECTION
     </p>
-    <p className="text-md text-gray-700 leading-relaxed">
+    <p className="text-sm text-gray-700 leading-relaxed">
       Intimissimi women’s collection is a one-stop-shop for all your needs.
       From underwear to outerwear, we carry the latest trends and styles in
       women’s fashion. Made with fine fabrics and attention to detail, our

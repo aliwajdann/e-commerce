@@ -21,7 +21,7 @@ const PromoCard = ({ image, title, description, link }: PromoCardProps) => {
       </div>
 
       {/* Text Content */}
-      <div className="flex flex-col justify-center gap-4 p-6 md:w-1/2">
+      <div className="flex flex-col justify-center gap-4 md:p-6 p-4 md:w-1/2">
         <span className="uppercase  text-xs text-gray-500 font-medium">Promo</span>
         <h4 className="md:text-xl text-md font-semibold text-gray-900">{title}</h4>
         <p className="text-gray-600 text-xs">{description}</p>
