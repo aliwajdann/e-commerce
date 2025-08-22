@@ -82,7 +82,7 @@ export default function CheckoutPage() {
           </div>
 
           <div
-            className="space-y-6 max-h-[70vh] md:max-h-[72vh]  pr-2"
+            className="space-y-6 pr-2"
             style={{ scrollbarGutter: "stable" }}
           >
             {/* Contact row */}
