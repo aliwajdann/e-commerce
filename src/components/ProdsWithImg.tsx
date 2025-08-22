@@ -18,6 +18,7 @@ interface Product {
   };
   category: { name: string; slug: string };
   subcategory: { name: string; slug: string };
+  description: string;
 }
 
 interface SubcategorySliderProps {
@@ -190,6 +191,7 @@ export default function ProdsWithImg({
           price: 1,
           images: product.media,
           href: `/products/${product.id}`,
+          description: product.description
         }}
       />
     </div>

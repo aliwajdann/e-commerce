@@ -77,6 +77,7 @@ export default function ProductsSection() {
                     // isBestSeller: true,
                     href: `/products/${product.id}`,
                     colors: product.variants?.colors || [],
+                    description: product.description
                 //  sizes: product.variants?.sizes || [],
                   }}
                 />

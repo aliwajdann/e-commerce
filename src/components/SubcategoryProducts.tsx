@@ -22,6 +22,7 @@ interface Product {
   };
   category: { name: string; slug: string };
   subcategory: { name: string; slug: string };
+  description: string;
 }
 
 interface SubcategorySliderProps {
@@ -115,6 +116,7 @@ export default function SubcategorySlider({
           images: product.media,
           colors: product.variants?.colors || [],
           href: `/products/${product.id}`,
+          description: product.description
         }}
       />
     </SwiperSlide>
