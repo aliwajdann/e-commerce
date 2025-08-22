@@ -17,6 +17,7 @@ interface Product {
   };
   category: { name: string; slug: string };
   subcategory: { name: string; slug: string };
+  description: string
 }
 
 interface RelatedProductsProps {
@@ -167,6 +168,7 @@ export default function RelatedProducts({
                   images: product.media,
                   colors: product.variants?.colors || [],
                   href: `/products/${product.id}`,
+                  description: product.description
                 }}
               />
             </div>

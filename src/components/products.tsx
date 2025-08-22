@@ -95,6 +95,7 @@ export default function ProductsSection() {
                 originalprice: product.originalPrice,
                 href: `/products/${product.id}`,
                 colors: [],
+                description: product.description
                 // sizes: [],
               }}
             />

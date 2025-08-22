@@ -32,6 +32,7 @@ interface Product {
   subcategory: SubCategoryType;
   categorySlug: string;
   subcategorySlug: string;
+  description: string
 }
 
 export default function SubCategoryProductsPage() {
@@ -102,6 +103,7 @@ export default function SubCategoryProductsPage() {
                 // isBestSeller: true,
                 href: `/products/${product.id}`,
                 colors: product.variants?.colors || [],
+                description: product.description
                 // sizes: product.variants?.sizes || [],
               }}
             />
