@@ -79,12 +79,12 @@ const scrollToSection = (id: string) => {
         <h1 className="text-2xl font-serif">{title}</h1>
 
         <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold">£{price.toFixed(2)}</span>
+          <span className="text-sm font-semibold">Rs.{price.toFixed(2)}</span>
           {originalprice && (
             <>
               <span className="text-sm text-red-500">(-{discount}%)</span>
               <span className="text-sm text-gray-500 line-through">
-                £{originalprice.toFixed(2)}
+                Rs.{originalprice.toFixed(2)}
               </span>
             </>
           )}

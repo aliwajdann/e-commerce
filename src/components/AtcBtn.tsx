@@ -1,6 +1,7 @@
 import { addToCart } from '@/redux/cartSlice';
 import {  useDispatch } from "react-redux";
 import { toggle } from "@/redux/drawerSlice";
+import { Plus } from 'lucide-react';
 interface MediaType {
   type: string;
   url: string;
@@ -8,7 +9,7 @@ interface MediaType {
 
 interface ProductInfoProps {
   id: string;
-  title: string;
+  name: string;
   price: number;
   description: string;
   media: MediaType[],
@@ -30,7 +31,7 @@ const dispatch = useDispatch();
       dispatch(
           addToCart({
               id: product.id,
-  title: product.title,
+  title: product.name,
   price:product.price,
   media:product.media.map((m:any) => ({
       url: m.url,
@@ -44,10 +45,10 @@ quantity: product.quantity
 
   return (
       <>
-      <button className='w-full bg-gradient-to-r from-[#681C1C] to-[#8B2635] text-white py-2.5 px-4 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]'
+      <button className=' z-30 absolute bottom-2.5 right-2.5 bg-white text-gray-600 p-1 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]'
         onClick={(e)=>{handleAddToCart(e)}}
       >
-          Add to Cart
+       <Plus className='w-3.5 h-3.5'/>
       </button>
 </>
 

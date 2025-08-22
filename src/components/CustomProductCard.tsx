@@ -2,15 +2,17 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import AtcBtn from './AtcBtn';
 
 interface Product {
   id: string;
   name: string;
   price: number;
   originalprice?: number;
-  images: { url: string }[];
+  images: { url: string, type: string }[];
   colors?: string[];
   href: string;
+  description: string;
 }
 
 interface ProductCardProps {
@@ -43,6 +45,17 @@ const CustomProductCard = ({ product }: ProductCardProps) => {
       className={`cursor-pointer  transition group ${hasSecondImage ? '' : ''}`}
     >
       <div className="relative p-0 overflow-hidden ">
+         <AtcBtn 
+          product={{
+             id : product.id,
+              name: product.name,
+  price:product.price,
+  media:product.images,
+  description: product.description,
+quantity: 1
+           } } 
+ 
+        />
         {/* Main Image */}
         <img
           src={product.images?.[0]?.url || '/placeholder.png'}

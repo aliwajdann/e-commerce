@@ -1,7 +1,7 @@
 "use client";
 
 // import { ShoppingCart, User, Menu, X } from "lucide-react";
-import { ShoppingBag, CircleUserRound, AlignJustify, X } from "lucide-react";
+import { ShoppingBag, User, AlignJustify, X } from "lucide-react";
 
 import { useState, useEffect } from "react";
 import { selectCartCount } from "@/redux/cartSelectors";
@@ -10,6 +10,7 @@ import { toggle } from "@/redux/drawerSlice";
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import CartDrawer from "./CartDrawer";
 import HeaderBar from "./HeaderBar";
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * New header:
@@ -80,7 +81,7 @@ export default function FixedHeader() {
   </div>
         {/* Header container */}
         <header
-  className={`relative md:px-3 py-1 transition-all duration-300 ${
+  className={`relative md:px-3 md:py-1 transition-all duration-300 ${
     isScrolled ? "md:mt-0" : "md:mt-[16px]"
   }`}
 >
@@ -143,7 +144,7 @@ export default function FixedHeader() {
                   href="/sign-in"
                   className={`p-1 rounded flex items-center ${isScrolled ? "bg-white/0" : "bg-white/0"}`}
                 >
-                  <CircleUserRound className={`w-5 h-5 ${isScrolled ? "text-gray-900" : "text-white"}`} />
+                  <User className={`w-5 h-5 ${isScrolled ? "text-gray-900" : "text-white"}`} />
                 </a>
               </SignedOut>
 
@@ -178,83 +179,70 @@ export default function FixedHeader() {
       <div
   className={`
     fixed top-0 left-0 h-full z-[9999] bg-white transform transition-transform duration-400
-    ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
-    w-full md:w-[30%]   // 👈 full on mobile, 30% on desktop
-    shadow-lg
+    ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}   
+    w-full md:w-[30%] shadow-lg
   `}
 >
-        <div className="flex flex-col h-full">
-          {/* Menu Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b">
-            <span className="text-md tracking-[0.18em]">Menu</span>
-            <button onClick={closeMenu} className="p-2 rounded-full">
-              <X className="w-4 h-4" />
-            </button>
-          </div>
+  <div className="flex flex-col h-full">
+    {/* Menu Header */}
+    <div className="flex items-center justify-between px-6 py-4 border-b">
+      <span className="text-md tracking-[0.18em]">Menu</span>
+      <button onClick={closeMenu} className="p-2 rounded-full">
+        <X className="w-4 h-4" />
+      </button>
+    </div>
 
-          {/* Menu items */}
-          <nav className="flex-1 overflow-y-auto py-6 text-sm">
-            <ul className="px-6 space-y-1">
-              {menuItems.map((m, i) => (
-                <li key={i}>
-                  <a
-                    onClick={closeMenu}
-                    href="#"
-                    className="block w-full text-sm py-3 border-b border-gray-100 hover:bg-gray-50"
-                  >
-                    {m}
-                  </a>
-                </li>
-              ))}
-            </ul>
+    {/* Menu items */}
+    <nav className="flex-1 overflow-y-auto py-6 text-sm">
+      <ul className="px-6 space-y-1">
+        {menuItems.map((m, i) => (
+          <li key={i}>
+            <a
+              onClick={closeMenu}
+              href="#"
+              className="block w-full text-sm py-3 border-b border-gray-100 hover:bg-gray-50"
+            >
+              {m}
+            </a>
+          </li>
+        ))}
+      </ul>
 
-            <div className="mt-6 px-6 border-t pt-4 space-y-2">
-              <a onClick={closeMenu} href="#" className="block text-sm py-3 border-b">About Us</a>
-              <a onClick={closeMenu} href="#" className="block text-sm py-3 border-b">Help</a>
-            </div>
-          </nav>
-
-          {/* Menu footer */}
-          {/* <div className="border-t p-5 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <SignedIn>
-                <div className="flex items-center gap-3">
-                  <UserButton appearance={{ elements: { avatarBox: "w-8 h-8" } }} />
-                  <div className="text-xs">
-                    <div>Hi, {user?.firstName || "User"}</div>
-                    {isAdmin && <a href="/admin" className="text-xs text-blue-600">Admin</a>}
-                  </div>
-                </div>
-              </SignedIn>
-
-              <SignedOut>
-                <a onClick={closeMenu} href="/sign-in" className="flex items-center gap-2 text-xs">
-                  <User className="w-5 h-5 text-gray-700" />
-                  <span>Sign in</span>
-                </a>
-              </SignedOut>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <button className="text-xs">Wishlist</button>
-              <button
-                onClick={() => {
-                  handleCartClick();
-                  closeMenu();
-                }}
-                className="relative"
-              >
-                Cart
-                {hasMounted && cartCount > 0 && (
-                  <span className="absolute -top-2 -right-6 bg-black text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartCount}
-                  </span>
-                )}
-              </button>
-            </div>
-          </div> */}
-        </div>
+      <div className="mt-6 px-6 border-t pt-4 space-y-2">
+        <a
+          onClick={closeMenu}
+          href="#"
+          className="block text-sm py-3 border-b"
+        >
+          About Us
+        </a>
+        <a
+          onClick={closeMenu}
+          href="#"
+          className="block text-sm py-3 border-b"
+        >
+          Help
+        </a>
       </div>
+    </nav>
+  </div>
+</div>
+
+{/* OVERLAY */}
+<AnimatePresence>
+  {isMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 bg-black/50 z-[888]"
+      onClick={closeMenu}
+    />
+  )}
+</AnimatePresence>
+
+     
 
       <CartDrawer />
     </>

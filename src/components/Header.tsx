@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingBag, CircleUserRound, AlignJustify, X } from "lucide-react";
+import { ShoppingBag, User, AlignJustify, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { selectCartCount } from "@/redux/cartSelectors";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import { toggle } from "@/redux/drawerSlice";
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import CartDrawer from "./CartDrawer";
 import HeaderBar from "./HeaderBar";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +41,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="sticky top-0">
+      <div className="sticky top-0 z-50">
         {/* optional top bar */}
         <div className=" z-50 bg-[#CC0D14]">
           <HeaderBar />
@@ -64,10 +65,10 @@ export default function Header() {
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <a
               href="/"
-              className="inline-block text-sm tracking-[0.18em] font-medium text-gray-900"
+              className="inline-block text-lg tracking-[0.18em] font-medium text-gray-900"
             >
               VELANO
-              <sup className="text-[10px] text-gray-700">®</sup>
+              <sup className="text-sm text-gray-700">®</sup>
             </a>
           </div>
 
@@ -79,7 +80,7 @@ export default function Header() {
 
             <SignedOut>
               <a href="/sign-in" className="p-1 rounded flex items-center">
-                <CircleUserRound className="w-5 h-5 text-gray-900" />
+                <User className="w-5 h-5 text-gray-900" />
               </a>
             </SignedOut>
 
@@ -100,67 +101,74 @@ export default function Header() {
       </div>
 
       {/* Side menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-[9999] flex">
-          {/* overlay */}
-          <div
-            className="flex-1 bg-black/50"
-            onClick={closeMenu}
-            aria-hidden="true"
-          />
+         {/* MENU PANEL */}
+<div
+  className={`
+    fixed top-0 left-0 h-full z-[9999] bg-white transform transition-transform duration-400
+    ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}   
+    w-full md:w-[30%] shadow-lg
+  `}
+>
+  <div className="flex flex-col h-full">
+    {/* Menu Header */}
+    <div className="flex items-center justify-between px-6 py-4 border-b">
+      <span className="text-md tracking-[0.18em]">Menu</span>
+      <button onClick={closeMenu} className="p-2 rounded-full">
+        <X className="w-4 h-4" />
+      </button>
+    </div>
 
-          {/* menu panel */}
-          <div
-            className={`w-full md:w-1/4 bg-white shadow-lg transform transition-transform duration-300 ${
-              isMenuOpen ? "translate-x-0" : "translate-x-full"
-            }`}
-          >
-            <div className="flex flex-col h-full">
-              {/* Menu Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b">
-                <span className="text-md tracking-[0.18em]">Menu</span>
-                <button onClick={closeMenu} className="p-2 rounded-full">
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
+    {/* Menu items */}
+    <nav className="flex-1 overflow-y-auto py-6 text-sm">
+      <ul className="px-6 space-y-1">
+        {menuItems.map((m, i) => (
+          <li key={i}>
+            <a
+              onClick={closeMenu}
+              href="#"
+              className="block w-full text-sm py-3 border-b border-gray-100 hover:bg-gray-50"
+            >
+              {m}
+            </a>
+          </li>
+        ))}
+      </ul>
 
-              {/* Menu items */}
-              <nav className="flex-1 overflow-y-auto py-6 text-sm">
-                <ul className="px-6 space-y-1">
-                  {menuItems.map((m, i) => (
-                    <li key={i}>
-                      <a
-                        onClick={closeMenu}
-                        href="#"
-                        className="block w-full text-sm py-3 border-b border-gray-100 hover:bg-gray-50"
-                      >
-                        {m}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+      <div className="mt-6 px-6 border-t pt-4 space-y-2">
+        <a
+          onClick={closeMenu}
+          href="#"
+          className="block text-sm py-3 border-b"
+        >
+          About Us
+        </a>
+        <a
+          onClick={closeMenu}
+          href="#"
+          className="block text-sm py-3 border-b"
+        >
+          Help
+        </a>
+      </div>
+    </nav>
+  </div>
+</div>
 
-                <div className="mt-6 px-6 border-t pt-4 space-y-2">
-                  <a
-                    onClick={closeMenu}
-                    href="#"
-                    className="block text-sm py-3 border-b"
-                  >
-                    About Us
-                  </a>
-                  <a
-                    onClick={closeMenu}
-                    href="#"
-                    className="block text-sm py-3 border-b"
-                  >
-                    Help
-                  </a>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      )}
+{/* OVERLAY */}
+<AnimatePresence>
+  {isMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 bg-black/50 z-[888]"
+      onClick={closeMenu}
+    />
+  )}
+</AnimatePresence>
+
+
 
       <CartDrawer />
     </>

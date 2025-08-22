@@ -38,7 +38,7 @@ export default function CartPage() {
 
   return (
     <div className="w-full bg-white text-gray-900">
-      <div className="max-w-5xl mx-auto px-4 md:px-6 py-8">
+      <div className="max-w-5xl md:max-w-7xl mx-auto px-4 md:px-6 py-8">
         {/* Title */}
         <header className="mb-4 text-center">
           <h1 className="text-2xl md:text-2xl font-medium tracking-tight">Your bag</h1>

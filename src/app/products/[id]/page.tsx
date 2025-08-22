@@ -33,6 +33,10 @@ interface categoryType  {
   slug: string,
   name: string,
 }
+interface subcategoryType  {
+  slug: string,
+  name: string,
+}
 
 interface Product {
   id: string;
@@ -43,6 +47,7 @@ interface Product {
   description: string;
   media: MediaType[];
   variants: VariantsType;
+  subcategory: subcategoryType;
 }
 
 export default function ProductPage() {
@@ -84,7 +89,8 @@ export default function ProductPage() {
 
   return (
     <>
-      <div className="w-full bg-white">
+      <div className="w-full bg-white mt-2">
+       <p style={{fontWeight: 400}} className=' pl-[16px]  text-xs font-light'>Women - {product.category.name} - {product.subcategory.name} </p>
         <CartActivityToast productTitle={product.title} />
 
         <div className="product-container grid md:mt-4 mt-1 md:w-[100%] mx-auto">
