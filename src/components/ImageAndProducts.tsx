@@ -49,6 +49,7 @@ function ImageAndProducts({title, tagline, linktext, image, buttonlink}:Props) {
 
   {/* Products List */}
   <div className="overflow-x-hidden">
+    
     <ProdsWithImg
       category="jewellery"
       subcategory="necklaces"

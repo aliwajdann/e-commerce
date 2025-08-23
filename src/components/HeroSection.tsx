@@ -5,9 +5,9 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiPause, FiPlay, FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import Image from 'next/image';
-import image1 from "@/Internet_20250730_210957_1.jpeg"
-import image2 from "@/Internet_20250730_210957_2.jpeg"
-import image3 from "@/Internet_20250730_210957_4.jpeg"
+// import image1 from "@/Internet_20250730_210957_1.jpeg"
+// import image2 from "@/Internet_20250730_210957_2.jpeg"
+// import image3 from "@/Internet_20250730_210957_4.jpeg"
 
 // Import styles
 import 'swiper/css';
@@ -23,7 +23,8 @@ const HeroSection = () => {
   const mediaItems = [
     {
       type: 'image',
-      src: image1,
+      desktopsrc: "https://images.unsplash.com/photo-1754753674476-6eda28010f02?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8",
+      mobilesrc: "https://plus.unsplash.com/premium_photo-1755612015739-942bd6de858c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
       alt: 'Nike Campaign',
       title: 'NEW COLLECTION',
       subtitle: 'Step into the future',
@@ -32,7 +33,8 @@ const HeroSection = () => {
     },
     {
       type: 'image',
-      src: image2,
+       desktopsrc: "https://plus.unsplash.com/premium_photo-1755534058913-29a8feca890f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D",
+      mobilesrc: "https://images.unsplash.com/photo-1755569309049-98410b94f66d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8",
       alt: 'Nike Air Max',
       title: 'AIR MAX SERIES',
       subtitle: 'Maximum comfort, maximum style',
@@ -41,7 +43,8 @@ const HeroSection = () => {
     },
     {
       type: 'image',
-      src: image3,
+       desktopsrc: "https://plus.unsplash.com/premium_photo-1755241424289-119335c3b372?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNHx8fGVufDB8fHx8fA%3D%3D",
+      mobilesrc: "https://images.unsplash.com/photo-1755804127231-c493579c8ce5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D",
       alt: 'Nike Performance',
       title: 'PERFORMANCE GEAR',
       subtitle: 'Unleash your potential',
@@ -129,23 +132,53 @@ const HeroSection = () => {
           <SwiperSlide key={index}>
             <div className="relative h-full w-full bg-black">
               {item.type === 'image' ? (
-                <Image 
-                  src={item.src} 
-                  alt={item.alt}
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                />
-              ) : (
-                <video 
-                  preload="auto"
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline
-                  className="w-full h-full object-cover"
-                >
-                </video>
-              )}
+  <>
+    {/* Desktop */}
+    <img
+      src={item.desktopsrc}
+      alt={item.alt}
+      className="hidden md:block w-full h-full object-cover"
+      loading="eager"
+      key={index}
+    />
+    {/* Mobile */}
+    <img
+      src={item.mobilesrc}
+      alt={item.alt}
+      className="block md:hidden w-full h-full object-cover"
+      loading="eager"
+      key={44}
+    />
+  </>
+) : (
+  <>
+    {/* Desktop Video */}
+    <video
+      preload="auto"
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="hidden md:block w-full h-full object-cover"
+      key={22}
+    >
+      {/* <source src={item.desktopVideo} type="video/mp4" /> */}
+    </video>
+    {/* Mobile Video */}
+    <video
+      preload="auto"
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="block md:hidden w-full h-full object-cover"
+      key={33}
+    >
+      {/* <source src={item.src} type="video/mp4" /> */}
+    </video>
+  </>
+)}
+
               
               {/* Overlay */}
               <div className="absolute w-full h-full inset-0 bg-black/10" />

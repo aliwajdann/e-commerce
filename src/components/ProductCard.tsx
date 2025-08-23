@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 import AtcBtn from './AtcBtn';
 
 interface Product {
@@ -27,6 +28,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
     e.stopPropagation();
     setIsWishlisted(!isWishlisted);
   };
+
+const atcbutton = useRef(null);
 
   const handleCardClick = () => {
     router.push(product.href);

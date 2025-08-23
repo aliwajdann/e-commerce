@@ -5,6 +5,7 @@ import { db } from '@/lib/firebase';
 import ProductCard from './ProductCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CustomProductCard from './CustomProductCard';
+import AtcBtn from './AtcBtn';
 
 interface Product {
   id: string;
@@ -182,13 +183,35 @@ export default function ProdsWithImg({
   {products.map((product) => (
     <div
       key={product.id}
-      className="flex-none w-1/2 md:w-[calc(33.333%-8px)] lg:w-[calc(25%-9px)]"
+      className="md:block hidden relative flex-none w-1/2 md:w-[calc(33.333%-8px)] lg:w-[calc(25%-9px)]"
     >
+       
       <CustomProductCard
         product={{
           id: product.id,
+          name: "",
+          price: 0,
+          images: product.media,
+          href: `/products/${product.id}`,
+          description: product.description
+        }}
+      />
+    </div>
+  ))}
+
+
+
+  {products.map((product) => (
+    <div
+      key={product.id}
+      className="md:hidden block relative flex-none w-1/2 md:w-[calc(33.333%-8px)] lg:w-[calc(25%-9px)]"
+    >
+     
+      <ProductCard
+        product={{
+          id: product.id,
           name: product.title,
-          price: 1,
+          price: product.price,
           images: product.media,
           href: `/products/${product.id}`,
           description: product.description

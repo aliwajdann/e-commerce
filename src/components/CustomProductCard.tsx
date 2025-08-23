@@ -9,7 +9,7 @@ interface Product {
   name: string;
   price: number;
   originalprice?: number;
-  images: { url: string, type: string }[];
+  images: { url: string; type: string }[];
   colors?: string[];
   href: string;
   description: string;
@@ -34,7 +34,9 @@ const CustomProductCard = ({ product }: ProductCardProps) => {
 
   const discount =
     product.originalprice && product.originalprice > product.price
-      ? Math.round(((product.originalprice - product.price) / product.originalprice) * 100)
+      ? Math.round(
+          ((product.originalprice - product.price) / product.originalprice) * 100
+        )
       : 0;
 
   const hasSecondImage = product.images?.[1];
@@ -42,25 +44,30 @@ const CustomProductCard = ({ product }: ProductCardProps) => {
   return (
     <div
       onClick={handleCardClick}
-      className={`cursor-pointer  transition group ${hasSecondImage ? '' : ''}`}
+      className={`cursor-pointer transition group ${hasSecondImage ? '' : ''}`}
     >
-      <div className="relative p-0 overflow-hidden ">
-         <AtcBtn 
-          product={{
-             id : product.id,
+      <div className="relative p-0 overflow-hidden">
+        {/* ATC Button - hidden until hover */}
+        <div className="absolute bottom-[0px] right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+          <AtcBtn
+            product={{
+              id: product.id,
               name: product.name,
-  price:product.price,
-  media:product.images,
-  description: product.description,
-quantity: 1
-           } } 
- 
-        />
+              price: product.price,
+              media: product.images,
+              description: product.description,
+              quantity: 1,
+            }}
+          />
+        </div>
+
         {/* Main Image */}
         <img
           src={product.images?.[0]?.url || '/placeholder.png'}
           alt={product.name}
-          className={`w-full h-full object-fill transition-opacity duration-500 ${hasSecondImage ? 'group-hover:opacity-0' : ''}`}
+          className={`w-full h-full object-fill transition-opacity duration-500 ${
+            hasSecondImage ? 'group-hover:opacity-0' : ''
+          }`}
         />
 
         {/* Second Image + White Overlay */}
@@ -85,7 +92,7 @@ quantity: 1
           </span> */}
 
           {/* Color Swatches */}
-          {/* {product.colors && product.colors.length > 0 && (
+          {product.colors && product.colors.length > 0 && (
             <div className="flex items-center gap-1">
               <div
                 className="w-4 h-4 rounded-full border border-gray-300"
@@ -97,8 +104,8 @@ quantity: 1
                 </span>
               )}
             </div>
-          )}*/}
-        </div> 
+          )}
+        </div>
       </div>
     </div>
   );

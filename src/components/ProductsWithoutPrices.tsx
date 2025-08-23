@@ -180,6 +180,7 @@ export default function ProductsWithoutPrices({
       key={product.id}
       className="flex-none w-1/2 md:w-[calc(33.333%-8px)] lg:w-[calc(25%-9px)]"
     >
+      
       <ProductCard
         product={{
           id: product.id,
