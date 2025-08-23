@@ -118,7 +118,7 @@ export default function ProductDetails({ productdetails }: ProductDetailsProps) 
 
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsOpen(false)}
@@ -129,7 +129,7 @@ export default function ProductDetails({ productdetails }: ProductDetailsProps) 
         className={`fixed z-50 bg-white rounded-t-2xl md:rounded-none shadow-xl
                     w-full md:w-[400px] h-[60vh] md:h-full
                     bottom-0 md:top-0 md:right-0 flex flex-col
-                    transform transition-transform duration-500
+                    transform transition-transform duration-300
                     ${
                       isOpen
                         ? "translate-x-0 translate-y-0"
