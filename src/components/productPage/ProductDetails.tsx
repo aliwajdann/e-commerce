@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 let itemCode = 987;
 let features = ["sdf", "sfa", "sfa", "sfa", "sfa"];
@@ -117,38 +116,36 @@ export default function ProductDetails({ productdetails }: ProductDetailsProps) 
         ))}
       </div>
 
-      {/* Sidebar lives *inside* same component */}
       {/* Overlay */}
-      <motion.div
-        initial={false}
-        animate={{
-          opacity: isOpen ? 1 : 0,
-          pointerEvents: isOpen ? "auto" : "none",
-        }}
-        transition={{ duration: 0.25 }}
-        className="fixed inset-0 bg-black/50 z-40"
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
         onClick={() => setIsOpen(false)}
       />
 
       {/* Drawer */}
-      <motion.div
-        initial={false}
-        animate={{
-          x: isOpen ? 0 : "100%",
-          y: isOpen ? 0 : "100%", // slide up on mobile, from right on desktop
-        }}
-        transition={{ type: "tween", duration: 0.3 }}
-        className="fixed z-50 bg-white rounded-t-2xl md:rounded-none shadow-xl
-                   w-full md:w-[400px] h-[60vh] md:h-full
-                   bottom-0 md:top-0 md:right-0 flex flex-col"
+      <div
+        className={`fixed z-50 bg-white rounded-t-2xl md:rounded-none shadow-xl
+                    w-full md:w-[400px] h-[60vh] md:h-full
+                    bottom-0 md:top-0 md:right-0 flex flex-col
+                    transform transition-transform duration-500
+                    ${
+                      isOpen
+                        ? "translate-x-0 translate-y-0"
+                        : "translate-x-full md:translate-x-full translate-y-full md:translate-y-0"
+                    }`}
       >
         <div className="p-4 overflow-y-auto h-full">
-          <button onClick={() => setIsOpen(false)} className="text-sm mb-4 underline">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-sm mb-4 underline"
+          >
             Close
           </button>
           {activeContent}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
