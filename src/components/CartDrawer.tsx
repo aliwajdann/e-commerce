@@ -34,7 +34,7 @@ export default function CartDrawer() {
     <>
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/40 z-50 transition-opacity duration-300
+        className={`fixed inset-0 bg-black/40 z-50 transition-opacity duration-500
         ${isOn ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={() => dispatch(toggle())}
       />
@@ -42,7 +42,7 @@ export default function CartDrawer() {
       {/* Drawer */}
       <aside
         className={`fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-xl z-50 flex flex-col
-        transform transition-transform duration-300
+        transform transition-transform duration-500
         ${isOn ? "translate-x-0" : "translate-x-full"}`}
         role="dialog"
         aria-label="Cart drawer"
