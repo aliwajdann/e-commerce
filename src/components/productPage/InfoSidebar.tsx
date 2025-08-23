@@ -1,20 +1,17 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-
-
-
+import { motion } from "framer-motion";
 
 interface MediaType {
-  type: 'image' | 'video';
+  type: "image" | "video";
   url: string;
 }
 
 interface ColorVariant {
   colorCode: string;
   colorName: string;
-  swatchImage?: string; // optional, if you add swatch images
-  images?: MediaType[]; // optional, so you can show color-specific media
+  swatchImage?: string;
+  images?: MediaType[];
 }
 
 interface VariantsType {
@@ -22,9 +19,9 @@ interface VariantsType {
   colors: ColorVariant[];
 }
 
-interface categoryType  {
-  slug: string,
-  name: string,
+interface categoryType {
+  slug: string;
+  name: string;
 }
 
 interface Product {
@@ -40,48 +37,48 @@ interface Product {
 
 interface Props {
   product: Product;
-   isOpen: boolean;
+  isOpen: boolean;
   onClose: () => void;
   content: React.ReactNode;
 }
 
-
-export function InfoSidebar({ isOpen, onClose, content, product }: Props) {
+export function InfoSidebar({ isOpen, onClose, content }: Props) {
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Overlay */}
-          <motion.div
-            className="fixed inset-0 bg-black/50 z-40"
-            onClick={onClose}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
+    <>
+      {/* Overlay */}
+      <motion.div
+        initial={false}
+        animate={{
+          opacity: isOpen ? 1 : 0,
+          pointerEvents: isOpen ? "auto" : "none",
+        }}
+        transition={{ duration: 0.25 }}
+        className="fixed inset-0 bg-black/50 z-40"
+        onClick={onClose}
+      />
 
-          {/* Sidebar / Drawer */}
-          <motion.div
-            className="fixed z-50 bg-white rounded-t-2xl md:rounded-none shadow-xl
-                       w-full md:w-[400px] h-[60vh] md:h-full
-                       bottom-0 md:top-0 md:right-0"
-            initial={{ x: "100%", y: "100%" }}
-            animate={{ x: 0, y: 0 }}
-            exit={{ x: "100%", y: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
+      {/* Sidebar / Drawer */}
+      <motion.div
+        initial={false}
+        animate={{
+          x: isOpen ? 0 : "100%",
+          y: isOpen ? 0 : "100%", // mobile slides up, desktop slides from right
+        }}
+        transition={{ type: "tween", duration: 0.3 }}
+        className="fixed z-50 bg-white rounded-t-2xl md:rounded-none shadow-xl
+                   w-full md:w-[400px] h-[60vh] md:h-full
+                   bottom-0 md:top-0 md:right-0 flex flex-col"
+      >
+        <div className="p-4 overflow-y-auto h-full">
+          <button
+            onClick={onClose}
+            className="text-sm mb-4 underline"
           >
-            <div className="p-4 overflow-y-auto h-full">
-              <button
-                onClick={onClose}
-                className="text-sm mb-4 underline"
-              >
-                Close
-              </button>
-              {content}
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+            Close
+          </button>
+          {content}
+        </div>
+      </motion.div>
+    </>
   );
 }
