@@ -62,6 +62,11 @@ export default function CartDrawer() {
           </button>
         </div>
 
+ <div className=" flex gap-3 p-5 border-b items-center">
+            <p className="p-2 bg-red-600 text-white  text-xs">Add Rs.3000 to get Free Shipping</p>
+            </div>
+
+
         {/* Items */}
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {items.length === 0 ? (
