@@ -1,51 +1,53 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import Navigation from "@/components/Navigation";
-// import NewHeader from "@/components/NewHeader";
-import Header from "@/components/Header";
-// import VelanoHeader from "./VelanoHeader";
 import { Providers } from "@/app/providers";
-// import {Inter} from "next/font/google";
-// import Footer from "@/components/Footer";
 import { ClerkProvider } from '@clerk/nextjs'
-// import Head from 'next/head';
-// import { Lexend_Deca } from 'next/font/google'
 import { Montserrat } from 'next/font/google'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LoadingOverlayProvider } from '@/components/LoadingOverlay';
-import Footer from "./LevanoFooter";
+import Footer from "./Footer";
 import ConditionalHeader from "./ConditionalHeader";
-// import velano from "./favicon.ico"
 
 
 
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
    
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
-// const lexendDeca = Lexend_Deca({
-//   subsets: ['latin'],
-//   weight: ['400', '500', '600', '700'], // you can choose the weights you want
-//   variable: '--font-lexend-deca',
-// })
 
 export const metadata: Metadata = {
-  title: "Velano",
-  description: "Minimal, everyday essentials with a clean aesthetic.",
-   icons: {
-    icon: "./favicon.ico", 
+  metadataBase: new URL("https://www.velanoshop.store"), // 👈 your live domain
+  title: "Velano | Women's Intimates, Jewelry & Essentials",
+  description:
+    "Discover Velano – your destination for women's intimates, jewelry, and everyday essentials. Elegant, comfortable, and crafted to match modern lifestyles.",
+  icons: {
+    icon: "/favicon.ico", // favicon should be inside /public
+  },
+  openGraph: {
+    title: "Velano | Women's Intimates, Jewelry & Essentials",
+    description:
+      "Shop Velano's curated collection of intimates, jewelry, and lifestyle essentials designed for women who value comfort and elegance.",
+    url: "https://www.velanoshop.store",
+    siteName: "Velano",
+    images: [
+      {
+        url: "https://i.ibb.co/HsGB4VP/IMG-20250725-WA0125.jpg", // resolves to full https://velanoshop.store/og-image.jpg
+        width: 1200,
+        height: 630,
+        alt: "Velano - Women's Essentials",
+      },
+    ],
+    locale: "en_PK",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Velano | Women's Intimates, Jewelry & Essentials",
+    description:
+      "Velano brings you women's intimates, jewelry, and lifestyle essentials — elegant and modern, crafted for everyday comfort.",
+    images: ["https://i.ibb.co/HsGB4VP/IMG-20250725-WA0125.jpg"],
   },
 };
 
@@ -56,7 +58,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-      // className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-light dark:bg-dark transition-colors duration-500` 
   return (
     <ClerkProvider>
     <html lang="en">
@@ -64,10 +65,7 @@ export default function RootLayout({
  <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white` }
       >
         <Providers>
-        {/* <Navigation /> */}
         <ConditionalHeader />
-        {/* <Header /> */}
-        {/* <VelanoHeader /> */}
         <LoadingOverlayProvider>
           {children}
           </LoadingOverlayProvider>
