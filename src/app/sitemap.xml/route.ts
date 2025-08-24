@@ -10,7 +10,8 @@ export async function GET() {
 
   const productUrls = productsSnap.docs.map((doc) => {
     const data = doc.data();
-    const updatedAt = data.updatedAt?.toDate?.() || data.createdAt?.toDate?.() || new Date();
+      const updatedAt = data.updatedAt?.toDate().toISOString() || data.createdAt?.toDate().toISOString() || new Date().toISOString();
+
 
     return `
       <url>
