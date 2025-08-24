@@ -61,7 +61,8 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" precedence="default" rel="stylesheet" />    
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" precedence="default" rel="stylesheet" />   
+<meta name="google-site-verification" content="hxnZjoFR8b1M5i1TXWUEILUTuGQbSOhj4oId4vusrWs" /> 
  <body className={` ${montserrat.variable} antialiased min-h-screen transition-colors duration-500 bg-white` }
       >
         <Providers>
