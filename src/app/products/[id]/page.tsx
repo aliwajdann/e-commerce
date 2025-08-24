@@ -49,6 +49,8 @@ interface Product {
   media: MediaType[];
   variants: VariantsType;
   subcategory: subcategoryType;
+  productCode: string;
+  features: string[]
 }
 
 export default function ProductPage() {

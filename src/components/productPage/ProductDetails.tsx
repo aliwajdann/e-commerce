@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-let itemCode = 987;
-let features = ["sdf", "sfa", "sfa", "sfa", "sfa"];
 
 interface MediaType {
   type: "image" | "video";
@@ -32,6 +30,8 @@ interface Product {
   description: string;
   media: MediaType[];
   variants: VariantsType;
+  productCode: string;
+  features: string[];
 }
 interface ProductDetailsProps {
   productdetails: Product;
@@ -62,10 +62,10 @@ export default function ProductDetails({ productdetails }: ProductDetailsProps) 
       {/* Description */}
       <div>
         <h3 className="font-medium mb-4 border-b-1 md:pb-4 pb-3">Description</h3>
-        <p className="text-xs text-neutral-500 mb-2">Item code: {itemCode}</p>
+        <p className="text-xs text-neutral-500 mb-2">Item code: {productdetails.productCode}</p>
         <p className="mb-4">{productdetails.description}</p>
         <ul className="space-y-1">
-          {features.map((f, i) => (
+          {productdetails.features.map((f, i) => (
             <li key={i} className="before:content-['·'] before:mr-1">
               {f}
             </li>

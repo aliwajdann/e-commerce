@@ -81,14 +81,7 @@ const scrollToSection = (id: string) => {
         Buy 5 get 70% off
       </div>
 
-      {reviewsCount > 0 && (
-        <button
-          onClick={handleScrollToReviews}
-          className="text-black underline text-xs block hover:text-black"
-        >
-          {reviewsCount} {reviewsCount === 1 ? "review" : "reviews"} on this product
-        </button>
-      )}
+      
 
 
       {/* Title and Prices */}
@@ -122,13 +115,13 @@ const scrollToSection = (id: string) => {
               <button
                 key={v}
                 onClick={() => setSelectedColor(c)}
-                className={`w-12 h-12 border-2 overflow-hidden transition 
+                className={`w-16 h-20  overflow-hidden transition 
                   ${
                     selectedColor?.colorName === c.colorName
-                      ? 'border-black'
-                      : 'border-gray-300 hover:border-black'
+                      ? 'border-gray-300 border-2'
+                      : ''
                   }
-                  ${c.image ? 'rounded-md' : 'rounded-full'}
+                  ${c.image ? 'rounded-sm' : 'rounded-full'}
                 `}
                 title={c.colorName}
               >
@@ -219,14 +212,15 @@ const scrollToSection = (id: string) => {
         />
         
       </div>
-{reviewsCount > 0 && (
+      {reviewsCount > 0 && (
         <button
           onClick={handleScrollToReviews}
-          className="text-black underline text-xs block hover:text-black"
+          className="text-black  underline text-xs block hover:text-black"
         >
           {reviewsCount} {reviewsCount === 1 ? "review" : "reviews"} on this product
         </button>
       )}
+
       {/* Tabs */}
       <div className="border-t mt-4 pt-4 flex space-x-6 text-sm">
         <button  onClick={() => scrollToSection("custom-product-details")} className="underline">Product description</button>

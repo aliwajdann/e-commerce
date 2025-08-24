@@ -5,9 +5,10 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 export default function CreateProductForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     title: '',
     description: '',
+    productCode: '',
     price: '',
     originalPrice: '',
     media: [''],
@@ -15,71 +16,57 @@ export default function CreateProductForm() {
     subcategory: { name: '', slug: '' },
     variants: {
       sizes: [''],
-      colors: [{ colorCode: '', colorName: '', image: '' }],
+      colors: [{ colorCode: '#000000', colorName: '', image: '' }],
     },
+    features: [''],
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index?: number, variantType?: 'sizes' | 'colors') => {
-    const { name, value } = e.target;
-
-    if (name === 'media' && typeof index === 'number') {
-      const updatedMedia = [...formData.media];
-      updatedMedia[index] = value;
-      setFormData({ ...formData, media: updatedMedia });
-    } else if (variantType === 'sizes' && typeof index === 'number') {
-      const updatedSizes = [...formData.variants.sizes];
-      updatedSizes[index] = value;
-      setFormData({ ...formData, variants: { ...formData.variants, sizes: updatedSizes } });
-    } else if (variantType === 'colors' && typeof index === 'number') {
-      const { field } = e.target.dataset;
-      const updatedColors = [...formData.variants.colors];
-      updatedColors[index] = { ...updatedColors[index], [field!]: value };
-      setFormData({ ...formData, variants: { ...formData.variants, colors: updatedColors } });
-    } else if (name.startsWith('category.') || name.startsWith('subcategory.')) {
-      const [parent, key] = name.split('.');
-      setFormData({
-        ...formData,
-        [parent]: {
-          ...formData[parent as 'category' | 'subcategory'],
-          [key]: value,
-        },
-      });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+  const handleChange = (path: string, value: any) => {
+    const parts = path.split('.');
+    setFormData((prev: any) => {
+      const copy = JSON.parse(JSON.stringify(prev));
+      let cur: any = copy;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const p = parts[i];
+        if (!(p in cur)) cur[p] = {};
+        cur = cur[p];
+      }
+      cur[parts[parts.length - 1]] = value;
+      return copy;
+    });
   };
 
-  const handleAddField = (field: 'media' | 'sizes' | 'colors') => {
-    if (field === 'media') {
-      setFormData((prev) => ({
-        ...prev,
-        media: [...prev.media, ''],
-      }));
-    } else if (field === 'sizes') {
-      setFormData((prev) => ({
-        ...prev,
-        variants: { ...prev.variants, sizes: [...prev.variants.sizes, ''] },
-      }));
-    } else if (field === 'colors') {
-      setFormData((prev) => ({
-        ...prev,
-        variants: {
-          ...prev.variants,
-          colors: [...prev.variants.colors, { colorCode: '', colorName: '', image: '' }],
-        },
-      }));
-    }
+  const addField = (path: string, defaultValue: any) => {
+    setFormData((prev: any) => {
+      const copy = JSON.parse(JSON.stringify(prev));
+      const parts = path.split('.');
+      let cur: any = copy;
+      for (let i = 0; i < parts.length; i++) cur = cur[parts[i]];
+      cur.push(defaultValue);
+      return copy;
+    });
+  };
+
+  const removeField = (path: string, index: number) => {
+    setFormData((prev: any) => {
+      const copy = JSON.parse(JSON.stringify(prev));
+      const parts = path.split('.');
+      let cur: any = copy;
+      for (let i = 0; i < parts.length; i++) cur = cur[parts[i]];
+      cur.splice(index, 1);
+      return copy;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const productData = {
       title: formData.title,
+      productCode: formData.productCode || null,
       description: formData.description,
-      price: parseFloat(formData.price),
-      originalPrice: parseFloat(formData.originalPrice),
-      media: formData.media.map((url) => ({ type: 'image', url })),
+      price: parseFloat(formData.price) || 0,
+      originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
+      media: (formData.media || []).filter(Boolean).map((url: string) => ({ type: 'image', url })),
       category: {
         name: formData.category.name.trim(),
         slug: formData.category.slug.trim(),
@@ -89,9 +76,14 @@ export default function CreateProductForm() {
         slug: formData.subcategory.slug.trim(),
       },
       variants: {
-        sizes: formData.variants.sizes.filter((s) => s.trim() !== ''),
-        colors: formData.variants.colors.filter((c) => c.colorCode && c.colorName),
+        sizes: (formData.variants?.sizes || []).filter((s: string) => s && s.trim() !== ''),
+        colors: (formData.variants?.colors || []).map((c: any) => ({
+          colorCode: c.colorCode,
+          colorName: c.colorName,
+          image: c.image || '',
+        })),
       },
+      features: (formData.features || []).filter((f: string) => f && f.trim() !== ''),
     };
 
     try {
@@ -100,6 +92,7 @@ export default function CreateProductForm() {
       setFormData({
         title: '',
         description: '',
+        productCode: '',
         price: '',
         originalPrice: '',
         media: [''],
@@ -107,8 +100,9 @@ export default function CreateProductForm() {
         subcategory: { name: '', slug: '' },
         variants: {
           sizes: [''],
-          colors: [{ colorCode: '', colorName: '', image: '' }],
+          colors: [{ colorCode: '#000000', colorName: '', image: '' }],
         },
+        features: [''],
       });
     } catch (err) {
       console.error(err);
@@ -117,88 +111,74 @@ export default function CreateProductForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto p-4">
-      <input name="title" placeholder="Title" value={formData.title} onChange={handleChange} className="border p-2 w-full" required />
-      <input name="description" placeholder="Description" value={formData.description} onChange={handleChange} className="border p-2 w-full" required />
-      <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleChange} className="border p-2 w-full" required />
-      <input name="originalPrice" type="number" placeholder="Original Price" value={formData.originalPrice} onChange={handleChange} className="border p-2 w-full" required />
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl mx-auto p-4">
+      <input value={formData.title} onChange={(e) => handleChange('title', e.target.value)} className="border p-2 w-full" placeholder="Title" required />
+      <input value={formData.productCode} onChange={(e) => handleChange('productCode', e.target.value)} className="border p-2 w-full" placeholder="Product Code / SKU (optional)" />
+      <textarea value={formData.description} onChange={(e) => handleChange('description', e.target.value)} className="border p-2 w-full" placeholder="Description" required />
 
-      {/* Category */}
-      <div className="space-y-1">
-        <input name="category.name" placeholder="Category Name" value={formData.category.name} onChange={handleChange} className="border p-2 w-full" />
-        <input name="category.slug" placeholder="Category Slug" value={formData.category.slug} onChange={handleChange} className="border p-2 w-full" />
+      <div className="grid grid-cols-2 gap-2">
+        <input value={formData.price} onChange={(e) => handleChange('price', e.target.value)} type="number" className="border p-2" placeholder="Price" required />
+        <input value={formData.originalPrice} onChange={(e) => handleChange('originalPrice', e.target.value)} type="number" className="border p-2" placeholder="Original Price (optional)" />
       </div>
 
-      {/* Subcategory */}
-      <div className="space-y-1">
-        <input name="subcategory.name" placeholder="Subcategory Name" value={formData.subcategory.name} onChange={handleChange} className="border p-2 w-full" />
-        <input name="subcategory.slug" placeholder="Subcategory Slug" value={formData.subcategory.slug} onChange={handleChange} className="border p-2 w-full" />
+      {/* category */}
+      <div className="grid grid-cols-2 gap-2">
+        <input value={formData.category.name} onChange={(e) => handleChange('category.name', e.target.value)} className="border p-2" placeholder="Category Name" />
+        <input value={formData.category.slug} onChange={(e) => handleChange('category.slug', e.target.value)} className="border p-2" placeholder="Category Slug" />
       </div>
 
-      {/* Media */}
+      {/* media */}
       <div>
-        {formData.media.map((url, i) => (
-          <input
-            key={i}
-            name="media"
-            placeholder={`Image URL ${i + 1}`}
-            value={url}
-            onChange={(e) => handleChange(e, i)}
-            className="border p-2 w-full mt-1"
-            required
-          />
-        ))}
-        <button type="button" onClick={() => handleAddField('media')} className="text-blue-500 text-sm mt-1">
-          + Add more images
-        </button>
-      </div>
-
-      {/* Sizes */}
-      <div>
-        {formData.variants.sizes.map((size, i) => (
-          <input
-            key={i}
-            placeholder={`Size ${i + 1}`}
-            value={size}
-            onChange={(e) => handleChange(e, i, 'sizes')}
-            className="border p-2 w-full mt-1"
-          />
-        ))}
-        <button type="button" onClick={() => handleAddField('sizes')} className="text-blue-500 text-sm mt-1">
-          + Add Size
-        </button>
-      </div>
-
-      {/* Colors */}
-      <div>
-        {formData.variants.colors.map((color, i) => (
-          <div key={i} className="grid grid-cols-3 gap-2 mt-1">
-            <input
-              placeholder="Color Code (#000000)"
-              value={color.colorCode}
-              data-field="colorCode"
-              onChange={(e) => handleChange(e, i, 'colors')}
-              className="border p-2 w-full"
-            />
-            <input
-              placeholder="Color Name"
-              value={color.colorName}
-              data-field="colorName"
-              onChange={(e) => handleChange(e, i, 'colors')}
-              className="border p-2 w-full"
-            />
-            <input
-              placeholder="Swatch Image URL"
-              value={color.image}
-              data-field="image"
-              onChange={(e) => handleChange(e, i, 'colors')}
-              className="border p-2 w-full"
-            />
+        <p className="text-sm font-medium mb-2">Media (image URLs)</p>
+        {formData.media.map((m: string, i: number) => (
+          <div key={i} className="flex gap-2 items-center mb-2">
+            <input value={m} onChange={(e) => handleChange(`media.${i}`, e.target.value)} className="border p-2 flex-1" placeholder={`Image ${i+1} URL`} />
+            <button type="button" className="text-red-500" onClick={() => removeField('media', i)}>Remove</button>
           </div>
         ))}
-        <button type="button" onClick={() => handleAddField('colors')} className="text-blue-500 text-sm mt-1">
-          + Add Color
-        </button>
+        <button type="button" className="text-blue-500" onClick={() => addField('media', '')}>+ Add image</button>
+      </div>
+
+      {/* sizes */}
+      <div>
+        <p className="text-sm font-medium mb-2">Sizes</p>
+        {formData.variants.sizes.map((s: string, i: number) => (
+          <div key={i} className="flex gap-2 items-center mb-2">
+            <input value={s} onChange={(e) => handleChange(`variants.sizes.${i}`, e.target.value)} className="border p-2 flex-1" placeholder={`Size ${i+1}`} />
+            <button type="button" className="text-red-500" onClick={() => removeField('variants.sizes', i)}>Remove</button>
+          </div>
+        ))}
+        <button type="button" className="text-blue-500" onClick={() => addField('variants.sizes', '')}>+ Add Size</button>
+      </div>
+
+      {/* colors */}
+      <div>
+        <p className="text-sm font-medium mb-2">Colors</p>
+        {formData.variants.colors.map((c: any, i: number) => (
+          <div key={i} className="grid grid-cols-6 gap-2 items-center mb-2">
+            <div className="col-span-1">
+              <div className="w-8 h-8 rounded border" style={{ background: c.colorCode }} />
+            </div>
+            <input className="col-span-2 border p-2" value={c.colorCode} onChange={(e) => handleChange(`variants.colors.${i}.colorCode`, e.target.value)} placeholder="#000000" />
+            <input className="col-span-2 border p-2" value={c.colorName} onChange={(e) => handleChange(`variants.colors.${i}.colorName`, e.target.value)} placeholder="Color name" />
+            <button className="text-red-500" type="button" onClick={() => removeField('variants.colors', i)}>Remove</button>
+
+            <input className="col-span-6 border p-2 mt-1" value={c.image} onChange={(e) => handleChange(`variants.colors.${i}.image`, e.target.value)} placeholder="Swatch image URL (optional)" />
+          </div>
+        ))}
+        <button type="button" className="text-blue-500" onClick={() => addField('variants.colors', { colorCode: '#000000', colorName: '', image: '' })}>+ Add color</button>
+      </div>
+
+      {/* features */}
+      <div>
+        <p className="text-sm font-medium mb-2">Features</p>
+        {formData.features.map((f: string, i: number) => (
+          <div key={i} className="flex gap-2 items-center mb-2">
+            <input className="flex-1 border p-2" value={f} onChange={(e) => handleChange(`features.${i}`, e.target.value)} placeholder="e.g. 100% cotton" />
+            <button type="button" className="text-red-500" onClick={() => removeField('features', i)}>Remove</button>
+          </div>
+        ))}
+        <button type="button" className="text-blue-500" onClick={() => addField('features', '')}>+ Add feature</button>
       </div>
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Add Product</button>

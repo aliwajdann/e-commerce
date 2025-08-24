@@ -20,7 +20,7 @@ export default function AdminProducts() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingProduct, setEditingProduct] = useState<any | null>(null);
-  const [form, setForm] = useState<any>({});
+  const [form, setForm] = useState<any>(null);
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
@@ -30,67 +30,131 @@ export default function AdminProducts() {
     });
   }, []);
 
+  const emptyForm = {
+    title: '',
+    description: '',
+    productCode: '',
+    price: '',
+    originalPrice: '',
+    media: [''],
+    category: { name: '', slug: '' },
+    subcategory: { name: '', slug: '' },
+    variants: {
+      sizes: [''],
+      colors: [{ colorCode: '#000000', colorName: '', image: '' }],
+    },
+    features: [''],
+  };
+
   const handleEdit = (product: any) => {
     setEditingProduct(product);
     setForm({
-      ...product,
-      price: product.price?.toString(),
+      title: product.title || '',
+      description: product.description || '',
+      productCode: product.productCode || '',
+      price: product.price?.toString() || '',
       originalPrice: product.originalPrice?.toString() || '',
-      media: product.media?.map((m: any) => m.url).join(',') || '',
+      media: (product.media || []).map((m: any) => m.url) || [''],
+      category: product.category || { name: '', slug: '' },
+      subcategory: product.subcategory || { name: '', slug: '' },
       variants: {
-        sizes: product.variants?.sizes?.join(',') || '',
-        colors: JSON.stringify(product.variants?.colors || []), // stringify objects for editing
+        sizes: product.variants?.sizes?.slice() || [''],
+        colors:
+          (product.variants?.colors?.map((c: any) => ({
+            colorCode: c.colorCode || '#000000',
+            colorName: c.colorName || '',
+            image: c.image || '',
+          })) || [{ colorCode: '#000000', colorName: '', image: '' }]),
       },
-      category: product.category?.name || '',
-      categorySlug: product.category?.slug || '',
-      subcategory: product.subcategory?.name || '',
-      subcategorySlug: product.subcategory?.slug || '',
+      features: product.features?.slice() || [''],
     });
   };
 
-  const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (path: string, value: any) => {
+    // path examples: "title", "category.name", "variants.sizes.0", "variants.colors.1.colorName"
+    const parts = path.split('.');
+    setForm((prev: any) => {
+      const copy = JSON.parse(JSON.stringify(prev || emptyForm));
+      let cur: any = copy;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const p = parts[i];
+        if (!(p in cur)) cur[p] = {};
+        cur = cur[p];
+      }
+      cur[parts[parts.length - 1]] = value;
+      return copy;
+    });
+  };
+
+  /* helpers to add/remove list items */
+  const addField = (path: string, defaultValue: any) => {
+    setForm((prev: any) => {
+      const copy = JSON.parse(JSON.stringify(prev || emptyForm));
+      const parts = path.split('.');
+      let cur: any = copy;
+      for (let i = 0; i < parts.length; i++) {
+        cur = cur[parts[i]];
+      }
+      cur.push(defaultValue);
+      return copy;
+    });
+  };
+
+  const removeField = (path: string, index: number) => {
+    setForm((prev: any) => {
+      const copy = JSON.parse(JSON.stringify(prev || emptyForm));
+      const parts = path.split('.');
+      let cur: any = copy;
+      for (let i = 0; i < parts.length; i++) {
+        cur = cur[parts[i]];
+      }
+      cur.splice(index, 1);
+      return copy;
+    });
   };
 
   const handleSave = async () => {
-    if (!editingProduct?.id) return;
+    if (!editingProduct?.id || !form) return;
     setIsSaving(true);
-
-    let parsedColors = [];
     try {
-      parsedColors = JSON.parse(form.variants.colors);
+      const updatedProduct = {
+        ...editingProduct,
+        title: form.title,
+        description: form.description,
+        productCode: form.productCode || null,
+        price: parseFloat(form.price) || 0,
+        originalPrice: form.originalPrice ? parseFloat(form.originalPrice) : null,
+        media: (form.media || []).filter(Boolean).map((url: string) => ({ type: 'image', url })),
+        variants: {
+          sizes: (form.variants?.sizes || []).filter((s: string) => s && s.trim() !== '').map((s: string) => s.trim()),
+          colors: (form.variants?.colors || []).map((c: any) => ({
+            colorCode: c.colorCode,
+            colorName: c.colorName,
+            image: c.image || '',
+          })),
+        },
+        category: {
+          name: form.category?.name || '',
+          slug: form.category?.slug || '',
+        },
+        subcategory: {
+          name: form.subcategory?.name || '',
+          slug: form.subcategory?.slug || '',
+        },
+        features: (form.features || []).filter((f: string) => f && f.trim() !== '').map((f: string) => f.trim()),
+      };
+
+      await updateProduct(editingProduct.id, updatedProduct);
+      const updated = products.map((p) => (p.id === editingProduct.id ? { ...updatedProduct, id: p.id } : p));
+      setProducts(updated);
+      setEditingProduct(null);
+      setForm(null);
     } catch (err) {
-      alert('Colors must be valid JSON (array of {colorCode, colorName, image})');
+      console.error('update error', err);
+      alert('Failed to save product');
+    } finally {
       setIsSaving(false);
-      return;
     }
-
-    const updatedProduct = {
-      ...editingProduct,
-      title: form.title,
-      description: form.description,
-      price: parseFloat(form.price),
-      originalPrice: form.originalPrice ? parseFloat(form.originalPrice) : null,
-      media: form.media.split(',').map((url: string) => ({ type: 'image', url })),
-      variants: {
-        sizes: form.variants.sizes.split(',').map((s: string) => s.trim()),
-        colors: parsedColors,
-      },
-      category: {
-        name: form.category,
-        slug: form.categorySlug,
-      },
-      subcategory: {
-        name: form.subcategory,
-        slug: form.subcategorySlug,
-      },
-    };
-
-    await updateProduct(editingProduct.id, updatedProduct);
-    const updated = products.map((p) => (p.id === editingProduct.id ? { ...updatedProduct, id: p.id } : p));
-    setProducts(updated);
-    setIsSaving(false);
-    setEditingProduct(null);
   };
 
   const handleDelete = async () => {
@@ -98,6 +162,7 @@ export default function AdminProducts() {
     await deleteProduct(editingProduct.id);
     setProducts(products.filter((p) => p.id !== editingProduct.id));
     setEditingProduct(null);
+    setForm(null);
   };
 
   if (loading) return <div className="p-4">Loading products...</div>;
@@ -107,30 +172,18 @@ export default function AdminProducts() {
       <h1 className="text-2xl font-bold mb-4">All Products</h1>
       <div className="grid gap-4">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="border p-4 rounded-lg shadow-md bg-white"
-          >
+          <div key={product.id} className="border p-4 rounded-lg shadow-md bg-white">
             <h2 className="text-xl font-semibold">{product.title}</h2>
             <p className="text-sm text-gray-600">{product.description}</p>
             <p className="font-bold">£{product.price}</p>
             <div className="flex gap-2 mt-2 overflow-scroll no-scrollbar">
               {product.media?.map((item: any, i: number) =>
                 item.type === 'image' ? (
-                  <img
-                    key={i}
-                    src={item.url}
-                    alt=""
-                    className="w-16 h-16 object-cover rounded"
-                  />
+                  <img key={i} src={item.url} alt="" className="w-16 h-16 object-cover rounded" />
                 ) : null
               )}
             </div>
-            <Button
-              className="mt-4"
-              onClick={() => handleEdit(product)}
-              variant="outline"
-            >
+            <Button className="mt-4" onClick={() => handleEdit(product)} variant="outline">
               Edit
             </Button>
           </div>
@@ -143,30 +196,98 @@ export default function AdminProducts() {
       </div>
 
       {/* Edit Dialog */}
-      <Dialog open={!!editingProduct} onOpenChange={() => setEditingProduct(null)}>
+      <Dialog open={!!editingProduct} onOpenChange={() => { setEditingProduct(null); setForm(null); }}>
         <DialogContent className="w-[90%] max-h-[90vh] overflow-auto">
           <DialogHeader>
             <DialogTitle>Edit Product</DialogTitle>
           </DialogHeader>
 
+          {/* Form */}
           <div className="grid gap-4 py-4">
-            <Input name="title" value={form.title || ''} onChange={handleChange} placeholder="Title" />
-            <Textarea name="description" value={form.description || ''} onChange={handleChange} placeholder="Description" />
-            <Input name="price" value={form.price || ''} onChange={handleChange} placeholder="Price" />
-            <Input name="originalPrice" value={form.originalPrice || ''} onChange={handleChange} placeholder="Original Price" />
-            <Input name="category" value={form.category || ''} onChange={handleChange} placeholder="Category Name" />
-            <Input name="categorySlug" value={form.categorySlug || ''} onChange={handleChange} placeholder="Category Slug" />
-            <Input name="subcategory" value={form.subcategory || ''} onChange={handleChange} placeholder="Subcategory Name" />
-            <Input name="subcategorySlug" value={form.subcategorySlug || ''} onChange={handleChange} placeholder="Subcategory Slug" />
-            <Input name="media" value={form.media || ''} onChange={handleChange} placeholder="Media URLs (comma separated)" />
-            <Input name="variants.colors" value={form.variants?.colors || ''} onChange={(e) => setForm({ ...form, variants: { ...form.variants, colors: e.target.value } })} placeholder="Colors (JSON array)" />
-            <Input name="variants.sizes" value={form.variants?.sizes || ''} onChange={(e) => setForm({ ...form, variants: { ...form.variants, sizes: e.target.value } })} placeholder="Sizes (comma separated)" />
+            {/* top-level fields */}
+            <Input value={form?.title || ''} placeholder="Title" onChange={(e: any) => handleChange('title', e.target.value)} />
+            <Input value={form?.productCode || ''} placeholder="Product code (SKU)" onChange={(e: any) => handleChange('productCode', e.target.value)} />
+            <Textarea value={form?.description || ''} placeholder="Description" onChange={(e: any) => handleChange('description', e.target.value)} />
+
+            <div className="grid grid-cols-2 gap-2">
+              <Input value={form?.price || ''} placeholder="Price" onChange={(e: any) => handleChange('price', e.target.value)} />
+              <Input value={form?.originalPrice || ''} placeholder="Original Price" onChange={(e: any) => handleChange('originalPrice', e.target.value)} />
+            </div>
+
+            {/* category */}
+            <div className="grid grid-cols-2 gap-2">
+              <Input value={form?.category?.name || ''} placeholder="Category Name" onChange={(e: any) => handleChange('category.name', e.target.value)} />
+              <Input value={form?.category?.slug || ''} placeholder="Category Slug" onChange={(e: any) => handleChange('category.slug', e.target.value)} />
+            </div>
+
+            {/* subcategory */}
+            <div className="grid grid-cols-2 gap-2">
+              <Input value={form?.subcategory?.name || ''} placeholder="Subcategory Name" onChange={(e: any) => handleChange('subcategory.name', e.target.value)} />
+              <Input value={form?.subcategory?.slug || ''} placeholder="Subcategory Slug" onChange={(e: any) => handleChange('subcategory.slug', e.target.value)} />
+            </div>
+
+            {/* media list */}
+            <div>
+              <p className="text-sm font-medium mb-2">Media (image URLs)</p>
+              {form?.media?.map((url: string, i: number) => (
+                <div key={i} className="flex gap-2 items-center mb-2">
+                  <input value={url} className="border p-2 flex-1" onChange={(e) => handleChange(`media.${i}`, e.target.value)} />
+                  <button type="button" className="text-sm text-red-500" onClick={() => removeField('media', i)}>Remove</button>
+                </div>
+              ))}
+              <button type="button" className="text-blue-500 text-sm" onClick={() => addField('media', '')}>+ Add image</button>
+            </div>
+
+            {/* sizes */}
+            <div>
+              <p className="text-sm font-medium mb-2">Sizes</p>
+              {form?.variants?.sizes?.map((size: string, i: number) => (
+                <div key={i} className="flex gap-2 items-center mb-2">
+                  <input value={size} className="border p-2 flex-1" onChange={(e) => handleChange(`variants.sizes.${i}`, e.target.value)} />
+                  <button type="button" className="text-sm text-red-500" onClick={() => removeField('variants.sizes', i)}>Remove</button>
+                </div>
+              ))}
+              <button type="button" className="text-blue-500 text-sm" onClick={() => addField('variants.sizes', '')}>+ Add size</button>
+            </div>
+
+            {/* colors (nice UI with swatch preview) */}
+            <div>
+              <p className="text-sm font-medium mb-2">Colors</p>
+              {form?.variants?.colors?.map((color: any, i: number) => (
+                <div key={i} className="grid grid-cols-6 gap-2 items-center mb-2">
+                  <div className="col-span-1">
+                    <div className="w-8 h-8 rounded border" style={{ background: color.colorCode || '#000' }} />
+                  </div>
+                  <input className="col-span-2 border p-2" value={color.colorCode} onChange={(e) => handleChange(`variants.colors.${i}.colorCode`, e.target.value)} />
+                  <input className="col-span-2 border p-2" value={color.colorName} onChange={(e) => handleChange(`variants.colors.${i}.colorName`, e.target.value)} />
+                  <button className="text-sm text-red-500" onClick={() => removeField('variants.colors', i)}>Remove</button>
+
+                  <input className="col-span-6 border p-2 mt-1" placeholder="Swatch Image URL (optional)" value={color.image} onChange={(e) => handleChange(`variants.colors.${i}.image`, e.target.value)} />
+                </div>
+              ))}
+              <button type="button" className="text-blue-500 text-sm" onClick={() => addField('variants.colors', { colorCode: '#000000', colorName: '', image: '' })}>+ Add color</button>
+            </div>
+
+            {/* features (array of strings) */}
+            <div>
+              <p className="text-sm font-medium mb-2">Features (highlight bullets)</p>
+              <div className="flex flex-col gap-2">
+                {form?.features?.map((feat: string, i: number) => (
+                  <div key={i} className="flex gap-2 items-center">
+                    <input className="flex-1 border p-2" value={feat} onChange={(e) => handleChange(`features.${i}`, e.target.value)} />
+                    <button className="text-red-500 text-sm" onClick={() => removeField('features', i)}>Remove</button>
+                  </div>
+                ))}
+              </div>
+              <button type="button" className="text-blue-500 text-sm mt-1" onClick={() => addField('features', '')}>+ Add feature</button>
+            </div>
+
           </div>
 
           <DialogFooter className="flex justify-between">
             <Button variant="destructive" onClick={handleDelete}>Delete Product</Button>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={() => setEditingProduct(null)}>Cancel</Button>
+              <Button variant="outline" onClick={() => { setEditingProduct(null); setForm(null); }}>Cancel</Button>
               <Button onClick={handleSave} disabled={isSaving}>
                 {isSaving ? 'Saving...' : 'Save Changes'}
               </Button>
