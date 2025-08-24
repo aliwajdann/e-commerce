@@ -29,6 +29,7 @@ interface ProductInfoProps {
   description: string;
   media: MediaType[];
   variants: VariantsType;
+  reviewsCount: any
 }
 
 export default function ProductInfo({
@@ -39,6 +40,7 @@ export default function ProductInfo({
   description,
   media,
   variants,
+  reviewsCount
 }: ProductInfoProps) {
   const [qty, setQty] = useState(1);
   const [selectedColor, setSelectedColor] = useState<ColorVariant | null>(null);
@@ -51,7 +53,12 @@ const scrollToSection = (id: string) => {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-
+ const handleScrollToReviews = () => {
+    const reviewsSection = document.getElementById("reviewsSlider");
+    if (reviewsSection) {
+      reviewsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   // default selections
   useEffect(() => {
@@ -73,6 +80,16 @@ const scrollToSection = (id: string) => {
       <div className="inline-block bg-red-700 text-white text-xs font-medium px-3 py-1 rounded">
         Buy 5 get 70% off
       </div>
+
+      {reviewsCount > 0 && (
+        <button
+          onClick={handleScrollToReviews}
+          className="text-black underline text-xs block hover:text-black"
+        >
+          {reviewsCount} {reviewsCount === 1 ? "review" : "reviews"} on this product
+        </button>
+      )}
+
 
       {/* Title and Prices */}
       <div className="flex flex-col gap-2">
@@ -200,8 +217,16 @@ const scrollToSection = (id: string) => {
             media: media.map((m) => ({ url: m.url, type: m.type })),
           }}
         />
+        
       </div>
-
+{reviewsCount > 0 && (
+        <button
+          onClick={handleScrollToReviews}
+          className="text-black underline text-xs block hover:text-black"
+        >
+          {reviewsCount} {reviewsCount === 1 ? "review" : "reviews"} on this product
+        </button>
+      )}
       {/* Tabs */}
       <div className="border-t mt-4 pt-4 flex space-x-6 text-sm">
         <button  onClick={() => scrollToSection("custom-product-details")} className="underline">Product description</button>

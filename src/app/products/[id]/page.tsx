@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 import CartActivityToast from '@/components/CartActivityToast';
 import ProductMedia from '@/components/productPage/ProductMedia';
 import ProductInfo from '@/components/productPage/ProductInfo';
-// import FaqSection from '@/components/productPage/FaqSection';
 import ProductDetails from '@/components/productPage/ProductDetails';
 import RelatedProducts from '@/components/productPage/RelatedProducts';
+import Reviews from '@/components/productPage/ReviewsSection';
+import ReviewSlider from '@/components/productPage/ReviewsSlider';
 
 interface MediaType {
   type: 'image' | 'video';
@@ -20,8 +21,8 @@ interface MediaType {
 interface ColorVariant {
   colorCode: string;
   colorName: string;
-  swatchImage?: string; // optional, if you add swatch images
-  images?: MediaType[]; // optional, so you can show color-specific media
+  swatchImage?: string;
+  images?: MediaType[];
 }
 
 interface VariantsType {
@@ -56,7 +57,9 @@ export default function ProductPage() {
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const [reviewsCount, setReviewsCount] = useState<number>(0);
 
+  // fetch product details
   useEffect(() => {
     if (!id) return;
 
@@ -81,43 +84,65 @@ export default function ProductPage() {
     fetchProduct();
   }, [id]);
 
- 
+  // fetch reviews count
+  useEffect(() => {
+    if (!id) return;
 
-  if (loading || !product) return ( <div className="flex items-center justify-center h-screen">
-      <div className="w-10 h-10 border-4 border-[#681C1C]  border-t-transparent rounded-full animate-spin"></div>
-    </div>)
+    const fetchReviewsCount = async () => {
+      try {
+        const reviewsRef = collection(db, "products", id, "reviews");
+        const reviewsSnap = await getDocs(reviewsRef);
+        setReviewsCount(reviewsSnap.size);
+      } catch (err) {
+        console.error("❌ Error fetching reviews:", err);
+      }
+    };
+
+    fetchReviewsCount();
+  }, [id]);
+
+  if (loading || !product) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="w-10 h-10 border-4 border-[#681C1C] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <>
       <div className="w-full bg-white mt-2">
-       <p style={{fontWeight: 400}} className=' pl-[16px]  text-xs font-light'>Women - {product.category.name} - {product.subcategory.name} </p>
+        <p className="pl-[16px] text-xs font-light">
+          Women - {product.category.name} - {product.subcategory.name}
+        </p>
         <CartActivityToast productTitle={product.title} />
 
         <div className="product-container grid md:mt-4 mt-1 md:w-[100%] mx-auto">
           <ProductMedia media={product.media} />
           <ProductInfo
+            reviewsCount={reviewsCount}   // ✅ now passing state
             id={product.id}
             title={product.title}
             price={product.price}
             originalprice={product.originalPrice}
             description={product.description}
             media={product.media}
-            variants={product.variants} // ✅ now passing updated colors + sizes
+            variants={product.variants}
           />
         </div>
       </div>
 
-<ProductDetails  productdetails={product} />
-<RelatedProducts category={product.category.slug} currentProductId={product.id} />
+      <ProductDetails productdetails={product} />
+      <ReviewSlider productId={product.id} />
+      <Reviews productId={product.id} />
+      <RelatedProducts category={product.category.slug} currentProductId={product.id} />
 
       <style jsx>{`
-        /* Desktop (>=768px) */
         @media (min-width: 768px) {
           .product-container {
             grid-template-columns: 60% auto;
           }
         }
-        /* Mobile (<768px) */
         @media (max-width: 767px) {
           .product-container {
             grid-template-columns: repeat(1, minmax(0, 1fr));
