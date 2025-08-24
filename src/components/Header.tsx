@@ -45,9 +45,9 @@ const menuItems = [
     <>
       <div className="sticky top-0 z-50">
         {/* optional top bar */}
-        <div className=" z-50 bg-[#CC0D14]">
+        {/* <div className=" z-50 bg-[#CC0D14]">
           <HeaderBar />
-        </div>
+        </div> */}
 
         {/* Main header */}
         <header className=" bg-white flex items-center justify-between h-14 px-4 md:px-6 text-gray-900 ">

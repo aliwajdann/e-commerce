@@ -25,7 +25,7 @@ const HeaderBar = () => {
   }, []);
 
   return (
-    <div className="bg-red-600 z-50 text-white top-0 overflow-hidden  ">
+    <div className="bg-[#CC0D14] z-50 text-white top-0 overflow-hidden  ">
       <div className="flex items-center h-[1.8rem] px-2 sm:px-4 justify-center gap-4">
         
         {/* Left Arrow */}

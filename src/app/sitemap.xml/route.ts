@@ -7,16 +7,17 @@ export async function GET() {
 
   // Fetch products
   const productsSnap = await getDocs(collection(db, "products"));
-
   const productUrls = productsSnap.docs.map((doc) => {
     const data = doc.data();
-      const updatedAt = data.updatedAt?.toDate().toISOString() || data.createdAt?.toDate().toISOString() || new Date().toISOString();
-
+    const updatedAt =
+      data.updatedAt?.toDate().toISOString() ||
+      data.createdAt?.toDate().toISOString() ||
+      new Date().toISOString();
 
     return `
       <url>
         <loc>${baseUrl}/products/${doc.id}</loc>
-        <lastmod>${updatedAt.toISOString()}</lastmod>
+        <lastmod>${updatedAt}</lastmod>
         <priority>0.8</priority>
       </url>
     `;
