@@ -24,20 +24,22 @@ export default function Header() {
   const toggleMenu = () => setIsMenuOpen((s) => !s);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const menuItems = [
-    "New In",
-    "Lingerie",
-    "Sets",
-    "Bestsellers",
-    "Provocative",
-    "Bras",
-    "Swim",
-    "Nightwear",
-    "Hosiery",
-    "Gifts",
-    "Clothing",
-    "Archive",
-  ];
+  // Instead of just strings, use objects
+const menuItems = [
+  { name: "New In", href: "/categories/new-in" },
+  { name: "Lingerie", href: "/categories/lingerie" },
+  { name: "Sets", href: "/categories/sets" },
+  { name: "Bestsellers", href: "/categories/bestsellers" },
+  { name: "Provocative", href: "/categories/provocative" },
+  { name: "Bras", href: "/categories/bras" },
+  { name: "Swim", href: "/categories/swim" },
+  { name: "Nightwear", href: "/categories/nightwear" },
+  { name: "Hosiery", href: "/categories/hosiery" },
+  { name: "Gifts", href: "/categories/gifts" },
+  { name: "Clothing", href: "/categories/clothing" },
+  { name: "Archive", href: "/categories/archive" },
+];
+
 
   return (
     <>
@@ -120,36 +122,36 @@ export default function Header() {
 
     {/* Menu items */}
     <nav className="flex-1 overflow-y-auto py-6 text-sm">
-      <ul className="px-6 space-y-1">
-        {menuItems.map((m, i) => (
-          <li key={i}>
-            <a
-              onClick={closeMenu}
-              href="#"
-              className="block w-full text-sm py-3 border-b border-gray-100 hover:bg-gray-50"
-            >
-              {m}
-            </a>
-          </li>
-        ))}
-      </ul>
+     <ul className="px-6 space-y-1">
+  {menuItems.map((m, i) => (
+    <li key={i}>
+      <a
+        onClick={closeMenu}
+        href={m.href} // now links work!
+        className="block w-full text-sm py-3 border-b border-gray-100 hover:bg-gray-50"
+      >
+        {m.name}
+      </a>
+    </li>
+  ))}
+</ul>
 
-      <div className="mt-6 px-6 border-t pt-4 space-y-2">
-        <a
-          onClick={closeMenu}
-          href="#"
-          className="block text-sm py-3 border-b"
-        >
-          About Us
-        </a>
-        <a
-          onClick={closeMenu}
-          href="#"
-          className="block text-sm py-3 border-b"
-        >
-          Help
-        </a>
-      </div>
+
+     <div className="mt-6 px-6 border-t pt-4 space-y-2">
+  <a onClick={closeMenu} href="/about" className="block text-sm py-3 border-b">
+    About Us
+  </a>
+  <a onClick={closeMenu} href="/contact" className="block text-sm py-3 border-b">
+    Help
+  </a>
+  <a onClick={closeMenu} href="/shipping" className="block text-sm py-3 border-b">
+    Shipping
+  </a>
+  <a onClick={closeMenu} href="/returns" className="block text-sm py-3 border-b">
+    Returns
+  </a>
+</div>
+
     </nav>
   </div>
 </div>

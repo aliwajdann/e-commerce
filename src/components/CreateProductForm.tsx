@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { serverTimestamp } from "firebase/firestore";
+
 
 export default function CreateProductForm() {
   const [formData, setFormData] = useState<any>({
@@ -61,30 +63,34 @@ export default function CreateProductForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const productData = {
-      title: formData.title,
-      productCode: formData.productCode || null,
-      description: formData.description,
-      price: parseFloat(formData.price) || 0,
-      originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
-      media: (formData.media || []).filter(Boolean).map((url: string) => ({ type: 'image', url })),
-      category: {
-        name: formData.category.name.trim(),
-        slug: formData.category.slug.trim(),
-      },
-      subcategory: {
-        name: formData.subcategory.name.trim(),
-        slug: formData.subcategory.slug.trim(),
-      },
-      variants: {
-        sizes: (formData.variants?.sizes || []).filter((s: string) => s && s.trim() !== ''),
-        colors: (formData.variants?.colors || []).map((c: any) => ({
-          colorCode: c.colorCode,
-          colorName: c.colorName,
-          image: c.image || '',
-        })),
-      },
-      features: (formData.features || []).filter((f: string) => f && f.trim() !== ''),
-    };
+  title: formData.title,
+  productCode: formData.productCode || null,
+  description: formData.description,
+  price: parseFloat(formData.price) || 0,
+  originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
+  media: (formData.media || []).filter(Boolean).map((url: string) => ({ type: 'image', url })),
+  category: {
+    name: formData.category.name.trim(),
+    slug: formData.category.slug.trim(),
+  },
+  subcategory: {
+    name: formData.subcategory.name.trim(),
+    slug: formData.subcategory.slug.trim(),
+  },
+  variants: {
+    sizes: (formData.variants?.sizes || []).filter((s: string) => s && s.trim() !== ''),
+    colors: (formData.variants?.colors || []).map((c: any) => ({
+      colorCode: c.colorCode,
+      colorName: c.colorName,
+      image: c.image || '',
+    })),
+  },
+  features: (formData.features || []).filter((f: string) => f && f.trim() !== ''),
+  
+  // 🔥 timestamps
+  createdAt: serverTimestamp(),
+  updatedAt: serverTimestamp(),
+};
 
     try {
       await addDoc(collection(db, 'products'), productData);

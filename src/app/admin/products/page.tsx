@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { fetchProducts } from '@/lib/fetchProducts';
 import { updateProduct, deleteProduct } from '@/lib/firestoreProducts';
 import CreateProductForm from '@/components/CreateProductForm';
+import { serverTimestamp } from "firebase/firestore";
+
 
 import {
   Dialog,
@@ -67,7 +69,9 @@ export default function AdminProducts() {
           })) || [{ colorCode: '#000000', colorName: '', image: '' }]),
       },
       features: product.features?.slice() || [''],
+      updatedAt: serverTimestamp(),
     });
+
   };
 
   const handleChange = (path: string, value: any) => {
