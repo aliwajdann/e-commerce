@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import ProductsWithoutPrices from './ProductsWithoutPrices'
 import Link from 'next/link'

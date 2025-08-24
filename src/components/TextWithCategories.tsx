@@ -1,7 +1,7 @@
 
+"use client"
 import React from 'react'
 import CustomCategorySlider from "./CustomCategorySlider";
-import Link from 'next/link'
 
 function TextWithCategories () {
   return (
