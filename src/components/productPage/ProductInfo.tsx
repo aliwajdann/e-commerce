@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import Ppatc from './Ppatc';
 
@@ -29,7 +29,13 @@ interface ProductInfoProps {
   description: string;
   media: MediaType[];
   variants: VariantsType;
-  reviewsCount: any
+  reviewsCount: number;
+  selectedSize: string | null;
+  setSelectedSize: (size: string) => void;
+  selectedColor: string | null;
+  setSelectedColor: (color: string) => void;
+  qty: number;
+  setQty: (qty: number) => void;
 }
 
 export default function ProductInfo({
@@ -40,35 +46,35 @@ export default function ProductInfo({
   description,
   media,
   variants,
-  reviewsCount
+  reviewsCount,
+  selectedSize,
+  setSelectedSize,
+  selectedColor,
+  setSelectedColor,
+  qty,
+  setQty,
 }: ProductInfoProps) {
-  const [qty, setQty] = useState(1);
-  const [selectedColor, setSelectedColor] = useState<ColorVariant | null>(null);
-  const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const [showSizeGrid, setShowSizeGrid] = useState(false);
 
 const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
- const handleScrollToReviews = () => {
+    const element = document.getElementById(id); 
+    if (element) 
+      { element.scrollIntoView({ behavior: "smooth", block: "start" });
+   }}; 
+   const handleScrollToReviews = () => { 
     const reviewsSection = document.getElementById("reviewsSlider");
-    if (reviewsSection) {
-      reviewsSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+     if (reviewsSection) { reviewsSection.scrollIntoView({ behavior: "smooth" });
+     }};
 
   // default selections
   useEffect(() => {
-    if (variants?.colors?.length > 0) {
-      setSelectedColor(variants.colors[0]);
+    if (!selectedColor && variants?.colors?.length > 0) {
+      setSelectedColor(variants.colors[0].colorName);
     }
-    if (variants?.sizes?.length > 0) {
+    if (!selectedSize && variants?.sizes?.length > 0) {
       setSelectedSize(variants.sizes[0]);
     }
-  }, [variants]);
+  }, [variants, selectedColor, selectedSize, setSelectedColor, setSelectedSize]);
 
   const discount = originalprice
     ? Math.round(((originalprice - price) / originalprice) * 100)
@@ -80,9 +86,6 @@ const scrollToSection = (id: string) => {
       <div className="inline-block bg-red-700 text-white text-xs font-medium px-3 py-1 rounded">
         Buy 5 get 70% off
       </div>
-
-      
-
 
       {/* Title and Prices */}
       <div className="flex flex-col gap-2">
@@ -106,18 +109,16 @@ const scrollToSection = (id: string) => {
         <div className="space-y-2">
           <p className="text-sm">
             Colour:{' '}
-            <span className="font-medium">
-              {selectedColor ? selectedColor.colorName : ''}
-            </span>
+            <span className="font-medium">{selectedColor || ''}</span>
           </p>
           <div className="flex space-x-2">
-            {variants.colors.map((c,v) => (
+            {variants.colors.map((c, i) => (
               <button
-                key={v}
-                onClick={() => setSelectedColor(c)}
-                className={`w-16 h-20  overflow-hidden transition 
+                key={i}
+                onClick={() => setSelectedColor(c.colorName)}
+                className={`w-16 h-20 overflow-hidden transition 
                   ${
-                    selectedColor?.colorName === c.colorName
+                    selectedColor === c.colorName
                       ? 'border-gray-300 border-2'
                       : ''
                   }
@@ -131,20 +132,14 @@ const scrollToSection = (id: string) => {
                     alt={c.colorName}
                     className="w-full h-full object-cover"
                   />
-                ) : <p>p</p>
-
-                }
+                ) : (
+                  <p>{c.colorName}</p>
+                )}
               </button>
             ))}
           </div>
         </div>
       )}
-
-      {/* Links */}
-      <div className="flex space-x-4 text-sm underline text-gray-600">
-        <button>Find your size</button>
-        <button>Size chart</button>
-      </div>
 
       {/* Size Selector */}
       {variants?.sizes?.length > 0 && (
@@ -188,16 +183,16 @@ const scrollToSection = (id: string) => {
         <div className="flex items-center border rounded h-full px-3 py-2">
           <button
             className="px-0"
-            onClick={() => setQty((q) => Math.max(1, q - 1))}
+            onClick={() => setQty(Math.max(1, qty - 1))}
           >
             <Minus size={16} />
           </button>
           <span className="px-4">{qty}</span>
-          <button className="px-0" onClick={() => setQty((q) => q + 1)}>
+          <button className="px-0" onClick={() => setQty(qty + 1)}>
             <Plus size={16} />
           </button>
         </div>
-
+<div   id="main-add-to-bag">
         <Ppatc
           product={{
             id,
@@ -205,28 +200,15 @@ const scrollToSection = (id: string) => {
             price,
             description,
             quantity: qty,
-            selectedColor: selectedColor?.colorName,
-            selectedSize: selectedSize,
+            selectedColor: selectedColor || undefined,
+            selectedSize: selectedSize || undefined,
             media: media.map((m) => ({ url: m.url, type: m.type })),
           }}
         />
-        
+        </div>
       </div>
-      {reviewsCount > 0 && (
-        <button
-          onClick={handleScrollToReviews}
-          className="text-black  underline text-xs block hover:text-black"
-        >
-          {reviewsCount} {reviewsCount === 1 ? "review" : "reviews"} on this product
-        </button>
-      )}
-
-      {/* Tabs */}
-      <div className="border-t mt-4 pt-4 flex space-x-6 text-sm">
-        <button  onClick={() => scrollToSection("custom-product-details")} className="underline">Product description</button>
-        <button  onClick={() => scrollToSection("custom-product-details")} className="underline">Shipping and returns</button>
-      </div>
+        {reviewsCount > 0 && ( <button onClick={handleScrollToReviews} className="text-black underline text-xs block hover:text-black" > {reviewsCount} {reviewsCount === 1 ? "review" : "reviews"} on this product </button> )}
+        <div className="border-t mt-4 pt-4 flex space-x-6 text-sm"> <button onClick={() => scrollToSection("custom-product-details")} className="underline">Product description</button> <button onClick={() => scrollToSection("custom-product-details")} className="underline">Shipping and returns</button> </div>
     </div>
   );
 }
-

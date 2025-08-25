@@ -12,6 +12,7 @@ import ProductDetails from '@/components/productPage/ProductDetails';
 import RelatedProducts from '@/components/productPage/RelatedProducts';
 import Reviews from '@/components/productPage/ReviewsSection';
 import ReviewSlider from '@/components/productPage/ReviewsSlider';
+import StickyATB from '@/components/productPage/StickyAtb';
 
 interface MediaType {
   type: 'image' | 'video';
@@ -60,6 +61,11 @@ export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [reviewsCount, setReviewsCount] = useState<number>(0);
+
+ const [selectedSize, setSelectedSize] = useState<string | null>(null);
+const [selectedColor, setSelectedColor] = useState<string | null>(null);
+const [qty, setQty] = useState<number>(1);
+
 
   // fetch product details
   useEffect(() => {
@@ -118,6 +124,16 @@ export default function ProductPage() {
           Women - {product.category.name} - {product.subcategory.name}
         </p>
         <CartActivityToast productTitle={product.title} />
+       <StickyATB
+        id={product.id}
+        title={product.title}
+        price={product.price}
+        description={product.description}
+        media={product.media}
+        qty={qty}
+        selectedColor={selectedColor}
+        selectedSize={selectedSize}
+      />
 
         <div className="product-container grid md:mt-4 mt-1 md:w-[100%] mx-auto">
           <ProductMedia media={product.media} />
@@ -130,6 +146,12 @@ export default function ProductPage() {
             description={product.description}
             media={product.media}
             variants={product.variants}
+            selectedSize={selectedSize}
+  setSelectedSize={setSelectedSize}
+  selectedColor={selectedColor}
+  setSelectedColor={setSelectedColor}
+  qty={qty}
+  setQty={setQty}
           />
         </div>
       </div>
