@@ -76,7 +76,7 @@ export default function ProductDetails({ productdetails }: ProductDetailsProps) 
         <p className="text-xs text-neutral-500 mb-2">Item code: {productdetails.productCode}</p>
         <p className="mb-4">{productdetails.description}</p>
         <ul className="space-y-1">
-          {productdetails.features.map((f, i) => (
+          {productdetails.features?.map((f, i) => (
             <li key={i} className="before:content-['·'] before:mr-1">
               {f}
             </li>

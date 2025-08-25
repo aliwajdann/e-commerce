@@ -6,11 +6,12 @@ import { selectCartCount } from "@/redux/cartSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle } from "@/redux/drawerSlice";
 import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
-import CartDrawer from "./CartDrawer";
-import HeaderBar from "./HeaderBar";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/logo.png"
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const CartDrawer = dynamic(() => import("./CartDrawer"), { ssr: false });
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,7 +72,7 @@ const menuItems = [
               href="/"
               className="inline-block text-lg tracking-[0.18em] font-medium text-gray-900"
             >
-             <Image src={logo} height={100} className="w-[90%] md:w-[100%] mt-2" alt="" />
+             <Image src={logo} height={100} className="w-[90%] md:w-[100%] mt-3" alt="" />
               {/* <sup className="text-sm text-gray-700">®</sup> */}
             </a>
           </div>

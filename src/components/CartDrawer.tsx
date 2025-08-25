@@ -248,11 +248,17 @@ export default function CartDrawer() {
 
         {/* Footer */}
         <div className="px-5 pt-2 pb-4 border-t border-neutral-200">
-          <p className="text-xs text-neutral-700 mb-2">
-            {remainingForFree > 0
-              ? `Add Rs.${remainingForFree.toFixed(0)} to get Free Standard Shipping`
-              : "You’ve unlocked Free Shipping 🎉"}
-          </p>
+         <p className="text-xs text-neutral-700 mb-2">
+  {!mounted ? (
+    // skeleton placeholder on server render
+    "Loading shipping info..."
+  ) : remainingForFree > 0 ? (
+    `Add Rs.${remainingForFree.toFixed(0)} to get Free Standard Shipping`
+  ) : (
+    "You’ve unlocked Free Shipping 🎉"
+  )}
+</p>
+
           <div className="h-1 w-full bg-neutral-200 rounded overflow-hidden mb-3">
             <div
               className="h-1 bg-neutral-900"

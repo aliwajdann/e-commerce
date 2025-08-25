@@ -207,7 +207,7 @@ export default function SubCategoryProductsPage() {
   if (loading) return <p className="p-6">Loading products...</p>;
 
   return (
-     <section className="w-full   custom-background pb-20">
+     <section className="w-full h-full py-10">
      <div className="w-[95%] md:w-[90%]  mx-auto flex items-center flex-col">
       <div className="inline-flex items-center justify-center mb-6">
             <div className="h-px bg-gradient-to-r from-transparent via-gray-100 to-transparent w-20"></div>
