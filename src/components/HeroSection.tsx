@@ -100,7 +100,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="md:pb-[16px] md:px-[16px]  mb-[32px] md:mb-[40px] h-full relative  w-full overflow-hidden flex justify-center items-center">
+    <section className="md:pb-[16px] md:px-[16px]  mb-[32px] md:mb-[40px] md:h-lvh h-full relative  w-full overflow-hidden flex justify-center items-center">
       <Swiper
         ref={swiperRef}
         loop={true}
