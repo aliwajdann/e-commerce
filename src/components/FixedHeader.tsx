@@ -132,7 +132,7 @@ export default function FixedHeader() {
             </div>
 
             {/* Right: Account + Cart */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center md:gap-2 gap-1">
               <SignedIn>
                 <div className="flex items-center gap-2">
                   {/* <span className={`text-xs ${isScrolled ? "text-gray-700" : "text-white/90"}`}>

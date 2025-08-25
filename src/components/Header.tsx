@@ -77,7 +77,7 @@ const menuItems = [
           </div>
 
           {/* Right: Account + Cart */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center  gap-1">
             <SignedIn>
               <UserButton appearance={{ elements: { avatarBox: "w-7 h-7" } }} />
             </SignedIn>
