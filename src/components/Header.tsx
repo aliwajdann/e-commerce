@@ -9,6 +9,8 @@ import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import CartDrawer from "./CartDrawer";
 import HeaderBar from "./HeaderBar";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/logo.png"
+import Image from "next/image";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,8 +71,8 @@ const menuItems = [
               href="/"
               className="inline-block text-lg tracking-[0.18em] font-medium text-gray-900"
             >
-              VELANO
-              <sup className="text-sm text-gray-700">®</sup>
+             <Image src={logo} height={100} className="w-[90%] md:w-[100%] mt-2" alt="" />
+              {/* <sup className="text-sm text-gray-700">®</sup> */}
             </a>
           </div>
 

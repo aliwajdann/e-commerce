@@ -11,6 +11,8 @@ import { UserButton, SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import CartDrawer from "./CartDrawer";
 import HeaderBar from "./HeaderBar";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/logo.png"
+import Image from "next/image";
 
 /**
  * New header:
@@ -124,7 +126,8 @@ export default function FixedHeader() {
                   isScrolled ? "text-gray-900" : "text-white"
                 }`}
               >
-                VELANO<sup className={`${isScrolled ? "text-[10px] text-gray-700" : "text-[10px] text-white"}`}>®</sup>
+                {/* VELANO<sup className={`${isScrolled ? "text-[10px] text-gray-700" : "text-[10px] text-white"}`}>®</sup> */}
+                  <Image src={logo} height={100} className="w-[90%] md:w-[100%] mt-2" alt="" />
               </a>
             </div>
 

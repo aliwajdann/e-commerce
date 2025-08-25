@@ -63,13 +63,13 @@ export default function StickyATB({
 >
       {/* Product summary */}
       <div className="flex items-center gap-3 overflow-hidden">
-        {/* {media?.[0] && (
+        {media?.[0] && (
           <img
             src={media[0].url}
             alt={title}
-            className="w-12 h-12 object-cover rounded-md"
+            className="hidden md:block w-12 h-12 object-cover rounded-md"
           />
-        )} */}
+        )}
         <div className="truncate">
           <p className="text-sm font-medium truncate">{title}</p>
           <p className="text-xs text-gray-500">
