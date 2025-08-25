@@ -1,7 +1,7 @@
 "use client";
 
-import Ppatc from './Ppatc';
 import { useState, useEffect } from 'react';
+import StickyAtcBtn from './StickyAtcBtn';
 
 interface MediaType {
   type: string;
@@ -50,11 +50,17 @@ export default function StickyATB({
   }, []);
 
   return (
-    <div
-      className={`fixed top-0 left-0 right-0 bg-white shadow-xs border-b px-4 py-3 flex items-center justify-between z-50 transform transition-transform duration-300 ${
-        showSticky ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
+   <div
+  className={`
+    fixed left-0 right-0 z-50 bg-white shadow-xs border-b px-[16px] md:px-[32px] py-3 
+    flex items-center justify-between transform transition-transform duration-300
+    
+    bottom-0 md:top-0 md:bottom-auto
+    ${showSticky 
+      ? "translate-y-0 md:translate-y-0" 
+      : "translate-y-full md:-translate-y-full"}
+  `}
+>
       {/* Product summary */}
       <div className="flex items-center gap-3 overflow-hidden">
         {media?.[0] && (
@@ -75,7 +81,7 @@ export default function StickyATB({
       </div>
 
       {/* Add to Cart button */}
-      <Ppatc
+      <StickyAtcBtn
         product={{
           id,
           title,
