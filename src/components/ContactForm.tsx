@@ -47,20 +47,20 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen  px-4 py-16 sm:px-6 lg:px-8 custom-background">
-    <div className="w-[90%] mx-auto mt-20">
+    <div className=" md:py-8 py-6  custom-background">
+    <div className="px-[16px] md:px-[0px] w-full mx-auto mt-4">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="max-w-2xl mx-auto"
       >
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-6">Contact Us</h1>
-        <p className="text-center text-[#681C1C] mb-10">
+        <h1 className="md:text-3xl text-xl  font-bold text-center text-white md:mb-6 mb-4">Contact Us</h1>
+        <p className="text-center text-white md:mb-10 mb-6  text-xs md:text-sm">
           We'd love to hear from you! Fill out the form below and we'll get back to you soon.
         </p>
 
-        <div className="bg-white p-8 rounded-2xl shadow-xl">
+        <div className="bg-white p-8 rounded-lg shadow-xl">
           <AnimatePresence mode="wait">
             {status === 'success' ? (
               <motion.div
@@ -70,14 +70,14 @@ const ContactForm = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 className="text-center space-y-4"
               >
-                <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center">
-                  <FiCheckCircle className="text-green-600 text-3xl" />
+                <div className="w-16 h-16 mx-auto rounded-full bg-black flex items-center justify-center">
+                  <FiCheckCircle className="text-white text-3xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800">Thanks for contacting us!</h3>
-                <p className="text-gray-600">{responseMessage}</p>
+                <h3 className="text-xl font-semibold text-white">Thanks for contacting us!</h3>
+                <p className="text-white">{responseMessage}</p>
                 <button
                   onClick={() => setStatus('idle')}
-                  className="mt-4 px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition"
+                  className="mt-4 px-6 py-2 bg-black text-white  hover:bg-black transition"
                 >
                   Send Another
                 </button>
@@ -98,7 +98,7 @@ const ContactForm = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                      className="pl-10 md:text-sm text-xs pr-4 py-3 w-full border border-gray-300 rounded-lg"
                       placeholder="ali wajdan"
                     />
                   </div>
@@ -118,7 +118,7 @@ const ContactForm = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                      className="pl-10 pr-4 py-3 md:text-sm text-xs w-full border border-gray-300 rounded-lg"
                       placeholder="name@example.com"
                     />
                   </div>
@@ -138,7 +138,7 @@ const ContactForm = () => {
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                      className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg"
                       placeholder="Write your message..."
                     />
                   </div>
@@ -160,7 +160,7 @@ const ContactForm = () => {
                   type="submit"
                   disabled={status === 'sending'}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full flex justify-center items-center gap-2 bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-all"
+                  className="w-full flex justify-center md:text-sm text-xs items-center gap-2 bg-black text-white py-3  hover:bg-black transition-all"
                 >
                   {status === 'sending' ? (
                     <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">

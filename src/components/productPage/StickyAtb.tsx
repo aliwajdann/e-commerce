@@ -52,9 +52,8 @@ export default function StickyATB({
   return (
    <div
   className={`
-    fixed left-0 right-0 z-50 bg-white shadow-xs border-b px-[16px] md:px-[32px] py-3 
+    fixed left-0 right-0 z-40 bg-white shadow-xs border-t md:border-b px-[16px] md:px-[32px] py-3 
     flex items-center justify-between transform transition-transform duration-300
-    
     bottom-0 md:top-0 md:bottom-auto
     ${showSticky 
       ? "translate-y-0 md:translate-y-0" 

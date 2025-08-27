@@ -60,8 +60,19 @@ export default function ProductDetails({ productdetails }: ProductDetailsProps) 
        </>,
     },
     {
-      label: "Product availability in store",
-      content: <p>Available in XYZ stores...</p>,
+      label: "Shipping Information",
+      content: <>
+            <div className="max-w-4xl mx-auto px-4 py-10">
+   <h1 className="text-md font-bold mb-4">Shipping Information</h1>
+     <ul className="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+        <li className="text-xs">We ship all over Pakistan via trusted courier services.</li>
+        <li className="text-xs">Orders are processed within 24 hours.</li>
+        <li className="text-xs">Delivery time: 2–5 business days.</li>
+        <li className="text-xs">You’ll receive a tracking number once your order is shipped.</li>
+        {/* <li className="text-xs">Shipping is <strong>free</strong> on all orders!</li> */}
+      </ul>
+    </div>
+      </>,
     },
   ];
 

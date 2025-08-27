@@ -366,8 +366,13 @@ body {
   );
 }
 .custom-background {
-  /* background: linear-gradient(95deg, #681c1c 0%, #d19195 50%, #f5d5d6 100%); */
-  background: linear-gradient(135deg, #d19195, #a34b96);
+  background: linear-gradient(95deg, #681c1c 0%, #d19195 100%);
+  /* background: linear-gradient(135deg, #d19195, #a34b96); */
+  /* background: linear-gradient(
+    135deg,
+    rgb(23, 255, 209) 0%,
+    rgb(248, 45, 255) 100%
+  ); */
 }
 
 Link {
