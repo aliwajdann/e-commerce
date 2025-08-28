@@ -70,10 +70,10 @@ export default function StickyATB({
           />
         )}
         <div className="truncate">
-          <p className="text-sm font-medium truncate">{title}</p>
+          <p className="text-sm md:block hidden font-medium truncate">{title}</p>
           <p className="text-xs text-gray-500">
             {selectedColor && <span>{selectedColor} • </span>}
-            {selectedSize && <span>{selectedSize} • </span>}
+            {selectedSize && <span>{selectedSize} • </span>} 
             Qty: {qty}
           </p>
         </div>

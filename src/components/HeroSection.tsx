@@ -23,7 +23,8 @@ const HeroSection = () => {
   const mediaItems = [
     {
       type: 'image',
-      desktopsrc: "https://images.unsplash.com/photo-1754753674476-6eda28010f02?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8",
+      // desktopsrc: "https://images.unsplash.com/photo-1754753674476-6eda28010f02?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8",
+      desktopsrc: "https://velano-assets.pages.dev/products/image-1.jpeg",
       mobilesrc: "https://plus.unsplash.com/premium_photo-1755612015739-942bd6de858c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
       alt: 'Nike Campaign',
       title: 'NEW COLLECTION',

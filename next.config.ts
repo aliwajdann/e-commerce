@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ['velano-assets.pages.dev'], // add your CDN subdomain
+}
+
   
 };
 

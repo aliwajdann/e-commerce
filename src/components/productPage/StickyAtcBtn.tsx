@@ -86,7 +86,7 @@ function StickyAtcBtn({ product }: Product) {
     // <div className='flex gap-2 flex-wrap'>
       <button
         onClick={handleAddToCart} id='main-atb'
-        className="hover:cursor-pointer border-2 inline-block border-[#3C3738] text-sm md:text-md px-4 py-2 text-white  bg-[#3C3738] transition-all text-center"
+        className="hover:cursor-pointer border-2 inline-block border-[#3C3738] text-sm md:text-md px-6 py-2 text-white  bg-[#3C3738] transition-all text-center"
       >
         Add to shopping bag
       </button>
