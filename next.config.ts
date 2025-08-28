@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['velano-assets.pages.dev'], // add your CDN subdomain
-}
+    domains: ['cdn.velanoshop.store'],
+  },
 
   
 };

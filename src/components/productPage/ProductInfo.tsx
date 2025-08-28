@@ -119,7 +119,7 @@ const scrollToSection = (id: string) => {
                 className={`w-16 h-20 overflow-hidden transition 
                   ${
                     selectedColor === c.colorName
-                      ? 'border-gray-300 border-2'
+                      ? 'border-gray-800 border-2'
                       : ''
                   }
                   ${c.image ? 'rounded-sm' : 'rounded-full'}

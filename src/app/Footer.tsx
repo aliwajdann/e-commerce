@@ -75,7 +75,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white border-t border-gray-200 pt-8 md:pt-12 lg:pt-16 pb-6">
+    <footer id="footer" className="bg-white border-t border-gray-200 pt-8 md:pt-12 lg:pt-16 pb-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Mobile: Newsletter First, Desktop: Original Layout */}
@@ -155,7 +155,7 @@ const Footer = () => {
           {/* Mobile Bottom Section */}
           <div className="pt-6 space-y-6 text-center">
             {/* Currency Selector */}
-            <div className="flex items-center justify-center space-x-2">
+            {/* <div className="flex items-center justify-center space-x-2">
               <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
                 <span className="text-white text-xs">🇪🇺</span>
               </div>
@@ -163,7 +163,7 @@ const Footer = () => {
               <button className="text-xs text-gray-600 hover:text-gray-900 underline">
                 Change
               </button>
-            </div>
+            </div> */}
 
             {/* Social Media Links */}
             <div className="flex justify-center space-x-4">

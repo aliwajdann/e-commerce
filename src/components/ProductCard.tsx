@@ -61,7 +61,7 @@ quantity: 1
         />
         {/* Main Image */}
         <img
-          src={product.images?.[0]?.url || '/placeholder.png'}
+          src={product.images?.[0]?.url || 'https://cdn.velanoshop.store/Products/product-placeholder.jpg'}
           alt={product.name}
           className={`w-full h-full object-fill transition-opacity duration-500 ${hasSecondImage ? 'group-hover:opacity-0' : ''}`}
         />
