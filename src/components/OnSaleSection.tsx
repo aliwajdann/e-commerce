@@ -18,6 +18,7 @@ interface Product {
   category: { name: string; slug: string };
   subcategory: { name: string; slug: string };
   description: string;
+  tags?: string[]; // 👈 added this
 }
 
 interface SubcategorySliderProps {
@@ -43,15 +44,20 @@ export default function OnSaleSection({
       try {
         const q = query(
           collection(db, 'products'),
-          where('category.slug', '==', category),
-        //   where('subcategory.slug', '==', subcategory)
+          // where('category.slug', '==', category)
         );
         const snapshot = await getDocs(q);
         const productsData = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         })) as Product[];
-        setProducts(productsData);
+
+        // ✅ filter here for "onsale"
+        const onSaleProducts = productsData.filter(
+          (product) => product.tags?.includes('onsale')
+        );
+
+        setProducts(onSaleProducts);
       } catch (error) {
         console.error('❌ Failed to fetch products:', error);
       } finally {
@@ -85,13 +91,9 @@ export default function OnSaleSection({
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
       const cardWidth = container.children[0]?.clientWidth || 0;
-      const gap = 12; // gap between cards
+      const gap = 12;
       const scrollAmount = cardWidth + gap;
-      
-      container.scrollBy({
-        left: -scrollAmount,
-        behavior: 'smooth'
-      });
+      container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
   };
 
@@ -99,13 +101,9 @@ export default function OnSaleSection({
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
       const cardWidth = container.children[0]?.clientWidth || 0;
-      const gap = 12; // gap between cards
+      const gap = 12;
       const scrollAmount = cardWidth + gap;
-      
-      container.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
 
@@ -113,19 +111,11 @@ export default function OnSaleSection({
 
   return (
     <section className="w-full flex flex-col items-center pt-[32px] md:pt-[40px]">
-      {/* <div className="inline-flex items-center justify-center mb-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
-        <div className="mx-6 p-3 bg-white rounded-full shadow-lg border border-gray-200">
-          <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse"></div>
-        </div>
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent w-20"></div>
-      </div> */}
-      
       <div className="flex items-center flex-col md:gap-4 gap-2 md:mb-6 mb-4">
-        <h2 className="text-[24px]  md:text-[32px] font-medium capitalize text-[#3C3738]">
+        <h2 className="text-[24px] md:text-[32px] font-medium capitalize text-[#3C3738]">
           {title}
         </h2>
-        <button className="text-sm custom-gray underline  text-[#3c3738]">
+        <button className="text-sm custom-gray underline text-[#3c3738]">
           Shop Now
         </button>
       </div>
@@ -177,57 +167,13 @@ export default function OnSaleSection({
                   images: product.media,
                   colors: product.variants?.colors || [],
                   href: `/products/${product.id}`,
-                  description: product.description
+                  description: product.description,
                 }}
               />
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 2px !important;
-  height: 0.1rem !important;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #BFBFBF;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #000;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-        // 
-      `}</style>
     </section>
   );
 }
-
-        //   scrollbar-width: thin;
-        //   scrollbar-color: black gray;
-        // }
-        
-        // .custom-scrollbar::-webkit-scrollbar {
-        //   height: 2px;
-        // }
-        
-        // .custom-scrollbar::-webkit-scrollbar-track {
-        //   background: #F1F5F9;
-        //   border-radius: 3px;
-        // }
-        
-        // .custom-scrollbar::-webkit-scrollbar-thumb {
-        //   background: #CBD5E1;
-        //   border-radius: 3px;
-        // }
-        
-        // .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        //   background: #94A3B8;
-        // }

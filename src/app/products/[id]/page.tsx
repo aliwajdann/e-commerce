@@ -121,7 +121,7 @@ const [qty, setQty] = useState<number>(1);
     <>
       <div className="w-full bg-white mt-2">
         <p className="pl-[16px] text-xs font-light">
-          Women - {product.category.name} - {product.subcategory.name}
+          Women - {product.category?.name} - {product.subcategory?.name}
         </p>
         <CartActivityToast productTitle={product.title} />
        <StickyATB
@@ -159,7 +159,7 @@ const [qty, setQty] = useState<number>(1);
       <ProductDetails productdetails={product} />
       <ReviewSlider productId={product.id} />
       <Reviews productId={product.id} />
-      <RelatedProducts category={product.category.slug} currentProductId={product.id} />
+      <RelatedProducts category={product.category?.slug} currentProductId={product.id} />
 
       <style jsx>{`
         @media (min-width: 768px) {

@@ -5,7 +5,6 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { serverTimestamp } from "firebase/firestore";
 
-
 export default function CreateProductForm() {
   const [formData, setFormData] = useState<any>({
     title: '',
@@ -21,7 +20,10 @@ export default function CreateProductForm() {
       colors: [{ colorCode: '#000000', colorName: '', image: '' }],
     },
     features: [''],
+    tags: [], // 👈 NEW
   });
+
+  const [tagInput, setTagInput] = useState("");
 
   const handleChange = (path: string, value: any) => {
     const parts = path.split('.');
@@ -60,37 +62,50 @@ export default function CreateProductForm() {
     });
   };
 
+  const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && tagInput.trim()) {
+      e.preventDefault();
+      if (!formData.tags.includes(tagInput.trim())) {
+        setFormData({ ...formData, tags: [...formData.tags, tagInput.trim()] });
+      }
+      setTagInput("");
+    }
+  };
+
+  const removeTag = (tag: string) => {
+    setFormData({ ...formData, tags: formData.tags.filter((t: string) => t !== tag) });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const productData = {
-  title: formData.title,
-  productCode: formData.productCode || null,
-  description: formData.description,
-  price: parseFloat(formData.price) || 0,
-  originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
-  media: (formData.media || []).filter(Boolean).map((url: string) => ({ type: 'image', url })),
-  category: {
-    name: formData.category.name.trim(),
-    slug: formData.category.slug.trim(),
-  },
-  subcategory: {
-    name: formData.subcategory.name.trim(),
-    slug: formData.subcategory.slug.trim(),
-  },
-  variants: {
-    sizes: (formData.variants?.sizes || []).filter((s: string) => s && s.trim() !== ''),
-    colors: (formData.variants?.colors || []).map((c: any) => ({
-      colorCode: c.colorCode,
-      colorName: c.colorName,
-      image: c.image || '',
-    })),
-  },
-  features: (formData.features || []).filter((f: string) => f && f.trim() !== ''),
-  
-  // 🔥 timestamps
-  createdAt: serverTimestamp(),
-  updatedAt: serverTimestamp(),
-};
+      title: formData.title,
+      productCode: formData.productCode || null,
+      description: formData.description,
+      price: parseFloat(formData.price) || 0,
+      originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
+      media: (formData.media || []).filter(Boolean).map((url: string) => ({ type: 'image', url })),
+      category: {
+        name: formData.category.name.trim(),
+        slug: formData.category.slug.trim(),
+      },
+      subcategory: {
+        name: formData.subcategory.name.trim(),
+        slug: formData.subcategory.slug.trim(),
+      },
+      variants: {
+        sizes: (formData.variants?.sizes || []).filter((s: string) => s && s.trim() !== ''),
+        colors: (formData.variants?.colors || []).map((c: any) => ({
+          colorCode: c.colorCode,
+          colorName: c.colorName,
+          image: c.image || '',
+        })),
+      },
+      features: (formData.features || []).filter((f: string) => f && f.trim() !== ''),
+      tags: formData.tags || [], // 👈 include tags
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
 
     try {
       await addDoc(collection(db, 'products'), productData);
@@ -109,6 +124,7 @@ export default function CreateProductForm() {
           colors: [{ colorCode: '#000000', colorName: '', image: '' }],
         },
         features: [''],
+        tags: [], // reset tags
       });
     } catch (err) {
       console.error(err);
@@ -117,8 +133,12 @@ export default function CreateProductForm() {
   };
 
   return (
+    
+   
+
+
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl mx-auto p-4">
-      <input value={formData.title} onChange={(e) => handleChange('title', e.target.value)} className="border p-2 w-full" placeholder="Title" required />
+        <input value={formData.title} onChange={(e) => handleChange('title', e.target.value)} className="border p-2 w-full" placeholder="Title" required />
       <input value={formData.productCode} onChange={(e) => handleChange('productCode', e.target.value)} className="border p-2 w-full" placeholder="Product Code / SKU (optional)" />
       <textarea value={formData.description} onChange={(e) => handleChange('description', e.target.value)} className="border p-2 w-full" placeholder="Description" required />
 
@@ -133,6 +153,22 @@ export default function CreateProductForm() {
         <input value={formData.category.slug} onChange={(e) => handleChange('category.slug', e.target.value)} className="border p-2" placeholder="Category Slug" />
       </div>
 
+    <div className="grid grid-cols-2 gap-2">
+  <input
+    value={formData.subcategory.name}
+    onChange={(e) => handleChange('subcategory.name', e.target.value)}
+    className="border p-2"
+    placeholder="Subcategory Name"
+  />
+  <input
+    value={formData.subcategory.slug}
+    onChange={(e) => handleChange('subcategory.slug', e.target.value)}
+    className="border p-2"
+    placeholder="Subcategory Slug"
+  />
+</div>
+
+   
       {/* media */}
       <div>
         <p className="text-sm font-medium mb-2">Media (image URLs)</p>
@@ -185,6 +221,28 @@ export default function CreateProductForm() {
           </div>
         ))}
         <button type="button" className="text-blue-500" onClick={() => addField('features', '')}>+ Add feature</button>
+      </div>
+
+      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Add Product</button>
+
+      {/* tags */}
+      <div>
+        <p className="text-sm font-medium mb-2">Tags</p>
+        <div className="flex flex-wrap gap-2 border p-2 rounded">
+          {formData.tags.map((tag: string, i: number) => (
+            <span key={i} className="bg-gray-200 px-2 py-1 rounded flex items-center gap-1">
+              {tag}
+              <button type="button" className="text-red-500" onClick={() => removeTag(tag)}>×</button>
+            </span>
+          ))}
+          <input
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            onKeyDown={handleAddTag}
+            placeholder="Add tag & press Enter"
+            className="flex-1 outline-none"
+          />
+        </div>
       </div>
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Add Product</button>

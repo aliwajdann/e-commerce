@@ -6,7 +6,6 @@ import { updateProduct, deleteProduct } from '@/lib/firestoreProducts';
 import CreateProductForm from '@/components/CreateProductForm';
 import { serverTimestamp } from "firebase/firestore";
 
-
 import {
   Dialog,
   DialogContent,
@@ -24,6 +23,7 @@ export default function AdminProducts() {
   const [editingProduct, setEditingProduct] = useState<any | null>(null);
   const [form, setForm] = useState<any>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [tagInput, setTagInput] = useState("");
 
   useEffect(() => {
     fetchProducts().then((data) => {
@@ -46,6 +46,7 @@ export default function AdminProducts() {
       colors: [{ colorCode: '#000000', colorName: '', image: '' }],
     },
     features: [''],
+    tags: [], // 👈 NEW
   };
 
   const handleEdit = (product: any) => {
@@ -69,13 +70,12 @@ export default function AdminProducts() {
           })) || [{ colorCode: '#000000', colorName: '', image: '' }]),
       },
       features: product.features?.slice() || [''],
+      tags: product.tags?.slice() || [], // 👈 load existing tags
       updatedAt: serverTimestamp(),
     });
-
   };
 
   const handleChange = (path: string, value: any) => {
-    // path examples: "title", "category.name", "variants.sizes.0", "variants.colors.1.colorName"
     const parts = path.split('.');
     setForm((prev: any) => {
       const copy = JSON.parse(JSON.stringify(prev || emptyForm));
@@ -90,7 +90,6 @@ export default function AdminProducts() {
     });
   };
 
-  /* helpers to add/remove list items */
   const addField = (path: string, defaultValue: any) => {
     setForm((prev: any) => {
       const copy = JSON.parse(JSON.stringify(prev || emptyForm));
@@ -115,6 +114,20 @@ export default function AdminProducts() {
       cur.splice(index, 1);
       return copy;
     });
+  };
+
+  const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && tagInput.trim()) {
+      e.preventDefault();
+      if (!form.tags.includes(tagInput.trim())) {
+        setForm({ ...form, tags: [...form.tags, tagInput.trim()] });
+      }
+      setTagInput("");
+    }
+  };
+
+  const removeTag = (tag: string) => {
+    setForm({ ...form, tags: form.tags.filter((t: string) => t !== tag) });
   };
 
   const handleSave = async () => {
@@ -146,6 +159,7 @@ export default function AdminProducts() {
           slug: form.subcategory?.slug || '',
         },
         features: (form.features || []).filter((f: string) => f && f.trim() !== '').map((f: string) => f.trim()),
+        tags: form.tags || [], // 👈 include tags
       };
 
       await updateProduct(editingProduct.id, updatedProduct);
@@ -180,6 +194,11 @@ export default function AdminProducts() {
             <h2 className="text-xl font-semibold">{product.title}</h2>
             <p className="text-sm text-gray-600">{product.description}</p>
             <p className="font-bold">£{product.price}</p>
+            <div className="flex flex-wrap gap-1 mt-2">
+              {product.tags?.map((tag: string, i: number) => (
+                <span key={i} className="text-xs bg-gray-200 px-2 py-1 rounded">{tag}</span>
+              ))}
+            </div>
             <div className="flex gap-2 mt-2 overflow-scroll no-scrollbar">
               {product.media?.map((item: any, i: number) =>
                 item.type === 'image' ? (
@@ -193,6 +212,10 @@ export default function AdminProducts() {
           </div>
         ))}
       </div>
+
+      
+
+
 
       <div className="mt-8">
         <h1 className="text-2xl font-bold mb-4">Admin Panel - Add Product</h1>
@@ -208,6 +231,9 @@ export default function AdminProducts() {
 
           {/* Form */}
           <div className="grid gap-4 py-4">
+
+
+
             {/* top-level fields */}
             <Input value={form?.title || ''} placeholder="Title" onChange={(e: any) => handleChange('title', e.target.value)} />
             <Input value={form?.productCode || ''} placeholder="Product code (SKU)" onChange={(e: any) => handleChange('productCode', e.target.value)} />
@@ -272,6 +298,26 @@ export default function AdminProducts() {
               <button type="button" className="text-blue-500 text-sm" onClick={() => addField('variants.colors', { colorCode: '#000000', colorName: '', image: '' })}>+ Add color</button>
             </div>
 
+             <div>
+              <p className="text-sm font-medium mb-2">Tags</p>
+              <div className="flex flex-wrap gap-2 border p-2 rounded">
+                {form?.tags?.map((tag: string, i: number) => (
+                  <span key={i} className="bg-gray-200 px-2 py-1 rounded flex items-center gap-1">
+                    {tag}
+                    <button type="button" className="text-red-500" onClick={() => removeTag(tag)}>×</button>
+                  </span>
+                ))}
+                <input
+                  value={tagInput}
+                  onChange={(e) => setTagInput(e.target.value)}
+                  onKeyDown={handleAddTag}
+                  placeholder="Add tag & press Enter"
+                  className="flex-1 outline-none"
+                />
+              </div>
+            </div>
+
+           
             {/* features (array of strings) */}
             <div>
               <p className="text-sm font-medium mb-2">Features (highlight bullets)</p>
@@ -300,5 +346,10 @@ export default function AdminProducts() {
         </DialogContent>
       </Dialog>
     </div>
+
+           
+
+          
+        
   );
 }
